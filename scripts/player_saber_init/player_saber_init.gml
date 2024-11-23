@@ -4,6 +4,7 @@ function player_saber_init() {
 	{
 		atk1, atk2, atk3,
 		jump, wall, 
+		dass,
 		normal_length,
 		up, spinning_jump, down, dash,
 		raikousen,
@@ -23,6 +24,7 @@ function player_saber_init() {
 	saber_atk_current = noone;
 	saber_atk_hspeed = 0;
 	saber_projectile_frame = 0;
+	saber_air_change_animation = true;
 
 	saber_key = 1;
 	saber_key_h = false;
@@ -52,6 +54,7 @@ function player_saber_init() {
 	saber_states[saber_atks.up]             = states.saber_up;
 	saber_states[saber_atks.down]           = states.saber_down;
 	saber_states[saber_atks.dash]           = states.saber_dash;
+	saber_states[saber_atks.dass]           = states.saber_dass;
 	saber_states[saber_atks.raikousen]      = states.saber_raikousen;
 	saber_states[saber_atks.charged_saber]  = states.saber_atk3;
 	saber_states[saber_atks.genmu]			= states.saber_atk3;
@@ -66,6 +69,7 @@ function player_saber_init() {
 	saber_atk_animations[saber_atks.up]            = "atk_ryuenjin";
 	saber_atk_animations[saber_atks.down]          = "atk_hyouretsuzan";
 	saber_atk_animations[saber_atks.dash]          = "atk_shippuuga";
+	saber_atk_animations[saber_atks.dass]          = "atk_dash";
 	saber_atk_animations[saber_atks.raikousen]     = "atk_raikousen";
 	saber_atk_animations[saber_atks.charged_saber] = "atk_3";
 	saber_atk_animations[saber_atks.genmu]		   = "atk_genmu";
@@ -80,6 +84,7 @@ function player_saber_init() {
 	saber_atk_sounds[saber_atks.up]             = snd_player_zero_saber_ryuenjin;
 	saber_atk_sounds[saber_atks.down]           = snd_player_zero_saber_hyouretsuzan;
 	saber_atk_sounds[saber_atks.dash]           = snd_player_zero_saber_1;
+	saber_atk_sounds[saber_atks.dass]           = snd_player_zero_saber_1;
 	saber_atk_sounds[saber_atks.raikousen]      = noone;
 	saber_atk_sounds[saber_atks.charged_saber]  = snd_player_zero_saber_2;
 	saber_atk_sounds[saber_atks.genmu]          = noone;
@@ -98,6 +103,7 @@ function player_saber_init() {
 	saber_atk_unlocked[saber_atks.up]            = false;
 	saber_atk_unlocked[saber_atks.down]          = false;
 	saber_atk_unlocked[saber_atks.dash]          = false;
+	saber_atk_unlocked[saber_atks.dass]          = false;
 	saber_atk_unlocked[saber_atks.raikousen]     = false;
 
 	// Projectile
@@ -115,6 +121,7 @@ function player_saber_init() {
 	saber_hitstun_interval[saber_atks.up]            = [4, 30, 6];
 	saber_hitstun_interval[saber_atks.down]          = [4, infinity, 6];
 	saber_hitstun_interval[saber_atks.dash]          = [2, 10, 6];
+	saber_hitstun_interval[saber_atks.dass]          = [2, 10, 6];
 	saber_hitstun_interval[saber_atks.raikousen]     = [12, 32, 6];
 	saber_hitstun_interval[saber_atks.charged_saber] = [0, 8, 6];
 	saber_hitstun_interval[saber_atks.genmu]		 = [2, 24, 10];
@@ -129,6 +136,7 @@ function player_saber_init() {
 	saber_damage[saber_atks.up]            = 1;
 	saber_damage[saber_atks.down]          = 2;
 	saber_damage[saber_atks.dash]          = 2;
+	saber_damage[saber_atks.dass]          = 3;
 	saber_damage[saber_atks.raikousen]     = 2;
 	saber_damage[saber_atks.charged_saber] = 3;
 	saber_damage[saber_atks.genmu]		   = 4;
@@ -150,6 +158,7 @@ function player_saber_init() {
 	saber_effects[saber_atks.up]            = 0;
 	saber_effects[saber_atks.down]          = 0;
 	saber_effects[saber_atks.dash]          = 1;
+	saber_effects[saber_atks.dass]          = 1;
 	saber_effects[saber_atks.raikousen]     = 1;
 	saber_effects[saber_atks.charged_saber] = 0;
 	saber_effects[saber_atks.genmu]			= 0;

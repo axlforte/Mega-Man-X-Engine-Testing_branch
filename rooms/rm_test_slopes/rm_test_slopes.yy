@@ -56,8 +56,6 @@
     {"name":"inst_154370D","path":"rooms/rm_test_slopes/rm_test_slopes.yy",},
     {"name":"inst_2614E5BD","path":"rooms/rm_test_slopes/rm_test_slopes.yy",},
     {"name":"inst_4C08FD73","path":"rooms/rm_test_slopes/rm_test_slopes.yy",},
-    {"name":"inst_45343919","path":"rooms/rm_test_slopes/rm_test_slopes.yy",},
-    {"name":"inst_6A97DBB4","path":"rooms/rm_test_slopes/rm_test_slopes.yy",},
   ],
   "isDnd": false,
   "layers": [
@@ -68,8 +66,6 @@
       ],"layers":[],"properties":[],"userdefinedDepth":false,"visible":false,},
     {"resourceType":"GMRInstanceLayer","resourceVersion":"1.0","name":"player","depth":-100,"effectEnabled":true,"effectType":null,"gridX":8,"gridY":8,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_6135842B","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_player_default","path":"objects/obj_player_default/obj_player_default.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":160.0,"y":144.0,},
-        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_45343919","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_ride_armor_x2","path":"objects/obj_ride_armor_x2/obj_ride_armor_x2.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":440.0,"y":128.0,},
-        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_6A97DBB4","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_ride_armor_x1","path":"objects/obj_ride_armor_x1/obj_ride_armor_x1.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":520.0,"y":128.0,},
       ],"layers":[],"properties":[],"userdefinedDepth":false,"visible":true,},
     {"resourceType":"GMRInstanceLayer","resourceVersion":"1.0","name":"entities","depth":0,"effectEnabled":true,"effectType":null,"gridX":16,"gridY":16,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_3CCE9669","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_square_16","path":"objects/obj_square_16/obj_square_16.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":60.0,"x":6064.0,"y":0.0,},

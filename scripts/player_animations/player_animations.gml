@@ -324,6 +324,46 @@ function player_animations() {
 		4, 4,
 		8, 6
 	], 8);
+	
+	animation_add("biometal_select",
+	[
+		0, 0,
+		2, 1,
+		4, 0,
+		12, 2,
+		14, 3,
+		19, 4,
+		24, 5,
+		29, 4
+	], 14,29);
+	
+	animation_add("biometal_transform_in",
+	[
+		0, 0,
+		2, 1,
+		6, 2,
+		8, 3,
+		10, 4,
+		12, 5,
+		14, 6
+	], 16);
+	
+	animation_add("biometal_transform_out",
+	[
+		0, 0,
+		2, 1,
+		6, 2,
+		8, 3,
+		10, 4,
+		12, 5,
+		14, 6,
+		16, 7,
+		18, 8,
+		20, 9,
+		22, 10,
+		24, 11
+	], 26);
+	
 	animation_add("ride_armor");
 	
 	animation_add("dive_kick", keyframes_generate(5, 1/2, false, 0));

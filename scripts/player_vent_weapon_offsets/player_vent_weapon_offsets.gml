@@ -27,9 +27,11 @@ function player_vent_weapon_offsets() {
 	player_weapon_offset("jump", 4, 21, -4);
 	player_weapon_offset("jump", 5, 21, -4);
 	player_weapon_offset("jump", 6, 20, -2);
+	player_weapon_offset("jump", 7, 20, -2);
 
 	player_weapon_offset("dash", 0, 26, -1);
 	player_weapon_offset("dash", 1, 32, 4);
+	player_weapon_offset("dash", 2, 32, 4);
 
 	player_weapon_offset("crouch", 0, 20, -2);
 	player_weapon_offset("crouch", 1, 21, 2);
@@ -39,6 +41,8 @@ function player_vent_weapon_offsets() {
 	player_weapon_offset("wall", 2, 15, -2);
 	player_weapon_offset("wall", 3, 18, -8);
 	player_weapon_offset("wall", 4, 21, -9);
+	player_weapon_offset("wall", 5, 21, -9);
+	player_weapon_offset("wall", 6, 21, -9);
 
 	player_weapon_offset("hadouken", 0, 20, -3);
 	/*

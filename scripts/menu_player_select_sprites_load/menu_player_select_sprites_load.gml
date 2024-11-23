@@ -3,6 +3,8 @@ function menu_player_select_sprites_load() {
 	// For each character
 	for (var c = 0; c < pl_char.length; c++) {
 		var character_name = G.character_name[c];
+		show_debug_message(character_name);
+		show_debug_message(G.character_armor);
 		if (c < array_length(G.character_armor)) {
 			var armors = G.character_armor[c];
 			var armors_length = array_length(armors);

@@ -32,14 +32,27 @@ switch(state) {
 	case menu_states.player_select:
 		var item = items[selected_item];
 		draw_sprite(spr_player_select_backgrounds, background_index, 0, 0);
-		menu_draw_player(0, 0, selected_item, armor_index);
+		draw_sprite(spr_box_cover,0,-3,150);
+		draw_sprite(spr_box_cover,0,257,150);
+		if(selected_item == 0){
+			draw_sprite_ext(spr_mugshot_default,array_length(items) - 1,7,160,1,1,0,c_white,1);
+		} else {
+			draw_sprite_ext(spr_mugshot_default,selected_item - 1,7,160,1,1,0,c_white,1);
+		}
+		
+		if(selected_item == array_length(items) - 1){
+			draw_sprite_ext(spr_mugshot_default,0,267,160,1,1,0,c_white,1);
+		} else {
+			draw_sprite_ext(spr_mugshot_default,selected_item + 1,267,160,1,1,0,c_white,1);
+		}
+		menu_draw_player(0, 0, selected_item, armor_index,0,0,[0, 0, 0, 0, 0, 0],1,1,c_white);
 		draw_string_center(270, 13, item);
 		menu_draw_buttons();
 		break;
 	#endregion
 	#region Armor Select
 	case menu_states.armor_select:
-		menu_draw_player(0, 0, G.character_selected_index[0], tmp_armor_index);
+		menu_draw_player(0, 0, G.character_selected_index[0], tmp_armor_index,1,1);
 		for (var i = 0; i <= pl_btn.confirm; i++) {
 			if (item_show[i]) {
 				var pos = item_pos[i];

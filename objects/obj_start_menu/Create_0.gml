@@ -98,7 +98,8 @@ page_items[menu_states.option] = [
 	[_("WINDOW SIZE"), [64, 64, 200, 20], wsize_options],
 	[_("KEY CONFIG"), [64, 88, 144, 20]],
 	[_("AUDIO SETTINGS"), [64, 112, 144, 20]],
-	[_("BACK"), [64, 136, 144, 20]]
+	[_("DAMAGE NUMBERS"), [64, 136, 144, 20]],
+	[_("BACK"), [64, 160, 144, 20]]
 ];
 
 #endregion
@@ -218,6 +219,7 @@ vinput = false;
 hinput_p = false;
 vinput_p = false;
 enter = false;
+select = false;
 scr_keys_reset();
 
 // Buttons
@@ -264,7 +266,8 @@ global.char_select_sprites = [
 	spr_player_axl,
 	spr_player_iris,
 	spr_player_vile,
-	spr_player_megaman
+	spr_player_megaman,
+	spr_player_vent
 ];
 background_index = 0;
 // Animation

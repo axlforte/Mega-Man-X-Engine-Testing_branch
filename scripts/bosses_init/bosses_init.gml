@@ -29,7 +29,7 @@ function bosses_init() {
 	["", spr_engine_icon, -1, -1, -1];
 
 	global.boss_info[e_boss.hq] = 
-	["", spr_hq_icon, spr_stage_hq, -1, -1];
+	["", spr_hq_icon, spr_stage_hq, rm_various_things_that_need_to_be_tested_for_various_characters_in_various_contexts, -1];
 
 	//global.boss_info[e_boss.intro] = 
 	//["", -1, -1, rm_intro_stage, -1];
@@ -45,7 +45,7 @@ function bosses_init() {
 
 	global.boss_info[e_boss.neon_tiger] = 
 	["NEON TIGER", spr_neon_tiger_icon, -1, rm_test_slopes, obj_magma_dragoon];
-
+	
 	global.boss_info[e_boss.magma_dragoon] = 
 	["MAGMA DRAGOON", spr_magma_dragoon_icon, -1, rm_magma_dragoon, obj_magma_dragoon_intro];
 	//["MAGMA DRAGOON", spr_magma_dragoon_icon, -1, -1, obj_magma_dragoon_intro];

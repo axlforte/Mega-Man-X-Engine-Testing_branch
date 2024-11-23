@@ -75,7 +75,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"a4394500-3329-4b8f-97a0-aeda789cfc96","path":"sprites/spr_zero_saber_shippuuga/spr_zero_saber_shippuuga.yy",},},},"Disabled":false,"id":"f9b3374d-f4cf-4a81-bdd3-2ee235f078d3","IsCreationKey":false,"Key":9.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 61,
     "yorigin": 64,

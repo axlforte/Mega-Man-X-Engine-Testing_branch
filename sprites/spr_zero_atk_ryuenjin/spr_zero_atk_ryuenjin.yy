@@ -91,7 +91,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"efac2dff-2cd2-4a58-9378-5275f87f09e2","path":"sprites/spr_zero_atk_ryuenjin/spr_zero_atk_ryuenjin.yy",},},},"Disabled":false,"id":"42574f2a-2b0e-42c3-9c54-adad7596d02f","IsCreationKey":false,"Key":17.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 61,
     "yorigin": 64,

@@ -35,4 +35,7 @@ function scr_keys_reset() {
 	key_p_start = false;
 	key_start = false;
 	
+	key_p_select = false;
+	key_select = false;
+	
 }

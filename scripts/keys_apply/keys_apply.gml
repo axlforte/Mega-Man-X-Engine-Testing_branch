@@ -11,6 +11,7 @@ function keys_apply() {
 	global.key_weapon1 = global.key_config[e_key.weapon1];
 	global.key_weapon2 = global.key_config[e_key.weapon2];
 	global.key_start   = global.key_config[e_key.start];
+	global.key_select  = global.key_config[e_key.select];
 
 
 }

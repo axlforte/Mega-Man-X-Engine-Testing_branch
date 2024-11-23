@@ -5,6 +5,7 @@ hinput_p = key_p_right - key_p_left;
 hinput = key_right - key_left;
 vinput = key_down - key_up;
 enter = key_p_start;
+select = key_p_select;
 var previous_selected_item = selected_item;
 #endregion
 #region Buttons
@@ -178,6 +179,8 @@ switch (state) {
 					menu_set_state(menu_states.difficulty_mode);
 					break;
 			}
+		} else if(select){
+			menu_set_state(menu_states.main);
 		}
 		break;
 	#endregion
@@ -193,6 +196,8 @@ switch (state) {
 			audio_play(snd_player_success);
 			global.difficulty = selected_item;
 			break;
+		} else if(select){
+			menu_set_state(menu_states.game_mode);
 		}
 		break;
 	#endregion
@@ -219,6 +224,7 @@ switch (state) {
 			tmp_armor_index = armor_index;
 			break;
 		}
+		
 		menu_update_item_h();
 		global.character_selected_index[0] = selected_item;
 		if (selected_item < array_length(global.player_character_armor)) {
@@ -245,6 +251,8 @@ switch (state) {
 			music_stop(1000);
 			audio_play(snd_player_success);
 			global.character_selected[0] = global.character_object[selected_item];
+		}  else if(select){
+			menu_set_state(menu_states.main);
 		}
 		break;
 	#endregion
@@ -369,6 +377,10 @@ switch (state) {
 		
 		var item = items[selected_item];
 		var subitem = (array_length(item) > 2 ? item[2] : 0);
+		
+		if(select){
+			menu_set_state(menu_states.main);
+		}
 				
 		switch(selected_item) {
 			// Window Size
@@ -400,8 +412,19 @@ switch (state) {
 				if (enter)
 					menu_set_state(menu_states.audio_settings);
 				break;
-			// Back
+			// Damage Numbers (shows how much an attack damages an enemy)
 			case 3:
+				if (enter)
+					global.hit_effects = !global.hit_effects;
+					if(global.hit_effects)
+						page_items[menu_states.option, 3] = 
+							[_("DAMAGE NUMBERS    TRUE"), [64, 136, 144, 20]];
+					else
+						page_items[menu_states.option, 3] = 
+							[_("DAMAGE NUMBERS    FALSE"), [64, 136, 144, 20]];
+				break;
+			// Back
+			case 4:
 				if (enter) {
 					menu_set_state(menu_states.main);
 					settings_save();
@@ -562,6 +585,8 @@ switch (state) {
 						audio_play(snd_player_success);
 					}
 				}
+			} else if(select){
+				menu_set_state(menu_states.difficulty_mode);
 			}
 		}
 		break;

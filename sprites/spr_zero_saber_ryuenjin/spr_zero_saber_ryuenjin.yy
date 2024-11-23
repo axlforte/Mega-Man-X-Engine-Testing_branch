@@ -91,7 +91,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"1257dfbf-3c01-42fc-9e5e-3e9638445d4e","path":"sprites/spr_zero_saber_ryuenjin/spr_zero_saber_ryuenjin.yy",},},},"Disabled":false,"id":"f8a9fe90-3bc1-4fbd-8ffa-f25605742eff","IsCreationKey":false,"Key":17.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 61,
     "yorigin": 64,

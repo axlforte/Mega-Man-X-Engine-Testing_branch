@@ -113,7 +113,9 @@ function player_load_sprites() {
 					}
 				}
 			} else {
-				var sprite_armor_name = _sprite_name + "_" + FULL;
+				show_debug_message(_sprite_name);
+				show_debug_message(armor[P_FULL]);
+				var sprite_armor_name = _sprite_name + "_" + string(FULL);
 				
 				var test_armor = asset_get_index(sprite_armor_name);
 				var test_normal = asset_get_index(_sprite_name);

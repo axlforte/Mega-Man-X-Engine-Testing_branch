@@ -10,7 +10,7 @@
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
-  "duration": 0.0,
+  "duration": 2.612562,
   "parent": {
     "name": "Menu",
     "path": "folders/Sounds/Menu.yy",

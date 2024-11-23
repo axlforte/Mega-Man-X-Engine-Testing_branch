@@ -69,7 +69,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"99740ff8-b2e4-4a63-b052-1addb6b9d0ec","path":"sprites/spr_zero_saber_wall/spr_zero_saber_wall.yy",},},},"Disabled":false,"id":"ba03e2f8-ede4-4e01-96a6-4a0dfd56e000","IsCreationKey":false,"Key":6.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 61,
     "yorigin": 64,

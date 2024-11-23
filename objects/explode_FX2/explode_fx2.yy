@@ -7,7 +7,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Explosion Effects",
-    "path": "folders/Objects/Enemies/Explosion Effects.yy",
+    "path": "folders/Objects/Enemies/Effects/Explosion Effects.yy",
   },
   "parentObjectId": {
     "name": "explode_FX",

@@ -38,6 +38,9 @@ function scr_keys_update() {
 		
 			key_p_start = (!key_start && keyboard_check(global.key_start));
 			key_start = keyboard_check(global.key_start);
+			
+			key_p_select = (!key_start && keyboard_check(global.key_select));
+			key_select = keyboard_check(global.key_select);
 		}
 	} else {
 		if (instance_exists(obj_mobile_btn_dpad)) {
@@ -135,6 +138,9 @@ function scr_keys_update() {
 		
 		key_p_start = gamepad_pressed(global.gamepad_config[e_key.start]); 
 		key_start = gamepad_hold(global.gamepad_config[e_key.start]); 	
+		
+		key_p_select = gamepad_pressed(global.gamepad_config[e_key.select]); 
+		key_select = gamepad_hold(global.gamepad_config[e_key.select]); 	
 	}
 
 	replay_record_update(id);

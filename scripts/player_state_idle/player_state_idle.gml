@@ -30,6 +30,6 @@ function player_state_idle() {
 	player_check_dash();
 	player_check_jump();
 	player_check_dodge_roll();
-
+	player_check_megamerge();
 
 }

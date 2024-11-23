@@ -10,6 +10,7 @@ function player_saber_skills_init() {
 		raikousen,
 		charged_saber,
 		genmu,
+		dass,
 		length
 	}
 	for (var i = 0; i < saber_skills.length; i++) {
@@ -40,6 +41,8 @@ function player_saber_skills_init() {
 	// Genmu
 	m = saber_skill_boss_damage[saber_skills.genmu];
 	m[? noone] = 2;
-
+	//regular dash attack
+	m = saber_skill_boss_damage[saber_skills.dass];
+	m[? noone] = 3;
 
 }

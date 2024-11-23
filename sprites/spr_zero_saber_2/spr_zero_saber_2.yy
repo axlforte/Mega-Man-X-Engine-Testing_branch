@@ -77,7 +77,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"3af7001f-fe28-4cf6-9d97-3d0982644b4c","path":"sprites/spr_zero_saber_2/spr_zero_saber_2.yy",},},},"Disabled":false,"id":"b5455c47-5673-4ba4-a200-a8569311d064","IsCreationKey":false,"Key":10.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 61,
     "yorigin": 64,

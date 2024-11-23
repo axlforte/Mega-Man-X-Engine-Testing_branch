@@ -91,7 +91,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"1a22cc2e-b84b-4309-affd-e2db51b65927","path":"sprites/spr_zero_saber_ryuenjin_mask/spr_zero_saber_ryuenjin_mask.yy",},},},"Disabled":false,"id":"b6f87a1f-94bd-4805-b00e-5dc3fec9056d","IsCreationKey":false,"Key":17.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 61,
     "yorigin": 64,

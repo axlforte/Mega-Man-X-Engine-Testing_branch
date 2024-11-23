@@ -73,7 +73,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"56ab69c8-0a8c-449c-9c35-a3691874b792","path":"sprites/spr_zero_saber_land/spr_zero_saber_land.yy",},},},"Disabled":false,"id":"48f71000-dea8-41f9-983d-a5d3f977b6c1","IsCreationKey":false,"Key":8.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 61,
     "yorigin": 64,

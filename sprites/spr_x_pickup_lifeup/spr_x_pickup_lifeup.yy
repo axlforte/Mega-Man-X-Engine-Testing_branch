@@ -33,7 +33,7 @@
   "sequence": {
     "resourceType": "GMSequence",
     "resourceVersion": "1.4",
-    "name": "",
+    "name": "spr_x_pickup_lifeup",
     "autoRecord": true,
     "backdropHeight": 1080,
     "backdropImageOpacity": 0.5,
@@ -55,8 +55,8 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"ffe89b23-81cd-4993-8163-29ae9a500648","path":"sprites/spr_x_pickup_lifeup/spr_x_pickup_lifeup.yy",},},},"Disabled":false,"id":"10e77d5a-94ca-4521-896a-63b5533d0e18","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"5fb3d66c-26d2-4eeb-97d2-db3affa1da34","path":"sprites/spr_x_pickup_lifeup/spr_x_pickup_lifeup.yy",},},},"Disabled":false,"id":"e52ed7b8-bf06-4bc4-8f6e-c6069fbcdb9e","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"ffe89b23-81cd-4993-8163-29ae9a500648","path":"sprites/spr_x_pickup_lifeup/spr_x_pickup_lifeup.yy",},},},"Disabled":false,"id":"53735e28-b524-4766-a8fe-60d0596aba2a","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"5fb3d66c-26d2-4eeb-97d2-db3affa1da34","path":"sprites/spr_x_pickup_lifeup/spr_x_pickup_lifeup.yy",},},},"Disabled":false,"id":"9a47ceca-a589-4310-87e5-80246bf39ec1","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

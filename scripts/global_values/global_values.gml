@@ -36,6 +36,8 @@ function global_values() {
 	global.golden_armor_enabled = false;
 	global.tile_shader_multiplier = 1;
 	global.anyone_can_get_armors = 1;
+	global.hit_effects = false;
+	player_global_armor_settings();
 	
 	enum diff_modes {
 		easy,
@@ -72,7 +74,7 @@ function global_values() {
 	display_reset(0, false);
 	global.character_selected_index[0] = 0;
 	global.character_selected[0] = obj_player_x;
-	global.pickup_lifeup_sprite = spr_x_pickup_lifeup;
+	global.pickup_lifeup_sprite = spr_vent_pickup_lifeup;
 	global.transition_object_list = ds_list_create();
 	for (var i = 0; i < pl_char.length; i++) {
 		global.player_character_armor[i] = ["", "", "", "", "", ""];
@@ -88,7 +90,7 @@ function global_values() {
 	global.magma_dragoon_defeat = 0;
 	global.unarmored_x_defeat = 0;
 	global.unarmored_axl_defeat = 0;
-	global.show_fps = true;
+	global.show_fps = false;
 	// Replay
 	global.recording_replay = false;
 	global.running_replay = false;

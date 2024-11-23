@@ -254,6 +254,12 @@ function player_variables() {
 		[255, 181, 16],
 		[255, 206, 49]
 	];
+	
+	//biometals
+	biometal_transform = false; // if you are actively transforming or not
+	biometal_index = 0; // timer
+	biometal_selected = 0; // which biometal? hu = 0, x = 1, zx = 2, hx = 3, fx = 4, lx = 5, px = 6, ox = 7, o1x = 8
+	
 	// Palette
 	armor_palette_index = [0, 0, 0, 0, 0, 0];
 

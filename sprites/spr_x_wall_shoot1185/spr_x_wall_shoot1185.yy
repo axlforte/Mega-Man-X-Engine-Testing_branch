@@ -65,7 +65,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"eb7a9787-247b-406a-8903-479670f91577","path":"sprites/spr_x_wall_shoot1185/spr_x_wall_shoot1185.yy",},},},"Disabled":false,"id":"06b95093-baa3-4025-881b-bff0afa45014","IsCreationKey":false,"Key":4.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 32,
     "yorigin": 40,

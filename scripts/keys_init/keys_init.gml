@@ -12,7 +12,8 @@ function keys_init() {
 		special,
 		weapon1,
 		weapon2,
-		start
+		start,
+		select
 	}
 	// Key Name
 	global.key_text[e_key.up]      = "UP";
@@ -27,6 +28,7 @@ function keys_init() {
 	global.key_text[e_key.weapon1] = "WEAPON1";
 	global.key_text[e_key.weapon2] = "WEAPON2";
 	global.key_text[e_key.start]   = "MENU";
+	global.key_text[e_key.select]  = "RETURN";
 	// Keyboard
 	global.key_config[e_key.up]      = vk_up;
 	global.key_config[e_key.down]    = vk_down;
@@ -40,6 +42,7 @@ function keys_init() {
 	global.key_config[e_key.weapon1] = ord("A");
 	global.key_config[e_key.weapon2] = ord("S");
 	global.key_config[e_key.start]   = vk_enter;
+	global.key_config[e_key.select]   = vk_escape;
 	// Gamepad
 	global.gamepad_config[e_key.up]      = gp_padu;
 	global.gamepad_config[e_key.down]    = gp_padd;
@@ -53,6 +56,7 @@ function keys_init() {
 	global.gamepad_config[e_key.weapon1] = gp_shoulderl;
 	global.gamepad_config[e_key.weapon2] = gp_shoulderlb;
 	global.gamepad_config[e_key.start]   = gp_start;
+	global.gamepad_config[e_key.select]   = gp_select;
 
 	// Initialize Variables using Apply
 	keys_apply();

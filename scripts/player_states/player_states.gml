@@ -24,6 +24,7 @@ function player_states() {
 		ride,
 		length_default,
 		// Special
+		biometal_select,
 		high_jump,
 		hover,
 		ceil_cling,
@@ -61,6 +62,7 @@ function player_states() {
 		saber_up,
 		saber_down,
 		saber_dash,
+		saber_dass,
 		saber_raikousen,
 		saber_charged,
 		saber_genmu,
@@ -78,25 +80,26 @@ function player_states() {
 	state = states.ready;
 
 	// State Scripts
-	state_array[states.none]         = noone;
-	state_array[states.ready]        = player_state_ready;
-	state_array[states.intro]        = player_state_intro;
-	state_array[states.capsule]      = player_state_armor_change;
-	state_array[states.outro]		 = player_state_outro;
-	state_array[states.idle]         = player_state_idle;
-	state_array[states.crouch]       = player_state_crouch;
-	state_array[states.walk]         = player_state_walk;
-	state_array[states.jump]         = player_state_jump;
-	state_array[states.fall]         = player_state_fall;
-	state_array[states.land]         = player_state_land;
-	state_array[states.dash]         = player_state_dash;
-	state_array[states.wall_slide]   = player_state_wall_slide;
-	state_array[states.wall_jump]    = player_state_wall_jump;
-	state_array[states.dolor]        = player_state_dolor;
-	state_array[states.death]        = player_state_death;
-	state_array[states.complete]	 = player_state_complete;
-	state_array[states.grabbed]	     = player_state_grabbed;
-	state_array[states.ride]	     = player_state_ride;
+	state_array[states.none]           = noone;
+	state_array[states.ready]          = player_state_ready;
+	state_array[states.intro]          = player_state_intro;
+	state_array[states.capsule]        = player_state_armor_change;
+	state_array[states.outro]		   = player_state_outro;
+	state_array[states.idle]           = player_state_idle;
+	state_array[states.crouch]         = player_state_crouch;
+	state_array[states.walk]           = player_state_walk;
+	state_array[states.jump]           = player_state_jump;
+	state_array[states.fall]           = player_state_fall;
+	state_array[states.land]           = player_state_land;
+	state_array[states.dash]           = player_state_dash;
+	state_array[states.wall_slide]     = player_state_wall_slide;
+	state_array[states.wall_jump]      = player_state_wall_jump;
+	state_array[states.dolor]          = player_state_dolor;
+	state_array[states.death]          = player_state_death;
+	state_array[states.complete]	   = player_state_complete;
+	state_array[states.grabbed]	       = player_state_grabbed;
+	state_array[states.ride]	       = player_state_ride;
+	state_array[states.biometal_select]= player_state_biometal_select;
 	
 
 	// Special State Scripts
@@ -137,6 +140,7 @@ function player_states() {
 	state_array[states.saber_up]              = player_state_saber_up;
 	state_array[states.saber_down]            = player_state_saber_down;
 	state_array[states.saber_dash]            = player_state_saber_dash;
+	state_array[states.saber_dass]            = player_state_saber_dass_regular;
 	state_array[states.saber_raikousen]       = player_state_saber_raikousen;
 	state_array[states.saber_genmu]			  = player_state_saber_genmu;
 

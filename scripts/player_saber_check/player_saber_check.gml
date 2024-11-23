@@ -12,7 +12,10 @@ function player_saber_check() {
 			changed_atk = true;
 			// Normal
 			if (is_on_floor()) {
-				player_saber_select(saber_atks.atk1);
+				if (state == states.dash)
+					player_saber_select(saber_atks.dass);
+				else
+					player_saber_select(saber_atks.atk1);
 			} else {
 				// Wall Slide
 				if (state == states.wall_slide && substates[0] == 1) {
