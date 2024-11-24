@@ -29,7 +29,7 @@ function bosses_init() {
 	["", spr_engine_icon, -1, -1, -1];
 
 	global.boss_info[e_boss.hq] = 
-	["", spr_hq_icon, spr_stage_hq, rm_various_things_that_need_to_be_tested_for_various_characters_in_various_contexts, -1];
+	["", spr_hq_icon, spr_stage_hq, rm_full_testing_stage, -1];
 
 	//global.boss_info[e_boss.intro] = 
 	//["", -1, -1, rm_intro_stage, -1];
