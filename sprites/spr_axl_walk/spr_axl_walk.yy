@@ -77,7 +77,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"e80de922-b5c3-4261-b243-0caa8facb1d1","path":"sprites/spr_axl_walk/spr_axl_walk.yy",},},},"Disabled":false,"id":"ff6717b9-dffc-4d7c-b6ed-a059c4e8fed3","IsCreationKey":false,"Key":10.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 35,
     "yorigin": 40,

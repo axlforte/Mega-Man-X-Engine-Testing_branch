@@ -65,7 +65,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"a0b2a0b9-5b3c-41b0-aee2-5e459ed07683","path":"sprites/spr_axl_hover_shoot/spr_axl_hover_shoot.yy",},},},"Disabled":false,"id":"95c57057-f181-4741-9307-98773dddda1a","IsCreationKey":false,"Key":4.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 35,
     "yorigin": 40,

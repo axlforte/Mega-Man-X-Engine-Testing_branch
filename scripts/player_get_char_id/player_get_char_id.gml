@@ -1,6 +1,6 @@
 function player_get_char_id() {
 	enum pl_char {
-		x, zero, axl, iris, vile, megaman, vent,
+		x, zero, axl, iris, vile, megaman, vent, bass,
 		length
 	}
 
@@ -12,6 +12,7 @@ function player_get_char_id() {
 		case "vile": return pl_char.vile; break;
 		case "megaman": return pl_char.megaman; break;
 		case "vent": return pl_char.vent; break;
+		case "bass": return pl_char.bass; break;
 	}
 
 

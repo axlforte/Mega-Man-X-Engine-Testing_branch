@@ -5,7 +5,8 @@ function characters_init() {
 	global.character_object[pl_char.iris]		= obj_player_iris;
 	global.character_object[pl_char.vile]		= obj_player_vile;
 	global.character_object[pl_char.megaman]	= obj_player_megaman;
-	global.character_object[pl_char.vent]	= obj_player_vent;
+	global.character_object[pl_char.vent]	    = obj_player_vent;
+	global.character_object[pl_char.bass]	    = obj_player_bass;
 	global.character_name[pl_char.x]		= "x";
 	global.character_name[pl_char.zero]		= "zero";
 	global.character_name[pl_char.axl]		= "axl";
@@ -13,6 +14,7 @@ function characters_init() {
 	global.character_name[pl_char.vile]		= "vile";
 	global.character_name[pl_char.megaman]  = "megaman";
 	global.character_name[pl_char.vent]     = "vent";
+	global.character_name[pl_char.bass]     = "bass";
 	player_global_voices_init();
 
 

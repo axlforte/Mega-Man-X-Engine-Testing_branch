@@ -1,6 +1,7 @@
 function player_state_biometal_select() {
 	var t = state_timer++;
 	shoot_enabled = false;
+	immortal = true;
 	
 	grav = 0;
 	v_speed = 0;
@@ -44,6 +45,7 @@ function player_state_biometal_select() {
 		} else {
 			state_set(states.fall);
 		}
+		immortal = false;
 		shoot_enabled = true;
 	}
 }

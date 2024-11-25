@@ -20,6 +20,8 @@ function player_weapon_settings() {
 		nightmare_saber,
 		// Axl
 		a_ray_gun,
+		//bass
+		bass_buster,
 		// Mega Man
 		copy_vision,
 		speed_gear,
@@ -80,6 +82,7 @@ function player_weapon_settings() {
 	weapon_shots_limit[weapons.x_buster] = 3;
 	weapon_shots_limit[weapons.z_buster] = 3;
 	weapon_shots_limit[weapons.a_pistol] = 200;
+	weapon_shots_limit[weapons.bass_buster] = 200;
 	weapon_shots_limit[weapons.a_ray_gun] = 200;
 	weapon_shots_limit[weapons.vile_vulcan] = 10;
 	weapon_shots_limit[weapons.hyper_charge] = 2;
@@ -93,12 +96,14 @@ function player_weapon_settings() {
 	weapon_show[weapons.x_buster] = false;
 	weapon_show[weapons.z_buster] = false;
 	weapon_show[weapons.a_pistol] = false;
+	weapon_show[weapons.bass_buster] = false;
 	weapon_show[weapons.z_saber] = false;
 	weapon_show[weapons.mega_buster] = false;
 	weapon_show[weapons.falcon_giga] = false;
 	// Cost
 	weapon_costs[weapons.x_buster] = [0];
 	weapon_costs[weapons.z_buster] = [0];
+	weapon_costs[weapons.bass_buster] = [0];
 	weapon_costs[weapons.z_buster_x5] = [0];
 	weapon_costs[weapons.nightmare_saber] = [0];
 	weapon_costs[weapons.a_pistol] = [0];
@@ -144,6 +149,7 @@ function player_weapon_settings() {
 	weapons_script[weapons.storm_tornado] = player_x_storm_tornado;
 	weapons_script[weapons.homing_torpedo] = player_x_homing_torpedo;
 	weapons_script[weapons.a_pistol] = player_axl_pistol;
+	weapons_script[weapons.bass_buster] = player_bass_buster;
 	weapons_script[weapons.a_ray_gun] = player_axl_pistol;
 	weapons_script[weapons.vile_vulcan] = player_vile_vulcan;
 	weapons_script[weapons.hyper_charge] = player_x_hyper_charge;

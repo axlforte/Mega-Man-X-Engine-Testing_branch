@@ -75,7 +75,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"be65acd2-1c42-44e9-b556-aa34f438830f","path":"sprites/spr_axl_dodge_roll/spr_axl_dodge_roll.yy",},},},"Disabled":false,"id":"41a6602a-4227-4db8-856c-1440ede2a72c","IsCreationKey":false,"Key":9.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 35,
     "yorigin": 40,

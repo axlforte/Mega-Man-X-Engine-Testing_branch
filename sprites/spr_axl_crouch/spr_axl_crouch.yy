@@ -59,7 +59,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"83f33af9-600f-4d84-8f00-69f61d86ff82","path":"sprites/spr_axl_crouch/spr_axl_crouch.yy",},},},"Disabled":false,"id":"ad6398d1-602c-4339-8187-ffa6ffdd216e","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 35,
     "yorigin": 40,

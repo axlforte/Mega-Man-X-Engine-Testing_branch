@@ -109,7 +109,7 @@ settings_apply();
 #region Player Select
 
 page_items[menu_states.player_select] = [
-	"X", "ZERO", "AXL", "IRIS", "VILE", "MEGAMAN","VENT"
+	"X", "ZERO", "AXL", "IRIS", "VILE", "MEGAMAN","VENT","BASS"
 ];
 global.golden_armor_enabled = false;
 
@@ -267,7 +267,8 @@ global.char_select_sprites = [
 	spr_player_iris,
 	spr_player_vile,
 	spr_player_megaman,
-	spr_player_vent
+	spr_player_vent,
+	spr_player_bass
 ];
 background_index = 0;
 // Animation
