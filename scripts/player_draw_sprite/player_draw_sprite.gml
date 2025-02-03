@@ -13,11 +13,34 @@ function player_draw_sprite(_x = x, _y = y, xs = xscale, ys = y_dir, index = flo
 				plt_source_index = armor_palette_index[p];
 				if (plt_index == 0)
 					plt_index = plt_index_default;
+				var _plt = plt_texture;
+				var _plts = plt_texture_sprite;
 				palette_shader();
 			} else {
 				scr_shader_set(shader_palette_light);	
 			}
-			draw_sprite_ext(pl_sprite[i], index, floor(_x), floor(_y), xs, ys, 0, noone, 1);
+			draw_sprite_ext(pl_sprite[i], index, floor(_x), floor(_y), xs, ys, rotation, c_white, 1);
+			var _plt = plt_texture;
+			var _plts = plt_texture_sprite;
+			plt_texture_sprite = plt_megaman_double_gear;
+			plt_texture = sprite_get_texture(plt_megaman_double_gear, 0);
+			var _arr = [0,1,1,1,1,2,2,2,2,2,1,1,0,0];
+			if(power_gear)
+				plt_index = array_get(_arr, gear_pulse_animation mod array_length(_arr)) + 2;
+			else if(speed_gear)
+				plt_index = array_get(_arr, gear_pulse_animation mod array_length(_arr)) + 5;
+			else if(current_weapon == weapons.atomic_fire && charge_t > 2 && charge_t < 22 && charge_t mod 2 == 0)
+				plt_index = 8;
+			else if(current_weapon == weapons.atomic_fire && charge_t > 22 && charge_t < 42 && charge_t mod 2 == 0)
+				plt_index = irandom_range(8,9);
+			else if(current_weapon == weapons.atomic_fire && charge_t > 42 && charge_t mod 2 == 0)
+				plt_index = irandom_range(8,10);
+			else
+				plt_index = 1;
+			palette_shader();
+			plt_texture = _plt;
+			plt_texture_sprite = _plts;
+			draw_sprite_ext(pl_sprite[i], index, floor(_x), floor(_y), xs, ys, rotation, c_white, 1);
 			palette_reset();
 		}
 	}

@@ -1,0 +1,26 @@
+offset = 1;
+dir = 1;
+h_speed = 0;
+v_speed = 0;
+abs_hspeed = 0;
+abs_vspeed = 0;
+dash_enabled = 0;
+h_speed = 0;
+abs_hspeed = 0;
+dir = 0;
+owner = 0;
+dir_angle = 0;
+dash = 0;
+dash_enabled = 0;
+dash = 0;
+is_main = 0;
+image_index_start = 0;
+shot_angle = 0
+charged_shot = 0;
+ignore_cost = 0;
+execute_step_in_first_frame = 0;
+frame_offset = 0;
+anim_offset = 0;
+x += 4 * instance_nearest(x,y,obj_player_parent).dir;
+fuckin_id = irandom_range(0, 1024);
+scr_keys_reset();

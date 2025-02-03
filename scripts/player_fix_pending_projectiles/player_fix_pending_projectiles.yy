@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "Shoot",
-    "path": "folders/Scripts/Player/Base/Weapons/Shoot.yy",
+    "path": "folders/Scripts/Player/Base/Step/Default/Weapons/Shoot.yy",
   },
 }

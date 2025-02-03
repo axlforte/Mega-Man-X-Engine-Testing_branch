@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "States",
-    "path": "folders/Scripts/Player/Base/Weapons/States.yy",
+    "path": "folders/Scripts/Player/Base/Step/Default/Weapons/States.yy",
   },
 }

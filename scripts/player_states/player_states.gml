@@ -31,6 +31,8 @@ function player_states() {
 		glide,
 		fly,
 		dodge_roll,
+		oil_slide,
+		super_arm_grab,
 		// Special Attacks
 		hadouken,
 		shoryuken,
@@ -40,6 +42,7 @@ function player_states() {
 		shin_messenko,
 		messenko,
 		speed_gear,
+		power_gear,
 		dive_kick,
 		z_buster_x5,
 		z_buster_nightmare,
@@ -99,15 +102,17 @@ function player_states() {
 	state_array[states.complete]	   = player_state_complete;
 	state_array[states.grabbed]	       = player_state_grabbed;
 	state_array[states.ride]	       = player_state_ride;
-	state_array[states.biometal_select]= player_state_biometal_select;
 	
 
 	// Special State Scripts
-	state_array[states.hover]         = player_state_hover;
-	state_array[states.ceil_cling]    = player_state_ceil_cling;
-	state_array[states.glide]         = player_state_glide;
-	state_array[states.fly]           = player_state_fly;
-	state_array[states.dodge_roll]    = player_state_dodge_roll;
+	state_array[states.hover]          = player_state_hover;
+	state_array[states.ceil_cling]     = player_state_ceil_cling;
+	state_array[states.glide]          = player_state_glide;
+	state_array[states.fly]            = player_state_fly;
+	state_array[states.dodge_roll]     = player_state_dodge_roll;
+	state_array[states.biometal_select]= player_state_biometal_select;
+	state_array[states.oil_slide]      = player_state_oil_slide;
+	state_array[states.super_arm_grab] = player_state_super_arm_grab;
 
 	// Special Attack States
 	state_array[states.nova_strike]		= player_state_nova_strike;

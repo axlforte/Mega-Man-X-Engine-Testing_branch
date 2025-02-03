@@ -3,6 +3,7 @@ function player_start() {
 	player_states();
 	is_player = true;
 	locked = false;
+	rotation = 0;
 	// Weapon Demo
 	weapon_demo = false;
 	weapon_demo_t = 0;
@@ -231,6 +232,8 @@ function player_start() {
 	player_weapon_settings();
 	player_weapon_sprites_init();
 	player_glow_init();
+	
+	palette_height = 32;
 	
 	for (var i = 80; i >= 0; i--) weapon_list[i] = noone;
 	weapon[0] = weapons.x_buster; // Primary weapon

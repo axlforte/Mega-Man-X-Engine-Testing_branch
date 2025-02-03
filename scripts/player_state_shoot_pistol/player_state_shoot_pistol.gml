@@ -22,7 +22,7 @@ function player_state_shoot_pistol() {
 		animation_play("shoot");
 		effect_top_visible = false;
 	}
-	if (substates[0] == 1) {
+	if (substates[0] == 1 && !instance_exists(obj_player_megaman)) {
 		if ((substates[1] <= hover_shoot_limit && substates[4] == 0) || hover_shoot_inf) {
 			grav = 0;
 			v_speed = 0;
@@ -30,7 +30,7 @@ function player_state_shoot_pistol() {
 			grav = gravity_default / 3;
 			substates[4] = 1;
 		}
-	} else {
+	} else if(!instance_exists(obj_player_megaman)){
 		grav = 0;
 		v_speed = 0;
 	}
@@ -63,6 +63,8 @@ function player_state_shoot_pistol() {
 	var st = state;
 	player_check_dash();
 	player_check_jump();
+	if(instance_exists(obj_player_megaman) && !is_on_floor())
+		player_check_move();
 	player_check_dodge_roll();
 	if (state != states.shoot_pistol) {
 		shoot = false;

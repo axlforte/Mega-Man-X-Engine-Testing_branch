@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "Charge",
-    "path": "folders/Scripts/Player/Base/Weapons/Charge.yy",
+    "path": "folders/Scripts/Player/Base/Step/Default/Weapons/Charge.yy",
   },
 }

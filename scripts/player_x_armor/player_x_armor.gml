@@ -43,9 +43,9 @@ function player_x_armor() {
 		}
 
 		if (BODY == "x2") {
+		}
 			player_weapon_set(8, weapons.x2_giga_crush);
 			player_special_weapons_add(states.giga_crush);
-		}
 
 		if (ARMS == "x2") {
 			weapons_script[weapons.x_buster] = player_x_buster_x2;

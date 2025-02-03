@@ -2,11 +2,18 @@ function player_megaman_variables() {
 	player_weapon_set(0, weapons.mega_buster);
 	player_weapon_select(weapons.mega_buster);
 	// Weapon Test
-	player_weapon_set(1, weapons.dive_missile);
-	player_weapon_set(2, weapons.lightning_bolt);
-	player_weapon_set(3, weapons.copy_vision);
-	player_weapon_set(9, weapons.speed_gear);
+	player_weapon_set(1, weapons.metal_blade);
+	player_weapon_set(2, weapons.atomic_fire);
+	player_weapon_set(3, weapons.air_shooter);
+	player_weapon_set(4, weapons.crash_bomb);
+	player_weapon_set(5, weapons.leaf_shield);
+	player_weapon_set(6, weapons.time_stopper);
+	player_weapon_set(7, weapons.bubble_lead);
+	player_weapon_set(8, weapons.quick_boomerang);
+	player_weapon_set(256, weapons.speed_gear);
+	player_weapon_set(257, weapons.power_gear);
 	player_special_weapons_add(states.speed_gear);
+	player_special_weapons_add(states.power_gear);
 
 	// Charge
 	charge_unlocked = true;
@@ -28,7 +35,7 @@ function player_megaman_variables() {
 		{alpha: 1, radius: 28 }
 	];
 	for (var i = 0; i < array_length(weapon_max_level); i++) {
-		if (i != weapons.mega_buster) {
+		if (i != weapons.mega_buster && i != weapons.atomic_fire) {
 			weapon_max_level[i] = 0;	
 		}
 	}

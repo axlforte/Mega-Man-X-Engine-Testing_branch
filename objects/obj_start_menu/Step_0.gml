@@ -582,6 +582,7 @@ switch (state) {
 						tran.color = c_white;
 						tran.transition_limit = 16;
 						menu_set_state(menu_states.player_select, 16, 60);
+						selected_item = 5;
 						audio_play(snd_player_success);
 					}
 				}

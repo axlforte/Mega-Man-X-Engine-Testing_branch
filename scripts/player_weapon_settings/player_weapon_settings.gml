@@ -20,13 +20,39 @@ function player_weapon_settings() {
 		nightmare_saber,
 		// Axl
 		a_ray_gun,
-		//bass
+		// I aint workin on bass no more. doc is trying his hand at that, let him have his fun
 		bass_buster,
 		// Mega Man
 		copy_vision,
 		speed_gear,
+		power_gear,
 		dive_missile,
-		lightning_bolt
+		lightning_bolt,
+		//bitchin, 88 weapons to add
+		rolling_cutter,
+		super_arm,
+		ice_slasher,
+		hyper_bomb,
+		fire_storm,
+		thunder_beam,
+		time_slow,
+		oil_slider,
+		//mm2
+		metal_blade,
+		atomic_fire,
+		bubble_lead,
+		crash_bomb,
+		air_shooter,
+		quick_boomerang,
+		time_stopper,
+		leaf_shield,
+		//utility - might make this universal
+		magnet_beam,
+		item_1,
+		item_2,
+		item_3,
+		wire,
+		balloon
 	}
 	// Must be changed to struct array
 	for (var i = 80; i >= 0; i--) {
@@ -55,6 +81,25 @@ function player_weapon_settings() {
 	weapon_palettes[weapons.copy_vision] = 13;
 	weapon_palettes[weapons.dive_missile] = 14;
 	weapon_palettes[weapons.lightning_bolt] = 15;
+	//mm1
+	weapon_palettes[weapons.rolling_cutter] = 16;
+	weapon_palettes[weapons.super_arm] = 17;
+	weapon_palettes[weapons.ice_slasher] = 18;
+	weapon_palettes[weapons.hyper_bomb] = 19;
+	weapon_palettes[weapons.fire_storm] = 20;
+	weapon_palettes[weapons.thunder_beam] = 21;
+	weapon_palettes[weapons.time_slow] = 22;
+	weapon_palettes[weapons.oil_slider] = 23;
+	//mm2
+	weapon_palettes[weapons.metal_blade] = 24;
+	weapon_palettes[weapons.time_stopper] = 25;
+	weapon_palettes[weapons.bubble_lead] = 26;
+	weapon_palettes[weapons.air_shooter] = 27;
+	weapon_palettes[weapons.quick_boomerang] = 28;
+	weapon_palettes[weapons.crash_bomb] = 29;
+	weapon_palettes[weapons.atomic_fire] = 30;
+	weapon_palettes[weapons.leaf_shield] = 31;
+	weapon_palettes[weapons.item_1] = 32;
 	// Bar Icons
 	weapon_icon[weapons.storm_tornado] = 0;
 	weapon_icon[weapons.homing_torpedo] = 5;
@@ -67,6 +112,25 @@ function player_weapon_settings() {
 	weapon_icon[weapons.copy_vision] = 6;
 	weapon_icon[weapons.dive_missile] = 7;
 	weapon_icon[weapons.lightning_bolt] = 8;
+	//mm1
+	weapon_icon[weapons.rolling_cutter] = 2;
+	weapon_icon[weapons.fire_storm] = 2;
+	weapon_icon[weapons.ice_slasher] = 2;
+	weapon_icon[weapons.super_arm] = 2;
+	weapon_icon[weapons.thunder_beam] = 2;
+	weapon_icon[weapons.hyper_bomb] = 2;
+	weapon_icon[weapons.oil_slider] = 2;
+	weapon_icon[weapons.time_slow] = 2;
+	weapon_icon[weapons.magnet_beam] = 2;
+	//mm2
+	weapon_icon[weapons.atomic_fire] = 2;
+	weapon_icon[weapons.metal_blade] = 2;
+	weapon_icon[weapons.crash_bomb] = 2;
+	weapon_icon[weapons.leaf_shield] = 2;
+	weapon_icon[weapons.air_shooter] = 2;
+	weapon_icon[weapons.time_stopper] = 2;
+	weapon_icon[weapons.bubble_lead] = 2;
+	weapon_icon[weapons.quick_boomerang] = 2;
 	// Bar color (Image Index)
 	weapon_color[weapons.storm_tornado] = 1;
 	weapon_color[weapons.homing_torpedo] = 3;
@@ -92,6 +156,13 @@ function player_weapon_settings() {
 	weapon_shots_limit[weapons.copy_vision] = 4;
 	weapon_shots_limit[weapons.dive_missile] = 1;
 	weapon_shots_limit[weapons.lightning_bolt] = 1;
+	weapon_shots_limit[weapons.fire_storm] = 2;
+	weapon_shots_limit[weapons.bubble_lead] = 2;
+	weapon_shots_limit[weapons.atomic_fire] = 2;
+	weapon_shots_limit[weapons.ice_slasher] = 3;
+	weapon_shots_limit[weapons.crash_bomb] = 3;
+	weapon_shots_limit[weapons.metal_blade] = 69;//this one was to be funny
+	weapon_shots_limit[weapons.quick_boomerang] = 69;//this one was because im lazy
 	// Show
 	weapon_show[weapons.x_buster] = false;
 	weapon_show[weapons.z_buster] = false;
@@ -114,8 +185,11 @@ function player_weapon_settings() {
 	weapon_costs[weapons.nova_strike] = [0];
 	weapon_costs[weapons.falcon_giga] = [-1];
 	weapon_costs[weapons.x2_giga_crush] = [-1];
-	weapon_costs[weapons.speed_gear] = [(28/60) / 5]; // Use for 5 seconds
+	weapon_costs[weapons.speed_gear] = [(28/60) / 256]; // Use for 5 seconds
+	weapon_costs[weapons.power_gear] = [(28/60) / 5]; // Use for 5 seconds
 	weapon_costs[weapons.lightning_bolt] = [4];
+	weapon_costs[weapons.metal_blade] = [1/8];
+	weapon_costs[weapons.quick_boomerang] = [1/8];
 	// Weapon Limit
 	weapon_energy_max[weapons.vile_vulcan] = 16;
 	// Max Level
@@ -133,16 +207,19 @@ function player_weapon_settings() {
 	weapon_level_id[weapons.a_ray_gun] = 1;
 	// Fill Rate
 	weapon_fill_rate[weapons.vile_vulcan] = 0.1;
-	weapon_fill_rate[weapons.speed_gear] = (28/60) / 15;
+	weapon_fill_rate[weapons.speed_gear] = (28/60) / 1;//15
+	weapon_fill_rate[weapons.power_gear] = (28/60) / 15;
 	// Full Sound
 	weapon_full_sound[weapons.x2_giga_crush] = snd_player_full_weapon;
 	weapon_full_sound[weapons.falcon_giga] = snd_player_full_weapon;
 	weapon_full_sound[weapons.speed_gear] = noone;
+	weapon_full_sound[weapons.power_gear] = noone;
 	// Selectable
 	weapon_selectable[weapons.z_saber] = false;
 	weapon_selectable[weapons.nova_strike] = false;
 	weapon_selectable[weapons.falcon_giga] = false;
 	weapon_selectable[weapons.speed_gear] = false;
+	weapon_selectable[weapons.power_gear] = false;
 	// Scripts
 	weapons_script[weapons.x_buster] = player_x_buster_x2;
 	weapons_script[weapons.z_buster] = player_zero_buster_x1;
@@ -153,10 +230,30 @@ function player_weapon_settings() {
 	weapons_script[weapons.a_ray_gun] = player_axl_pistol;
 	weapons_script[weapons.vile_vulcan] = player_vile_vulcan;
 	weapons_script[weapons.hyper_charge] = player_x_hyper_charge;
+	weapons_script[weapons.z_buster_x5] = player_zero_buster_x5;
+	weapons_script[weapons.nightmare_saber] = player_zero_nightmare_saber;
+	//megaman
 	weapons_script[weapons.mega_buster] = player_megaman_buster;
 	weapons_script[weapons.copy_vision] = player_megaman_copy_vision;
 	weapons_script[weapons.dive_missile] = player_megaman_dive_missile;
 	weapons_script[weapons.lightning_bolt] = player_megaman_lightning_bolt;
-	weapons_script[weapons.z_buster_x5] = player_zero_buster_x5;
-	weapons_script[weapons.nightmare_saber] = player_zero_nightmare_saber;
+	//mm1
+	weapons_script[weapons.rolling_cutter] = player_megaman_rolling_cutter;
+	weapons_script[weapons.fire_storm] = player_megaman_fire_storm;
+	weapons_script[weapons.super_arm] = player_megaman_super_arm;
+	weapons_script[weapons.ice_slasher] = player_megaman_ice_slasher;
+	weapons_script[weapons.thunder_beam] = player_megaman_thunder_beam;
+	weapons_script[weapons.hyper_bomb] = player_megaman_hyper_bomb;
+	weapons_script[weapons.oil_slider] = player_megaman_oil_slider;
+	weapons_script[weapons.time_slow] = player_megaman_time_slow;
+	weapons_script[weapons.magnet_beam] = player_megaman_magnet_beam;
+	//mm2
+	weapons_script[weapons.metal_blade] = player_megaman_metal_blade;
+	weapons_script[weapons.atomic_fire] = player_megaman_atomic_fire;
+	weapons_script[weapons.leaf_shield] = player_megaman_leaf_shield;
+	weapons_script[weapons.quick_boomerang] = player_megaman_quick_boomerang;
+	weapons_script[weapons.crash_bomb] = player_megaman_crash_bomb;
+	weapons_script[weapons.bubble_lead] = player_megaman_bubble_lead;
+	weapons_script[weapons.time_stopper] = player_megaman_time_stopper;
+	weapons_script[weapons.air_shooter] = player_megaman_air_shooter;
 }

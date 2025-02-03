@@ -32,8 +32,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_player_megaman_dive_missile",
-    "path": "sprites/spr_player_megaman_dive_missile/spr_player_megaman_dive_missile.yy",
+    "name": "Dive_Missile",
+    "path": "sprites/Dive_Missile/Dive_Missile.yy",
   },
   "spriteMaskId": null,
   "visible": true,

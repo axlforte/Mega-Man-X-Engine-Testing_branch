@@ -11,8 +11,10 @@ function player_charge() {
 			if (charge_t >= charge_limits[i]) {
 				if (i >= charge_level && i <= charge_level_max && (weapon[0] == noone || i <= weapon_max_level[weapon[0]])) {
 					charge_level = i;
-					charge_sprite = charge_sprites[i];
-					charge_palette = charge_palettes[i];
+					if(current_weapon != weapons.atomic_fire){
+						charge_sprite = charge_sprites[i];
+						charge_palette = charge_palettes[i];
+					}
 				}
 			}
 		}

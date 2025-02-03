@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "Functions",
-    "path": "folders/Scripts/Player/Base/Weapons/Functions.yy",
+    "path": "folders/Scripts/Player/Base/Step/Default/Weapons/Functions.yy",
   },
 }

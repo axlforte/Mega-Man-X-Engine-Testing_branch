@@ -225,6 +225,12 @@ function player_animations() {
 		0, 0,
 		4, 1
 	], 4);
+	
+	animation_add("throw",
+	[
+		0, 0,
+		4, 1
+	], 4);
 
 	animation_add("db_buster_1|db_buster",
 	[
@@ -363,6 +369,8 @@ function player_animations() {
 		22, 10,
 		24, 11
 	], 26);
+	
+	animation_add("oil_slide", [0,0],0);
 	
 	animation_add("ride_armor");
 	

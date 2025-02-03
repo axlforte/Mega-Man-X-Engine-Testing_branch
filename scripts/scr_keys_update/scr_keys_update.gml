@@ -29,6 +29,9 @@ function scr_keys_update() {
 
 			key_p_special =  (!key_special && keyboard_check(global.key_special));
 			key_special = keyboard_check(global.key_special);
+			
+			key_p_special2 =  (!key_special2 && keyboard_check(global.key_special2));
+			key_special2 = keyboard_check(global.key_special2);
 	
 			key_p_wp1 = (!key_wp1 && keyboard_check(global.key_weapon1));
 			key_wp1 = keyboard_check(global.key_weapon1);
@@ -71,6 +74,9 @@ function scr_keys_update() {
 
 		key_p_special =  (!key_special && keyboard_check(global.key_special));
 		key_special = keyboard_check(global.key_special);
+		
+		key_p_special2 =  (!key_special2 && keyboard_check(global.key_special2));
+		key_special2 = keyboard_check(global.key_special2);
 	
 		key_p_wp1 = (!key_p_wp1 && keyboard_check_pressed(global.key_weapon1));
 		key_wp1 = keyboard_check(global.key_weapon1);
@@ -129,6 +135,9 @@ function scr_keys_update() {
 
 		key_p_special = gamepad_pressed(global.gamepad_config[e_key.special]); 
 		key_special = gamepad_hold(global.gamepad_config[e_key.special]); 
+		
+		key_p_special = gamepad_pressed(global.gamepad_config[e_key.special2]); 
+		key_special = gamepad_hold(global.gamepad_config[e_key.special2]); 
 
 		key_p_wp1 = gamepad_pressed(global.gamepad_config[e_key.weapon1]); 
 		key_wp1 = gamepad_hold(global.gamepad_config[e_key.weapon1]); 

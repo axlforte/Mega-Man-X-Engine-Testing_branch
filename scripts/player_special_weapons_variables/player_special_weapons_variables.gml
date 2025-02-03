@@ -49,7 +49,12 @@ function player_special_weapons_variables() {
 	
 	// Power Gear
 	power_gear = false;
+	power_gear_enabled = true;
+	normal_gear_effect = player_effect_new(obj_player_double_gear_effect, 0, 0, layer_up);
 	power_gear_sprite = spr_power_gear_effect;
+	
+	// Any gear
+	gear_pulse_animation = 1;
 	
 	// Shin Messenko
 	shin_messenko_interval = 8;

@@ -6,6 +6,6 @@
   "isDnD": false,
   "parent": {
     "name": "Cost",
-    "path": "folders/Scripts/Player/Base/Weapons/Functions/Cost.yy",
+    "path": "folders/Scripts/Player/Base/Step/Default/Weapons/Functions/Cost.yy",
   },
 }

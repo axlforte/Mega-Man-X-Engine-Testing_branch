@@ -3,6 +3,10 @@ function player_check_weapon_change() {
 
 	var old_id = weapon_id;
 	var change_dir = key_p_wp1 - key_p_wp2;
+	
+	if(instance_exists(obj_player_megaman_shot_time_stopper))
+		return;
+		
 	if (change_dir != 0) {
 		do {
 			weapon_id = (weapon_id + change_dir + 81) mod 81;
