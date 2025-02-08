@@ -1,0 +1,1 @@
+draw_sprite(sprite_index, (timer > 45 ? 11 : 1),x,y);

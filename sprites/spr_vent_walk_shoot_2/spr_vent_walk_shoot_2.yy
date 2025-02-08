@@ -36,7 +36,7 @@
   "origin": 9,
   "parent": {
     "name": "ZX",
-    "path": "folders/Sprites/Player/Characters/Vent n Ailr/Vent/Megamerges/ZX.yy",
+    "path": "folders/Sprites/Player/Characters/Vent n Aile/Vent/Megamerges/ZX.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

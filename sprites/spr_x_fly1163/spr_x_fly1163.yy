@@ -29,7 +29,7 @@
   "origin": 9,
   "parent": {
     "name": "Normal",
-    "path": "folders/Sprites/Player/Characters/Vent n Ailr/Vent/Normal.yy",
+    "path": "folders/Sprites/Player/Characters/Vent n Aile/Vent/Normal.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

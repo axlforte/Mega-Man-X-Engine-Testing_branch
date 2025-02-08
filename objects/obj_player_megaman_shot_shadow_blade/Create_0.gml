@@ -1,0 +1,14 @@
+event_inherited();
+sound = snd_player_axl_bullets;
+anti_destroy = true;
+anti_destroy_limit = 3;
+execute_step_in_first_frame = true;
+timer = -1;
+atk = 2;
+abs_hspeed = 4;
+animation_auto = false;
+boss_buffer_limit = 25;
+animation_auto = false;
+abs_max_speed = 6.25;
+animation_speed = 0.25;
+anim_frame = 0;

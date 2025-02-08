@@ -26,7 +26,6 @@ function player_weapon_settings() {
 		copy_vision,
 		speed_gear,
 		power_gear,
-		dive_missile,
 		lightning_bolt,
 		//bitchin, 88 weapons to add
 		rolling_cutter,
@@ -46,6 +45,24 @@ function player_weapon_settings() {
 		quick_boomerang,
 		time_stopper,
 		leaf_shield,
+		//mm3
+		needle_shot,
+		gemini_laser,
+		hard_knuckle,
+		search_snake,
+		spark_shot,
+		magnet_missile,
+		top_spin,
+		shadow_blade,
+		//mm4
+		pharoah_shot,
+		rain_flush,
+		skull_barrier,
+		dust_crusher,
+		ring_boomerang,
+		flash_stopper,
+		drill_bomb,
+		dive_missile,
 		//utility - might make this universal
 		magnet_beam,
 		item_1,
@@ -79,7 +96,6 @@ function player_weapon_settings() {
 	weapon_palettes[weapons.storm_tornado] = 6;
 	weapon_palettes[weapons.homing_torpedo] = 9;
 	weapon_palettes[weapons.copy_vision] = 13;
-	weapon_palettes[weapons.dive_missile] = 14;
 	weapon_palettes[weapons.lightning_bolt] = 15;
 	//mm1
 	weapon_palettes[weapons.rolling_cutter] = 16;
@@ -100,6 +116,24 @@ function player_weapon_settings() {
 	weapon_palettes[weapons.atomic_fire] = 30;
 	weapon_palettes[weapons.leaf_shield] = 31;
 	weapon_palettes[weapons.item_1] = 32;
+	//mm3
+	weapon_palettes[weapons.needle_shot] = 33;
+	weapon_palettes[weapons.gemini_laser] = 34;
+	weapon_palettes[weapons.hard_knuckle] = 35;
+	weapon_palettes[weapons.magnet_missile] = 36;
+	weapon_palettes[weapons.shadow_blade] = 37;
+	weapon_palettes[weapons.spark_shot] = 38;
+	weapon_palettes[weapons.search_snake] = 39;
+	weapon_palettes[weapons.top_spin] = 40;
+	//mm4
+	weapon_palettes[weapons.flash_stopper] = 41;
+	weapon_palettes[weapons.rain_flush] = 42;
+	weapon_palettes[weapons.dive_missile] = 43;
+	weapon_palettes[weapons.skull_barrier] = 44;
+	weapon_palettes[weapons.ring_boomerang] = 45;
+	weapon_palettes[weapons.pharoah_shot] = 46;
+	weapon_palettes[weapons.drill_bomb] = 47;
+	weapon_palettes[weapons.dust_crusher] = 48;
 	// Bar Icons
 	weapon_icon[weapons.storm_tornado] = 0;
 	weapon_icon[weapons.homing_torpedo] = 5;
@@ -131,6 +165,23 @@ function player_weapon_settings() {
 	weapon_icon[weapons.time_stopper] = 2;
 	weapon_icon[weapons.bubble_lead] = 2;
 	weapon_icon[weapons.quick_boomerang] = 2;
+	//mm3
+	weapon_icon[weapons.shadow_blade] = 2;
+	weapon_icon[weapons.top_spin] = 2;
+	weapon_icon[weapons.spark_shot] = 2;
+	weapon_icon[weapons.search_snake] = 2;
+	weapon_icon[weapons.gemini_laser] = 2;
+	weapon_icon[weapons.needle_shot] = 2;
+	weapon_icon[weapons.magnet_missile] = 2;
+	weapon_icon[weapons.hard_knuckle] = 2;
+	//mm4
+	weapon_icon[weapons.rain_flush] = 2;
+	weapon_icon[weapons.flash_stopper] = 2;
+	weapon_icon[weapons.ring_boomerang] = 2;
+	weapon_icon[weapons.dust_crusher] = 2;
+	weapon_icon[weapons.drill_bomb] = 2;
+	weapon_icon[weapons.pharoah_shot] = 2;
+	weapon_icon[weapons.skull_barrier] = 2;
 	// Bar color (Image Index)
 	weapon_color[weapons.storm_tornado] = 1;
 	weapon_color[weapons.homing_torpedo] = 3;
@@ -163,6 +214,7 @@ function player_weapon_settings() {
 	weapon_shots_limit[weapons.crash_bomb] = 3;
 	weapon_shots_limit[weapons.metal_blade] = 69;//this one was to be funny
 	weapon_shots_limit[weapons.quick_boomerang] = 69;//this one was because im lazy
+	weapon_shots_limit[weapons.needle_shot] = 69;//this one was because im lazy
 	// Show
 	weapon_show[weapons.x_buster] = false;
 	weapon_show[weapons.z_buster] = false;
@@ -190,6 +242,7 @@ function player_weapon_settings() {
 	weapon_costs[weapons.lightning_bolt] = [4];
 	weapon_costs[weapons.metal_blade] = [1/8];
 	weapon_costs[weapons.quick_boomerang] = [1/8];
+	weapon_costs[weapons.needle_shot] = [1/8];
 	// Weapon Limit
 	weapon_energy_max[weapons.vile_vulcan] = 16;
 	// Max Level
@@ -235,7 +288,6 @@ function player_weapon_settings() {
 	//megaman
 	weapons_script[weapons.mega_buster] = player_megaman_buster;
 	weapons_script[weapons.copy_vision] = player_megaman_copy_vision;
-	weapons_script[weapons.dive_missile] = player_megaman_dive_missile;
 	weapons_script[weapons.lightning_bolt] = player_megaman_lightning_bolt;
 	//mm1
 	weapons_script[weapons.rolling_cutter] = player_megaman_rolling_cutter;
@@ -256,4 +308,22 @@ function player_weapon_settings() {
 	weapons_script[weapons.bubble_lead] = player_megaman_bubble_lead;
 	weapons_script[weapons.time_stopper] = player_megaman_time_stopper;
 	weapons_script[weapons.air_shooter] = player_megaman_air_shooter;
+	//mm3
+	weapons_script[weapons.shadow_blade] = player_megaman_shadow_blade;
+	weapons_script[weapons.top_spin] = player_megaman_top_spin;
+	weapons_script[weapons.gemini_laser] = player_megaman_gemini_laser;
+	weapons_script[weapons.hard_knuckle] = player_megaman_hard_knuckle;
+	weapons_script[weapons.spark_shot] = player_megaman_spark_shot;
+	weapons_script[weapons.search_snake] = player_megaman_search_snake;
+	weapons_script[weapons.needle_shot] = player_megaman_needle_cannon;
+	weapons_script[weapons.magnet_missile] = player_megaman_magnet_missile;
+	//mm4
+	weapons_script[weapons.dive_missile] = player_megaman_dive_missile;
+	weapons_script[weapons.ring_boomerang] = player_megaman_ring_boomerang;
+	weapons_script[weapons.drill_bomb] = player_megaman_drill_bomb;
+	weapons_script[weapons.rain_flush] = player_megaman_rain_flush;
+	weapons_script[weapons.flash_stopper] = player_megaman_flash_stopper;
+	weapons_script[weapons.dust_crusher] = player_megaman_dust_crusher;
+	weapons_script[weapons.pharoah_shot] = player_megaman_pharoah_shot;
+	weapons_script[weapons.skull_barrier] = player_megaman_skull_barrier;
 }

@@ -33,6 +33,7 @@ function player_states() {
 		dodge_roll,
 		oil_slide,
 		super_arm_grab,
+		top_spin,
 		// Special Attacks
 		hadouken,
 		shoryuken,
@@ -113,6 +114,7 @@ function player_states() {
 	state_array[states.biometal_select]= player_state_biometal_select;
 	state_array[states.oil_slide]      = player_state_oil_slide;
 	state_array[states.super_arm_grab] = player_state_super_arm_grab;
+	state_array[states.top_spin] = player_state_top_spin;
 
 	// Special Attack States
 	state_array[states.nova_strike]		= player_state_nova_strike;

@@ -7,7 +7,7 @@ function player_check_dolor() {
 	}
 	var enemy = instance_place(x, y, par_enemy);
 	mask_index = previous_mask;
-	if (state == states.death || state == states.grabbed || weapon_demo) exit;
+	if (state == states.death || state == states.grabbed || state == states.top_spin || weapon_demo) exit;
 	if (!immortal) {
 		if (!immunity && state != states.dolor && instance_exists(enemy) && !enemy.dead && enemy.collide_damage > 0) {
 			var _damage_reduction = damage_reduction;

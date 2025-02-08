@@ -56,6 +56,9 @@ function player_special_weapons_variables() {
 	// Any gear
 	gear_pulse_animation = 1;
 	
+	//top spin
+	initial_dir = 0;
+	
 	// Shin Messenko
 	shin_messenko_interval = 8;
 	shin_messenko_distance = 48;

@@ -26,7 +26,7 @@
   "origin": 0,
   "parent": {
     "name": "Palletes",
-    "path": "folders/Sprites/Player/Characters/Vent n Ailr/Palletes.yy",
+    "path": "folders/Sprites/Player/Characters/Vent n Aile/Palletes.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

@@ -33,8 +33,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_vent_pickup_lifeup",
-    "path": "sprites/spr_vent_pickup_lifeup/spr_vent_pickup_lifeup.yy",
+    "name": "spr_megaman_pickup_lifeup",
+    "path": "sprites/spr_megaman_pickup_lifeup/spr_megaman_pickup_lifeup.yy",
   },
   "spriteMaskId": null,
   "visible": true,

@@ -26,7 +26,7 @@
   "origin": 0,
   "parent": {
     "name": "Player Select",
-    "path": "folders/Sprites/Player/Characters/Vent n Ailr/Vent/Player Select.yy",
+    "path": "folders/Sprites/Player/Characters/Vent n Aile/Vent/Player Select.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

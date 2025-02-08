@@ -372,6 +372,8 @@ function player_animations() {
 	
 	animation_add("oil_slide", [0,0],0);
 	
+	animation_add("spin",[0,0,2,1,4,2,6,3],0, 6);
+	
 	animation_add("ride_armor");
 	
 	animation_add("dive_kick", keyframes_generate(5, 1/2, false, 0));

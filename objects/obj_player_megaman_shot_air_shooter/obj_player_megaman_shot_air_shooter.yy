@@ -33,8 +33,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "air_shooter",
-    "path": "sprites/air_shooter/air_shooter.yy",
+    "name": "spr_air_shooter",
+    "path": "sprites/spr_air_shooter/spr_air_shooter.yy",
   },
   "spriteMaskId": null,
   "visible": true,

@@ -37,8 +37,8 @@
     "path": "sprites/leaf_shield/leaf_shield.yy",
   },
   "spriteMaskId": {
-    "name": "spr_super_arm_brick_block",
-    "path": "sprites/spr_super_arm_brick_block/spr_super_arm_brick_block.yy",
+    "name": "spr_super_arm_brick_block_centered",
+    "path": "sprites/spr_super_arm_brick_block_centered/spr_super_arm_brick_block_centered.yy",
   },
   "visible": true,
 }

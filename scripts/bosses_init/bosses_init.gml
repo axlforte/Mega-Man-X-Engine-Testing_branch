@@ -10,6 +10,7 @@ enum e_boss
 	magma_dragoon,
 	neon_tiger,
 	launch_octopus,
+	blade_man,
 	intro,
 	length
 }
@@ -30,6 +31,9 @@ function bosses_init() {
 
 	global.boss_info[e_boss.hq] = 
 	["", spr_hq_icon, spr_stage_hq, rm_full_testing_stage, -1];
+	
+	global.boss_info[e_boss.blade_man] = 
+	["BLADE MAN", spr_blade_man_icon, spr_stage_hq, rm_blade_man, -1];
 
 	//global.boss_info[e_boss.intro] = 
 	//["", -1, -1, rm_intro_stage, -1];
@@ -61,7 +65,7 @@ function bosses_init() {
 	global.boss_slot[4] = e_boss.neon_tiger;
 
 	global.boss_slot[5] = e_boss.magma_dragoon;
-	global.boss_slot[6] = noone;
+	global.boss_slot[6] = e_boss.blade_man;
 	global.boss_slot[7] = e_boss.hq;
 	global.boss_slot[8] = noone;
 	global.boss_slot[9] = e_boss.launch_octopus;
