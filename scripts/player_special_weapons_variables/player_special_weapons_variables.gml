@@ -59,6 +59,9 @@ function player_special_weapons_variables() {
 	//top spin
 	initial_dir = 0;
 	
+	//super arm
+	grabbing_block = false;
+	
 	// Shin Messenko
 	shin_messenko_interval = 8;
 	shin_messenko_distance = 48;
@@ -98,4 +101,5 @@ function player_special_weapons_variables() {
 	// All
 	using_special_weapon = false;
 	special_inst = noone;
+	weapon_plt = 0;
 }

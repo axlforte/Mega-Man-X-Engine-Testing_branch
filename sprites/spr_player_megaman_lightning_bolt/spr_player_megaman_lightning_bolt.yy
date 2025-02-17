@@ -28,8 +28,8 @@
   "nineSlice": null,
   "origin": 9,
   "parent": {
-    "name": "Lightning Bolt",
-    "path": "folders/Sprites/Player/Characters/MegaMan/Weapons/Lightning Bolt.yy",
+    "name": "Custom",
+    "path": "folders/Sprites/Player/Characters/MegaMan/Weapons/Custom.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

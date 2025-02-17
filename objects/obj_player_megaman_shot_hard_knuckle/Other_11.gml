@@ -17,11 +17,8 @@ else {
 	}
 	if (t < player_lock){ 
 		//player_shot_pos_fix();
-		owner.y = y + 2;
-		owner.x = x - 18 * dir;
-		if(owner.state == states.jump || owner.state == states.fall){
-			owner.x = x - 16 * dir;
-		}
+		owner.y = initial_player_y;
+		owner.x = initial_player_x;
 		owner.v_speed = 0;
 		owner.h_speed = 0;
 	}else if (t == player_lock) abs_hspeed = 2;

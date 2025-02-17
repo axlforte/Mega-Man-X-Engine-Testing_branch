@@ -31,6 +31,7 @@ function macros() {
 	#macro PAUSE if (global.paused) exit;
 	#macro PAUSE_EXCEPT if (global.paused && !array_contains(pause_exceptions, global.pause_type)) exit;
 	#macro PAUSE_ONLY_NORMAL if (global.paused && global.pause_type == pause_types.normal) exit;
+	#macro DIE instance_destroy();
 	
 	///Dialogue Engine
 	#macro font_big 0

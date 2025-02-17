@@ -2,7 +2,7 @@
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
   "name": "spr_box_cover",
-  "bbox_bottom": 58,
+  "bbox_bottom": 60,
   "bbox_left": 5,
   "bbox_right": 58,
   "bbox_top": 5,

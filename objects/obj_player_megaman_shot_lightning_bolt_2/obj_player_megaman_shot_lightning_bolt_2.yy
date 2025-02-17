@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Lightning Bolt",
-    "path": "folders/Objects/Players/Characters/MegaMan/Shots/Lightning Bolt.yy",
+    "name": "Custom",
+    "path": "folders/Objects/Players/Characters/MegaMan/Shots/Custom.yy",
   },
   "parentObjectId": {
     "name": "obj_player_megaman_shot_3_effect",

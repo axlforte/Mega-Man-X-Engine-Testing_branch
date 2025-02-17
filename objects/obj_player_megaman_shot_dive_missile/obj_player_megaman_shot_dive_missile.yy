@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Dive Missile",
-    "path": "folders/Objects/Players/Characters/MegaMan/Shots/Dive Missile.yy",
+    "name": "MM4",
+    "path": "folders/Objects/Players/Characters/MegaMan/Shots/MM4.yy",
   },
   "parentObjectId": {
     "name": "obj_player_shot_parent",

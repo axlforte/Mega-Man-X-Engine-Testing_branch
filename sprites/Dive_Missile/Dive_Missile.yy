@@ -40,8 +40,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "Dive Missile",
-    "path": "folders/Sprites/Player/Characters/MegaMan/Weapons/Dive Missile.yy",
+    "name": "MM4",
+    "path": "folders/Sprites/Player/Characters/MegaMan/Weapons/MM4.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

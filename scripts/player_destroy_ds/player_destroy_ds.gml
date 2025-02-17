@@ -2,9 +2,14 @@ function player_destroy_ds() {
 	// Sprites
 	ds_map_destroy(sprite_str);
 	ds_map_destroy(sprite_shoot_str);
+	ds_map_destroy(sprite_carry_str);
+	ds_map_destroy(sprite_throw_str);
 
 	ds_list_destroy(my_sprites);
 	ds_list_destroy(my_sprites_shoot);
+	ds_list_destroy(my_sprites_carry);
+	ds_list_destroy(my_sprites_throw);
+	ds_list_destroy(my_custom_sprites);
 
 	ds_map_destroy(weapon_offset);
 	ds_list_destroy(special_weapons);

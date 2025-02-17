@@ -28,12 +28,32 @@ switch(state) {
 		}
 		break;
 	#endregion
+	#region weapon select
+	case menu_states.weapon_select:
+		draw_set_color(c_white);
+		draw_rectangle(8,0,144,240,false);
+		for(var i = 0; i < 11; i++){
+			var _p = selected_item - 5 + i;
+			if(_p < G.weapon_chunk[weapon_player_selected][0])
+				_p += G.weapon_chunk[weapon_player_selected][1] - G.weapon_chunk[weapon_player_selected][0];
+			else if(_p > G.weapon_chunk[weapon_player_selected][1])
+				_p -= G.weapon_chunk[weapon_player_selected][1] - G.weapon_chunk[weapon_player_selected][0];
+			draw_sprite(weapon_icons, _p, 9, 
+			i * 26 - 18 + (weapon_lerp * (weapon_lerp_distance / weapon_lerp_time)) * weapon_lerp_direction);
+			draw_string(23, i * 26 - 18 + (weapon_lerp * (weapon_lerp_distance / weapon_lerp_time)) * weapon_lerp_direction,
+			G.weapon[_p].name, colors.blue);
+		}
+		//lines
+		draw_rectangle(236, 0, 238, 240,false);
+		//the buttons
+		draw_string(240, 2, "SAVE", colors.orange);
+		draw_string(288, 2, "ALL", colors.orange);
+		break;
+	#endregion
 	#region Player Select
 	case menu_states.player_select:
 		var item = items[selected_item];
 		draw_sprite(spr_player_select_backgrounds, background_index, 0, 0);
-		draw_sprite(spr_box_cover,0,-3,150);
-		draw_sprite(spr_box_cover,0,257,150);
 		if(selected_item == 0){
 			draw_sprite_ext(spr_mugshot_default,array_length(items) - 1,7,160,1,1,0,c_white,1);
 		} else {
@@ -47,6 +67,8 @@ switch(state) {
 		}
 		menu_draw_player(0, 0, selected_item, armor_index,0,0,[0, 0, 0, 0, 0, 0],1,1,c_white);
 		draw_string_center(270, 13, item);
+		draw_sprite(spr_box_cover,0,-3,150);
+		draw_sprite(spr_box_cover,0,257,150);
 		menu_draw_buttons();
 		break;
 	#endregion

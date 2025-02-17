@@ -18,7 +18,7 @@ enum e_boss
 function bosses_init() {
 #region Bosses Variables
 	for (var i = 0; i < e_boss.length; i++) {
-		global.boss_defeated[i] = false;	
+		global.boss_defeated[i] = true;	
 	}
 	global.boss_defeated[e_boss.neon_tiger] = true;
 	global.boss_defeated[e_boss.flame_stag] = true;

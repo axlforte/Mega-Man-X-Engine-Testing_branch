@@ -26,7 +26,6 @@ else
 		boom_timer--;
 		if(boom_timer == 15){
 		} else if(boom_timer < 0){
-			instance_create_depth(x,y,depth - 1,explode_FX);
 			instance_destroy();
 		} else if(boom_timer < 1){
 			can_hit = true;

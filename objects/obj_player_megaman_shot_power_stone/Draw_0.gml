@@ -1,0 +1,1 @@
+draw_sprite(sprite_index, floor(spd / 4), x, y);

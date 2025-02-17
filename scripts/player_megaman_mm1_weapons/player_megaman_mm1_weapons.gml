@@ -17,8 +17,27 @@ function player_megaman_fire_storm(lvl = -1, t = 0) {
 }
 
 function player_megaman_super_arm(lvl = -1, t = 0) {
-	if(state != states.super_arm_grab){
-		player_state_set(states.super_arm_grab)
+	if(grabbing_block){
+		with(par_destructibleobject){
+			if(status == blockie.grabbed){
+				status = blockie.thrown;
+				dir = other.dir;
+			}
+		}
+	} else {
+		if(instance_place(x + 16 * dir, y, par_destructibleobject)){
+			instance_place(x + 16 * dir, y, par_destructibleobject).status = blockie.grabbed;
+			audio_play(snd_player_land);
+		} else {
+			with(par_destructibleobject){
+				if(status == blockie.grabbed){
+					status = blockie.thrown;
+					v_speed = -3;
+					dir = other.dir;
+				}
+			}
+			player_state_set(states.idle);
+		}
 	}
 }
 

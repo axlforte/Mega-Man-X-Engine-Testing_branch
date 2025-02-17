@@ -36,3 +36,5 @@ animation_play("S");
 
 execute_step_in_first_frame = true;
 player_lock = 10;
+initial_player_x = global.player_x;
+initial_player_y = global.player_y;

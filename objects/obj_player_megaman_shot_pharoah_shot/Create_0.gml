@@ -38,5 +38,5 @@ animation_add("B",
 animation_play("S");
 
 execute_step_in_first_frame = true;
-
+released = false;
 scr_keys_reset();

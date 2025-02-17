@@ -14,14 +14,24 @@ function player_load_sprites() {
 	for (var k = ds_map_find_first(sprite_str); !is_undefined(k); k = ds_map_find_next(sprite_str, k)) {
 		sprite_shoot_str[? k] = sprite_str[? k] + "_shoot";
 	}
+	for (var k = ds_map_find_first(sprite_str); !is_undefined(k); k = ds_map_find_next(sprite_str, k)) {
+		sprite_carry_str[? k] = sprite_str[? k] + "_shoot";
+	}
+	for (var k = ds_map_find_first(sprite_str); !is_undefined(k); k = ds_map_find_next(sprite_str, k)) {
+		sprite_throw_str[? k] = sprite_str[? k] + "_shoot";
+	}
 
 	for (var k = ds_map_find_first(sprite_str); !is_undefined(k); k = ds_map_find_next(sprite_str, k)) {
 		sprite_str[? k] = "spr_" + char_name + "_" + sprite_str[? k]; // spr_player_action
 		sprite_shoot_str[? k] = "spr_" + char_name + "_" + sprite_shoot_str[? k]; // spr_player_action_shoot
+		sprite_carry_str[? k] = "spr_" + char_name + "_" + sprite_carry_str[? k]; // spr_player_action_carry
+		sprite_throw_str[? k] = "spr_" + char_name + "_" + sprite_throw_str[? k]; // spr_player_action_shoot
 	}
 	for (var i = 0; i <= P_EXT4; i++) {
 		ds_map_clear(my_sprites[| i]);
 		ds_map_clear(my_sprites_shoot[| i]);
+		ds_map_clear(my_sprites_carry[| i]);
+		ds_map_clear(my_sprites_throw[| i]);
 	}
 
 	parts_name[P_OG] = "";
@@ -35,8 +45,9 @@ function player_load_sprites() {
 	parts_name[P_EXT3] = "ext3";
 	parts_name[P_EXT4] = "ext4";
 
-	for (var l = 0; l < 2; l++) {
-		var sprite_map = l ? sprite_shoot_str : sprite_str;
+	for (var l = 0; l < 4; l++) {
+		//var sprite_map = l ? sprite_shoot_str : sprite_str;
+		var sprite_map = array_get([sprite_str, sprite_shoot_str, sprite_carry_str, sprite_throw_str], l);
 	
 		for (var k = ds_map_find_first(sprite_map); !is_undefined(k); k = ds_map_find_next(sprite_map, k)) {
 			var _sprite_name = sprite_map[? k]; // spr_x_walk or spr_x_walk_shoot
@@ -66,10 +77,17 @@ function player_load_sprites() {
 						var map = (sprite_map == sprite_str) ? my_sprites[| j] : my_sprites_shoot[| j];
 				
 						map[? k] = noone;
+						
 				
 						if (sprite_to_add != -1) {
+							
+							show_debug_message(sprite_to_add_name)
+							var _tempo = player_get_custom_sprites(sprite_to_add_name);
+							if(_tempo != noone && _tempo != undefined)
+								sprite_to_add = _tempo;
+							
 							map[? k] = sprite_to_add;
-							log("Added sprite " + sprite_to_add_name);
+							//log("Added sprite " + sprite_to_add_name);
 						} else if (sprite_to_add_name != "" && (t_armor != "" || j == 0)) {
 							// Shoot
 							if (l == 1) {
@@ -78,10 +96,11 @@ function player_load_sprites() {
 							}
 					
 							if (map[? k] == noone && j < P_EXT1) {
-								log("Couldn't find sprite " + sprite_to_add_name);
+								//log("Couldn't find sprite " + sprite_to_add_name);
 							}
 						}
-						sprite_fix_origin(map[? k]);
+						if(_tempo == noone)
+							sprite_fix_origin(map[? k]);
 					}
 				}
 				// This sprite doesn't exists but maybe it's only for a full armor
@@ -97,7 +116,7 @@ function player_load_sprites() {
 				
 						if (sprite_to_add != -1) {
 							map[? k] = sprite_to_add;
-							log("Added sprite " + sprite_armor_name);
+							//log("Added sprite " + sprite_armor_name);
 						} else if (sprite_armor_name != "") {
 							// Shoot
 							if (l == 1) {
@@ -106,7 +125,7 @@ function player_load_sprites() {
 							}
 						
 							if (map[? k] == noone) {
-								log("Couldn't find sprite " + sprite_armor_name);
+								//log("Couldn't find sprite " + sprite_armor_name);
 							}
 						}
 						sprite_fix_origin(map[? k]);
@@ -122,10 +141,10 @@ function player_load_sprites() {
 				
 				if (test_armor > -1) {
 					player_map_sprite_set(test_armor, sprite_map, k, P_OG);
-					log("Added " + sprite_armor_name);
+					//log("Added " + sprite_armor_name);
 				} else {
 					player_map_sprite_set(test_normal, sprite_map, k, P_OG);
-					log("Added " + _sprite_name);
+					//log("Added " + _sprite_name);
 				}
 			}
 		}

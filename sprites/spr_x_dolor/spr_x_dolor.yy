@@ -75,7 +75,7 @@
             {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"e1aa68c9-8a64-4977-96a1-1d9707fbe070","path":"sprites/spr_x_dolor/spr_x_dolor.yy",},},},"Disabled":false,"id":"8f947b59-a522-4350-ac5e-b83bf0b6fee0","IsCreationKey":false,"Key":9.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "volume": 1.0,
     "xorigin": 32,
     "yorigin": 40,

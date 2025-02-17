@@ -32,16 +32,28 @@ function player_start() {
 
 	sprite_str = ds_map_create();
 	sprite_shoot_str = ds_map_create();
+	sprite_carry_str = ds_map_create();
+	sprite_throw_str = ds_map_create();
 
 	my_sprites = ds_list_create();
 	my_sprites_shoot = ds_list_create();
+	my_sprites_carry = ds_list_create();
+	my_sprites_throw = ds_list_create();
 
 	for (var i = 0; i <= P_EXT4; i++) {
 		my_sprites[| i] = ds_map_create();
 		ds_list_mark_as_map(my_sprites, i);
 		my_sprites_shoot[| i] = ds_map_create();
 		ds_list_mark_as_map(my_sprites_shoot, i);
+		my_sprites_carry[| i] = ds_map_create();
+		ds_list_mark_as_map(my_sprites_carry, i);
+		my_sprites_throw[| i] = ds_map_create();
+		ds_list_mark_as_map(my_sprites_throw, i);
 	}
+	
+	weapon_slot_handler = new WeaponSlotManager();
+	weapon_slot_handler.start();
+	
 	undefined_sprite_origin = { x: 0, y: 0 };
 	default_sprite_origin = { x: 32, y: 40 };
 
@@ -228,6 +240,8 @@ function player_start() {
 		snes, psx
 	}
 
+	style = weapon_styles.snes;
+	
 	palette_init();
 	player_weapon_settings();
 	player_weapon_sprites_init();
@@ -236,7 +250,7 @@ function player_start() {
 	palette_height = 32;
 	
 	for (var i = 80; i >= 0; i--) weapon_list[i] = noone;
-	weapon[0] = weapons.x_buster; // Primary weapon
+	weapon[0] = WEAPONS.x_buster; // Primary weapon
 	weapon[1] = noone; // Secondary weapon (Disabled in Snes Style)
 	weapon[2] = noone;
 	
@@ -254,7 +268,7 @@ function player_start() {
 	// Special Input
 	special_input_init();
 
-	player_weapon_set(0, weapons.x_buster);
+	player_weapon_set(0, WEAPONS.x_buster);
 	player_saber_init();
 	player_variables();
 	

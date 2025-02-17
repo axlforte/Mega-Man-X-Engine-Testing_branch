@@ -37,6 +37,7 @@ function global_values() {
 	global.tile_shader_multiplier = 1;
 	global.anyone_can_get_armors = 1;
 	global.hit_effects = false;
+	global_weapon_Settings();
 	player_global_armor_settings();
 	
 	enum diff_modes {

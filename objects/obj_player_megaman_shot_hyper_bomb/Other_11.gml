@@ -41,6 +41,10 @@ else {
 				audio_play(snd_X1_explode);
 				instance_destroy();
 			}
+			if floor(boom_index + 0.5) == 0 {
+				var b = instance_create_depth(x,y,depth,obj_nes_explosion_handler);
+				b.explosion_type = nesboom.mm1;
+			}
 			can_hit = true;
 		} else {
 			can_hit = false

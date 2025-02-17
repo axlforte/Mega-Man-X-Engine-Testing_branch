@@ -1,42 +1,50 @@
 function player_megaman_variables() {
-	player_weapon_set(0, weapons.mega_buster);
-	player_weapon_select(weapons.mega_buster);
+	player_weapon_set(0, WEAPONS.mega_buster);
+	player_weapon_select(WEAPONS.mega_buster);
 	// Weapon Test
-	player_weapon_set(1, weapons.dive_missile);
-	player_weapon_set(2, weapons.ring_boomerang);
-	player_weapon_set(3, weapons.pharoah_shot);
-	player_weapon_set(4, weapons.dust_crusher);
-	player_weapon_set(5, weapons.skull_barrier);
-	player_weapon_set(6, weapons.flash_stopper);
-	player_weapon_set(7, weapons.rain_flush);
-	player_weapon_set(8, weapons.drill_bomb);
-	/*the real weapon lineup
-	player_weapon_set(1, weapons.rolling_cutter);
-	player_weapon_set(2, weapons.fire_storm);
-	player_weapon_set(3, weapons.hyper_bomb);
-	player_weapon_set(4, weapons.ice_slasher);
-	player_weapon_set(5, weapons.super_arm);
-	player_weapon_set(6, weapons.thunder_beam);
-	player_weapon_set(7, weapons.magnet_beam);
-	player_weapon_set(8, weapons.metal_blade);
-	player_weapon_set(9, weapons.atomic_fire);
-	player_weapon_set(10, weapons.air_shooter);
-	player_weapon_set(11, weapons.crash_bomb);
-	player_weapon_set(12, weapons.leaf_shield);
-	player_weapon_set(13, weapons.time_stopper);
-	player_weapon_set(14, weapons.bubble_lead);
-	player_weapon_set(15, weapons.quick_boomerang);
-	player_weapon_set(16, weapons.shadow_blade);
-	player_weapon_set(17, weapons.spark_shot);
-	player_weapon_set(18, weapons.needle_shot);
-	player_weapon_set(19, weapons.search_snake);
-	player_weapon_set(20, weapons.gemini_laser);
-	player_weapon_set(21, weapons.hard_knuckle);
-	player_weapon_set(22, weapons.top_spin);
-	player_weapon_set(23, weapons.magnet_missile);
-	*/
-	player_weapon_set(255, weapons.speed_gear);
-	player_weapon_set(256, weapons.power_gear);
+	player_weapon_set(1, WEAPONS.rolling_cutter);
+	player_weapon_set(2, WEAPONS.fire_storm);
+	player_weapon_set(3, WEAPONS.hyper_bomb);
+	player_weapon_set(4, WEAPONS.ice_slasher);
+	player_weapon_set(5, WEAPONS.super_arm);
+	player_weapon_set(6, WEAPONS.thunder_beam);
+	player_weapon_set(7, WEAPONS.magnet_beam);
+	player_weapon_set(8, WEAPONS.metal_blade);
+	player_weapon_set(9, WEAPONS.atomic_fire);
+	player_weapon_set(10, WEAPONS.air_shooter);
+	player_weapon_set(11, WEAPONS.crash_bomb);
+	player_weapon_set(12, WEAPONS.leaf_shield);
+	player_weapon_set(13, WEAPONS.time_stopper);
+	player_weapon_set(14, WEAPONS.bubble_lead);
+	player_weapon_set(15, WEAPONS.quick_boomerang);
+	player_weapon_set(16, WEAPONS.shadow_blade);
+	player_weapon_set(17, WEAPONS.spark_shot);
+	player_weapon_set(18, WEAPONS.needle_shot);
+	player_weapon_set(19, WEAPONS.search_snake);
+	player_weapon_set(20, WEAPONS.gemini_laser);
+	player_weapon_set(21, WEAPONS.hard_knuckle);
+	player_weapon_set(22, WEAPONS.top_spin);
+	player_weapon_set(23, WEAPONS.magnet_missile);
+	player_weapon_set(24, WEAPONS.dive_missile);
+	player_weapon_set(25, WEAPONS.ring_boomerang);
+	player_weapon_set(26, WEAPONS.pharoah_shot);
+	player_weapon_set(27, WEAPONS.dust_crusher);
+	player_weapon_set(28, WEAPONS.skull_barrier);
+	player_weapon_set(29, WEAPONS.flash_stopper);
+	player_weapon_set(30, WEAPONS.rain_flush);
+	player_weapon_set(31, WEAPONS.drill_bomb);
+	player_weapon_set(32, WEAPONS.gravity_hold);
+	player_weapon_set(33, WEAPONS.power_stone);
+	player_weapon_set(34, WEAPONS.water_wave);
+	player_weapon_set(35, WEAPONS.gyro_attack);
+	player_weapon_set(36, WEAPONS.crystal_eye);
+	player_weapon_set(37, WEAPONS.napalm_bomb);
+	player_weapon_set(38, WEAPONS.charge_kick);
+	player_weapon_set(39, WEAPONS.star_crash);
+	player_weapon_set(100, WEAPONS.arctic_coverage);
+	
+	player_weapon_set(200, WEAPONS.speed_gear);
+	player_weapon_set(201, WEAPONS.power_gear);
 	player_special_weapons_add(states.speed_gear);
 	player_special_weapons_add(states.power_gear);
 
@@ -59,11 +67,14 @@ function player_megaman_variables() {
 		{alpha: 0.2, radius: 40 },
 		{alpha: 1, radius: 28 }
 	];
-	for (var i = 0; i < array_length(weapon_max_level); i++) {
-		if (i != weapons.mega_buster && i != weapons.atomic_fire) {
-			weapon_max_level[i] = 0;	
-		}
-	}
+	
+	//disabled for later forte to handle. i aint doin all dat
+	
+	//for (var i = 0; i < array_length(weapon_max_level); i++) {
+		//if (i != WEAPONS.mega_buster && i != WEAPONS.atomic_fire) {
+			//weapon_max_level[i] = 0;	
+		//}
+	//}
 	trail_mode = 1;
 	player_trail_set(8, 2);
 	// Energy Drain

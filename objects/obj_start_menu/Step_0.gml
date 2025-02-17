@@ -98,6 +98,8 @@ if (activate_sprites) {
 			animation2_add(spr_stage_selecter, 1/5, 0, 0);
 			animation2_add(spr_stage_selecter2, 1/5, 176, 85);
 			break;
+		case menu_states.weapon_select:
+			layer_background_change(layer_bg, weapon_select_menu);
 		case menu_states.player_select:
 			layer_background_change(layer_bg, spr_player_select_background2);
 			layer_background_blend(layer_bg, c_white);
@@ -192,7 +194,7 @@ switch (state) {
 			var tran = transition_create(transition_types.blink);
 			tran.color = c_white;
 			tran.transition_limit = 16;
-			menu_set_state(menu_states.stage_select, 16, 60);
+			menu_set_state(menu_states.stage_select, 16, 30);
 			audio_play(snd_player_success);
 			global.difficulty = selected_item;
 			break;
@@ -247,13 +249,27 @@ switch (state) {
 			var tran = transition_create(transition_types.blink);
 			tran.color = c_white;
 			tran.transition_limit = 16;
-			menu_set_state(menu_states.boss_intro, 16, 60);
+			menu_set_state(menu_states.boss_intro, 16, 30);
 			music_stop(1000);
 			audio_play(snd_player_success);
 			global.character_selected[0] = global.character_object[selected_item];
 		}  else if(select){
-			menu_set_state(menu_states.main);
+			menu_set_state(menu_states.stage_select);
 		}
+		break;
+	#endregion
+	#region weapon select
+	case menu_states.weapon_select:
+		if(enter){
+			menu_set_state(menu_states.armor_select);
+		}
+		if((key_up - key_down) != 0 && weapon_lerp <= 0){
+			selected_item -= key_up - key_down;
+			weapon_lerp = weapon_lerp_time;
+			weapon_lerp_direction = key_down - key_up;
+		}
+		if(weapon_lerp > 0)
+			weapon_lerp--;
 		break;
 	#endregion
 	#region Armor Select
@@ -310,6 +326,10 @@ switch (state) {
 						var index = tmp_armor_index[part_index];
 						var armor_names = G.character_armor_name[c];
 						item_string[selected_item] = string_ucfirst(armor_names[index]);
+						break;
+					case pl_btn.info:
+						weapon_player_selected = selected_item;
+						menu_set_state(menu_states.weapon_select);
 						break;
 				}
 			}

@@ -7,7 +7,7 @@
 /// @param palette_index (optional)
 /// @param palette_source_array (optional)
 /// Needs refactoring: make the layer order less hardcoded
-function menu_draw_player(x, y, c, armor_array = [0], palette_sprite = noone, palette_index = 0, palette_array = [0, 0, 0, 0, 0, 0], x_scale, y_scale, col) {
+function menu_draw_player(x, y, c, armor_array = [0], palette_sprite = noone, palette_index = 0, palette_array = [0, 0, 0, 0, 0, 0], x_scale = 1, y_scale = 1, col = c_white) {
 	var sprite;
 	if (c >= pl_char.length) exit;
 	plt_index = palette_index;

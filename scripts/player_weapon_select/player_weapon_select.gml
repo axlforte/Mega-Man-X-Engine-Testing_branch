@@ -9,13 +9,16 @@ function player_weapon_select() {
 	if (current_weapon == old_weapon && current_weapon != noone) {
 		current_weapon = wp;
 	}
-	weapon_name = weapon_sprite_name[wp];
+	weapon_name = global.weapon[wp].name;
 
 	if (weapon_name != "") {
 		player_weapon_sprites_init(weapon_name);	
 	}
-	weapon_bar_show = weapon_show[wp];
-	shots_limit = weapon_shots_limit[wp];
+	weapon_bar_show = global.weapon[wp].show;
+	shots_limit = global.weapon[wp].shot_limit;
+	
+	
+	
 	script_try(weapon_offsets_script);
 
 

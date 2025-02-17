@@ -6,10 +6,10 @@ if (destroy) {
 }
 else {
 	scr_keys_update();
-	if(key_shoot){
+	if(key_shoot && !released){
 		timer++;
 		goal_x = global.player_x;
-		goal_y = global.player_y;
+		goal_y = global.player_y - 20;
 		var _dstx = x - goal_x;
 		if(_dstx > 40){
 			x -= 5;
@@ -44,12 +44,12 @@ else {
 			other.dir = dir;
 		}
 	} else {
-		if(timer < 6){
-			x += 4 * dir;
-		} else if(timer > 45){
+		released = true;
+		if(timer > 45){
 			x += 5 * dir;
 		} else {
-			instance_destroy()
-;		}
+			atk = 2;
+			x += 2 * dir;
+		}
 	}
 }

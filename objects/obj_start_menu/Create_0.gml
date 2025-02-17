@@ -13,7 +13,14 @@ enum menu_states {
 	audio_settings,
 	voice_language,
 	weapon_get,
-	volume
+	volume,
+	weapon_select//for weapons and techniques probably. 
+	//regarding techniques, there might have to be something regarding checks, because multiple
+	//techniques used up and special or down and special, for example.
+	//another good fix is to make it work like gravity circuit, where the player selects what goes 
+	//to which input combo, so you could set an uppercut to side special and a downwards thrust to 
+	//neutral special. unlike gravity circuit, you should be able to bind things to up/down/side
+	//normal and ultimate, so you could do down and special for rekkoha and ult for shield barrier
 }
 
 enum background_select { intro, middle, ending }
@@ -69,6 +76,13 @@ page_items[menu_states.game_mode] = [
 #endregion
 #region Difficulty Mode
 page_items[menu_states.difficulty_mode] = [
+	[_("EASY"),			 [92, 88, 144, 20]],
+	[_("NORMAL"),		 [92, 112, 144, 20]],
+	[_("HARD"),		     [92, 136, 144, 20]]
+];
+#endregion
+#region weapon selection
+page_items[menu_states.weapon_select] = [
 	[_("EASY"),			 [92, 88, 144, 20]],
 	[_("NORMAL"),		 [92, 112, 144, 20]],
 	[_("HARD"),		     [92, 136, 144, 20]]
@@ -185,7 +199,7 @@ weapon_get_props = {
 			y: 0,
 			interval: [0, 60]
 		},
-		new_weapon: weapons.homing_torpedo,
+		new_weapon: WEAPONS.homing_torpedo,
 		wp_slot: 2,
 		visible: false,
 		palette_array: [0, 0, 0, 0, 0, 0],
@@ -243,6 +257,13 @@ boss_name = "";
 boss_name_show = false;
 boss_defeated = false;
 loading_text = "";
+
+//weapon selection
+weapon_lerp = 0;
+weapon_lerp_time = 6;
+weapon_lerp_distance = 26;
+weapon_lerp_direction = 1;
+weapon_player_selected = pl_char.x;
 
 activate_sprites = true;
 if (global.start_menu_force_state) {

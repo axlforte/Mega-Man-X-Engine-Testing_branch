@@ -1,6 +1,6 @@
 function player_check_speed_gear() {
-	var wp = weapons.speed_gear;
-	if (!speed_gear && weapon_energy[wp] == weapon_energy_max[wp]) {
+	var wp = WEAPONS.speed_gear;
+	if (!speed_gear && weapon_slot_handler.get_energy(wp) == global.weapon[wp].energy_max) {
 		speed_gear_enabled = true;
 	}
 	if (speed_gear) {
@@ -49,6 +49,6 @@ function player_disable_speed_gear() {
 		gear_pulse_animation = 0;
 		trail_sprites_enabled = false;
 		trail_sprites_remove = true;
-		weapon_refill_enabled[weapons.speed_gear] = true;
+		weapon_slot_handler.set_refill(WEAPONS.speed_gear)
 	}
 }

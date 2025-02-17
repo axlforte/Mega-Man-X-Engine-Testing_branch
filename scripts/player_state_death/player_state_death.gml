@@ -19,7 +19,7 @@ function player_state_death() {
 		player_saber_reset();
 		player_dolor_reset();
 		player_charge_reset();
-		plt_index = (weapon_allow_pallete) ? weapon_palettes[weapon[0]] : plt_index_default;
+		plt_index = (weapon_allow_pallete) ? global.weapon[weapon[0]].palette : plt_index_default;
 	}
 	if (t >= 31) {
 		visible = false;

@@ -37,8 +37,8 @@
   "nineSlice": null,
   "origin": 9,
   "parent": {
-    "name": "Copy Vision",
-    "path": "folders/Sprites/Player/Characters/MegaMan/Weapons/Copy Vision.yy",
+    "name": "Custom",
+    "path": "folders/Sprites/Player/Characters/MegaMan/Weapons/Custom.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
