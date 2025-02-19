@@ -2,7 +2,7 @@
 Mega Man X Engine is a framework being developed using the GameMaker engine (formerly GameMaker Studio 2) that contains a lot of features Mega Man X games have so you don't have to do it yourself, plus new assets showing what is possible with the engine.  
 Current version: v1.2.2.1? 
 
-GameMaker Runtime version: v2023.6.0.139, hopefully gonna be new soon
+GameMaker Runtime version: v2024.4.1.201
 
 Note: this engine is not complete yet, so not all features we want are in the engine. While you can definitely make a game with it, certain features may be clunky and or difficult to use as of current progress. 
 
