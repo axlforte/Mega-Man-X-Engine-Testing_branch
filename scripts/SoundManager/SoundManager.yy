@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "SoundManager",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Managers",
-    "path": "folders/Netcode/Game/Managers.yy",
+  "$GMScript":"",
+  "%Name":"SoundManager",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"SoundManager",
+  "parent":{
+    "name":"Managers",
+    "path":"folders/Netcode/Game/Managers.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

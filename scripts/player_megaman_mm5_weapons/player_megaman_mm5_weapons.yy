@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "player_megaman_mm5_weapons",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Weapons",
-    "path": "folders/Scripts/Player/Characters/MegaMan/Weapons.yy",
+  "$GMScript":"",
+  "%Name":"player_megaman_mm5_weapons",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"player_megaman_mm5_weapons",
+  "parent":{
+    "name":"Weapons",
+    "path":"folders/Scripts/Player/Characters/MegaMan/Weapons.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

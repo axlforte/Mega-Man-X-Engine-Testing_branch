@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "Socket",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Classes",
-    "path": "folders/Netcode/Classes.yy",
+  "$GMScript":"",
+  "%Name":"Socket",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Socket",
+  "parent":{
+    "name":"Classes",
+    "path":"folders/Netcode/Classes.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

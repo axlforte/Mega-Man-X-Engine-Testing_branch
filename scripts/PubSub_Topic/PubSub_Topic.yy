@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "PubSub_Topic",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "PubSub",
-    "path": "folders/Netcode/Util/PubSub.yy",
+  "$GMScript":"",
+  "%Name":"PubSub_Topic",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PubSub_Topic",
+  "parent":{
+    "name":"PubSub",
+    "path":"folders/Netcode/Util/PubSub.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

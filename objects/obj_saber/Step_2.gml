@@ -13,8 +13,8 @@ scr_weapon_collision();
 
 if (destroy)
 {
-	x = -infinity;
-	y = -infinity;
+	x = -2456543;
+	y = -1231343;
 }
 else
 {

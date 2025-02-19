@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "RPCRequest",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "RPC",
-    "path": "folders/Netcode/RPC.yy",
+  "$GMScript":"",
+  "%Name":"RPCRequest",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"RPCRequest",
+  "parent":{
+    "name":"RPC",
+    "path":"folders/Netcode/RPC.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

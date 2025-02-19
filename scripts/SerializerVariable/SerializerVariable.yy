@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "SerializerVariable",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Serialization",
-    "path": "folders/Netcode/Classes/Serialization.yy",
+  "$GMScript":"",
+  "%Name":"SerializerVariable",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"SerializerVariable",
+  "parent":{
+    "name":"Serialization",
+    "path":"folders/Netcode/Classes/Serialization.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

@@ -14,7 +14,7 @@ if(key_p_left){
 }
 
 if(key_p_jump){
-	if(instance_exists(global.server)){
+	if(!is_undefined(global.server)){
 		global.server.change_room(room_array[room_id]);
 		current_room = room_id;
 	}

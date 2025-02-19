@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "Network",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Network",
-    "path": "folders/Netcode/Classes/Network.yy",
+  "$GMScript":"",
+  "%Name":"Network",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Network",
+  "parent":{
+    "name":"Network",
+    "path":"folders/Netcode/Classes/Network.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }
