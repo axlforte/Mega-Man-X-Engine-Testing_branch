@@ -32,8 +32,13 @@ switch(state) {
 	case menu_states.weapon_select:
 		draw_set_color(c_white);
 		draw_rectangle(8,0,144,240,false);
+		var _plt = 32;
 		for(var i = 0; i < 11; i++){
 			var _p = selected_item - 5 + i;
+			
+			if(i == 6)
+			_plt = 64;
+				
 			if(_p < G.weapon_chunk[weapon_player_selected][0])
 				_p += G.weapon_chunk[weapon_player_selected][1] - G.weapon_chunk[weapon_player_selected][0];
 			else if(_p > G.weapon_chunk[weapon_player_selected][1])
@@ -41,10 +46,15 @@ switch(state) {
 			draw_sprite(weapon_icons, _p, 9, 
 			i * 26 - 18 + (weapon_lerp * (weapon_lerp_distance / weapon_lerp_time)) * weapon_lerp_direction);
 			draw_string(23, i * 26 - 18 + (weapon_lerp * (weapon_lerp_distance / weapon_lerp_time)) * weapon_lerp_direction,
-			G.weapon[_p].name, colors.blue);
+			string_upper(G.weapon[_p].name), colors.blue);
 		}
+		palette_shader();
+		plt_index = _plt;
+		draw_sprite(spr_megaman_idle, 0, 164, 143);
+		palette_reset();
 		//lines
-		draw_rectangle(236, 0, 238, 240,false);
+		draw_rectangle(236, 0, 238, 160,false);
+		draw_rectangle(144, 160, 320, 162,false);
 		//the buttons
 		draw_string(240, 2, "SAVE", colors.orange);
 		draw_string(288, 2, "ALL", colors.orange);

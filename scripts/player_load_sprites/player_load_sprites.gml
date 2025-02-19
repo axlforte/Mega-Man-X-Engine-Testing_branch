@@ -83,7 +83,7 @@ function player_load_sprites() {
 							
 							show_debug_message(sprite_to_add_name)
 							var _tempo = player_get_custom_sprites(sprite_to_add_name);
-							if(_tempo != noone && _tempo != undefined)
+							if(_tempo != noone && _tempo != undefined && global.custom_skin)
 								sprite_to_add = _tempo;
 							
 							map[? k] = sprite_to_add;

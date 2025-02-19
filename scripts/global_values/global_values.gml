@@ -4,8 +4,8 @@ function global_values() {
 	global.player_y                         = 0;     // Player Y coordinate
 	global.player_spawned                   = false; // Has the player spawned yet?
 	global.debug_active                     = false; // Is the Debug mode on?
-	global.view_width                       = 320;
-	global.view_height                      = 240;
+	global.view_width                       = 256;//320
+	global.view_height                      = 224;//240
 	global.checkpoint                       = 0;
 	global.checkpoint_x                     = 0;
 	global.checkpoint_y                     = 0;
@@ -37,6 +37,8 @@ function global_values() {
 	global.tile_shader_multiplier = 1;
 	global.anyone_can_get_armors = 1;
 	global.hit_effects = false;
+	global.custom_skin = false;
+	global.player_palette_index = 0;
 	global_weapon_Settings();
 	player_global_armor_settings();
 	
@@ -57,6 +59,25 @@ function global_values() {
 	global.start_menu_force_state = false;
 	global.start_menu_state = menu_states.main;
 	global.player_max_health = 16;
+	
+	//server shit
+	global.ip = "127.0.0.1";//this is the universal 'your own computer' ip
+	global.is_server = false;//are you the one doing the servering
+	global.player_server_id = 0;//which player am i?
+	global.is_online = false;//am i in a server with other people?
+	global.client = undefined;
+	global.server = undefined;
+	global.player_xs = [];
+	global.player_ys = [];
+	global.player_sprites = [];
+	global.player_frames = [];
+	global.player_dirs = [];
+	global.player_chars = [];
+	global.player_names = [];
+	global.player_palettes = [];
+	global.tick_rate = 60;
+	global.chat_string = "";
+	global.username = "googledebunkers";
 
 	global.gamepad_list = ds_list_create();
 	global.gamepad_list_index = 0;

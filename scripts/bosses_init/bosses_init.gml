@@ -27,7 +27,7 @@ function bosses_init() {
 	// Needs refactoring: use struct
 	// [name, boss_icon, stage_icon, room, object]
 	global.boss_info[e_boss.engine] = 
-	["", spr_engine_icon, -1, -1, -1];
+	["", spr_engine_icon, -1, rm_lobby, -1];
 
 	global.boss_info[e_boss.hq] = 
 	["", spr_hq_icon, spr_stage_hq, rm_full_testing_stage, -1];

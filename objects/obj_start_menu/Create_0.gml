@@ -14,15 +14,11 @@ enum menu_states {
 	voice_language,
 	weapon_get,
 	volume,
-	weapon_select//for weapons and techniques probably. 
-	//regarding techniques, there might have to be something regarding checks, because multiple
-	//techniques used up and special or down and special, for example.
-	//another good fix is to make it work like gravity circuit, where the player selects what goes 
-	//to which input combo, so you could set an uppercut to side special and a downwards thrust to 
-	//neutral special. unlike gravity circuit, you should be able to bind things to up/down/side
-	//normal and ultimate, so you could do down and special for rekkoha and ult for shield barrier
+	weapon_select,//for weapons and techniques probably. 
+	online_select//are you gonna host or join?
 }
-
+palette_init();
+palette_texture_set(plt_megaman_full);
 enum background_select { intro, middle, ending }
 
 // State
@@ -70,8 +66,14 @@ page_items[menu_states.main] = [
 #endregion
 #region Game Mode
 page_items[menu_states.game_mode] = [
-	[_("SINGLE PLAYER"), [92, 88, 144, 20]]/*,
-	[_("MULTIPLAYER"),   [92, 128, 144, 20]]*/
+	[_("SINGLE PLAYER"), [92, 88, 144, 20]],
+	[_("MULTIPLAYER"),   [92, 128, 144, 20]]
+];
+#endregion
+#region Game Mode
+page_items[menu_states.online_select] = [
+	[_("HOST"), [92, 88, 144, 20]],
+	[_("JOIN"),   [92, 128, 144, 20]]
 ];
 #endregion
 #region Difficulty Mode

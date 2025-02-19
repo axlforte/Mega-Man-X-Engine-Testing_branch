@@ -6,8 +6,10 @@ if (t == 0) {
 	var inst = instance_create_depth(x, y, depth, obj_player_megaman_shot_2_effect);
 	inst.image_xscale = dir;
 	inst.owner = owner;
-	inst.owner_x = owner.x;
-	inst.owner_y = owner.y;
+		if (instance_exists(owner)) {
+			inst.owner_x = owner.x;
+			inst.owner_y = owner.y;
+		}
 	inst.shot_counted = false;
 }
 with(par_enemy){

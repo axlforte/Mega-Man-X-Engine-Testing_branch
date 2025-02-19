@@ -172,7 +172,7 @@ function player_weapon_settings() {
 
 function global_weapon_Settings(){
 	enum WEAPONS {
-		mega_buster,copy_vision,speed_gear,power_gear,lightning_bolt,arctic_coverage,
+		mega_buster,copy_vision,speed_gear,power_gear,lightning_bolt,snow_drift,
 		//mm1
 		rolling_cutter,super_arm,ice_slasher,hyper_bomb,fire_storm,thunder_beam,time_slow,oil_slider,
 		//mm2
@@ -227,6 +227,7 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.homing_torpedo].set_palette(9);
 	G.weapon[WEAPONS.copy_vision].set_palette(13);
 	G.weapon[WEAPONS.lightning_bolt].set_palette(15);
+	G.weapon[WEAPONS.snow_drift].set_palette(127);
 	// Bar Icons
 	G.weapon[WEAPONS.storm_tornado].set_icon(0);
 	G.weapon[WEAPONS.homing_torpedo].set_icon(5);
@@ -300,7 +301,7 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.metal_blade].set_costs([1/8]);
 	G.weapon[WEAPONS.quick_boomerang].set_costs([1/8]);
 	G.weapon[WEAPONS.needle_shot].set_costs([1/8]);
-	G.weapon[WEAPONS.arctic_coverage].set_costs([1/8]);
+	G.weapon[WEAPONS.snow_drift].set_costs([1/8]);
 	// Weapon Limit
 	G.weapon[WEAPONS.vile_vulcan].set_shot_limit(16);
 	// Max Level
@@ -346,7 +347,7 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.mega_buster].set_code(player_megaman_buster);
 	G.weapon[WEAPONS.copy_vision].set_code(player_megaman_copy_vision);
 	G.weapon[WEAPONS.lightning_bolt].set_code(player_megaman_lightning_bolt);
-	G.weapon[WEAPONS.arctic_coverage].set_code(player_megaman_arctic_coverage);
+	G.weapon[WEAPONS.snow_drift].set_code(player_megaman_arctic_coverage);//i changed the name
 	
 	mm1_mm6_weapons();
 }
@@ -454,14 +455,14 @@ function mm1_mm6_weapons(){
 	G.weapon[WEAPONS.napalm_bomb].set_code(player_megaman_napalm_bomb);
 	G.weapon[WEAPONS.gravity_hold].set_code(player_megaman_gravity_hold);
 	//mm6
-	G.weapon[WEAPONS.dive_missile].set_code(player_megaman_dive_missile);
-	G.weapon[WEAPONS.ring_boomerang].set_code(player_megaman_ring_boomerang);
-	G.weapon[WEAPONS.drill_bomb].set_code(player_megaman_drill_bomb);
-	G.weapon[WEAPONS.rain_flush].set_code(player_megaman_rain_flush);
-	G.weapon[WEAPONS.flash_stopper].set_code(player_megaman_flash_stopper);
-	G.weapon[WEAPONS.dust_crusher].set_code(player_megaman_dust_crusher);
-	G.weapon[WEAPONS.pharoah_shot].set_code(player_megaman_pharoah_shot);
-	G.weapon[WEAPONS.skull_barrier].set_code(player_megaman_skull_barrier);
+	G.weapon[WEAPONS.yamato_spear].set_code(player_megaman_dive_missile);
+	G.weapon[WEAPONS.blizzard_attack].set_code(player_megaman_ring_boomerang);
+	G.weapon[WEAPONS.plant_barrier].set_code(player_megaman_drill_bomb);
+	G.weapon[WEAPONS.wind_storm].set_code(player_megaman_rain_flush);
+	G.weapon[WEAPONS.flame_blast].set_code(player_megaman_flash_stopper);
+	G.weapon[WEAPONS.knight_crusher].set_code(player_megaman_dust_crusher);
+	G.weapon[WEAPONS.silver_tomahawk].set_code(player_megaman_pharoah_shot);
+	G.weapon[WEAPONS.centaur_flash].set_code(player_megaman_skull_barrier);
 	//mm1
 	G.weapon[WEAPONS.rolling_cutter].set_name("rolling cutter");
 	G.weapon[WEAPONS.fire_storm].set_name("fire storm");

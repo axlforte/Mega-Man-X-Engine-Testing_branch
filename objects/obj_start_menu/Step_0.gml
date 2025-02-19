@@ -163,7 +163,7 @@ switch (state) {
 		menu_update_item_click();
 		if (enter) {
 			switch(selected_item) {
-				case 0: state_next = menu_states.game_mode; break;
+				case 0: state_next = menu_states.difficulty_mode; break;
 				case 1: state_next = menu_states.option; break;
 				case 2: game_end(); exit; break;
 			}
@@ -174,13 +174,38 @@ switch (state) {
 	#region Game Mode
 	case menu_states.game_mode:
 		menu_update_item_v();
-		menu_update_item_click();
+		//menu_update_item_click();
 		if (enter) {
 			switch(selected_item) {
 				case 0:
 					menu_set_state(menu_states.difficulty_mode);
 					break;
+				case 1:
+					menu_set_state(menu_states.online_select);
+					break;
 			}
+		} else if(select){
+			menu_set_state(menu_states.main);
+		}
+		break;
+	#endregion
+	#region Select if you are server or client
+	case menu_states.online_select:
+		menu_update_item_v();
+		menu_update_item_click();
+		if (enter) {
+			switch(selected_item) {
+				case 0:
+					global.is_server = true;
+					break;
+				case 1:
+					global.is_server = false;
+					break;
+			}
+			global.is_online = true;
+			global.character_selected[0] = global.character_object[0];
+			log("wahoo")
+			room_goto(rm_lobby);
 		} else if(select){
 			menu_set_state(menu_states.main);
 		}
@@ -199,7 +224,7 @@ switch (state) {
 			global.difficulty = selected_item;
 			break;
 		} else if(select){
-			menu_set_state(menu_states.game_mode);
+			menu_set_state(menu_states.main);
 		}
 		break;
 	#endregion

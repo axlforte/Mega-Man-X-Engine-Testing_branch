@@ -10,8 +10,8 @@ else {
 		var inst = instance_create_depth(x, y, depth, obj_player_megaman_shot_2_effect);
 		inst.image_xscale = dir;
 		inst.owner = owner;
-		inst.owner_x = owner.x;
-		inst.owner_y = owner.y;
+		inst.owner_x = x;
+		inst.owner_y = y;
 		inst.shot_counted = false;
 	}
 	

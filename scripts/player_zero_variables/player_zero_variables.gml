@@ -8,7 +8,7 @@ function player_zero_variables() {
 	charge_palette_enabled = false;
 	weapon[0] = noone;
 	weapon[1] = noone;
-	weapon[2] = weapons.z_buster_x5;
+	weapon[2] = WEAPONS.z_buster_x5;
 
 	// Complete Effect
 	complete_effect_limit = 17;

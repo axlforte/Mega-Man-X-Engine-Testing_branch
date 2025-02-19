@@ -16,6 +16,6 @@ animation_add("S",
 animation_play("S");
 
 grav = 0.2;
-v_speed = -2;
+v_speed = 0;
 
 execute_step_in_first_frame = true;

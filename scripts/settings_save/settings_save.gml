@@ -4,6 +4,7 @@ function settings_save() {
 	ini_write_real("SETTINGS", "Window", global.settings[0]);
 	ini_write_real("SETTINGS", "Input", global.settings[1]);
 	ini_write_real("SETTINGS", global.gp_name, global.gp_movement);
+	ini_write_string("SETTINGS", "Username", global.username);
 	// Audio
 	ini_write_string("AUDIO", "Voice Language", G.voice_language);
 	ini_write_real("AUDIO", "Sound Volume", global.sfx_volume);

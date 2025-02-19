@@ -1,7 +1,11 @@
 /// @description Step
 event_inherited();
 
-if (destroy || animation_end)
+if(destroy){
+	animation_i++;
+}
+
+if (animation_end)
 {
 	instance_destroy();
 }

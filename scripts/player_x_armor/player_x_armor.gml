@@ -135,7 +135,7 @@ function player_x_armor() {
 	#region X5 - Falcon Armor
 		if (BODY == "falcon") {
 			armor_part_parent[P_EXT1] = P_BODY;
-			player_weapon_set(8, weapons.falcon_giga);
+			player_weapon_set(256, WEAPONS.falcon_giga);
 			player_special_weapons_add(states.giga_falcon);
 			fly_effect2 = spr_x_fly_effect_bottom_falcon;
 			fly_length += 90;

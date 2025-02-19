@@ -41,7 +41,15 @@ function player_megaman_variables() {
 	player_weapon_set(37, WEAPONS.napalm_bomb);
 	player_weapon_set(38, WEAPONS.charge_kick);
 	player_weapon_set(39, WEAPONS.star_crash);
-	player_weapon_set(100, WEAPONS.arctic_coverage);
+	player_weapon_set(40, WEAPONS.yamato_spear);
+	player_weapon_set(41, WEAPONS.centaur_flash);
+	player_weapon_set(42, WEAPONS.plant_barrier);
+	player_weapon_set(43, WEAPONS.knight_crusher);
+	player_weapon_set(44, WEAPONS.wind_storm);
+	player_weapon_set(45, WEAPONS.silver_tomahawk);
+	player_weapon_set(46, WEAPONS.flame_blast);
+	player_weapon_set(47, WEAPONS.blizzard_attack);
+	player_weapon_set(48, WEAPONS.snow_drift);
 	
 	player_weapon_set(200, WEAPONS.speed_gear);
 	player_weapon_set(201, WEAPONS.power_gear);

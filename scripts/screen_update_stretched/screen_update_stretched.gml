@@ -1,6 +1,6 @@
 function screen_update_stretched() {
-	var base_w = 320;
-	var base_h = 240;
+	var base_w = global.view_width;
+	var base_h = global.view_height;
 	var ww = base_w, hh = base_h;
 
 	// Stretched

@@ -44,18 +44,24 @@ if (t == 27) {
 	
 }
 
+if(t > 900){
+	global.game_world_speed = old_world_speed;
+	instance_destroy();
+}
+
 var p = instance_create_depth(x + irandom_range(-160, 160),y + irandom_range(-120, 120),depth, obj_player_megaman_shot_time_stopper_particles);
-var p = instance_create_depth(x + irandom_range(-140, 140),y + irandom_range(-100, 100),depth, obj_player_megaman_shot_time_stopper_particles);
-var p = instance_create_depth(x + irandom_range(-120, 120),y + irandom_range(-80, 80),depth, obj_player_megaman_shot_time_stopper_particles);
+p = instance_create_depth(x + irandom_range(-140, 140),y + irandom_range(-100, 100),depth, obj_player_megaman_shot_time_stopper_particles);
+p = instance_create_depth(x + irandom_range(-120, 120),y + irandom_range(-80, 80),depth, obj_player_megaman_shot_time_stopper_particles);
 
 /*
 10 seconds - fully drain
 28 units
 60 fps
 */
-
-instance_nearest(x,y,obj_player_parent).weapon_energy[weapons.time_stopper]-=1 / 60 * 28 / 10;
-if(instance_nearest(x,y,obj_player_parent).weapon_energy[weapons.time_stopper] < 0){
-	global.game_world_speed = old_world_speed;
-	instance_destroy();
+if(!global.is_online){
+	instance_nearest(x,y,obj_player_parent).weapon_energy[weapons.time_stopper]-=1 / 60 * 28 / 10;
+	if(instance_nearest(x,y,obj_player_parent).weapon_energy[weapons.time_stopper] < 0){
+		global.game_world_speed = old_world_speed;
+		instance_destroy();
+	}
 }

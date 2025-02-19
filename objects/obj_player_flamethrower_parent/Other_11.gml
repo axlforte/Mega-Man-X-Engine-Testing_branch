@@ -20,13 +20,17 @@ if(flame_interval < flame_t){
 	p.v_speed = flame_vspeed;
 	p.grav = flame_gravity;
 	p.owner = owner;
-	with(owner){
-		weapon_energy[current_weapon] -= player_weapon_get_cost(current_weapon, 0);
+	if(!global.is_online){
+		with(obj_player_parent){
+			weapon_slot_handler.set_energy(weapon[0], weapon_slot_handler.get_energy(weapon[0]) - player_weapon_get_cost(current_weapon, 0));
+		}
 	}
 } else {
 	flame_t++;
 }
 
-if(owner.weapon_energy[owner.current_weapon] <= 0 || owner.state == states.dolor){
-	instance_destroy();
+if(!global.is_online){
+	if(owner.weapon_slot_handler.get_energy(owner.weapon[0]) <= 0 || owner.state == states.dolor){
+		other.instance_destroy();
+	}
 }

@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "MM2",
-    "path": "folders/Objects/Players/Characters/MegaMan/Shots/MM2.yy",
+    "name": "MM3",
+    "path": "folders/Objects/Players/Characters/MegaMan/Shots/MM3.yy",
   },
   "parentObjectId": {
     "name": "obj_player_shot_parent",

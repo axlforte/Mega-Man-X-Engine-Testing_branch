@@ -9,3 +9,5 @@ flame_interval = 3;
 flame_t = 0;
 dir = 1;
 flame_cost = 1/8;
+
+owner = instance_nearest(x,y,obj_player_parent);
