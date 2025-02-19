@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"input_string_async",
   "parent":{
-    "name":"Mega Man X Engine",
-    "path":"Mega Man X Engine.yyp",
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

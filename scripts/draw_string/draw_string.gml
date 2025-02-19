@@ -43,8 +43,9 @@ function draw_string() {
 	    }
 		xx += global.text_font_width;
 	}
-	if(_use_plt)
+	if(_use_plt){
 		palette_reset();
+	}
 
 
 }

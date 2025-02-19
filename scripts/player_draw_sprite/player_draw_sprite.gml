@@ -8,7 +8,7 @@ function player_draw_sprite(_x = x, _y = y, xs = xscale, ys = y_dir, index = flo
 	// Swap Palette
 	if (charge_blink) {
 		glow_in_dark = true;
-		if (charge_palette_enabled) {
+		if (charge_palette_enabled && state != states.outro) {
 			if (charge_blink_t mod 4 <= 1) {
 				plt_index = charge_palette;
 			}
@@ -19,7 +19,7 @@ function player_draw_sprite(_x = x, _y = y, xs = xscale, ys = y_dir, index = flo
 		charge_blink_t++;
 	} else {
 		charge_blink_t = 0;
-		if (charge_palette_enabled)
+		if (charge_palette_enabled && state != states.outro)
 			plt_index = global.weapon[weapon[0]].palette;
 	}
 	

@@ -34,7 +34,8 @@ function player_megaman_magnet_missile(lvl = -1, t = 0) {
 function player_megaman_top_spin(lvl = -1, t = 0) {
 	if(is_on_floor() || state == states.top_spin)
 		return;
-	weapon_energy[current_weapon] -= player_weapon_get_cost(current_weapon, 0);
+	weapon_slot_handler.set_energy(WEAPONS.top_spin,
+	weapon_slot_handler.get_energy(WEAPONS.top_spin) - player_weapon_get_cost(current_weapon, 0));
 	charge_level = -1;
 	player_state_set(states.top_spin);
 	state_timer = -1;

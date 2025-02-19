@@ -26,6 +26,9 @@ function macros() {
 	#macro UP 18
 	#macro UP_RIGHT 19
 
+	#macro CLI global.client;
+	#macro CLI_ID global.client.socket.id;
+	#macro SER global.server;
 	#macro BAR_DEPTH -800
 	#macro G global
 	#macro PAUSE if (global.paused) exit;

@@ -22,12 +22,14 @@ function GameServer(_port) : TCPServer(_port) constructor{
             array_delete(player_sprite, _index, 1);
             array_delete(player_frame, _index, 1);
             array_delete(player_dir, _index, 1);
+            array_delete(player_palette, _index, 1);
+            array_delete(nicknames, _index, 1);
         }
-		log($"{_client.nickname} left the room");
+		//log($"{_client.nickname} left the room");
     }
 	
 	change_room = function(_room) {
-		log(_room);
+		//log(_room);
 		current_room = _room;
 		rpc.sendNotification("change_room", [_room,true], roomSockets);
     }
@@ -38,18 +40,18 @@ function GameServer(_port) : TCPServer(_port) constructor{
     });
 	
 	rpc.registerHandler("chat", function(_time, _socket) {
-		log(_time)
+		//log(_time)
         rpc.sendNotification("chat", _time, roomSockets);
     });
 	
 	rpc.registerHandler("update_position", function(_info, _socket) {
 		//log("i was pinged i work i swear")
-		log(_info);
+		//log(_info);
 		_socket.x = _info.x;
 		_socket.y = _info.y;
 		_socket.sprite = _info.sprite;
 		_socket.frame = _info.frame;
-		log(_socket);
+		//log(_socket);
     });
 	
 	rpc.registerHandler("update_x_pos", function(_info, _socket) {
@@ -91,7 +93,7 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	
 	rpc.registerHandler("update_player_char", function(_info, _socket) {
 		//log(_info);
-		log("char updated")
+		//log("char updated")
 		player_char[_socket.id] = _info;
 		for(var q = 0; q < array_length(player_char); q++){
 			rpc.sendNotification("update_player_char", [player_char[q], q], roomSockets);
@@ -102,8 +104,8 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	rpc.registerHandler("spawn_pickup_2", function(_pos, _client) {
 		//log("put a dispenser here!")
         //rpc.sendNotification("spawn_pickup_2", _pos, sockets);
-		log(roomSockets);
-		log(_client);
+		//log(roomSockets);
+		//log(_client);
 		/*for(var q = 0; q < array_length(roomSockets); q++){
 			rpc.sendNotification("spawn_pickup_2", _pos, roomSockets[q]);
 		}*/
@@ -115,13 +117,13 @@ function GameServer(_port) : TCPServer(_port) constructor{
     });
 	
 	rpc.registerHandler("room_join", function(_param, _client){
-		log("joined room")
+		//log("joined room")
 		array_push(roomSockets, _client.socket)
 		rpc.sendNotification("change_room", [current_room], _client.socket);
 	});
 	
 	rpc.registerHandler("set_nickname", function(_nick, _client){
-		log("new nickname set")
+		//log("new nickname set")
 		_client.nickname = _nick;
 		nicknames[_client.id] = _nick;
 		for(var q = 0; q < array_length(nicknames); q++){

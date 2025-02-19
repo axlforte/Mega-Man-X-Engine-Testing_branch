@@ -124,7 +124,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	});
 	
 	setEvent("step", function() {
-		if(!is_connected) return;
+		if(!is_connected || !instance_exists(obj_player_parent)) return;
 		if(keyboard_check_pressed(ord("1"))){
 			var _pos = {x : mouse_x, y : mouse_y};
 			//request expects response, notification does not expect anything in return

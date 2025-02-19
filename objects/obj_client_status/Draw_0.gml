@@ -2,7 +2,10 @@ for(var z = 0; z < array_length(global.player_xs); z++){
 	if(z != global.player_server_id){
 		var _y = 0;
 		palette_shader();
-		plt_index = global.player_palettes[z];
+		if(z < array_length(global.player_palettes))
+			plt_index = global.player_palettes[z];
+		else
+		plt_index = 0;
 		palette_texture_set(plt_x_full);
 		if(z < array_length(global.player_chars)){
 			
@@ -18,24 +21,30 @@ for(var z = 0; z < array_length(global.player_xs); z++){
 			if(global.player_chars[z] == pl_char.megaman)
 				palette_texture_set(plt_megaman_full);
 		}
-		draw_sprite_ext(
-			global.player_sprites[z],
-			global.player_frames[z],
-			global.player_xs[z],
-			global.player_ys[z],
-			global.player_dirs[z],
-			1,0,c_white,1
-			);
-		palette_reset();
-		if(z < array_length(global.player_names))
-			draw_string(
-				global.player_xs[z] - x,
-				global.player_ys[z] - 32 - y,
-				global.player_names[z],
-				colors.orange,
-				false);
+		if(!is_undefined(global.player_sprites[z]) && global.player_sprites[z] != -4){
+			draw_sprite_ext(
+				global.player_sprites[z],
+				global.player_frames[z],
+				global.player_xs[z],
+				global.player_ys[z],
+				global.player_dirs[z],
+				1,0,c_white,1
+				);
+			palette_reset();
+			if(z < array_length(global.player_names))
+				draw_string_center(
+					global.player_xs[z] - x,
+					global.player_ys[z] - 32 - y,
+					global.player_names[z],
+					colors.orange,
+					false);
+		}
 	}
 }
+
+if(instance_exists(obj_player_parent))
+	depth = instance_nearest(0,0,obj_player_parent).depth;
+	
 //ping counter. jitters though
 x = __view_get(e__VW.XView, 0);
 y = __view_get(e__VW.YView, 0);

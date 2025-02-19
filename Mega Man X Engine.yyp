@@ -1005,6 +1005,7 @@
     {"id":{"name":"rm_blade_man","path":"rooms/rm_blade_man/rm_blade_man.yy",},},
     {"id":{"name":"rm_chill_penguin","path":"rooms/rm_chill_penguin/rm_chill_penguin.yy",},},
     {"id":{"name":"rm_full_testing_stage","path":"rooms/rm_full_testing_stage/rm_full_testing_stage.yy",},},
+    {"id":{"name":"rm_headquarters","path":"rooms/rm_headquarters/rm_headquarters.yy",},},
     {"id":{"name":"rm_input_string_example","path":"rooms/rm_input_string_example/rm_input_string_example.yy",},},
     {"id":{"name":"rm_launch_octopus","path":"rooms/rm_launch_octopus/rm_launch_octopus.yy",},},
     {"id":{"name":"rm_lobby","path":"rooms/rm_lobby/rm_lobby.yy",},},
@@ -2968,6 +2969,7 @@
     {"roomId":{"name":"rm_blade_man","path":"rooms/rm_blade_man/rm_blade_man.yy",},},
     {"roomId":{"name":"rm_lobby","path":"rooms/rm_lobby/rm_lobby.yy",},},
     {"roomId":{"name":"rm_input_string_example","path":"rooms/rm_input_string_example/rm_input_string_example.yy",},},
+    {"roomId":{"name":"rm_headquarters","path":"rooms/rm_headquarters/rm_headquarters.yy",},},
   ],
   "templateType":null,
   "TextureGroups":[

@@ -11,8 +11,10 @@ else
 		var inst = instance_create_depth(x, y, depth, obj_player_zero_shot_x5_effect);
 		inst.image_xscale = dir;
 		inst.owner = owner;
-		inst.owner_x = owner.x;
-		inst.owner_y = owner.y;
+		if (instance_exists(owner)) {
+			inst.owner_x = owner.x;
+			inst.owner_y = owner.y;
+		}
 		inst.follow_owner = true;
 		inst.shot_counted = false;
 	}

@@ -1,5 +1,5 @@
 function player_check_nova_strike() {
-	if ((key_p_special || (key_p_shoot && weapon[0] == weapons.nova_strike))
+	if ((key_p_special || (key_p_shoot && weapon[0] == WEAPONS.nova_strike))
 	&& can_move_x(dir) && (is_on_floor() || dash_air_count < dash_air_limit)
 	&& !using_special_weapon
 	&& player_weapon_can_spend(WEAPONS.nova_strike)

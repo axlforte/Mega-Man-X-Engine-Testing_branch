@@ -8,10 +8,12 @@ else {
 	var t = timer++;
 	if (t < player_lock && initial_player_dir == owner.dir){ 
 		if(owner.state == states.dolor){
-			with(owner){
-				player_state_set(states.fall);
+			if (instance_exists(owner)) {
+				with(owner){
+					player_state_set(states.fall);
+				}
+				instance_destroy();
 			}
-			instance_destroy();
 		}
 		with(owner){
 			y = other.initial_player_y;
