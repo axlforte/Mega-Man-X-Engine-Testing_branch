@@ -1,19 +1,3 @@
-var _size = 1024;
-if(array_length(global.player_xs) < _size)
-	_size = array_length(global.player_xs);
-if(array_length(global.player_sprites) < _size)
-	_size = array_length(global.player_sprites);
-if(array_length(global.player_xs) < _size)
-	_size = array_length(global.player_xs);
-if(array_length(global.player_frames) < _size)
-	_size = array_length(global.player_frames);
-if(array_length(global.player_ys) < _size)
-	_size = array_length(global.player_ys);
-if(array_length(global.player_dirs) < _size)
-	_size = array_length(global.player_dirs);
-if(array_length(global.player_chars) < _size)
-	_size = array_length(global.player_chars);
-
 for(var z = 0; z < array_length(global.player_xs); z++){
 	if(z != global.player_server_id){
 		var _y = 0;

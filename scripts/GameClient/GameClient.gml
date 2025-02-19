@@ -46,6 +46,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	});
 	
 	rpc.registerHandler("spawn_shot", function(_pos) {
+		if(_pos[4] == global.player_server_id) return;
 		var _p = instance_create_depth(_pos[1], _pos[2], 0, _pos[0]);
 		_p.dir = _pos[3];
 		_p.image_xscale = _p.dir;
@@ -93,14 +94,19 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	});
 	
 	rpc.registerHandler("update_player_id", function(_pos) {
+		log("ID's!")
 		global.player_server_id = _pos;
 	});
 	
 	rpc.registerHandler("change_room", function(_pos) {
+		log("roomies!");
 		room_goto(_pos[0]);
 	});
 	
+	is_connected = false;
+	
 	setEvent("connected", function() {
+		is_connected = true;
 		var _chr = pl_char.x;
 		if(instance_exists(obj_player_zero))
 			_chr = pl_char.zero
@@ -117,11 +123,8 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		rpc.sendNotification("update_player_char", _chr);
 	});
 	
-	/*setEvent("disconnected", function() {
-		rpc.sendNotification("room_leave");
-	});*/
-	
 	setEvent("step", function() {
+		if(!is_connected) return;
 		if(keyboard_check_pressed(ord("1"))){
 			var _pos = {x : mouse_x, y : mouse_y};
 			//request expects response, notification does not expect anything in return

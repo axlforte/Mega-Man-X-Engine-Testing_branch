@@ -27,6 +27,7 @@ function GameServer(_port) : TCPServer(_port) constructor{
     }
 	
 	change_room = function(_room) {
+		log(_room);
 		current_room = _room;
 		rpc.sendNotification("change_room", [_room,true], roomSockets);
     }
@@ -90,6 +91,7 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	
 	rpc.registerHandler("update_player_char", function(_info, _socket) {
 		//log(_info);
+		log("char updated")
 		player_char[_socket.id] = _info;
 		for(var q = 0; q < array_length(player_char); q++){
 			rpc.sendNotification("update_player_char", [player_char[q], q], roomSockets);
@@ -113,11 +115,13 @@ function GameServer(_port) : TCPServer(_port) constructor{
     });
 	
 	rpc.registerHandler("room_join", function(_param, _client){
+		log("joined room")
 		array_push(roomSockets, _client.socket)
 		rpc.sendNotification("change_room", [current_room], _client.socket);
 	});
 	
 	rpc.registerHandler("set_nickname", function(_nick, _client){
+		log("new nickname set")
 		_client.nickname = _nick;
 		nicknames[_client.id] = _nick;
 		for(var q = 0; q < array_length(nicknames); q++){

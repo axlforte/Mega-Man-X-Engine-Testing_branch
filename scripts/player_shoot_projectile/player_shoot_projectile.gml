@@ -17,7 +17,7 @@ function player_shoot_projectile(_object, _affect_direction = false) {
 				_x += (p[0] * dir + h_speed);
 				_y += (p[1] * y_dir + v_speed);
 		}
-		var _shot = [_object, _x, _y, dir];
+		var _shot = [_object, _x, _y, dir, global.player_server_id];
 		global.client.pingProjectile(_shot);
 	}
 	
@@ -59,9 +59,6 @@ function player_shoot_projectile(_object, _affect_direction = false) {
 		inst.charged_shot = true;
 	}
 	shoot = true;
-	if(global.is_online){
-		instance_destroy(inst);
-	}
 	return inst;
 
 
