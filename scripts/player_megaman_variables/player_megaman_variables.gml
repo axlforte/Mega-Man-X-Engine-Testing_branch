@@ -1,4 +1,8 @@
 function player_megaman_variables() {
+	
+	state_hitbox[states.dash] = spr_megaman_crouch_mask;
+	state_hitbox[states.crouch] = spr_megaman_crouch_mask;
+	
 	player_weapon_set(0, WEAPONS.mega_buster);
 	player_weapon_select(WEAPONS.mega_buster);
 	// Weapon Test

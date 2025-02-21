@@ -1,3 +1,4 @@
+return;
 scr_keys_update();
 if(key_p_right){
 	room_id++;

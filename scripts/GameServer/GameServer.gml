@@ -10,7 +10,7 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	player_dir = [];
 	player_char = [];
 	player_palette = [];
-	current_room = rm_test_stage;
+	current_room = rm_headquarters;
 	
 	leaveRoom = function(_client) {
         var _socket = _client.socket;

@@ -8,11 +8,17 @@ function player_state_dash() {
 		// Dash (Horizontal)	
 		if (!dash_up) {
 		    var condition = (t == dash_length + 1);
+			if(substates[3])
+				condition = false;
     
 		    if (t == 0) {
 		        // Play Audio
 		        audio_play(dash_sound);
-		
+				if(instance_exists(obj_player_megaman))
+					substates[3] = true;
+				else 
+					substates[3] = false;
+				mask_index = state_hitbox[states.dash];
 		        if (dash_air) {
 		            dash_length = dash_air_length;
 		            v_speed = 0;
@@ -52,13 +58,32 @@ function player_state_dash() {
 				player_effect_pos_reset(dash_spark_inst);
     
 		    var result = key_right - key_left;
-    
-		    if (!dash_tapped) {
-		        condition |= !key_dash;
-		    } else {
+			if(substates[3]){
+				if(instance_place(x,y - 20, obj_block_parent) && state_timer > 3){
+					result = dash_dir;
+				}
+			}
+			
+			if (!dash_tapped) {
+			    condition |= !key_dash;
+			} else {
 				condition |= (result != dash_dir);
 			}
-		    condition |= (result != 0 && result != dash_dir);
+			condition |= (result != 0 && result != dash_dir);
+			
+			if(substates[3]){
+				if(instance_place(x,y - 20, obj_block_parent) && state_timer > 3){
+					if (dash_air) {
+						state_timer = dash_air_length - 2;
+			        } else {
+						state_timer = dash_normal_length - 2;
+					}
+					if (!can_move_x(dash_speed * dash_dir) || (!is_on_floor() && !dash_air))
+						condition = true;
+					else 
+						condition = false;
+				}
+			}
     
 		    if (condition) {
 		        dash_spark_inst = player_effect_destroy(dash_spark_inst);
@@ -67,10 +92,12 @@ function player_state_dash() {
 					walk_speed = dash_speed;
 			
 		            if (is_on_floor()) {
+						mask_index = state_hitbox[states.idle];
 						state_set(states.idle, 0);
 						y_dir = 1;
 		            } else {
 						if (move != 0) {
+							mask_index = state_hitbox[states.idle];
 							state_set(states.fall, 8);
 							//dash_air_count++;
 						} else {
@@ -143,6 +170,7 @@ function player_state_dash() {
 	}
 	// Dash End
 	else {
+		mask_index = state_hitbox[states.idle];
 		player_check_move();
 		if (is_on_floor())
 			walk_speed = walk_speed_default;
@@ -162,8 +190,9 @@ function player_state_dash() {
 			player_state_set(states.idle, 0);
 			animation_play("idle", 0);
 			if (!is_on_floor(3)) {
-				player_state_set(states.fall, 8);
+				mask_index = state_hitbox[states.idle];
 				animation_play("fall", 8);
+				player_state_set(states.fall, 8);
 			}
 		
 			substates[0] = 0;

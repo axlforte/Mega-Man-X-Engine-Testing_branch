@@ -22,6 +22,7 @@ function player_states() {
 		complete,
 		grabbed,
 		ride,
+		safety_teleport,
 		length_default,
 		// Special
 		biometal_select,
@@ -103,6 +104,7 @@ function player_states() {
 	state_array[states.complete]	   = player_state_complete;
 	state_array[states.grabbed]	       = player_state_grabbed;
 	state_array[states.ride]	       = player_state_ride;
+	state_array[states.safety_teleport]= player_state_safety_teleoport;
 	
 
 	// Special State Scripts

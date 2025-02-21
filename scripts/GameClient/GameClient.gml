@@ -27,7 +27,6 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
     }
 	
 	pingProjectile = function(_shot) {
-        // Wait 1 second to send ping
         rpc.sendNotification("spawn_shot", _shot);
     }
 	
@@ -51,6 +50,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		_p.dir = _pos[3];
 		_p.image_xscale = _p.dir;
 		_p.owner = _p;
+		_p.shot_angle = _pos[4];
 	});
 	
 	rpc.registerHandler("update_x_pos", function(_pos) {
@@ -100,7 +100,8 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	
 	rpc.registerHandler("change_room", function(_pos) {
 		log("roomies!");
-		room_goto(_pos[0]);
+		if(room != _pos[0])
+			room_goto(_pos[0]);
 	});
 	
 	is_connected = false;

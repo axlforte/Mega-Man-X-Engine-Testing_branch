@@ -3,5 +3,5 @@ if(timer < angle_dist_max){
 } else {
 	mask_index = rain_flush_hitbox;
 	depth = -10000;
-	draw_sprite_tiled(rain_flush_rain, timer / 6, timer,timer);
+	draw_sprite_tiled(rain_flush_rain, timer / 6, timer * -1,timer);
 }

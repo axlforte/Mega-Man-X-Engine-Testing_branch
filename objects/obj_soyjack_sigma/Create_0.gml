@@ -2,6 +2,7 @@ event_inherited();
 #region Variables
 hp = 128;
 is_boss = true;
+face_x = false;
 collide_damage = 0;
 hit = 0;
 state_set(zero_body_pillow2.stand);

@@ -3,15 +3,13 @@
 function scr_turn_sprite_into_strip(){
 	convert_sprite_sheet_to_sprite_animation(argument[0]);
 }
-
-//sets up the custom sprites. these functions need to be gated by a settings option, as they could cause performance issues.
-//also would be neat if you could have a list of skins and you can pick from there
 function convert_sprite_sheet_to_sprite_animation(){
 	//gets ready to set up the table of skins
 	my_custom_sprites = ds_list_create();
 	
 	custom_sprites_lookup = ds_list_create();
-	//this is ass, but because of the way the sheet is, hardcoded works the best. 
+	//these point out where each frame of animation is. because the sheet extends verically and
+	//horizontally, i have 2 indexes for the position (x and y)
 	ds_list_insert(custom_sprites_lookup,0,         [[0,6], [1,6], [2,6], [3,6], [4,6], [5,6]]);
 	ds_list_insert(custom_sprites_lookup,1,         [[0,5], [1,5], [2,5], [3,5], [4,5], [5,5], [6,5]]);
 	ds_list_insert(custom_sprites_lookup,2,         [[0,4], [1,4], [2,4], [3,4], [4,4], [5,4], [6,4]]);
@@ -30,13 +28,14 @@ function convert_sprite_sheet_to_sprite_animation(){
 	ds_list_insert(custom_sprites_lookup,15,        [[0,3], [1,3], [2,3], [3,3], [4,3]]);
 	ds_list_insert(custom_sprites_lookup,16,        [[4,2], [5,2], [6,2], [7,2], [8,2]]);
 	ds_list_insert(custom_sprites_lookup,17,        [[7,5], [8,5], [9,5], [10,5], [0,8]]);
-	
+	//here is where you get the animation file. 
 	spr_x_sheet = sprite_add("Sprites/sheet_x.png", 1, false, false, 0, 0);
-	//if there isnt a sprite sheet dont even bother
 	if(spr_x_sheet == undefined){
-		//log("whoops something went wrong, it wasnt loaded")
+		//if the sheet wasnt found, then the rest of the code wont work. breaktime!
 		return;
 	}
+	//surf is where the animation is drawn to. width must match height, or you
+	//cant draw properly.
 	var surf = surface_create(70 * 6, 70 * 6);
 	surface_set_target(surf);
 	draw_clear_alpha(c_black, 0);
@@ -44,25 +43,35 @@ function convert_sprite_sheet_to_sprite_animation(){
 	var _yoff = 0;
 	//i need to add a wrapping for loop, it goes thru all the animations
 	for(var e = 0; e < ds_list_size(custom_sprites_lookup); e++){
+		//for each frame of the animation, draw the frame to surf.
 		for (var i = 0; i < array_length(ds_list_find_value(custom_sprites_lookup,e)); i += 1){
+			//the offsets are multiplied by 70 because the sprites are 70 pixels by 70 pixels.
+			//you could have seperate sprite_height and sprite_width parameters when bringing in
+			//animations.
 			_xoff = ds_list_find_value(custom_sprites_lookup,e)[i][0] * 70;
 			_yoff = ds_list_find_value(custom_sprites_lookup,e)[i][1] * 70;
+			//draws the animation. the first 2 '70' values are sample width and height, and the 
+			// i * 70 is the horizontal offset. the i value should be multiplied by the sample width
 			draw_sprite_part(spr_x_sheet, 0, floor(_xoff), floor(_yoff), 70, 70, floor(i * 70), 0);
 		}
-		
+		//this creates the first frame of the animation, and sets the offsets of the sprite to 32 and 40
 		var _tmp_img = sprite_create_from_surface(surf, 0, 0, 70, 70, false, false, 32,40)
 		
 		for (var j = 1; j < array_length(ds_list_find_value(custom_sprites_lookup,e));j += 1)
 		{
+			//this adds the following parts of the sprite as new frames for the sprite. 
+			//the leftmost false argument is to make the lower left pixel the transparency pixel,
+			//which could be useful if people need guideboxes or a sheet background
+			//the last argument is for having interpolation. this fucks up palettes, so leave it off
 			sprite_add_from_surface(_tmp_img, surf, floor(j * 70 + 1), 0, 70, 70, false, false);
 		}
+		//adds the animation to the bucket of custom sprites. 
 		ds_list_add(my_custom_sprites,_tmp_img);
+		//clears surf completely, so the next sprite can be set up. 
 		surface_reset_target();
 		surface_free(surf);
 		
-		//sprite_save_strip(_tmp_img, "spr_x_animation_strip_" + string(e) + ".png");
-		//debug thing. saves the generated images into strips. helped with debugging but just a performance suck now
-		
+		//if this isnt the end of the list, then set surf up and do this again
 		if(e + 1 < ds_list_size(custom_sprites_lookup)){
 			surf = surface_create( 70 * array_length(ds_list_find_value(custom_sprites_lookup,e + 1)), 70 * array_length(ds_list_find_value(custom_sprites_lookup,e + 1)));
 			surface_set_target(surf);

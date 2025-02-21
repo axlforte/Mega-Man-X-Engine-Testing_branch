@@ -26,7 +26,7 @@ if(key_p_start){
 		instance_create_depth(0, 0, 0, obj_client_status);
 		instance_create_depth(0, 0, 0, obj_lobby);
 		instance_destroy();
-		room_goto(rm_test_stage);
+		room_goto(rm_headquarters);
 	}
 	global.is_server = server;
 	global.is_online = true;
