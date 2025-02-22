@@ -13,6 +13,7 @@ function player_state_dash() {
     
 		    if (t == 0) {
 		        // Play Audio
+				walk_speed = dash_speed;
 		        audio_play(dash_sound);
 				if(instance_exists(obj_player_megaman))
 					substates[3] = true;

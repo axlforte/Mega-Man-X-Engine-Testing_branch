@@ -10,8 +10,9 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	player_dir = [];
 	player_char = [];
 	player_palette = [];
-	player_y_vel = [];
 	player_x_vel = [];
+	player_y_vel = [];
+	player_grav = [];
 	current_room = rm_headquarters;
 	
 	leaveRoom = function(_client) {
@@ -48,64 +49,34 @@ function GameServer(_port) : TCPServer(_port) constructor{
         rpc.sendNotification("chat", _time, roomSockets);
     });
 	
-	rpc.registerHandler("update_position", function(_info, _socket) {
-		//log("i was pinged i work i swear")
+	rpc.registerHandler("update_all", function(_info, _socket) {
 		//log(_info);
-		_socket.x = _info.x;
-		_socket.y = _info.y;
-		_socket.sprite = _info.sprite;
-		_socket.frame = _info.frame;
+		player_x[_socket.id] = _info[0];
+		player_y[_socket.id] = _info[1];
+		player_sprite[_socket.id] = _info[2];
+		player_frame[_socket.id] = _info[3];
+		player_dir[_socket.id] = _info[4];
+		player_palette[_socket.id] = _info[5];
+		player_x_vel[_socket.id] = _info[6];
+		player_y_vel[_socket.id] = _info[7];
+		player_grav[_socket.id] = _info[8];
+		rpc.sendNotification("update_all", [
+			_socket.id,
+			player_x[_socket.id],
+			player_y[_socket.id],
+			player_sprite[_socket.id],
+			player_frame[_socket.id],
+			player_dir[_socket.id],
+			player_char[_socket.id],
+			nicknames[_socket.id],
+			player_palette[_socket.id],
+			player_x_vel[_socket.id],
+			player_y_vel[_socket.id],
+			player_grav[_socket.id]
+			], roomSockets);
 		//log(_socket);
     });
 	
-	rpc.registerHandler("update_x_pos", function(_info, _socket) {
-		//log(_info);
-		player_x[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	
-	rpc.registerHandler("update_y_pos", function(_info, _socket) {
-		//log(_info);
-		player_y[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_sprite", function(_info, _socket) {
-		//log(_info);
-		player_sprite[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_frame", function(_info, _socket) {
-		//log(_info);
-		player_frame[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_dir", function(_info, _socket) {
-		//log(_info);
-		player_dir[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_palette", function(_info, _socket) {
-		//log(_info);
-		player_palette[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_x_vel", function(_info, _socket) {
-		//log(_info);
-		player_x_vel[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_y_vel", function(_info, _socket) {
-		//log(_info);
-		player_y_vel[_socket.id] = _info;
-		//log(_socket);
-    });
 	rpc.registerHandler("update_player_id", function(_info, _socket) {
 		rpc.sendNotification("update_player_id", _socket.id, _socket.socket);
 	});
@@ -157,25 +128,8 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	
 	setEvent("step", function(){
 		if(tick_timer > 60 / tick_rate){
-			//log(roomSockets)
-			//log(player_x);
-			//log(player_y);
-			for(var q = 0; q < array_length(player_x); q++){
-				if(q < array_length(player_x))
-					rpc.sendNotification("update_x_pos", [player_x[q], q], roomSockets);
-				if(q < array_length(player_y))
-					rpc.sendNotification("update_y_pos", [player_y[q], q], roomSockets);
-				if(q < array_length(player_sprite))
-					rpc.sendNotification("update_sprite", [player_sprite[q], q], roomSockets);
-				if(q < array_length(player_frame))
-					rpc.sendNotification("update_frame", [player_frame[q], q], roomSockets);
-				if(q < array_length(player_dir))
-					rpc.sendNotification("update_dir", [player_dir[q], q], roomSockets);
-				if(q < array_length(nicknames))
-					rpc.sendNotification("update_names", [nicknames[q], q], roomSockets);
-				if(q < array_length(player_palette))
-					rpc.sendNotification("update_palette", [player_palette[q], q], roomSockets);
-			}
+			// i moved all the proper checks to be seperate. no reason to keep them together, but i
+			// still need to make an update_everything call
 			tick_timer = 0;
 		} else {
 			tick_timer++;

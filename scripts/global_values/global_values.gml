@@ -36,6 +36,8 @@ function global_values() {
 	global.player_palettes = [];
 	global.player_x_vel = [];
 	global.player_y_vel = [];
+	global.player_grav = [];
+	global.player_sprite_index = 0;
 	global.tick_rate = 60;
 	global.chat_string = "";
 	global.username = "googledebunkers";
