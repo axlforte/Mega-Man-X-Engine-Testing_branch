@@ -1,7 +1,7 @@
 switch(state){
 	case lift.idle:
 		if(instance_exists(obj_player_parent)){
-			if(global.is_online){
+			if(global.is_online == 2){
 		
 			} else {
 				var _p = instance_nearest(x,y,obj_player_parent)
@@ -19,7 +19,7 @@ switch(state){
 	break;
 	case lift.down:
 		if(instance_exists(obj_player_parent)){
-			if(global.is_online){
+			if(global.is_online == 2){
 		
 			} else {
 				var _p = instance_nearest(x,y,obj_player_parent)
@@ -39,7 +39,7 @@ switch(state){
 	break;
 	case lift.up:
 		if(instance_exists(obj_player_parent)){
-			if(global.is_online){
+			if(global.is_online == 2){
 		
 			} else {
 				var _p = instance_nearest(x,y,obj_player_parent)

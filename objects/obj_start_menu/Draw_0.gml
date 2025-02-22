@@ -120,6 +120,7 @@ switch(state) {
 					txt = subitem[index];
 				}
 				draw_string_center(_x + 176, _y, txt, colors.orange);
+				if(array_length(item) > i)
 				menu_item_draw_arrows(_x + 176, _y, index, subitem, colors.orange);
 				
 			}
@@ -131,7 +132,7 @@ switch(state) {
 		draw_string_center(160, 8, titles[state], colors.gray);
 		for (var i = 1; i < items_length; i++) {
 			var item = items[i];
-			var _x = 64, _y = 32 + 14*i;
+			var _x = 64, _y = 32 + 10*i;
 			// BACK
 			if (i == items_length - 1) _x = 144;
 			var item_name = item[0];

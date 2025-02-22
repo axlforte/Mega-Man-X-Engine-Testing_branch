@@ -6,6 +6,8 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	player_sprite = [];
 	player_frame = [];
 	player_dir = [];
+	player_y_vel = [];
+	player_x_vel = [];
 	tick_rate = global.tick_rate;
 	tick_timer = 0;
 	sendPing = function() {
@@ -39,6 +41,22 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		instance_create_depth(_pos.x, _pos.y, 0, obj_pickup_life_2);
 	});
 	
+	rpc.registerHandler("haul_ass", function(_pos) {
+		global.player_xs = [];
+		global.player_ys = [];
+		global.player_sprites = [];
+		global.player_frames = [];
+		global.player_dirs = [];
+		global.player_chars = [];
+		global.player_names = [];
+		global.player_palettes = [];
+		global.player_x_vel = [];
+		global.player_y_vel = [];
+		var _nick = global.username;
+		rpc.sendNotification("set_nickname", _nick);
+		rpc.sendNotification("update_player_id", _nick);
+	});
+	
 	rpc.registerHandler("chat", function(_pos) {
 		var _chat = instance_create_depth(0, 0, 0, obj_chat);
 		_chat.strin = _pos;
@@ -54,47 +72,67 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	});
 	
 	rpc.registerHandler("update_x_pos", function(_pos) {
+		if(global.player_xs[_pos[1]] != _pos[0])
 		array_set(global.player_xs, _pos[1], _pos[0]);
 		//log(_pos[1])
 	});
 	
 	rpc.registerHandler("update_y_pos", function(_pos) {
+		if(global.player_ys[_pos[1]] != _pos[0])
 		array_set(global.player_ys, _pos[1], _pos[0]);
 		//log(_pos[1])
 	});
 	
 	rpc.registerHandler("update_sprite", function(_pos) {
+		if(global.player_sprites[_pos[1]] != _pos[0])
 		array_set(global.player_sprites, _pos[1], _pos[0]);
 		//log(_pos[1])
 	});
 	
 	rpc.registerHandler("update_frame", function(_pos) {
+		if(global.player_frames[_pos[1]] != _pos[0])
 		array_set(global.player_frames, _pos[1], _pos[0]);
 		//log(_pos[1])
 	});
 	
 	rpc.registerHandler("update_dir", function(_pos) {
+		if(global.player_dirs[_pos[1]] != _pos[0])
 		array_set(global.player_dirs, _pos[1], _pos[0]);
 		//log(_pos[1])
 	});
 	
 	rpc.registerHandler("update_player_char", function(_pos) {
+		if(global.player_chars[_pos[1]] != _pos[0])
 		array_set(global.player_chars, _pos[1], _pos[0]);
 		//log(_pos[1])
 	});
 	
 	rpc.registerHandler("update_names", function(_pos) {
+		if(global.player_names[_pos[1]] != _pos[0])
 		array_set(global.player_names, _pos[1], _pos[0]);
 		//log(_pos[1])
 	});
 	
 	rpc.registerHandler("update_palette", function(_pos) {
+		if(global.player_palettes[_pos[1]] != _pos[0])
 		array_set(global.player_palettes, _pos[1], _pos[0]);
 		//log(_pos[1])
 	});
 	
+	rpc.registerHandler("update_x_vel", function(_pos) {
+		if(global.player_x_vel[_pos[1]] != _pos[0])
+		array_set(global.player_x_vel, _pos[1], _pos[0]);
+		//log(_pos[1])
+	});
+	
+	rpc.registerHandler("update_y_vel", function(_pos) {
+		if(global.player_y_vel[_pos[1]] != _pos[0])
+		array_set(global.player_y_vel, _pos[1], _pos[0]);
+		//log(_pos[1])
+	});
+	
 	rpc.registerHandler("update_player_id", function(_pos) {
-		log("ID's!")
+		//log("ID's!")
 		global.player_server_id = _pos;
 	});
 	
@@ -108,6 +146,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	
 	setEvent("connected", function() {
 		is_connected = true;
+		global.is_online = true;
 		var _chr = pl_char.x;
 		if(instance_exists(obj_player_zero))
 			_chr = pl_char.zero
@@ -139,9 +178,10 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		//log(_info);
 		if(tick_timer > 60 / tick_rate){
 			if(instance_exists(obj_player_parent))
-			var _spr = instance_nearest(0,0,obj_player_parent).pl_sprite[0];
-			var _frm = instance_nearest(0,0,obj_player_parent).image_index;
-			var _dir = instance_nearest(0,0,obj_player_parent).dir;
+			var _p =  instance_nearest(0,0,obj_player_parent);
+			var _spr = _p.pl_sprite[0];
+			var _frm = _p.image_index;
+			var _dir = _p.dir;
 			var _plt = global.player_palette_index;
 			rpc.sendNotification("update_x_pos",   _x);
 			rpc.sendNotification("update_y_pos",   _y);
@@ -149,6 +189,8 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 			rpc.sendNotification("update_frame",   _frm);
 			rpc.sendNotification("update_dir",     _dir);
 			rpc.sendNotification("update_palette", _plt);
+			rpc.sendNotification("update_x_vel", _p.h_speed);
+			rpc.sendNotification("update_y_vel", _p.v_speed);
 			
 			if(global.chat_string != ""){
 				rpc.sendNotification("chat", global.chat_string);

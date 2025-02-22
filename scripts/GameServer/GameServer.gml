@@ -10,6 +10,8 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	player_dir = [];
 	player_char = [];
 	player_palette = [];
+	player_y_vel = [];
+	player_x_vel = [];
 	current_room = rm_headquarters;
 	
 	leaveRoom = function(_client) {
@@ -18,14 +20,16 @@ function GameServer(_port) : TCPServer(_port) constructor{
         if (_index != -1) {
             array_delete(roomSockets, _index, 1);
             array_delete(player_x, _index, 1);
+            array_delete(player_x_vel, _index, 1);
             array_delete(player_y, _index, 1);
+            array_delete(player_y_vel, _index, 1);
             array_delete(player_sprite, _index, 1);
             array_delete(player_frame, _index, 1);
             array_delete(player_dir, _index, 1);
             array_delete(player_palette, _index, 1);
             array_delete(nicknames, _index, 1);
         }
-		//log($"{_client.nickname} left the room");
+		rpc.sendNotification("haul_ass", true, roomSockets);
     }
 	
 	change_room = function(_room) {
@@ -90,6 +94,21 @@ function GameServer(_port) : TCPServer(_port) constructor{
 		player_palette[_socket.id] = _info;
 		//log(_socket);
     });
+	
+	rpc.registerHandler("update_x_vel", function(_info, _socket) {
+		//log(_info);
+		player_x_vel[_socket.id] = _info;
+		//log(_socket);
+    });
+	
+	rpc.registerHandler("update_y_vel", function(_info, _socket) {
+		//log(_info);
+		player_y_vel[_socket.id] = _info;
+		//log(_socket);
+    });
+	rpc.registerHandler("update_player_id", function(_info, _socket) {
+		rpc.sendNotification("update_player_id", _socket.id, _socket.socket);
+	});
 	
 	rpc.registerHandler("update_player_char", function(_info, _socket) {
 		//log(_info);

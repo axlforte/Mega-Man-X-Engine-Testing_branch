@@ -1,46 +1,5 @@
 function global_values() {
-	global.reload                           = false; // Is the game reloading after a death?
-	global.player_x                         = 0;     // Player X coordinate used for the camera and misc other actions
-	global.player_y                         = 0;     // Player Y coordinate
-	global.player_spawned                   = false; // Has the player spawned yet?
-	global.debug_active                     = false; // Is the Debug mode on?
-	global.view_width                       = 256;//320
-	global.view_height                      = 224;//240
-	global.checkpoint                       = 0;
-	global.checkpoint_x                     = 0;
-	global.checkpoint_y                     = 0;
-	global.checkpoint_phase					= 0;
-	global.current_camera                   = 0;
-	global.checkpoint_camera                = 0;
-	global.prev_camera                      = 0;
-	global.current_camera_collision         = 0;
-	global.camera_min_x                     = 0;
-	global.camera_min_y                     = 0;
-	global.camera_max_x                     = 0;
-	global.camera_max_y                     = 0;
-	global.camera_vbor_min_y				= -12;
-	global.camera_vbor_max_y				= 12;
-	global.camera_shake						= false;
-	global.check							= false;
-	global.paused						    = false;
-	global.pause_type					    = pause_types.none;
-	global.is_using_door					= 0;
-	global.bgm_volume			        	= 0;
-	global.sfx_volume			        	= 0;
-	global.center_screen = true;
-	global.player_lives = 2;
-	global.items_count = 0;
-	global.difficulty = diff_modes.normal;
-	global.dash_lemon_visible = false;
-	global.unlocked_points = 0;
-	global.golden_armor_enabled = false;
-	global.tile_shader_multiplier = 1;
-	global.anyone_can_get_armors = 1;
-	global.hit_effects = false;
-	global.custom_skin = false;
-	global.player_palette_index = 0;
-	global_weapon_Settings();
-	player_global_armor_settings();
+	global_player_info();
 	
 	enum diff_modes {
 		easy,
@@ -75,6 +34,8 @@ function global_values() {
 	global.player_chars = [];
 	global.player_names = [];
 	global.player_palettes = [];
+	global.player_x_vel = [];
+	global.player_y_vel = [];
 	global.tick_rate = 60;
 	global.chat_string = "";
 	global.username = "googledebunkers";
@@ -118,4 +79,49 @@ function global_values() {
 	global.running_replay = false;
 	global.replay_fname = "";
 	replay_init();
+}
+
+function global_player_info(){
+	global.reload                           = false; // Is the game reloading after a death?
+	global.player_x                         = 0;     // Player X coordinate used for the camera and misc other actions
+	global.player_y                         = 0;     // Player Y coordinate
+	global.player_spawned                   = false; // Has the player spawned yet?
+	global.debug_active                     = false; // Is the Debug mode on?
+	global.view_width                       = 320;//320
+	global.view_height                      = 240;//240
+	global.checkpoint                       = 0;
+	global.checkpoint_x                     = 0;
+	global.checkpoint_y                     = 0;
+	global.checkpoint_phase					= 0;
+	global.current_camera                   = 0;
+	global.checkpoint_camera                = 0;
+	global.prev_camera                      = 0;
+	global.current_camera_collision         = 0;
+	global.camera_min_x                     = 0;
+	global.camera_min_y                     = 0;
+	global.camera_max_x                     = 0;
+	global.camera_max_y                     = 0;
+	global.camera_vbor_min_y				= -12;
+	global.camera_vbor_max_y				= 12;
+	global.camera_shake						= false;
+	global.check							= false;
+	global.paused						    = false;
+	global.pause_type					    = pause_types.none;
+	global.is_using_door					= 0;
+	global.bgm_volume			        	= 0;
+	global.sfx_volume			        	= 0;
+	global.center_screen = true;
+	global.player_lives = 2;
+	global.items_count = 0;
+	global.difficulty = diff_modes.normal;
+	global.dash_lemon_visible = false;
+	global.unlocked_points = 0;
+	global.golden_armor_enabled = false;
+	global.tile_shader_multiplier = 1;
+	global.anyone_can_get_armors = 1;
+	global.hit_effects = false;
+	global.custom_skin = false;
+	global.player_palette_index = 0;
+	global_weapon_Settings();
+	player_global_armor_settings();
 }

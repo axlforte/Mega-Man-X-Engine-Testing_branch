@@ -6,6 +6,8 @@ if (destroy) {
 }
 else {
 	var t = timer++;
+	if(is_undefined(owner) || owner == noone)
+		instance_destroy();
 	if (t < player_lock && initial_player_dir == owner.dir){ 
 		if(owner.state == states.dolor){
 			if (instance_exists(owner)) {

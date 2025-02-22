@@ -9,7 +9,6 @@ function player_check_jump() {
 			animation_play("jump");
 			voice_play();
 			v_speed = -jump_strength;
-			y += v_speed;
 			mask_index = state_hitbox[states.idle];
 			if (state_unlocked[states.high_jump] && key_up) {
 				v_speed = -high_jump_strength;
