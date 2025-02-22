@@ -43,7 +43,10 @@ function player_draw_sprite(_x = x, _y = y, xs = xscale, ys = y_dir, index = flo
 				scr_shader_set(shader_palette_light);	
 			}
 			global.player_palette_index = plt_index;
+<<<<<<< HEAD
 			global.player_sprite_index = index;
+=======
+>>>>>>> origin/master
 			draw_sprite_ext(pl_sprite[i], index, floor(_x), floor(_y), xs, ys, rotation, c_white, 1);
 			if(instance_exists(obj_player_megaman)){
 				var _plt = plt_texture;

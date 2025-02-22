@@ -4,7 +4,11 @@ function player_x_armor() {
 	plt_index_default = 0;
 
 	special_weapons = ds_list_create();
+<<<<<<< HEAD
 	global.weapon[WEAPONS.x_buster].set_code(player_x_buster_x2);
+=======
+	weapons_script[WEAPONS.x_buster] = player_x_buster_x2;
+>>>>>>> origin/master
 	charge_level_max = 2;
 	dash_air_unlocked = false;
 	dash_up_unlocked = false;
@@ -31,7 +35,11 @@ function player_x_armor() {
 		}
 
 		if (LEGS == "x1") {
+<<<<<<< HEAD
 			dash_speed = 4.5;	
+=======
+			dash_speed = 4.25;	
+>>>>>>> origin/master
 		}
 		if (BODY == "x1") {
 			immunity_length *= 3.5;
@@ -39,7 +47,11 @@ function player_x_armor() {
 		if (ARMS == "x1") {
 			// X-Buster
 			charge_level_max = 3;
+<<<<<<< HEAD
 			global.weapon[WEAPONS.x_buster].set_code(player_x_buster_x1);	
+=======
+			weapons_script[WEAPONS.x_buster] = player_x_buster_x1;	
+>>>>>>> origin/master
 		}
 	#endregion
 	#region X2 - Giga Armor
@@ -59,7 +71,11 @@ function player_x_armor() {
 		}
 
 		if (ARMS == "x2") {
+<<<<<<< HEAD
 			global.weapon[WEAPONS.x_buster].set_code(player_x_buster_x2);
+=======
+			weapons_script[WEAPONS.x_buster] = player_x_buster_x2;
+>>>>>>> origin/master
 			charge_level_max = 4;
 			charge_sprites[4] = spr_player_charge_3;
 			charge_palettes = [0, 1, 1, 2, 2];
@@ -79,7 +95,11 @@ function player_x_armor() {
 			charge_level_max = 4;
 			charge_sprites[4] = spr_player_charge_saber;
 			charge_palettes = [0, 1, 1, 2, 3];	
+<<<<<<< HEAD
 			global.weapon[WEAPONS.x_buster].set_code(player_x_buster_x3_saber);
+=======
+			weapons_script[WEAPONS.x_buster] = player_x_buster_x3_saber;
+>>>>>>> origin/master
 			weapons_script[WEAPONS.hyper_charge] = player_x_hyper_charge_saber;
 			auto_charge_palette = 3;
 		}
@@ -87,7 +107,11 @@ function player_x_armor() {
 			charge_level_max = 4;
 			charge_sprites[4] = spr_player_charge_3;
 			charge_palettes = [0, 1, 1, 2, 7];	
+<<<<<<< HEAD
 			global.weapon[WEAPONS.x_buster].set_code(player_x_buster_x3);
+=======
+			weapons_script[WEAPONS.x_buster] = player_x_buster_x3;
+>>>>>>> origin/master
 			auto_charge_palette = 7;
 		}
 		if (HELM == "x3") {
@@ -121,7 +145,11 @@ function player_x_armor() {
 			// X-Buster
 			charge_level_max = 3;
 			charge_limits[3] = charge_limits[2];
+<<<<<<< HEAD
 			global.weapon[WEAPONS.x_buster].set_code(player_x_buster_x4);	
+=======
+			weapons_script[WEAPONS.x_buster] = player_x_buster_x4;	
+>>>>>>> origin/master
 		}
 	#endregion
 	#region X4 - Ultimate Armor
@@ -140,7 +168,11 @@ function player_x_armor() {
 			// X-Buster
 			charge_level_max = 3;
 			charge_limits[3] = charge_limits[2];
+<<<<<<< HEAD
 			global.weapon[WEAPONS.x_buster].set_code(player_x_buster_x4);
+=======
+			weapons_script[WEAPONS.x_buster] = player_x_buster_x4;
+>>>>>>> origin/master
 		}
 	#endregion
 	#region X5 - Falcon Armor
@@ -152,7 +184,11 @@ function player_x_armor() {
 			fly_length += 90;
 		}
 		if (ARMS == "falcon") {
+<<<<<<< HEAD
 			global.weapon[WEAPONS.x_buster].set_code(player_x_buster_falcon);
+=======
+			weapons_script[WEAPONS.x_buster] = player_x_buster_falcon;
+>>>>>>> origin/master
 		}
 		if (LEGS == "falcon") {
 			state_unlocked[states.fly] = true;
@@ -177,7 +213,11 @@ function player_x_armor() {
 		}
 		if (ARMS == "gaea") {
 			charge_limits[2] = charge_limits[1];
+<<<<<<< HEAD
 			global.weapon[WEAPONS.x_buster].set_code(player_x_buster_gaea);
+=======
+			weapons_script[WEAPONS.x_buster] = player_x_buster_gaea;
+>>>>>>> origin/master
 		}
 		if (BODY == "gaea") {
 			damage_reduction = 0.625;
@@ -193,7 +233,11 @@ function player_x_armor() {
 			state_unlocked[states.high_jump] = true;
 			instance_destroy(wall_slide_dust);
 			// X-Buster
+<<<<<<< HEAD
 			global.weapon[WEAPONS.x_buster] = player_x_buster_shadow;
+=======
+			weapons_script[WEAPONS.x_buster] = player_x_buster_shadow;
+>>>>>>> origin/master
 			// Saber
 			saber_unlocked = true;
 			saber_atk_unlocked[saber_atks.atk2] = false;
@@ -212,7 +256,11 @@ function player_x_armor() {
 		}
 
 		if (ARMS == "x7") {
+<<<<<<< HEAD
 			global.weapon[WEAPONS.x_buster].set_code(player_x_buster_x7);
+=======
+			weapons_script[WEAPONS.x_buster] = player_x_buster_x7;
+>>>>>>> origin/master
 			charge_level_max = 3;
 		}
 		if (BODY == "x7") {
@@ -248,7 +296,11 @@ function player_x_armor() {
 			// X-Buster
 			charge_level_max = 3;
 			charge_limits[3] = charge_limits[2];
+<<<<<<< HEAD
 			global.weapon[WEAPONS.x_buster].set_code(player_x_buster_x8);
+=======
+			weapons_script[WEAPONS.x_buster] = player_x_buster_x8;
+>>>>>>> origin/master
 			weapon_allow_pallete = false;
 			wall_jump_strength = 7;
 			jump_strength = 7;

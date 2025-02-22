@@ -1669,7 +1669,10 @@
     {"id":{"name":"crash_bomber","path":"sprites/crash_bomber/crash_bomber.yy",},},
     {"id":{"name":"crystal_eye_large1","path":"sprites/crystal_eye_large1/crystal_eye_large1.yy",},},
     {"id":{"name":"crystal_eye_small","path":"sprites/crystal_eye_small/crystal_eye_small.yy",},},
+<<<<<<< HEAD
     {"id":{"name":"Custom_Edited___Mega_Man_Customs___Megaman_V_Plates_Expanded","path":"sprites/Custom_Edited___Mega_Man_Customs___Megaman_V_Plates_Expanded/Custom_Edited___Mega_Man_Customs___Megaman_V_Plates_Expanded.yy",},},
+=======
+>>>>>>> origin/master
     {"id":{"name":"diagonal_crash_bomba","path":"sprites/diagonal_crash_bomba/diagonal_crash_bomba.yy",},},
     {"id":{"name":"Dive_Missile","path":"sprites/Dive_Missile/Dive_Missile.yy",},},
     {"id":{"name":"drill_bomba","path":"sprites/drill_bomba/drill_bomba.yy",},},
@@ -2990,7 +2993,10 @@
     {"id":{"name":"tile_chill_penguin","path":"tilesets/tile_chill_penguin/tile_chill_penguin.yy",},},
     {"id":{"name":"tile_generic","path":"tilesets/tile_generic/tile_generic.yy",},},
     {"id":{"name":"Tile_sewers","path":"tilesets/Tile_sewers/Tile_sewers.yy",},},
+<<<<<<< HEAD
     {"id":{"name":"TileSet15","path":"tilesets/TileSet15/TileSet15.yy",},},
+=======
+>>>>>>> origin/master
     {"id":{"name":"ts_blade_man","path":"tilesets/ts_blade_man/ts_blade_man.yy",},},
     {"id":{"name":"ts_engine","path":"tilesets/ts_engine/ts_engine.yy",},},
     {"id":{"name":"ts_igloo","path":"tilesets/ts_igloo/ts_igloo.yy",},},

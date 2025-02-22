@@ -37,6 +37,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
         rpc.sendNotification("chat", _string);
     }
 	
+<<<<<<< HEAD
 	rpc.registerHandler("haul_ass", function(_pos) {
 		global.player_xs = [];
 		global.player_ys = [];
@@ -51,6 +52,10 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		var _nick = global.username;
 		rpc.sendNotification("set_nickname", _nick);
 		rpc.sendNotification("update_player_id", _nick);
+=======
+	rpc.registerHandler("spawn_pickup_2", function(_pos) {
+		instance_create_depth(_pos.x, _pos.y, 0, obj_pickup_life_2);
+>>>>>>> origin/master
 	});
 	
 	rpc.registerHandler("chat", function(_pos) {
@@ -67,6 +72,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		_p.shot_angle = _pos[4];
 	});
 	
+<<<<<<< HEAD
 	rpc.registerHandler("update_all", function(_pos) {
 		// this didnt work last time, but it would make the data much easier to store
 		array_set(global.player_xs,        _pos[0], _pos[1]);
@@ -80,15 +86,72 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		array_set(global.player_x_vel,     _pos[0], _pos[9]);
 		array_set(global.player_y_vel,     _pos[0], _pos[10]);
 		array_set(global.player_grav,      _pos[0], _pos[11]);
+=======
+	rpc.registerHandler("update_x_pos", function(_pos) {
+		array_set(global.player_xs, _pos[1], _pos[0]);
+		//log(_pos[1])
+	});
+	
+	rpc.registerHandler("update_y_pos", function(_pos) {
+		array_set(global.player_ys, _pos[1], _pos[0]);
+		//log(_pos[1])
+	});
+	
+	rpc.registerHandler("update_sprite", function(_pos) {
+		array_set(global.player_sprites, _pos[1], _pos[0]);
+		//log(_pos[1])
+	});
+	
+	rpc.registerHandler("update_frame", function(_pos) {
+		array_set(global.player_frames, _pos[1], _pos[0]);
+		//log(_pos[1])
+	});
+	
+	rpc.registerHandler("update_dir", function(_pos) {
+		array_set(global.player_dirs, _pos[1], _pos[0]);
+		//log(_pos[1])
+	});
+	
+	rpc.registerHandler("update_player_char", function(_pos) {
+		array_set(global.player_chars, _pos[1], _pos[0]);
+		//log(_pos[1])
+	});
+	
+	rpc.registerHandler("update_names", function(_pos) {
+		array_set(global.player_names, _pos[1], _pos[0]);
+		//log(_pos[1])
+	});
+	
+	rpc.registerHandler("update_palette", function(_pos) {
+		array_set(global.player_palettes, _pos[1], _pos[0]);
+		//log(_pos[1])
+	});
+	
+	rpc.registerHandler("update_x_vel", function(_pos) {
+		array_set(global.player_x_vel, _pos[1], _pos[0]);
+		//log(_pos[1])
+	});
+	
+	rpc.registerHandler("update_y_vel", function(_pos) {
+		array_set(global.player_y_vel, _pos[1], _pos[0]);
+>>>>>>> origin/master
 		//log(_pos[1])
 	});
 	
 	rpc.registerHandler("update_player_id", function(_pos) {
+<<<<<<< HEAD
 		//log("ID's!")
+=======
+		log("ID's!")
+>>>>>>> origin/master
 		global.player_server_id = _pos;
 	});
 	
 	rpc.registerHandler("change_room", function(_pos) {
+<<<<<<< HEAD
+=======
+		log("roomies!");
+>>>>>>> origin/master
 		if(room != _pos[0])
 			room_goto(_pos[0]);
 	});
@@ -97,7 +160,10 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	
 	setEvent("connected", function() {
 		is_connected = true;
+<<<<<<< HEAD
 		global.is_online = true;
+=======
+>>>>>>> origin/master
 		var _chr = pl_char.x;
 		if(instance_exists(obj_player_zero))
 			_chr = pl_char.zero
@@ -116,6 +182,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	
 	setEvent("step", function() {
 		if(!is_connected || !instance_exists(obj_player_parent)) return;
+<<<<<<< HEAD
 		if(tick_timer > 60 / tick_rate && instance_exists(obj_player_parent)){
 			var _x = instance_nearest(0,0,obj_player_parent).x;
 			var _y = instance_nearest(0,0,obj_player_parent).y;
@@ -137,6 +204,39 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 			_mvx
 			,_p.v_speed,
 			(_p.state != states.fall && _p.state != states.jump ? _p.grav * _damp : 0)]);
+=======
+		if(keyboard_check_pressed(ord("1"))){
+			var _pos = {x : mouse_x, y : mouse_y};
+			//request expects response, notification does not expect anything in return
+			rpc.sendNotification("spawn_pickup_2", _pos);
+		}
+		var _x = instance_nearest(0,0,obj_player_parent).x;
+		var _y = instance_nearest(0,0,obj_player_parent).y;
+		_x = floor(_x);
+		_y = floor(_y);
+		var _info = [_x,_y,spr_x_idle,0];
+		//log(_info);
+		if(tick_timer > 60 / tick_rate){
+			if(instance_exists(obj_player_parent))
+			var _p =  instance_nearest(0,0,obj_player_parent);
+			var _spr = _p.pl_sprite[0];
+			var _frm = _p.image_index;
+			var _dir = _p.dir;
+			var _plt = global.player_palette_index;
+			rpc.sendNotification("update_x_pos",   _x);
+			rpc.sendNotification("update_y_pos",   _y);
+			rpc.sendNotification("update_sprite",  _spr);
+			rpc.sendNotification("update_frame",   _frm);
+			rpc.sendNotification("update_dir",     _dir);
+			rpc.sendNotification("update_palette", _plt);
+			rpc.sendNotification("update_x_vel", _p.h_speed);
+			rpc.sendNotification("update_y_vel", _p.v_speed);
+			
+			if(global.chat_string != ""){
+				rpc.sendNotification("chat", global.chat_string);
+				global.chat_string = "";
+			}
+>>>>>>> origin/master
 			tick_timer = 0;
 		} else {
 			tick_timer++;

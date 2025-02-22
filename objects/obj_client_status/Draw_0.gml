@@ -8,6 +8,12 @@ for(var z = 0; z < array_length(global.player_xs); z++){
 		plt_index = 0;
 		palette_texture_set(plt_x_full);
 		if(z < array_length(global.player_chars)){
+<<<<<<< HEAD
+=======
+			if(array_length(global.player_palettes) > z)
+			log(string(global.player_palettes[z]) + " is the palette, and " + 
+			string(global.player_chars[z]) + " is the player!");
+>>>>>>> origin/master
 			
 			if(global.player_chars[z] == pl_char.x)
 				palette_texture_set(plt_x_full);
@@ -19,6 +25,7 @@ for(var z = 0; z < array_length(global.player_xs); z++){
 				palette_texture_set(plt_megaman_full);
 		}
 		if(!is_undefined(global.player_sprites[z]) && global.player_sprites[z] != -4){
+<<<<<<< HEAD
 			
 			if(array_length(global.player_x_vel) > z)
 				global.player_xs[z] += global.player_x_vel[z];
@@ -28,6 +35,8 @@ for(var z = 0; z < array_length(global.player_xs); z++){
 				global.player_y_vel[z] += global.player_grav[z];
 			}
 			
+=======
+>>>>>>> origin/master
 			draw_sprite_ext(
 				global.player_sprites[z],
 				global.player_frames[z],
