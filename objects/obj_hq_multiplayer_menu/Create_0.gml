@@ -1,5 +1,5 @@
 if(global.is_online){
-	
+	instance_destroy();
 }
 
 ip = [127,0,0,1];
