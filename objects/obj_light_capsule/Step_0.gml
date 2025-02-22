@@ -32,8 +32,7 @@ if state == 0 {
 					armor == "falcon") && myPlayer.is_x)
 					
                         state = 1;
-					}
-					if (global.anyone_can_get_armors){state = 1;}
+					} else {state = 1;}
                 }
             }
         }

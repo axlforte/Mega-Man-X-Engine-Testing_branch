@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"EntityManager",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"EntityManager",
+  "parent":{
+    "name":"Manager",
+    "path":"folders/Netcode/Util/Manager.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

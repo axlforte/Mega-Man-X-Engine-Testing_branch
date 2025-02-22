@@ -1,5 +1,5 @@
 function player_check_wall_jump() {
-	if (key_p_jump) {
+	if (key_p_jump && state_unlocked[states.wall_jump]) {
 	    var condition = false;
 	    var dir_new = dir;
     

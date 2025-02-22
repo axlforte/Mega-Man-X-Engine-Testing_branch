@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"UDPSocket",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"UDPSocket",
+  "parent":{
+    "name":"UDP",
+    "path":"folders/Netcode/Protocol/UDP.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -83,10 +83,16 @@ function player_shot_start() {
 	enum weapon_types {
 		none,
 		projectile,
+		fire,
+		ice,
+		electric,
 		saber
 	}
 	enum weapon_death_types {
 		normal,
+		fire,
+		ice,
+		electric,
 		saber
 	}
 
@@ -119,6 +125,9 @@ function player_shot_start() {
 
 	// Target (enemy or boss)
 	target = noone;
+	
+	// dont kill yourself if youre offscreened
+	destroy_when_off_screen = true;
 
 	// Will not pause in these paused states
 	pause_exceptions = [];

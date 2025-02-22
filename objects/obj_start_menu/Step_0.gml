@@ -5,6 +5,7 @@ hinput_p = key_p_right - key_p_left;
 hinput = key_right - key_left;
 vinput = key_down - key_up;
 enter = key_p_start;
+select = key_p_select;
 var previous_selected_item = selected_item;
 #endregion
 #region Buttons
@@ -97,6 +98,8 @@ if (activate_sprites) {
 			animation2_add(spr_stage_selecter, 1/5, 0, 0);
 			animation2_add(spr_stage_selecter2, 1/5, 176, 85);
 			break;
+		case menu_states.weapon_select:
+			layer_background_change(layer_bg, weapon_select_menu);
 		case menu_states.player_select:
 			layer_background_change(layer_bg, spr_player_select_background2);
 			layer_background_blend(layer_bg, c_white);
@@ -160,7 +163,7 @@ switch (state) {
 		menu_update_item_click();
 		if (enter) {
 			switch(selected_item) {
-				case 0: state_next = menu_states.game_mode; break;
+				case 0: state_next = menu_states.difficulty_mode; break;
 				case 1: state_next = menu_states.option; break;
 				case 2: game_end(); exit; break;
 			}
@@ -171,13 +174,40 @@ switch (state) {
 	#region Game Mode
 	case menu_states.game_mode:
 		menu_update_item_v();
-		menu_update_item_click();
+		//menu_update_item_click();
 		if (enter) {
 			switch(selected_item) {
 				case 0:
 					menu_set_state(menu_states.difficulty_mode);
 					break;
+				case 1:
+					menu_set_state(menu_states.online_select);
+					break;
 			}
+		} else if(select){
+			menu_set_state(menu_states.main);
+		}
+		break;
+	#endregion
+	#region Select if you are server or client
+	case menu_states.online_select:
+		menu_update_item_v();
+		menu_update_item_click();
+		if (enter) {
+			switch(selected_item) {
+				case 0:
+					global.is_server = true;
+					break;
+				case 1:
+					global.is_server = false;
+					break;
+			}
+			global.is_online = true;
+			global.character_selected[0] = global.character_object[0];
+			log("wahoo")
+			room_goto(rm_lobby);
+		} else if(select){
+			menu_set_state(menu_states.main);
 		}
 		break;
 	#endregion
@@ -189,10 +219,12 @@ switch (state) {
 			var tran = transition_create(transition_types.blink);
 			tran.color = c_white;
 			tran.transition_limit = 16;
-			menu_set_state(menu_states.stage_select, 16, 60);
+			menu_set_state(menu_states.stage_select, 16, 30);
 			audio_play(snd_player_success);
 			global.difficulty = selected_item;
 			break;
+		} else if(select){
+			menu_set_state(menu_states.main);
 		}
 		break;
 	#endregion
@@ -219,6 +251,7 @@ switch (state) {
 			tmp_armor_index = armor_index;
 			break;
 		}
+		
 		menu_update_item_h();
 		global.character_selected_index[0] = selected_item;
 		if (selected_item < array_length(global.player_character_armor)) {
@@ -241,11 +274,27 @@ switch (state) {
 			var tran = transition_create(transition_types.blink);
 			tran.color = c_white;
 			tran.transition_limit = 16;
-			menu_set_state(menu_states.boss_intro, 16, 60);
+			menu_set_state(menu_states.boss_intro, 16, 30);
 			music_stop(1000);
 			audio_play(snd_player_success);
 			global.character_selected[0] = global.character_object[selected_item];
+		}  else if(select){
+			menu_set_state(menu_states.stage_select);
 		}
+		break;
+	#endregion
+	#region weapon select
+	case menu_states.weapon_select:
+		if(enter){
+			menu_set_state(menu_states.armor_select);
+		}
+		if((key_up - key_down) != 0 && weapon_lerp <= 0){
+			selected_item -= key_up - key_down;
+			weapon_lerp = weapon_lerp_time;
+			weapon_lerp_direction = key_down - key_up;
+		}
+		if(weapon_lerp > 0)
+			weapon_lerp--;
 		break;
 	#endregion
 	#region Armor Select
@@ -302,6 +351,10 @@ switch (state) {
 						var index = tmp_armor_index[part_index];
 						var armor_names = G.character_armor_name[c];
 						item_string[selected_item] = string_ucfirst(armor_names[index]);
+						break;
+					case pl_btn.info:
+						weapon_player_selected = selected_item;
+						menu_set_state(menu_states.weapon_select);
 						break;
 				}
 			}
@@ -369,6 +422,10 @@ switch (state) {
 		
 		var item = items[selected_item];
 		var subitem = (array_length(item) > 2 ? item[2] : 0);
+		
+		if(select){
+			menu_set_state(menu_states.main);
+		}
 				
 		switch(selected_item) {
 			// Window Size
@@ -400,8 +457,19 @@ switch (state) {
 				if (enter)
 					menu_set_state(menu_states.audio_settings);
 				break;
-			// Back
+			// Damage Numbers (shows how much an attack damages an enemy)
 			case 3:
+				if (enter)
+					global.hit_effects = !global.hit_effects;
+					if(global.hit_effects)
+						page_items[menu_states.option, 3] = 
+							[_("DAMAGE NUMBERS    TRUE"), [64, 136, 144, 20]];
+					else
+						page_items[menu_states.option, 3] = 
+							[_("DAMAGE NUMBERS    FALSE"), [64, 136, 144, 20]];
+				break;
+			// Back
+			case 4:
 				if (enter) {
 					menu_set_state(menu_states.main);
 					settings_save();
@@ -559,9 +627,12 @@ switch (state) {
 						tran.color = c_white;
 						tran.transition_limit = 16;
 						menu_set_state(menu_states.player_select, 16, 60);
+						selected_item = 5;
 						audio_play(snd_player_success);
 					}
 				}
+			} else if(select){
+				menu_set_state(menu_states.difficulty_mode);
 			}
 		}
 		break;

@@ -2,9 +2,9 @@ function player_weapon_set() {
 	var _id = argument[0];
 	var _weapon = argument[1];
 
-	weapon_list[_id] = _weapon;
+	weapon_slot_handler.add_weapon(_weapon, _id)
 
-	if (_weapon == weapons.speed_gear) {
+	if (_weapon == WEAPONS.speed_gear || _weapon == WEAPONS.power_gear) {
 		double_gear_unlocked = true;	
 	}
 

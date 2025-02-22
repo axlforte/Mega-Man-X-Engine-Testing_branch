@@ -2,7 +2,7 @@ function player_saber_sprites() {
 	saber_all_skill_names = [
 		"1", "2", "3",
 		"jump", "land", "wall", "mikazukizan", "ryuenjin", "hyouretsuzan",
-		"shippuuga", "raikousen", "3", "genmu"
+		"shippuuga", "raikousen", "3", "genmu", "dash"
 	];
 	saber_sprite = ds_map_create();
 	for (var i = 0; i < array_length(saber_all_skill_names); i++) {

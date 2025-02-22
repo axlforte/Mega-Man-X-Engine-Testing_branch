@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"NetworkSpawner",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"NetworkSpawner",
+  "parent":{
+    "name":"Network",
+    "path":"folders/Netcode/Classes/Network.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -13,9 +13,12 @@ enum menu_states {
 	audio_settings,
 	voice_language,
 	weapon_get,
-	volume
+	volume,
+	weapon_select,//for weapons and techniques probably. 
+	online_select//are you gonna host or join?
 }
-
+palette_init();
+palette_texture_set(plt_megaman_full);
 enum background_select { intro, middle, ending }
 
 // State
@@ -63,12 +66,25 @@ page_items[menu_states.main] = [
 #endregion
 #region Game Mode
 page_items[menu_states.game_mode] = [
-	[_("SINGLE PLAYER"), [92, 88, 144, 20]]/*,
-	[_("MULTIPLAYER"),   [92, 128, 144, 20]]*/
+	[_("SINGLE PLAYER"), [92, 88, 144, 20]],
+	[_("MULTIPLAYER"),   [92, 128, 144, 20]]
+];
+#endregion
+#region Game Mode
+page_items[menu_states.online_select] = [
+	[_("HOST"), [92, 88, 144, 20]],
+	[_("JOIN"),   [92, 128, 144, 20]]
 ];
 #endregion
 #region Difficulty Mode
 page_items[menu_states.difficulty_mode] = [
+	[_("EASY"),			 [92, 88, 144, 20]],
+	[_("NORMAL"),		 [92, 112, 144, 20]],
+	[_("HARD"),		     [92, 136, 144, 20]]
+];
+#endregion
+#region weapon selection
+page_items[menu_states.weapon_select] = [
 	[_("EASY"),			 [92, 88, 144, 20]],
 	[_("NORMAL"),		 [92, 112, 144, 20]],
 	[_("HARD"),		     [92, 136, 144, 20]]
@@ -98,7 +114,8 @@ page_items[menu_states.option] = [
 	[_("WINDOW SIZE"), [64, 64, 200, 20], wsize_options],
 	[_("KEY CONFIG"), [64, 88, 144, 20]],
 	[_("AUDIO SETTINGS"), [64, 112, 144, 20]],
-	[_("BACK"), [64, 136, 144, 20]]
+	[_("DAMAGE NUMBERS"), [64, 136, 144, 20]],
+	[_("BACK"), [64, 160, 144, 20]]
 ];
 
 #endregion
@@ -184,7 +201,7 @@ weapon_get_props = {
 			y: 0,
 			interval: [0, 60]
 		},
-		new_weapon: weapons.homing_torpedo,
+		new_weapon: WEAPONS.homing_torpedo,
 		wp_slot: 2,
 		visible: false,
 		palette_array: [0, 0, 0, 0, 0, 0],
@@ -218,6 +235,7 @@ vinput = false;
 hinput_p = false;
 vinput_p = false;
 enter = false;
+select = false;
 scr_keys_reset();
 
 // Buttons
@@ -242,6 +260,13 @@ boss_name_show = false;
 boss_defeated = false;
 loading_text = "";
 
+//weapon selection
+weapon_lerp = 0;
+weapon_lerp_time = 6;
+weapon_lerp_distance = 26;
+weapon_lerp_direction = 1;
+weapon_player_selected = pl_char.x;
+
 activate_sprites = true;
 if (global.start_menu_force_state) {
 	global.start_menu_force_state = false;
@@ -264,7 +289,8 @@ global.char_select_sprites = [
 	spr_player_axl,
 	spr_player_iris,
 	spr_player_vile,
-	spr_player_megaman
+	spr_player_megaman,
+	spr_player_vent
 ];
 background_index = 0;
 // Animation

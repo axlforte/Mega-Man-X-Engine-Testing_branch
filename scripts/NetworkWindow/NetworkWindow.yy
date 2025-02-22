@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"NetworkWindow",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"NetworkWindow",
+  "parent":{
+    "name":"Network",
+    "path":"folders/Netcode/Classes/Network.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

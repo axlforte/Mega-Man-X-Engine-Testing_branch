@@ -14,3 +14,14 @@ if (!is_boss) {
 		mask_index = hitbox_sprite;
 	}	
 }
+
+if(does_comboing){
+	if(comboTime == 0){
+		var hnum = instance_create_depth(x,y,-600, obj_hit_number);
+		hnum.dam = combo;
+		hnum.amazing = true;
+		combo = 0; comboTime -= 1;
+	} else if(comboTime > 0){
+		comboTime -= 1;
+	}
+}

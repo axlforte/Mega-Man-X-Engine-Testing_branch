@@ -4,14 +4,14 @@ function player_shoot_pistol_animation() {
 		substates[0] = 2;
 		dir = -wall_slide_dir;
 		xscale = -dir;
-	} else if (state != states.shoot_pistol) {
+	} else if (state != states.shoot_pistol && !instance_exists(obj_player_megaman)) {
 		substates[0] = 0;
 		substates[1] = 0;
 		grav = 0;
 		v_speed = 0;
 		if (!is_on_floor())
 			substates[0] = 1;
-	} else if (key_p_shoot) {
+	} else if (key_p_shoot && !instance_exists(obj_player_megaman)) {
 		grav = 0;
 		v_speed = 0;
 	}

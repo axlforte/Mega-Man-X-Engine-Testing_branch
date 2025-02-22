@@ -4,8 +4,8 @@ function global_values() {
 	global.player_y                         = 0;     // Player Y coordinate
 	global.player_spawned                   = false; // Has the player spawned yet?
 	global.debug_active                     = false; // Is the Debug mode on?
-	global.view_width                       = 320;
-	global.view_height                      = 240;
+	global.view_width                       = 256;//320
+	global.view_height                      = 224;//240
 	global.checkpoint                       = 0;
 	global.checkpoint_x                     = 0;
 	global.checkpoint_y                     = 0;
@@ -36,6 +36,11 @@ function global_values() {
 	global.golden_armor_enabled = false;
 	global.tile_shader_multiplier = 1;
 	global.anyone_can_get_armors = 1;
+	global.hit_effects = false;
+	global.custom_skin = false;
+	global.player_palette_index = 0;
+	global_weapon_Settings();
+	player_global_armor_settings();
 	
 	enum diff_modes {
 		easy,
@@ -54,6 +59,27 @@ function global_values() {
 	global.start_menu_force_state = false;
 	global.start_menu_state = menu_states.main;
 	global.player_max_health = 16;
+	
+	//server shit
+	global.ip = "127.0.0.1";//this is the universal 'your own computer' ip
+	global.is_server = false;//are you the one doing the servering
+	global.player_server_id = 0;//which player am i?
+	global.is_online = false;//am i in a server with other people?
+	global.client = undefined;
+	global.server = undefined;
+	global.player_xs = [];
+	global.player_ys = [];
+	global.player_sprites = [];
+	global.player_frames = [];
+	global.player_dirs = [];
+	global.player_chars = [];
+	global.player_names = [];
+	global.player_palettes = [];
+	global.player_x_vel = [];
+	global.player_y_vel = [];
+	global.tick_rate = 60;
+	global.chat_string = "";
+	global.username = "googledebunkers";
 
 	global.gamepad_list = ds_list_create();
 	global.gamepad_list_index = 0;
@@ -72,7 +98,7 @@ function global_values() {
 	display_reset(0, false);
 	global.character_selected_index[0] = 0;
 	global.character_selected[0] = obj_player_x;
-	global.pickup_lifeup_sprite = spr_x_pickup_lifeup;
+	global.pickup_lifeup_sprite = spr_vent_pickup_lifeup;
 	global.transition_object_list = ds_list_create();
 	for (var i = 0; i < pl_char.length; i++) {
 		global.player_character_armor[i] = ["", "", "", "", "", ""];
@@ -88,7 +114,7 @@ function global_values() {
 	global.magma_dragoon_defeat = 0;
 	global.unarmored_x_defeat = 0;
 	global.unarmored_axl_defeat = 0;
-	global.show_fps = true;
+	global.show_fps = false;
 	// Replay
 	global.recording_replay = false;
 	global.running_replay = false;

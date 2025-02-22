@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"player_state_saber_dass_regular",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"player_state_saber_dass_regular",
+  "parent":{
+    "name":"States",
+    "path":"folders/Scripts/Player/Base/Saber/States.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

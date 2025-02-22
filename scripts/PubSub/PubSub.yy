@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"PubSub",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"PubSub",
+  "parent":{
+    "name":"PubSub",
+    "path":"folders/Netcode/Util/PubSub.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

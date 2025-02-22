@@ -28,9 +28,9 @@ function player_axl_variables() {
 	hover_effect_layer = effects.top;
 
 	// Weapon
-	player_weapon_set(0, weapons.a_pistol);
-	player_weapon_set(1, weapons.a_ray_gun);
-	player_weapon_select(weapons.a_pistol);
+	player_weapon_set(0, WEAPONS.a_pistol);
+	player_weapon_set(1, WEAPONS.a_ray_gun);
+	player_weapon_select(WEAPONS.a_pistol);
 	weapon_hold_mode = true;
 	crouch_unlocked = false;
 	weapon_allow_pallete = false;

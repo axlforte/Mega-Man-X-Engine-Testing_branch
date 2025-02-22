@@ -63,7 +63,7 @@ if (destroy) {
 		exit;
 	}
 }
-if (!is_inside_view() && target == noone) {
+if (!is_inside_view() && target == noone && destroy_when_off_screen) {
 	instance_destroy();
 	exit;
 }

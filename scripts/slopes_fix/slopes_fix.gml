@@ -1,5 +1,7 @@
 // This would not be necessary if we had a better collision system for slopes
 function slopes_fix() {
+	return;//i dont give a damn. we're in the eve of the refactor
+	
 	// Move Slopes X axis
 	with (obj_slope_parent) {
 		var px = 8, h = 16;

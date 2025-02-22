@@ -1,0 +1,1 @@
+draw_sprite_ext(sprite_index, abs(diag) * 3 + anim_offset, x, y,(diag == 0 ? 1 : diag * dir), 1, 0, c_white, 1);

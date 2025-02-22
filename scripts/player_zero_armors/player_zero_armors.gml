@@ -32,10 +32,10 @@ function player_zero_armors() {
 		charge_limits[3] = charge_limits[2];
 		glow_name = "glow_x1";
 		weapon_allow_pallete = false;
-		player_weapon_set(0, weapons.z_buster);
-		player_weapon_set(1, weapons.homing_torpedo);
-		player_weapon_set(2, weapons.storm_tornado);
-		player_weapon_select(weapons.z_buster);
+		player_weapon_set(0, WEAPONS.z_buster);
+		player_weapon_set(1, WEAPONS.homing_torpedo);
+		player_weapon_set(2, WEAPONS.storm_tornado);
+		player_weapon_select(WEAPONS.z_buster);
 		player_special_weapons_add(states.dive_kick);		
 		weapon_offsets_script = player_zero_x1_weapon_offsets;
 		#endregion
@@ -53,8 +53,8 @@ function player_zero_armor_nightmare() {
 	charge_unlocked = true;
 	weapon_allow_pallete = false;
 	z_buster_effect.object = obj_player_zero_shot_nightmare_charge;
-	player_weapon_set(0, weapons.nightmare_saber);
-	player_weapon_select(weapons.nightmare_saber);
+	player_weapon_set(0, WEAPONS.nightmare_saber);
+	player_weapon_select(WEAPONS.nightmare_saber);
 	player_special_weapons_add(states.teleport_dash);		
 	saber_atk_unlocked[saber_atks.raikousen] = false;
 	charge_limits[3] = charge_limits[2];

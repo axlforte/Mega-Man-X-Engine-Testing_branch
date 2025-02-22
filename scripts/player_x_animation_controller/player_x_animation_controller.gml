@@ -1,12 +1,18 @@
 function player_x_animation_controller() {
 	if (animation != "") {
+		
+		if(grabbing_block)
+			animation += "_carry";
+		
 		for (var i = 0; i <= P_EXT4; i++) {
 			if (i == P_FULL) continue;
 			pl_sprite[i] = noone;
 	
-			var map1 = my_sprites[| i], map2 = my_sprites_shoot[| i];
+			var map1 = my_sprites[| i], map2 = my_sprites_shoot[| i], map3 = my_sprites_carry[| i], map4 = my_sprites_throw[| i];
 	
-			if (shoot && ds_map_exists(map2, animation)) {
+			if (grabbing_block && ds_map_exists(map3, animation)) {
+				pl_sprite[i] = map3[? animation];
+			} else if (shoot && ds_map_exists(map2, animation)) {
 				pl_sprite[i] = map2[? animation];
 			} else if (ds_map_exists(map1, animation)) {
 				pl_sprite[i] = map1[? animation];

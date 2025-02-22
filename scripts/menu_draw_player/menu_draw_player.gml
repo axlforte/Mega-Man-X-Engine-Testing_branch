@@ -7,7 +7,7 @@
 /// @param palette_index (optional)
 /// @param palette_source_array (optional)
 /// Needs refactoring: make the layer order less hardcoded
-function menu_draw_player(x, y, c, armor_array = [0], palette_sprite = noone, palette_index = 0, palette_array = [0, 0, 0, 0, 0, 0]) {
+function menu_draw_player(x, y, c, armor_array = [0], palette_sprite = noone, palette_index = 0, palette_array = [0, 0, 0, 0, 0, 0], x_scale = 1, y_scale = 1, col = c_white) {
 	var sprite;
 	if (c >= pl_char.length) exit;
 	plt_index = palette_index;
@@ -18,7 +18,7 @@ function menu_draw_player(x, y, c, armor_array = [0], palette_sprite = noone, pa
 		var sprite = G.player_select_sprite[c][0];
 		plt_source_index = palette_array[0];
 		palette_shader();
-		draw_sprite(sprite, 0, x, y);
+		draw_sprite_ext(sprite, 0, x, y,x_scale,y_scale,0,col,1);
 		palette_reset();
 		exit;
 	}
@@ -35,7 +35,7 @@ function menu_draw_player(x, y, c, armor_array = [0], palette_sprite = noone, pa
 			if (sprite_exists(spr_index)) {
 				plt_source_index = palette_array[P_BODY];
 				palette_shader();
-				draw_sprite(spr_index, 4, x, y);
+				draw_sprite_ext(spr_index, 4, x, y,x_scale,y_scale,0,col,1);
 				palette_reset();
 			}
 		}
@@ -54,7 +54,7 @@ function menu_draw_player(x, y, c, armor_array = [0], palette_sprite = noone, pa
 			plt_source_index = palette_array[i];
 			if (i_start == P_FULL) plt_source_index = palette_array[0];
 			palette_shader();
-			draw_sprite(sprite, img_index, x, y);
+			draw_sprite_ext(sprite, img_index, x, y,x_scale,y_scale,0,col,1);
 			palette_reset();
 		}
 	}

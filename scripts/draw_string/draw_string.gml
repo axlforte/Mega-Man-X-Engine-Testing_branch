@@ -25,11 +25,14 @@ function draw_string() {
 	var _y = argument[1];
 	var _text = argument[2];
 	var _color = (argument_count > 3 ? argument[3] : colors.blue);
+	var _use_plt = (argument_count > 4 ? argument[4] : true);
 
-	plt_index = _color;
+	if(_use_plt){
+		plt_index = _color;
 
-	palette_texture_set(plt_text_font_normal);
-	palette_shader();
+		palette_texture_set(plt_text_font_normal);
+		palette_shader();
+	}
 
 	var xx = _x - 2;
 	for (var i = 1; i <= string_length(_text); i++) {
@@ -40,8 +43,9 @@ function draw_string() {
 	    }
 		xx += global.text_font_width;
 	}
-
-	palette_reset();
+	if(_use_plt){
+		palette_reset();
+	}
 
 
 }

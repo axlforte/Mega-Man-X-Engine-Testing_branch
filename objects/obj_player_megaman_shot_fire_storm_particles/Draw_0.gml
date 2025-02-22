@@ -1,0 +1,1 @@
+draw_sprite(sprite_index, 2-clamp(t / 4, 0, 2), x, y);

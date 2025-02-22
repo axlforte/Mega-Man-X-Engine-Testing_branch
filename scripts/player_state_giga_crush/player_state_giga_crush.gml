@@ -54,7 +54,7 @@ function player_state_giga_crush() {
 
 	// Close Circle
 	var max_radius = global.view_width / 2;
-	if (t == 32)
+	/*if (t == 32)
 		surf_inst.black_radius = max_radius;	
 	if (t > 32 && t <= 39)
 		surf_inst.black_radius -= (max_radius - (84 - 39)) / (39 - 32);	
@@ -67,15 +67,15 @@ function player_state_giga_crush() {
 	}
 	if (t > 94 && t < 120) {
 		surf_inst.black_radius = min(2*max_radius, surf_inst.black_radius + max_radius / (102 - 94));
-	}
+	}*/
 	// White Circle + Black Circle
 	if (t == 120) {
 		surf_inst.black_radius = 0;
 		surf_inst.black_animation = 3;
 	}
-	if (t > 120 && t <= 128) {
+	if (t > 120 && t <= 132) {//t <= 128
 		surf_inst.black_radius += max_radius / (128 - 120);	
-	}
+	}/*
 	// Rectangle
 	if (t == 129) {
 		surf_inst.black_radius = 0;
@@ -84,7 +84,7 @@ function player_state_giga_crush() {
 	if (t > 129 && t < 142) {
 		var tt = t - 128;
 		surf_inst.black_radius += 2.05*tt
-	}
+	}*/
 
 	if (t == 129)
 		pause_set(false);

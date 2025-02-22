@@ -67,6 +67,10 @@ switch(state) {
 				target.dir = dir;
 				target.xscale = dir;
 			}
+			if(flip_when_entered){
+				dir = dir * -1;
+				camera_id += dir;
+			}
 			var wall = instance_create_layer(x, y, "blocks", obj_square_16);
 			wall.image_xscale = sprite_width / 16;
 			wall.image_yscale = sprite_height / 16;
@@ -94,3 +98,7 @@ switch(state) {
 }
 #endregion
 animation_update(true);
+
+if(flip_to_face_player && state != door_states.open){
+	dir = sign(global.player_x - x) * -1;
+}

@@ -59,12 +59,13 @@ function player_shoot_check() {
 				charge_t = 0;
 		
 				if (shots_count < shots_limit && player_weapon_can_spend(current_weapon, charge_level)) {
-					weapon_script = weapons_script[current_weapon];
-		
+					weapon_script = global.weapon[current_weapon].code;
+					log(string(weapon_script) + " is the weapon script")
+					//show_debug_message(string(player_x_buster_gaea))
 					if (charge_level < 0)	
 						charge_level = 0;
-					if (weapon_level_id[current_weapon] != 0)
-						shot_id = weapon_level_id[current_weapon];
+					if (global.weapon[current_weapon].level_id != 0)
+						shot_id = global.weapon[current_weapon].level_id;
 					player_shoot(charge_level, shot_id);
 					if (ds_queue_size(projectiles_queue) > 0) {
 						shoot_t = 0;

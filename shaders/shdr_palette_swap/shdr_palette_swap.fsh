@@ -12,6 +12,8 @@ uniform sampler2D Palette;
 uniform float Offset;
 //  Source
 uniform float OffsetSource;
+//  pallete texture height
+uniform float Height;
 
 void main() {
     vec4 NewColor;
@@ -33,10 +35,10 @@ void main() {
         if (Found){
             break;
         }
-        vec2 uv_coord = vec2((n / 32.0), (OffsetSource));
+        vec2 uv_coord = vec2((n / Height), (OffsetSource));
         vec4 ver = texture2D(Palette, uv_coord);
         if (ref == ver){
-            vec2 uv_coord2 = vec2((n / Width), Offset);
+            vec2 uv_coord2 = vec2((n / Height), Offset);
             NewColor = texture2D(Palette, uv_coord2);
             Found = true;
         }

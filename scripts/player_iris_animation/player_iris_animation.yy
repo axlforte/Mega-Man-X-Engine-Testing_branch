@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "player_iris_animation",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Animation",
-    "path": "folders/Scripts/Player/Characters/Iris/Animation.yy",
+  "$GMScript":"",
+  "%Name":"player_iris_animation",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"player_iris_animation",
+  "parent":{
+    "name":"Animation",
+    "path":"folders/Scripts/Player/Characters/Iris/Animation.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

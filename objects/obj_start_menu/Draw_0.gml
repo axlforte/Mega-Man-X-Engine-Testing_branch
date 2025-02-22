@@ -28,18 +28,63 @@ switch(state) {
 		}
 		break;
 	#endregion
+	#region weapon select
+	case menu_states.weapon_select:
+		draw_set_color(c_white);
+		draw_rectangle(8,0,144,240,false);
+		var _plt = 32;
+		for(var i = 0; i < 11; i++){
+			var _p = selected_item - 5 + i;
+			
+			if(i == 6)
+			_plt = 64;
+				
+			if(_p < G.weapon_chunk[weapon_player_selected][0])
+				_p += G.weapon_chunk[weapon_player_selected][1] - G.weapon_chunk[weapon_player_selected][0];
+			else if(_p > G.weapon_chunk[weapon_player_selected][1])
+				_p -= G.weapon_chunk[weapon_player_selected][1] - G.weapon_chunk[weapon_player_selected][0];
+			draw_sprite(weapon_icons, _p, 9, 
+			i * 26 - 18 + (weapon_lerp * (weapon_lerp_distance / weapon_lerp_time)) * weapon_lerp_direction);
+			draw_string(23, i * 26 - 18 + (weapon_lerp * (weapon_lerp_distance / weapon_lerp_time)) * weapon_lerp_direction,
+			string_upper(G.weapon[_p].name), colors.blue);
+		}
+		palette_shader();
+		plt_index = _plt;
+		draw_sprite(spr_megaman_idle, 0, 164, 143);
+		palette_reset();
+		//lines
+		draw_rectangle(236, 0, 238, 160,false);
+		draw_rectangle(144, 160, 320, 162,false);
+		//the buttons
+		draw_string(240, 2, "SAVE", colors.orange);
+		draw_string(288, 2, "ALL", colors.orange);
+		break;
+	#endregion
 	#region Player Select
 	case menu_states.player_select:
 		var item = items[selected_item];
 		draw_sprite(spr_player_select_backgrounds, background_index, 0, 0);
-		menu_draw_player(0, 0, selected_item, armor_index);
+		if(selected_item == 0){
+			draw_sprite_ext(spr_mugshot_default,array_length(items) - 1,7,160,1,1,0,c_white,1);
+		} else {
+			draw_sprite_ext(spr_mugshot_default,selected_item - 1,7,160,1,1,0,c_white,1);
+		}
+		
+		if(selected_item == array_length(items) - 1){
+			draw_sprite_ext(spr_mugshot_default,0,267,160,1,1,0,c_white,1);
+		} else {
+			draw_sprite_ext(spr_mugshot_default,selected_item + 1,267,160,1,1,0,c_white,1);
+		}
+		menu_draw_player(0, 0, selected_item, armor_index,0,0,[0, 0, 0, 0, 0, 0],1,1,c_white);
 		draw_string_center(270, 13, item);
+		draw_sprite(spr_box_cover,0,-3,150);
+		draw_sprite(spr_box_cover,0,257,150);
 		menu_draw_buttons();
 		break;
 	#endregion
 	#region Armor Select
 	case menu_states.armor_select:
-		menu_draw_player(0, 0, G.character_selected_index[0], tmp_armor_index);
+		menu_draw_player(0, 0, G.character_selected_index[0], tmp_armor_index,1,1);
 		for (var i = 0; i <= pl_btn.confirm; i++) {
 			if (item_show[i]) {
 				var pos = item_pos[i];
@@ -86,7 +131,7 @@ switch(state) {
 		draw_string_center(160, 8, titles[state], colors.gray);
 		for (var i = 1; i < items_length; i++) {
 			var item = items[i];
-			var _x = 64, _y = 32 + 14*i;
+			var _x = 64, _y = 32 + 10*i;
 			// BACK
 			if (i == items_length - 1) _x = 144;
 			var item_name = item[0];

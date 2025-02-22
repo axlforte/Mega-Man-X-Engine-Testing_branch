@@ -10,8 +10,9 @@ function draw_string_center() {
 	var _y = argument[1];
 	var _text = argument[2];
 	var _color = (argument_count > 3 ? argument[3] : colors.blue);
+	var _plt = (argument_count > 4 ? argument[4] : true);
 	_x = floor(_x - (get_string_width(_text) / 2));
-	draw_string(_x, _y, _text, _color);
+	draw_string(_x, _y, _text, _color, _plt);
 
 
 }

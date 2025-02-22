@@ -2,12 +2,14 @@ function player_check_jump() {
 	if (key_p_jump) {
 		var can_jump = player_can_jump();
 		if (can_jump) {
-			if (state == states.dash)
+			if (state == states.dash){
 				walk_speed = dash_speed;
+			}
 			state_set(states.jump, 1, [0]);
 			animation_play("jump");
 			voice_play();
 			v_speed = -jump_strength;
+			mask_index = state_hitbox[states.idle];
 			if (state_unlocked[states.high_jump] && key_up) {
 				v_speed = -high_jump_strength;
 				grav = 0;

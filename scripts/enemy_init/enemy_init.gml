@@ -20,8 +20,14 @@ function enemy_init() {
 	pl_y = 0;
 
 	hp = 1;
+	hurt = 0;
 	max_hp = 1;
 	max_bar_hp = 32;
+	
+	//combo and hitnum related data
+	comboMax = 60;
+	comboTime = -1;
+	combo = 0;
 
 	collide_damage = 1; // How much damage the enemy does on contact
 	blocking = false; // Nullify damage

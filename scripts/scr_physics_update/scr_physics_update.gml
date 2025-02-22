@@ -3,8 +3,7 @@ function scr_physics_update(ignore_solids = true) {
 		physics_ignore_frame --;
 		exit;
 	}
-	v_speed = min(vspeed_max, v_speed + grav);
-	h_speed += h_acceleration;
+	v_speed = min(vspeed_max, v_speed);
 	if (ignore_solids) {
 		x += h_speed;
 		y += v_speed;
@@ -19,6 +18,8 @@ function scr_physics_update(ignore_solids = true) {
 			}
 		}
 	}
+	v_speed = min(vspeed_max, v_speed + grav);
+	h_speed += h_acceleration;
 	/*
 	if (ignore_solids || is_place_free(x, y + v_speed)) y += v_speed;
 	if (ignore_solids || is_place_free(x + h_speed, y)) x += h_speed;

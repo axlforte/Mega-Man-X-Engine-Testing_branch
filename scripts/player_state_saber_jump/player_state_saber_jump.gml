@@ -12,8 +12,12 @@ function player_state_saber_jump() {
 			animation = "";
 			audio_play(saber_atk_sound);
 		}
-	
-		saber_atk_animation = (is_on_floor()) ? "atk_land" : "atk_jump";	
+		
+		if(saber_air_change_animation){
+			saber_atk_animation = (is_on_floor()) ? "atk_land" : "atk_jump";	
+		} else {
+			saber_atk_animation = "atk_jump";
+		}
 		substates[1] = is_on_floor();
 	
 		if (!animation_end)

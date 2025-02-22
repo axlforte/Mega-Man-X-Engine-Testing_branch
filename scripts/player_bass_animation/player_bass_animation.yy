@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"player_bass_animation",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"player_bass_animation",
+  "parent":{
+    "name":"forte",
+    "path":"folders/Scripts/Player/Characters/forte.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

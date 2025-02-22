@@ -25,6 +25,9 @@ function scr_keys_reset() {
 
 	key_p_special = false;
 	key_special = false;
+	
+	key_p_special2 = false;
+	key_special2 = false;
 
 	key_p_wp1 = false;
 	key_wp1 = false;
@@ -34,5 +37,8 @@ function scr_keys_reset() {
 
 	key_p_start = false;
 	key_start = false;
+	
+	key_p_select = false;
+	key_select = false;
 	
 }

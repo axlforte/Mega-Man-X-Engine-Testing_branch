@@ -33,6 +33,18 @@ function player_global_armor_settings() {
 		none,
 		length
 	}
+	enum vent_armor {
+		none,
+		x,
+		zx,
+		px,
+		lx,
+		hx,
+		fx,
+		ox,
+		o1x,
+		length
+	}
 
 	for (var i = 0; i < pl_char.length; i++) {
 		global.character_armor[i] = [""];
@@ -40,6 +52,11 @@ function player_global_armor_settings() {
 		global.character_armor_unlocked[i] = [[true, true, true, true, true, true]];
 		global.armor_is_mixable[i] = [true];
 	}
+	
+	//global.character_armor[101251] = [""];
+	//global.character_armor[101252] = [""];
+	//global.character_armor[101253] = [""];
+	
 	// X Armors
 	global.character_armor[pl_char.x] = [
 		"",
@@ -80,6 +97,7 @@ function player_global_armor_settings() {
 		"nightmare_3",
 		"nightmare_4"
 	];
+	
 	global.character_armor_name[pl_char.zero] = [
 		"default", 
 		"black", 
@@ -91,8 +109,32 @@ function player_global_armor_settings() {
 	];
 	player_global_armor_set_mixable(pl_char.zero, zero_armor.length);
 	
+	global.character_armor[pl_char.vent] = [
+		"", 
+		"x", 
+		"zx", 
+		"Model_HX",
+		"Model_LX",
+		"Model_PX",
+		"Model_OX",
+		"Model_O1X"
+	];
+	
+	global.character_armor_name[pl_char.vent] = [
+		"", 
+		"x", 
+		"zx", 
+		"Model_HX",
+		"Model_LX",
+		"Model_PX",
+		"Model_OX",
+		"Model_O1X"
+	];
+	player_global_armor_set_mixable(pl_char.vent, vent_armor.length);
+	
 	// Axl Armors
 	global.character_armor[pl_char.axl] = ["", "white"];
+	//global.character_armor[pl_char.vent] = ["", "white"];
 	global.character_armor_name[pl_char.axl] = ["default", "white"];
 	player_global_armor_set_mixable(pl_char.axl, axl_armor.length);
 	
@@ -106,6 +148,9 @@ function player_global_armor_settings() {
 	
 	// MegaMan Armor
 	player_global_armor_set_mixable(pl_char.megaman, megaman_armor.length);
+	
+	
+	//player_global_armor_set_mixable(pl_char.vent, vent_armor.length);
 	
 
 	// Unlock All X Armors

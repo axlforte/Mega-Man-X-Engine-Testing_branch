@@ -1,0 +1,1 @@
+draw_sprite(sprite_index, animation_fr, x, y);

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"input_string_async",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"input_string_async",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

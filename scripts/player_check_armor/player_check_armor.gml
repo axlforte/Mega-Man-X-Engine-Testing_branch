@@ -24,5 +24,7 @@ function player_check_armor() {
 
 	script_try(weapon_offsets_script);
 	
-    state_set(states.capsule, 0, [0]);
+	if(state != states.biometal_select){
+		state_set(states.capsule, 0, [0]);
+	}
 }

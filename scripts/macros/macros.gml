@@ -26,11 +26,15 @@ function macros() {
 	#macro UP 18
 	#macro UP_RIGHT 19
 
+	#macro CLI global.client;
+	#macro CLI_ID global.client.socket.id;
+	#macro SER global.server;
 	#macro BAR_DEPTH -800
 	#macro G global
 	#macro PAUSE if (global.paused) exit;
 	#macro PAUSE_EXCEPT if (global.paused && !array_contains(pause_exceptions, global.pause_type)) exit;
 	#macro PAUSE_ONLY_NORMAL if (global.paused && global.pause_type == pause_types.normal) exit;
+	#macro DIE instance_destroy();
 	
 	///Dialogue Engine
 	#macro font_big 0

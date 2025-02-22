@@ -13,21 +13,25 @@ var t = timer++;
 // Start
 if (t == 0 && pickup_type == pickup_types.wp) {
 	// Find weapon to fill
-	with (target) {
+	/*with (target) {
 		// If this weapon is full, find other weapon to fill
-		if (weapon[0] == noone || weapon_energy[weapon[0]] >= weapon_energy_max[weapon[0]] || weapon_damage_refill[weapon[0]] != 0) {
-			for (var i = 0; i < array_length(weapon_list); i++) {
-				var wp = weapon_list[i];
-				if (wp >= 0 && weapon_energy[wp] < weapon_energy_max[wp] && weapon_damage_refill[wp] == 0) {
-					other.weapon_id = weapon_list[i];
+		if (weapon[0] == noone || 
+		weapon_slot_handler.get_energy(weapon[0]) >= global.weapon[weapon[0]].energy_max || 
+		global.weapon[weapon[0]].damage_refill != 0) {
+			for (var i = 1; i < array_length( weapon_slot_handler.weapons); i++) {
+				var wp = weapon_slot_handler.raw_weapon(i);
+				if (wp >= 0 && weapon_slot_handler.get_energy(wp) < global.weapon[wp].energy_max && 
+				global.weapon[wp].damage_refill == 0) {
+					other.weapon_id = weapon_slot_handler.raw_weapon(i);
 					other.weapon_fill_other = true;
 					other.instant_fill = true;
 				}
 			}
 		} else {
+			log(weapon[0])
 			other.weapon_id = weapon[0];
 		}
-	}
+	}*/
 }
 
 // If the target is dead, ignore this
@@ -83,8 +87,9 @@ if (t >= min_limit && (t mod time_per_unit == 0)) {
 			} else {
 				audio_play(fill_sound);
 			}
-			target.weapon_energy[weapon_id] = min(target.weapon_energy_max[weapon_id], target.weapon_energy[weapon_id] + wp_add);
-			if (target.weapon_energy[weapon_id] >= target.weapon_energy_max[weapon_id]) {
+			target.weapon_slot_handler.set_energy(weapon_id, min(global.weapon[weapon_id].energy_max, 
+			target.weapon_slot_handler.get_energy(weapon_id) + wp_add));
+			if (target.weapon_slot_handler.get_energy(weapon_id) >= global.weapon[weapon_id].energy_max) {
 				amount = 0;
 			}
 			break;

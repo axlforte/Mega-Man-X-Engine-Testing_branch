@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"TCPSocket",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"TCPSocket",
+  "parent":{
+    "name":"TCP",
+    "path":"folders/Netcode/Protocol/TCP.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

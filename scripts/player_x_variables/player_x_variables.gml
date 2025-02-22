@@ -4,8 +4,8 @@ function player_x_variables() {
 	intro_end_animation = "intro2_end"; // Armored part
 
 	// Weapon Test
-	player_weapon_set(1, weapons.homing_torpedo);
-	player_weapon_set(2, weapons.storm_tornado);
+	weapon_slot_handler.add_weapon(WEAPONS.storm_tornado);
+	weapon_slot_handler.add_weapon(WEAPONS.homing_torpedo);
 
 	// Charge
 	charge_unlocked = true;
