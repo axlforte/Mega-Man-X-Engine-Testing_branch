@@ -3,6 +3,8 @@
   "%Name":"obj_teleport_point",
   "eventList":[
     {"$GMEvent":"","%Name":"","collisionObjectId":{"name":"obj_player_parent","path":"objects/obj_player_parent/obj_player_parent.yy",},"eventNum":0,"eventType":4,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_teleport_point",
@@ -30,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"goal_post",
-    "path":"sprites/goal_post/goal_post.yy",
+    "name":"spr_bird_checkpoint",
+    "path":"sprites/spr_bird_checkpoint/spr_bird_checkpoint.yy",
   },
   "spriteMaskId":null,
   "visible":true,

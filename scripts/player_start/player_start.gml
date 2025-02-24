@@ -280,6 +280,10 @@ function player_start() {
 	using_world_speed = false;
 	
 	pause_enabled = false;
+	
+	//warp checkpoints
+	trip_check = 0;
+	trip_point = noone;
 }
 
 function player_trail_set(interval, amount) {

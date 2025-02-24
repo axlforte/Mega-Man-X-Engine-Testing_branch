@@ -8,6 +8,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	player_dir = [];
 	player_y_vel = [];
 	player_x_vel = [];
+	enemies = [];
 	tick_rate = global.tick_rate;
 	tick_timer = 0;
 	sendPing = function() {
@@ -16,7 +17,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
             rpc.sendRequest("ping", current_time)
                 .onCallback(function(_result) {
                     var _ping = current_time - _result;
-					ping = _ping;
+					global.ping = _ping;
                     //show_debug_message($"{_ping} ms");
                 })
                 .onError(function(_error) {
@@ -33,9 +34,16 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
     }
 	
 	pingChat = function(_string) {
-        // Wait 1 second to send ping
         rpc.sendNotification("chat", _string);
     }
+	
+	spawn_enemy = function(_params) {
+		 rpc.sendNotification("spawn_enemy", _params);
+	}
+	
+	hurt_enemy = function(_params) {
+		 rpc.sendNotification("Hurt_enemy", _params);
+	}
 	
 	rpc.registerHandler("haul_ass", function(_pos) {
 		global.player_xs = [];
@@ -65,6 +73,27 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		_p.image_xscale = _p.dir;
 		_p.owner = _p;
 		_p.shot_angle = _pos[4];
+		_p.dmg = 0;
+	});
+	
+	rpc.registerHandler("spawn_enemy", function(_pos) {
+		if(instance_position(_pos[1],_pos[2],_pos[0])) { return; }
+		var _e = instance_create_layer(_pos[1],_pos[2],_pos[3],_pos[0]);
+		_e.dies_when_offscreen = false;
+		_e.network_id = _pos[4]
+		global.server_enemies[_pos[4]] = _e;
+	});
+	
+	rpc.registerHandler("hurt_enemy", function(_pos) {
+		//if(_pos[2] == global.player_server_id){ return;}
+		log(string(array_length(global.server_enemies)) + " length of enemies")
+		for(var q = 0; q < array_length(global.server_enemies); q++){
+			log(string(global.server_enemies[q].network_id) + " id")
+			log(string(_pos[0]) + " pos")
+			if(global.server_enemies[q].network_id == _pos[0]){
+				scr_weapon_apply_damage(global.server_enemies[q], _pos[1]);
+			}
+		}
 	});
 	
 	rpc.registerHandler("update_all", function(_pos) {
@@ -98,6 +127,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	setEvent("connected", function() {
 		is_connected = true;
 		global.is_online = true;
+		global.client = self;
 		var _chr = pl_char.x;
 		if(instance_exists(obj_player_zero))
 			_chr = pl_char.zero
@@ -121,22 +151,23 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 			var _y = instance_nearest(0,0,obj_player_parent).y;
 			_x = floor(_x);
 			_y = floor(_y);
-			var _damp = 0.6;
 			var _p =  instance_nearest(0,0,obj_player_parent);
-			var _spr = _p.pl_sprite[0];
+			var _spr = _p.pl_sprite;
 			var _frm = global.player_sprite_index;
 			var _dir = _p.image_xscale * _p.dir;
 			var _plt = global.player_palette_index;
 			var _mvx = 0;
 			var _st = _p.state;
 			if(variable_instance_exists(_p,"move")){
-			_mvx = (_st!=states.wall_slide && _st!=states.wall_jump ? _p.move*_p.walk_speed*_damp : 0)
+			_mvx = (_st!=states.wall_slide && _st!=states.crouch && _st!=states.wall_jump &&
+			_st!=states.idle ? 
+			_p.move*_p.walk_speed*0.5 : 0)
 			}
 			rpc.sendNotification("update_all", 
 			[_x,_y,_spr,_frm,_dir,_plt,
 			_mvx
 			,_p.v_speed,
-			(_p.state != states.fall && _p.state != states.jump ? _p.grav * _damp : 0)]);
+			(_p.state != states.fall && _p.state != states.jump ? _p.grav * 0.5 : 0)]);
 			tick_timer = 0;
 		} else {
 			tick_timer++;

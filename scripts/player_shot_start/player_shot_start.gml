@@ -141,4 +141,5 @@ function player_shot_start() {
 	// Local Game Speed
 	local_game_speed_init();
 	using_world_speed = false;
+	shoot_direction_index = 0;
 }

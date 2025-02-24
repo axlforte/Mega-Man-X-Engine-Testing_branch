@@ -49,7 +49,13 @@ function scr_weapon_collision() {
 							if (ds_map_exists(boss_damage, enemy.object_index))
 								dmg = boss_damage[? enemy.object_index];
 						}
-						scr_weapon_apply_damage(enemy, dmg);
+						if(online){
+							global.client.hurt_enemy(
+							[enemy.network_id, 
+							dmg,
+							global.player_server_id]);
+						}
+						//scr_weapon_apply_damage(enemy, dmg);
 						if (enemy.hp > 0 || hit_sound_on_destroy || (enemy.is_boss && enemy.state != boss_states.death))
 							play_hit = true;
 					}

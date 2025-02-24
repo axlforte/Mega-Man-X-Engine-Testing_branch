@@ -21,7 +21,8 @@ if (t == 0) {
 			with (shot) {
 				event_perform(ev_step, ev_step_normal);	
 			}	
-			player_shot_sync_groups();
+			if(!global.is_online)
+				player_shot_sync_groups();
 		}
 	}
 }

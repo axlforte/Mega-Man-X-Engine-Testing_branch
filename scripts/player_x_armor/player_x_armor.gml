@@ -31,7 +31,7 @@ function player_x_armor() {
 		}
 
 		if (LEGS == "x1") {
-			dash_speed = 4.5;	
+			dash_speed = 4;	
 		}
 		if (BODY == "x1") {
 			immunity_length *= 3.5;

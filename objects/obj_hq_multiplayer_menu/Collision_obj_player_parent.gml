@@ -1,9 +1,10 @@
 scr_keys_update();
-if(key_p_shoot){
+if(key_p_shoot || key_p_shoot2 || key_dash){
 	changing_number = !changing_number;
 	//other.locked = changing_number;
 	if(!changing_number){
-		keyboard_string = string_copy(keyboard_string,1,string_length(keyboard_string) - 1)
+		if(global.settings[1] != input_types.gamepad)
+			keyboard_string = string_copy(keyboard_string,1,string_length(keyboard_string) - 1)
 		ip_string = keyboard_string;
 	} else {
 		keyboard_string = "";
@@ -24,11 +25,11 @@ if(key_p_start && !changing_number){
 	var _c = global.character_selected;
 	var _i = global.character_selected_index;
 	global_player_info();
-	settings_load();
-	settings_apply();
 	global.is_server = server;
 	global.character_selected = _c;
 	global.character_selected_index = _i;
+	settings_load();
+	settings_apply();
 	with(obj_player_parent){
 		//instance_destroy();
 		y -= 32;

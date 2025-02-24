@@ -1,5 +1,9 @@
 // Warning: this script is very similar to projectile_collision_init and needs refactoring
 function enemy_init() {
+	
+	//networking shit
+	network_id = -1;
+	
 	on_a_slope = 0;
 	grv_speed_up = 0.25;
 	grv_speed_down = 0.25;
@@ -12,6 +16,7 @@ function enemy_init() {
 	hit = 0;
 	max_slope = 3;
 	moved = 0;
+	dies_when_offscreen = false;
 
 	nearest_player = 0;
 	_p = 0;

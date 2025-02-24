@@ -27,15 +27,21 @@ for(var z = 0; z < array_length(global.player_xs); z++){
 				global.player_ys[z] += global.player_y_vel[z];
 				global.player_y_vel[z] += global.player_grav[z];
 			}
-			
-			draw_sprite_ext(
-				global.player_sprites[z],
-				global.player_frames[z],
-				global.player_xs[z],
-				global.player_ys[z],
-				global.player_dirs[z],
-				1,0,c_white,1
-				);
+			for(var g = 0; g < array_length(global.player_sprites[z]); g++){
+				if(sprite_exists(global.player_sprites[z][g]) 
+				&& abs(__view_get(e__VW.XView,0) - global.player_xs[z]  + global.view_width / 2) < global.view_width + 48
+				&& abs(__view_get(e__VW.YView,0) - global.player_ys[z] + global.view_height / 2) < global.view_height + 64
+				)
+					if(global.player_sprites[z][g] != arctic_coverage)
+					draw_sprite_ext(
+						global.player_sprites[z][g],
+						global.player_frames[z],
+						global.player_xs[z],
+						global.player_ys[z],
+						global.player_dirs[z],
+						1,0,c_white,1
+						);
+			}
 			palette_reset();
 			if(z < array_length(global.player_names))
 				draw_string_center(

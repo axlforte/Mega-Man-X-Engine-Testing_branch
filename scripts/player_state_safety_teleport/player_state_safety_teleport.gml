@@ -7,8 +7,12 @@ function player_state_safety_teleoport() {
 	}
 	animation_play("tp",0);
 	if(instance_exists(obj_teleport_point)){
-		var _t = instance_nearest(x,y,obj_teleport_point);
-		move_to_point(_t.x, _t.y, 10);
+		with(obj_teleport_point){
+			if check == other.trip_check {
+				other.trip_point = self;
+			}
+		}
+		move_to_point(trip_point.x, trip_point.y, 10);
 		physics_ignore_frame++;
 	} else {
 		player_state_set(states.fall);

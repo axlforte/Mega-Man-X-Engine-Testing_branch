@@ -1,1 +1,1 @@
-boss_object = obj_blade_man;
+boss_object = obj_launch_octopus;

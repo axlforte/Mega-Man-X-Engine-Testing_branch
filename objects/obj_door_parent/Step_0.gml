@@ -32,7 +32,8 @@ switch(state) {
 		if (!moving_target) {
 			target.animation_ignore_frame = 1;
 		} else {
-			global.current_camera = camera_id;
+			if(!flip_when_entered && !flip_to_face_player)
+				global.current_camera = camera_id;
 			if (is_vertical) {
 				target.y += 72 / 116 * dir;	
 			} else {

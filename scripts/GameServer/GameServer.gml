@@ -13,6 +13,7 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	player_x_vel = [];
 	player_y_vel = [];
 	player_grav = [];
+	enemies = [];
 	current_room = rm_headquarters;
 	
 	leaveRoom = function(_client) {
@@ -47,6 +48,15 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	rpc.registerHandler("chat", function(_time, _socket) {
 		//log(_time)
         rpc.sendNotification("chat", _time, roomSockets);
+    });
+	
+	rpc.registerHandler("spawn_enemy", function(_time, _socket) {
+		//log(_time)
+        rpc.sendNotification("spawn_enemy", _time, roomSockets);
+    });
+	
+	rpc.registerHandler("Hurt_enemy", function(_time, _socket) {
+        rpc.sendNotification("hurt_enemy", _time, roomSockets);
     });
 	
 	rpc.registerHandler("update_all", function(_info, _socket) {

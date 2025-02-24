@@ -1,6 +1,6 @@
 function player_draw_healthbar(p) {
-	var xx = x_off + __view_get(e__VW.XView, 0);;
-	var yy = y_off + __view_get(e__VW.YView, 0);;
+	var xx = x_off + __view_get(e__VW.XView, 0);
+	var yy = y_off + __view_get(e__VW.YView, 0);
 	scr_draw_vertical_bar(
 		xx,
 		yy,
@@ -13,6 +13,8 @@ function player_draw_healthbar(p) {
 		spr_bar1_area,
 		spr_bar1_limit
 	);
+	if(online)
+	draw_string_here(xx,yy - clamp(p.max_hp * 2, 0, p.max_bar_hp * 2) - 20,string(global.ping) + " ms",colors.red);
 }
 function player_draw_weaponbar(p, _wep = 0) {
 	var xx = 25 + __view_get(e__VW.XView, 0);

@@ -1,6 +1,6 @@
 #region Variables
 event_inherited();
-hp = 16;
+hp = 15;
 atk = 3;
 phy_type = phy_types.NEW;
 atk_limit[0] = 2; // Missile

@@ -4,7 +4,7 @@ function gamepad_init() {
 
 	enum input_types
 	{
-		keyboard, gamepad	
+		keyboard, gamepad, both
 	}
 
 

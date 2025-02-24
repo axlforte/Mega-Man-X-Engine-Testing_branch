@@ -2,6 +2,7 @@ event_inherited();
 sound = snd_megaman_shot_3;
 
 abs_hspeed = 0;
+state = 0;
 atk = 5;
 boss_damage[? noone] = 4; // Default damage on bosses
 // Start
