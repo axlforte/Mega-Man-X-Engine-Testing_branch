@@ -20,8 +20,11 @@ for(var z = 0; z < array_length(global.player_xs); z++){
 		}
 		if(!is_undefined(global.player_sprites[z]) && global.player_sprites[z] != -4){
 			
-			if(array_length(global.player_x_vel) > z)
+			if(array_length(global.player_x_vel) > z){
+				global.player_x_vel[z] = global.player_xs[z] - global.player_x_prevs[z];
 				global.player_xs[z] += global.player_x_vel[z];
+				global.player_x_prevs[z] = global.player_xs[z];
+			}
 				
 			if(array_length(global.player_y_vel) > z && array_length(global.player_grav) > z){
 				global.player_ys[z] += global.player_y_vel[z];
@@ -52,6 +55,17 @@ for(var z = 0; z < array_length(global.player_xs); z++){
 					false);
 		}
 	}
+}
+
+for(var p = 127; p < array_length(global.server_enemies); p++){
+	draw_sprite_ext(
+		global.player_sprites[p],
+		global.player_frames[p],
+		global.player_xs[p],
+		global.player_ys[p],
+		global.player_dirs[p],
+		1,0,c_white,1
+		);
 }
 
 if(instance_exists(obj_player_parent))

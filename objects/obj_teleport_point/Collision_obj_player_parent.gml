@@ -9,5 +9,5 @@ with(other){
 		trip_check = other.check;
 	}
 }
-if(frim == 8 && other.state != states.idle && other.state != states.crouch){
-	frim = 0; audio_play(Checkpoint);}
+if(speen <= 0.1 && other.state != states.idle && other.state != states.crouch){
+	frim = 0; audio_play(Checkpoint); speen = 3;}

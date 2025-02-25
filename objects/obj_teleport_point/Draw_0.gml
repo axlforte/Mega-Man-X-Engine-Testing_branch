@@ -1,4 +1,3 @@
-if(frim < 8){
-	frim+=1/3;
-}
+frim += speen;
+speen = speen / 1.101;
 draw_sprite(spr_bird_checkpoint,frim,x,y);

@@ -27,6 +27,7 @@ function global_values() {
 	global.client = undefined;
 	global.server = undefined;
 	global.player_xs = [];
+	global.player_x_prevs = [];
 	global.player_ys = [];
 	global.player_sprites = [];
 	global.player_frames = [];

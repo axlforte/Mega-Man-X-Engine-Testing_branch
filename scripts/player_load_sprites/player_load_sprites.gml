@@ -81,11 +81,6 @@ function player_load_sprites() {
 				
 						if (sprite_to_add != -1) {
 							
-							show_debug_message(sprite_to_add_name)
-							var _tempo = player_get_custom_sprites(sprite_to_add_name);
-							if(_tempo != noone && _tempo != undefined && global.custom_skin)
-								sprite_to_add = _tempo;
-							
 							map[? k] = sprite_to_add;
 							//log("Added sprite " + sprite_to_add_name);
 						} else if (sprite_to_add_name != "" && (t_armor != "" || j == 0)) {
@@ -99,8 +94,7 @@ function player_load_sprites() {
 								//log("Couldn't find sprite " + sprite_to_add_name);
 							}
 						}
-						if(_tempo == noone)
-							sprite_fix_origin(map[? k]);
+						sprite_fix_origin(map[? k]);
 					}
 				}
 				// This sprite doesn't exists but maybe it's only for a full armor

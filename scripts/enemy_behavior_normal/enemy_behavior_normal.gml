@@ -5,6 +5,11 @@ function enemy_behavior_normal() {
 	if (local_game_run_step) {
 		scr_physics_update(through_walls);
 	}
+	
+	if(global.is_server){
+		global.server.update_enemy([x,y,sprite_index,image_index, network_id]);
+	}
+	
 	_p = instance_nearest(x, y, obj_player_parent);
 	nearest_player = _p;
 	inside_view = is_inside_view();

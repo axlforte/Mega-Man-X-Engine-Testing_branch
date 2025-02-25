@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"player_online_step",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"player_online_step",
+  "parent":{
+    "name":"Default",
+    "path":"folders/Scripts/Player/Base/Step/Default.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

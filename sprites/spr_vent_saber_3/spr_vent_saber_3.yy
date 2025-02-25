@@ -57,7 +57,7 @@
   "origin":9,
   "parent":{
     "name":"saber",
-    "path":"folders/Sprites/Player/Characters/Vent n Aile/Vent/Megamerges/ZX/saber.yy",
+    "path":"folders/Sprites/Player/Characters/Vent n Aile/Vent/ZX/saber.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

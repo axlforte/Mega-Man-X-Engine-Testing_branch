@@ -40,6 +40,17 @@ function GameServer(_port) : TCPServer(_port) constructor{
 		rpc.sendNotification("change_room", [_room,true], roomSockets);
     }
 	
+	update_enemy = function(_ene) {
+		enemies[_ene[4]].x = _ene[0];
+		enemies[_ene[4]].y = _ene[1];
+		enemies[_ene[4]].sprite_index = _ene[2];
+		enemies[_ene[4]].image_index = _ene[3];
+    }
+	
+	spawn_enemy_shot = function(_shot){
+		//kys
+	}
+	
 	rpc.registerHandler("ping", function(_time, _socket) {
 		//log("i was pinged i work i swear")
         return _time;
@@ -52,7 +63,10 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	
 	rpc.registerHandler("spawn_enemy", function(_time, _socket) {
 		//log(_time)
-        rpc.sendNotification("spawn_enemy", _time, roomSockets);
+        var _e = instance_create_layer(_time[1],_time[2],_time[3],_time[0]);
+		_e.dies_when_offscreen = false;
+		_e.network_id = _time[4]
+		enemies[_time[4]] = _e;
     });
 	
 	rpc.registerHandler("Hurt_enemy", function(_time, _socket) {
@@ -82,10 +96,15 @@ function GameServer(_port) : TCPServer(_port) constructor{
 			player_palette[_socket.id],
 			player_x_vel[_socket.id],
 			player_y_vel[_socket.id],
-			player_grav[_socket.id]
+			player_grav[_socket.id],
+			enemies
 			], roomSockets);
 		//log(_socket);
     });
+	
+	rpc.registerHandler("rollback_keys", function(_info, _socket) {
+		rpc.sendNotification("rollback_keys", _socket.id, _socket.socket);
+	});
 	
 	rpc.registerHandler("update_player_id", function(_info, _socket) {
 		rpc.sendNotification("update_player_id", _socket.id, _socket.socket);
@@ -149,6 +168,7 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	setEvent("connected", function(_client){
 		rpc.sendNotification("update_player_id", _client.id, _client.socket);
 		rpc.sendNotification("update_player_char", global.character_selected[0], _client.socket);
+		rpc.sendNotification("rollback_spawn_player",_client.id,roomSockets)
 	});
 	
 	setEvent("disconnected", function(_client) {

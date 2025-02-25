@@ -1,1 +1,0 @@
-draw_string(x, y, $"Ping:{global.client.ping}", colors.orange, false);
