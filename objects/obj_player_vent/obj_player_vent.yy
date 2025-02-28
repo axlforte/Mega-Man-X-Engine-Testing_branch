@@ -11,7 +11,10 @@
     "name":"Vent n Ailr",
     "path":"folders/Objects/Players/Characters/Vent n Ailr.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_player_parent",
+    "path":"objects/obj_player_parent/obj_player_parent.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

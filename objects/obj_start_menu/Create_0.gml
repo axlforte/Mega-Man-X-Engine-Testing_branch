@@ -125,7 +125,7 @@ settings_apply();
 #region Player Select
 
 page_items[menu_states.player_select] = [
-	"X", "ZERO", "AXL", "MEGAMAN", ".EXE", "VILE", "IRIS"
+	"X", "ZERO", "AXL", "MEGAMAN", ".EXE", "VILE", "IRIS", "VENT"
 ];
 global.golden_armor_enabled = false;
 

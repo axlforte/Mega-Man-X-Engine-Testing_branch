@@ -11,7 +11,10 @@
     "name":"Falcon",
     "path":"folders/Objects/Players/Characters/X/Shots/X Buster/X5/Falcon.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_player_shot_parent",
+    "path":"objects/obj_player_shot_parent/obj_player_shot_parent.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

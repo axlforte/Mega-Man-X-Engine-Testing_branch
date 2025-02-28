@@ -12,8 +12,8 @@
     "path":"folders/Objects/Players/Characters/X/Shots/X Buster/X8 Ultimate.yy",
   },
   "parentObjectId":{
-    "name":"obj_player_x_shot_ult_super",
-    "path":"objects/obj_player_x_shot_ult_super/obj_player_x_shot_ult_super.yy",
+    "name":"obj_player_shot_parent",
+    "path":"objects/obj_player_shot_parent/obj_player_shot_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

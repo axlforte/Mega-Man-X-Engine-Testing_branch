@@ -12,8 +12,8 @@
     "path":"folders/Objects/Players/Characters/X/Shots/X Buster/X3.yy",
   },
   "parentObjectId":{
-    "name":"obj_player_x_shot_nova_strike",
-    "path":"objects/obj_player_x_shot_nova_strike/obj_player_x_shot_nova_strike.yy",
+    "name":"obj_player_shot_parent",
+    "path":"objects/obj_player_shot_parent/obj_player_shot_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

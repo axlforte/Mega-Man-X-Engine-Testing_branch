@@ -12,8 +12,8 @@
     "path":"folders/Objects/Players/Characters/MegaMan/Shots/Custom.yy",
   },
   "parentObjectId":{
-    "name":"obj_player_megaman_shot_3_effect",
-    "path":"objects/obj_player_megaman_shot_3_effect/obj_player_megaman_shot_3_effect.yy",
+    "name":"obj_player_shot_parent",
+    "path":"objects/obj_player_shot_parent/obj_player_shot_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

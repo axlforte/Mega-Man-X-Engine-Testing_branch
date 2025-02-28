@@ -12,8 +12,8 @@
     "path":"folders/Objects/Players/Characters/X/Shots/X Buster/X5/Gaea.yy",
   },
   "parentObjectId":{
-    "name":"obj_player_x_shot_1",
-    "path":"objects/obj_player_x_shot_1/obj_player_x_shot_1.yy",
+    "name":"obj_player_shot_parent",
+    "path":"objects/obj_player_shot_parent/obj_player_shot_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
