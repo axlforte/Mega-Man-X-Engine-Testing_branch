@@ -81,6 +81,7 @@ function player_megaman_variables() {
 	];
 	
 	//disabled for later forte to handle. i aint doin all dat
+	//i have no idea how i will make this work. the old way relied on the fact that the data is not universal
 	
 	//for (var i = 0; i < array_length(weapon_max_level); i++) {
 		//if (i != WEAPONS.mega_buster && i != WEAPONS.atomic_fire) {

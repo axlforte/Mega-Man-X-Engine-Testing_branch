@@ -54,8 +54,9 @@ function scr_weapon_collision() {
 							[enemy.network_id, 
 							dmg,
 							global.player_server_id]);
+						} else {
+							scr_weapon_apply_damage(enemy, dmg);
 						}
-						//scr_weapon_apply_damage(enemy, dmg);
 						if (enemy.hp > 0 || hit_sound_on_destroy || (enemy.is_boss && enemy.state != boss_states.death))
 							play_hit = true;
 					}
@@ -81,6 +82,7 @@ function scr_weapon_collision() {
 							break;
 						case par_enemy_projectile:
 							// Destroy projectile?
+							// fym DeStRoY PrOjEcTiLe?
 							break;
 					}
 					if (((atk == enemy_hp && destroy_if_equal_to_atk) || (destroy_if_hit && !enemy.is_boss)) || enemy.hp > 0)

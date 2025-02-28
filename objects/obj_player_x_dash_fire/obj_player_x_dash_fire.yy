@@ -11,10 +11,7 @@
     "name":"X2",
     "path":"folders/Objects/Players/Characters/X/Effects/X2.yy",
   },
-  "parentObjectId":{
-    "name":"obj_player_shot_parent",
-    "path":"objects/obj_player_shot_parent/obj_player_shot_parent.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

@@ -14,11 +14,11 @@ function player_weapon_sprites_init() {
 		var index = asset_get_index(spr);
 		// If this sprite exists
 		if (index != -1) {
-			log("Added " + spr);	
+			//log("Added " + spr);	
 		} else {
 			// Couldn't find the sprite
 			index = noone;
-			log("Couldn't add " + spr);	
+			//log("Couldn't add " + spr);	
 		}
 		weapon_overlay_sprite_map[? map_name[? k]] = index;
 	}

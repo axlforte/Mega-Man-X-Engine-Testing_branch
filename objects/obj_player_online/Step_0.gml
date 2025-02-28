@@ -1,4 +1,4 @@
-
+if(!global.player_Server_update) return;
 player_online_step();
 script_execute(animation_controller);
 if (!global.paused && !locked) {

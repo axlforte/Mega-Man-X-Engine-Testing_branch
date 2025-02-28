@@ -21,9 +21,7 @@ for(var z = 0; z < array_length(global.player_xs); z++){
 		if(!is_undefined(global.player_sprites[z]) && global.player_sprites[z] != -4){
 			
 			if(array_length(global.player_x_vel) > z){
-				global.player_x_vel[z] = global.player_xs[z] - global.player_x_prevs[z];
-				global.player_xs[z] += global.player_x_vel[z];
-				global.player_x_prevs[z] = global.player_xs[z];
+global.player_xs[z] += (global.player_x_vel[z] - global.player_x_vel[z]) * global.player_x_vel[z];
 			}
 				
 			if(array_length(global.player_y_vel) > z && array_length(global.player_grav) > z){

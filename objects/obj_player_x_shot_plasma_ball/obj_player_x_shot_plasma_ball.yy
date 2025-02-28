@@ -12,10 +12,7 @@
     "name":"Ultimate",
     "path":"folders/Objects/Players/Characters/X/Shots/X Buster/X4/Ultimate.yy",
   },
-  "parentObjectId":{
-    "name":"obj_player_shot_parent",
-    "path":"objects/obj_player_shot_parent/obj_player_shot_parent.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

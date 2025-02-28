@@ -197,6 +197,8 @@ function global_weapon_Settings(){
 		messenko,z_buster_x5,nightmare_saber,
 		// Axl
 		a_ray_gun,
+		// EXE
+		hub_buster,bn_chip,bn_cust_menu,
 		length
 	}
 	// dark: Must be changed to struct array
@@ -274,9 +276,11 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.ice_slasher].set_shot_limit(3);
 	G.weapon[WEAPONS.crash_bomb].set_shot_limit(3);
 	G.weapon[WEAPONS.metal_blade].set_shot_limit(69);//this one was to be funny
+	G.weapon[WEAPONS.hub_buster].set_shot_limit(69);//this one was to be funny
 	G.weapon[WEAPONS.quick_boomerang].set_shot_limit(69);//this one was because im lazy
 	// Show
 	G.weapon[WEAPONS.x_buster].set_show(false);
+	G.weapon[WEAPONS.hub_buster].set_show(false);
 	G.weapon[WEAPONS.z_buster].set_show(false);
 	G.weapon[WEAPONS.a_pistol].set_show(false);
 	G.weapon[WEAPONS.z_saber].set_show(false);
@@ -284,6 +288,7 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.falcon_giga].set_show(false);
 	// Cost
 	G.weapon[WEAPONS.x_buster].set_costs([0]);
+	G.weapon[WEAPONS.hub_buster].set_costs([0]);
 	G.weapon[WEAPONS.z_buster].set_costs([0]);
 	G.weapon[WEAPONS.z_buster_x5].set_costs([0]);
 	G.weapon[WEAPONS.nightmare_saber].set_costs([0]);
@@ -334,6 +339,7 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.power_gear].set_selectable(false);
 	// Scripts
 	G.weapon[WEAPONS.x_buster].set_code(player_x_buster_x2);
+	G.weapon[WEAPONS.hub_buster].set_code(player_exe_buster);
 	G.weapon[WEAPONS.z_buster].set_code(player_zero_buster_x1);
 	G.weapon[WEAPONS.storm_tornado].set_code(player_x_storm_tornado);
 	G.weapon[WEAPONS.homing_torpedo].set_code(player_x_homing_torpedo);

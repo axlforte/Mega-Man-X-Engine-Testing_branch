@@ -1,3 +1,4 @@
+if(!global.player_Server_update) return;
 /// @description unfuck shots
 if (state == states.intro || state == states.outro) exit;
 //this whole ass thing is for lining up shots

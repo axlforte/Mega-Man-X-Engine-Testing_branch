@@ -11,10 +11,7 @@
     "name":"Vile",
     "path":"folders/Objects/Players/Characters/Vile.yy",
   },
-  "parentObjectId":{
-    "name":"obj_player_parent",
-    "path":"objects/obj_player_parent/obj_player_parent.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -32,7 +29,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_vile_idle",
+    "path":"sprites/spr_vile_idle/spr_vile_idle.yy",
+  },
   "spriteMaskId":{
     "name":"spr_vile_mask",
     "path":"sprites/spr_vile_mask/spr_vile_mask.yy",

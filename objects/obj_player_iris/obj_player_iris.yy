@@ -11,10 +11,7 @@
     "name":"Iris",
     "path":"folders/Objects/Players/Characters/Iris.yy",
   },
-  "parentObjectId":{
-    "name":"obj_player_parent",
-    "path":"objects/obj_player_parent/obj_player_parent.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

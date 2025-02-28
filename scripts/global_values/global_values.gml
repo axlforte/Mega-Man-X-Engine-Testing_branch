@@ -38,12 +38,17 @@ function global_values() {
 	global.player_x_vel = [];
 	global.player_y_vel = [];
 	global.player_grav = [];
+	global.player_key_lefts = [];
+	global.player_key_rights = [];//not the constitutional kind of rights
+	global.player_key_downs = [];//not the constitutional kind of rights
 	global.server_enemies = [];
 	global.player_sprite_index = 0;
+	global.player_Server_update = false;
 	global.tick_rate = 60;
 	global.ping = 0;
 	global.chat_string = "";
 	global.username = "googledebunkers";
+	global.rollback = false;//rollback is a bitch. keep off unless you fix rollback
 
 	global.gamepad_list = ds_list_create();
 	global.gamepad_list_index = 0;

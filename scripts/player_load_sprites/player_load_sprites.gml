@@ -15,10 +15,10 @@ function player_load_sprites() {
 		sprite_shoot_str[? k] = sprite_str[? k] + "_shoot";
 	}
 	for (var k = ds_map_find_first(sprite_str); !is_undefined(k); k = ds_map_find_next(sprite_str, k)) {
-		sprite_carry_str[? k] = sprite_str[? k] + "_shoot";
+		sprite_carry_str[? k] = sprite_str[? k] + "_carry";
 	}
 	for (var k = ds_map_find_first(sprite_str); !is_undefined(k); k = ds_map_find_next(sprite_str, k)) {
-		sprite_throw_str[? k] = sprite_str[? k] + "_shoot";
+		sprite_throw_str[? k] = sprite_str[? k] + "_throw";
 	}
 
 	for (var k = ds_map_find_first(sprite_str); !is_undefined(k); k = ds_map_find_next(sprite_str, k)) {

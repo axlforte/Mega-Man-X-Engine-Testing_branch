@@ -77,6 +77,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	});
 	
 	rpc.registerHandler("rollback_spawn_player", function(_pos) {
+		global.player_Server_update = false;
 		var _p = instance_create_depth(global.player_x, global.player_y, 0, obj_player_online);
 		with(obj_player_online){
 			player_start();
@@ -85,21 +86,21 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	});
 	
 	rpc.registerHandler("rollback_keys", function(_info){
-		players[_pos[0]].x =            _info[1];
-		players[_pos[0]].y =            _info[2];
-		players[_pos[0]].key_left =     _info[3];
-		players[_pos[0]].key_right =    _info[4];
-		players[_pos[0]].key_up =       _info[5];
-		players[_pos[0]].key_down =     _info[6];
-		players[_pos[0]].key_dash =     _info[7];
-		players[_pos[0]].key_jump =     _info[8];
-		players[_pos[0]].key_shoot =    _info[9];
-		players[_pos[0]].key_shoot2 =   _info[10];
-		players[_pos[0]].key_special =  _info[11];
-		players[_pos[0]].key_special2 = _info[12];
-		players[_pos[0]].key_wp1 =      _info[13];
-		players[_pos[0]].key_wp2 =      _info[14];
-		players[_pos[0]].state =        _info[15];
+		players[_info[0]].x =            _info[1];
+		players[_info[0]].y =            _info[2];
+		players[_info[0]].key_left =     _info[3];
+		players[_info[0]].key_right =    _info[4];
+		players[_info[0]].key_up =       _info[5];
+		players[_info[0]].key_down =     _info[6];
+		players[_info[0]].key_dash =     _info[7];
+		players[_info[0]].key_jump =     _info[8];
+		players[_info[0]].key_shoot =    _info[9];
+		players[_info[0]].key_shoot2 =   _info[10];
+		players[_info[0]].key_special =  _info[11];
+		players[_info[0]].key_special2 = _info[12];
+		players[_info[0]].key_wp1 =      _info[13];
+		players[_info[0]].key_wp2 =      _info[14];
+		players[_info[0]].state =        _info[15];
 	});
 	
 	rpc.registerHandler("hurt_enemy", function(_pos) {
@@ -127,6 +128,8 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		array_set(global.player_x_vel,     _pos[0], _pos[9]);
 		array_set(global.player_y_vel,     _pos[0], _pos[10]);
 		array_set(global.player_grav,      _pos[0], _pos[11]);
+		array_set(global.server_enemies,   _pos[0], _pos[12]);
+		array_set(global.server_enemies,   _pos[0], _pos[12]);
 		array_set(global.server_enemies,   _pos[0], _pos[12]);
 		//log(_pos[1])
 		array_set(global.player_x_prevs,   _pos[0], global.player_xs[_pos[0]]);
@@ -191,24 +194,47 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 			(_p.state != states.fall && _p.state != states.jump ? _p.grav * 0.5 : 0)]);*/
 			
 			//actual rollback. sends keys and predicts they will keep pressing keys
-			rpc.sendNotification("rollback_keys", [
-			global.player_server_id,
-			_x,
-			_y,
-			_p.key_left,
-			_p.key_right,
-			_p.key_up,
-			_p.key_down,
-			_p.key_dash,
-			_p.key_jump,
-			_p.key_shoot,
-			_p.key_shoot2,
-			_p.key_special,
-			_p.key_special2,
-			_p.key_wp1,
-			_p.key_wp2,
-			_p.state
-			])
+			if(global.rollback){
+				rpc.sendNotification("rollback_keys", [
+				global.player_server_id,
+				_x,
+				_y,
+				_p.key_left,
+				_p.key_right,
+				_p.key_up,
+				_p.key_down,
+				_p.key_dash,
+				_p.key_jump,
+				_p.key_shoot,
+				_p.key_shoot2,
+				_p.key_special,
+				_p.key_special2,
+				_p.key_wp1,
+				_p.key_wp2,
+				_p.state
+				]);
+			} else {
+				var _spr = _p.pl_sprite;
+				var _frm = global.player_sprite_index;
+				var _dir = _p.image_xscale * _p.dir * (_p.state == states.wall_slide && _frm > 0 ? -1 : 1);
+				var _plt = global.player_palette_index;
+				var _mvx = _p.walk_speed;
+				var _st = _p.state;
+				if(variable_instance_exists(_p,"move")){
+				_mvx = (_st!=states.wall_slide && _st!=states.crouch && _st!=states.wall_jump &&
+				_st!=states.idle ? 
+				_p.move*_p.walk_speed * (2/3) : 0)
+				}
+				rpc.sendNotification("update_all", 
+				[_x,_y,_spr,_frm,_dir,_plt,
+				_mvx
+				,_p.v_speed,
+				(_p.state != states.fall && _p.state != states.jump ? _p.grav * 0.5 : 0),
+				_p.key_left,
+				_p.key_right,
+				_p.key_down
+				]);
+			}
 			tick_timer = 0;
 		} else {
 			tick_timer++;
