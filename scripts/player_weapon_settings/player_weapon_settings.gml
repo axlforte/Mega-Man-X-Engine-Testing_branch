@@ -102,19 +102,12 @@ function WeaponSlotManager() constructor {
 	
 	get_energy = function(_wep){
 		for(var e = 0; e < array_length(weapons); e++){
-			//(string(weapons[e]) + ", " + string(e))
 			if(weapons[e] != 0){
 				if(_wep == weapons[e].weapon){
-					//(string(e) + ", " + string(_wep) + ", i am the succ of energy")
-					//im still mad i cant use ds lists ):<
-					//but i can settle with arrays. they
-					//work almost as well
-					//(weapons[e].find_energy())
 					return weapons[e].find_energy();
 				}
 			}
 		}
-		//log("end of loop i guess")
 		return 0;
 	}
 	
@@ -131,11 +124,9 @@ function WeaponSlotManager() constructor {
 	
 	locate_energy = function(_wep){
 		for(var e = 0; e < array_length(weapons); e++){
-			//log(string(_wep) + ", " + string(weapons[e].weapon) + ", " + string(_wep == weapons[e].weapon))
 			if(weapons[e].weapon == _wep)
 				return weapons[e].find_energy();
 		}
-		//fuck you, kill yourself. 
 		return undefined;
 	}
 	
@@ -197,6 +188,8 @@ function global_weapon_Settings(){
 		messenko,z_buster_x5,nightmare_saber,
 		// Axl
 		a_ray_gun,
+		// EXE
+		hub_buster,bn_chip,bn_cust_menu,
 		length
 	}
 	// dark: Must be changed to struct array
@@ -274,9 +267,11 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.ice_slasher].set_shot_limit(3);
 	G.weapon[WEAPONS.crash_bomb].set_shot_limit(3);
 	G.weapon[WEAPONS.metal_blade].set_shot_limit(69);//this one was to be funny
+	G.weapon[WEAPONS.hub_buster].set_shot_limit(69);//this one was to be funny
 	G.weapon[WEAPONS.quick_boomerang].set_shot_limit(69);//this one was because im lazy
 	// Show
 	G.weapon[WEAPONS.x_buster].set_show(false);
+	G.weapon[WEAPONS.hub_buster].set_show(false);
 	G.weapon[WEAPONS.z_buster].set_show(false);
 	G.weapon[WEAPONS.a_pistol].set_show(false);
 	G.weapon[WEAPONS.z_saber].set_show(false);
@@ -284,6 +279,7 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.falcon_giga].set_show(false);
 	// Cost
 	G.weapon[WEAPONS.x_buster].set_costs([0]);
+	G.weapon[WEAPONS.hub_buster].set_costs([0]);
 	G.weapon[WEAPONS.z_buster].set_costs([0]);
 	G.weapon[WEAPONS.z_buster_x5].set_costs([0]);
 	G.weapon[WEAPONS.nightmare_saber].set_costs([0]);
@@ -334,6 +330,7 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.power_gear].set_selectable(false);
 	// Scripts
 	G.weapon[WEAPONS.x_buster].set_code(player_x_buster_x2);
+	G.weapon[WEAPONS.hub_buster].set_code(player_exe_buster);
 	G.weapon[WEAPONS.z_buster].set_code(player_zero_buster_x1);
 	G.weapon[WEAPONS.storm_tornado].set_code(player_x_storm_tornado);
 	G.weapon[WEAPONS.homing_torpedo].set_code(player_x_homing_torpedo);

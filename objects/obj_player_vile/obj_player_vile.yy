@@ -9,7 +9,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Vile",
-    "path":"folders/Objects/Players/Characters/Vile.yy",
+    "path":"folders/Objects/Player/Characters/Vile.yy",
   },
   "parentObjectId":{
     "name":"obj_player_parent",
@@ -32,7 +32,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_vile_idle",
+    "path":"sprites/spr_vile_idle/spr_vile_idle.yy",
+  },
   "spriteMaskId":{
     "name":"spr_vile_mask",
     "path":"sprites/spr_vile_mask/spr_vile_mask.yy",

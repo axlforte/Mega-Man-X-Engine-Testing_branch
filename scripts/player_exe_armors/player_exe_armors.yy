@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"player_exe_armors",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"player_exe_armors",
+  "parent":{
+    "name":"exe",
+    "path":"folders/Scripts/Player/Characters/exe.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -8,9 +8,6 @@ for(var z = 0; z < array_length(global.player_xs); z++){
 		plt_index = 0;
 		palette_texture_set(plt_x_full);
 		if(z < array_length(global.player_chars)){
-			if(array_length(global.player_palettes) > z)
-			log(string(global.player_palettes[z]) + " is the palette, and " + 
-			string(global.player_chars[z]) + " is the player!");
 			
 			if(global.player_chars[z] == pl_char.x)
 				palette_texture_set(plt_x_full);
@@ -22,14 +19,30 @@ for(var z = 0; z < array_length(global.player_xs); z++){
 				palette_texture_set(plt_megaman_full);
 		}
 		if(!is_undefined(global.player_sprites[z]) && global.player_sprites[z] != -4){
-			draw_sprite_ext(
-				global.player_sprites[z],
-				global.player_frames[z],
-				global.player_xs[z],
-				global.player_ys[z],
-				global.player_dirs[z],
-				1,0,c_white,1
-				);
+			
+			if(array_length(global.player_x_vel) > z){
+global.player_xs[z] += (global.player_x_vel[z] - global.player_x_vel[z]) * global.player_x_vel[z];
+			}
+				
+			if(array_length(global.player_y_vel) > z && array_length(global.player_grav) > z){
+				global.player_ys[z] += global.player_y_vel[z];
+				global.player_y_vel[z] += global.player_grav[z];
+			}
+			for(var g = 0; g < array_length(global.player_sprites[z]); g++){
+				if(sprite_exists(global.player_sprites[z][g]) 
+				&& abs(__view_get(e__VW.XView,0) - global.player_xs[z]  + global.view_width / 2) < global.view_width + 48
+				&& abs(__view_get(e__VW.YView,0) - global.player_ys[z] + global.view_height / 2) < global.view_height + 64
+				)
+					if(global.player_sprites[z][g] != arctic_coverage)
+					draw_sprite_ext(
+						global.player_sprites[z][g],
+						global.player_frames[z],
+						global.player_xs[z],
+						global.player_ys[z],
+						global.player_dirs[z],
+						1,0,c_white,1
+						);
+			}
 			palette_reset();
 			if(z < array_length(global.player_names))
 				draw_string_center(
@@ -40,6 +53,17 @@ for(var z = 0; z < array_length(global.player_xs); z++){
 					false);
 		}
 	}
+}
+
+for(var p = 127; p < array_length(global.server_enemies); p++){
+	draw_sprite_ext(
+		global.player_sprites[p],
+		global.player_frames[p],
+		global.player_xs[p],
+		global.player_ys[p],
+		global.player_dirs[p],
+		1,0,c_white,1
+		);
 }
 
 if(instance_exists(obj_player_parent))

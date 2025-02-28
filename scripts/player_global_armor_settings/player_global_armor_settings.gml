@@ -33,6 +33,24 @@ function player_global_armor_settings() {
 		none,
 		length
 	}
+	
+	enum exe_armor {
+		none,
+		wood,
+		fire,
+		elec,
+		aqua,
+		//
+		guts,
+		team,
+		custom,
+		shield,
+		ground,
+		shadow,
+		//
+		length
+	}
+	
 	enum vent_armor {
 		none,
 		x,
@@ -130,6 +148,37 @@ function player_global_armor_settings() {
 		"Model_OX",
 		"Model_O1X"
 	];
+	
+	global.character_armor[pl_char.exe] = [
+		"",
+		"wood",
+		"fire",
+		"elec",
+		"aqua",
+		"guts",
+		"team",
+		"custom",
+		"shield",
+		"ground",
+		"shadow"
+	];
+	
+	global.character_armor_name[pl_char.exe] = [
+		"default",
+		"wood",
+		"fire",
+		"elec",
+		"aqua",
+		"guts",
+		"team",
+		"custom",
+		"shield",
+		"ground",
+		"shadow"
+	];
+	
+	player_global_armor_set_mixable(pl_char.exe, exe_armor.length);
+	
 	player_global_armor_set_mixable(pl_char.vent, vent_armor.length);
 	
 	// Axl Armors
@@ -190,6 +239,22 @@ function player_global_armor_settings() {
 		global.character_armor_unlocked[pl_char.iris][i] = [false, false, false, false, false, true];
 	}
 	global.character_armor_unlocked[pl_char.iris][iris_armor.swimsuit] = [false, false, false, false, false, false];
+	
+	for (var i = 0; i < exe_armor.length; i++) {
+		global.character_armor_unlocked[pl_char.exe][i] = [false, false, false, false, false, false];
+	}
+	global.character_armor_unlocked[pl_char.exe][0] = [false, true, true, true, true, true];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.wood] = [false, true, false, false, true, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.elec] = [false, true, false, false, true, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.fire] = [false, true, false, false, true, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.aqua] = [false, true, false, false, true, false];
+	
+	global.character_armor_unlocked[pl_char.exe][exe_armor.guts] = [false, false, true, true, false, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.team] = [false, false, true, true, false, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.custom] = [false, false, true, true, false, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.ground] = [false, false, true, true, false, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.shield] = [false, false, true, true, false, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.shadow] = [false, false, true, true, false, false];
 
 }
 // Set player armors that are mixable

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"player_exe_variables",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"player_exe_variables",
+  "parent":{
+    "name":"exe",
+    "path":"folders/Scripts/Player/Characters/exe.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

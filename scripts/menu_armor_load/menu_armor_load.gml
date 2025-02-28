@@ -68,8 +68,26 @@ function menu_armor_load() {
 		case pl_char.axl:
 			armors_length = axl_armor.length;
 			break;
+		case pl_char.exe:
+			// Edges
+			menu_add_edge(pl_btn.back, pl_btn.helmet, e_dir.right);
+			menu_add_edge(pl_btn.back, pl_btn.armors, e_dir.down);
+			menu_add_edge(pl_btn.helmet, pl_btn.confirm, e_dir.right);
+			menu_add_edge(pl_btn.helmet, pl_btn.body, e_dir.down);
+			menu_add_edge(pl_btn.slots, pl_btn.info, e_dir.up);
+			menu_add_edge(pl_btn.info, pl_btn.confirm, e_dir.up);
+			// Armor
+			item_pos[pl_btn.helmet] = [83, 11];
+			item_pos[pl_btn.body] = [185, 47];
+			item_sprite[pl_btn.helmet] = spr_armor_menu_helmet;
+			item_sprite[pl_btn.body] = spr_armor_menu_body;
+			// Slot
+			item_sprite[pl_btn.slots] = spr_armor_menu_slots;
+			item_pos[pl_btn.slots] = [280, 200];
+			armors_length = exe_armor.length;
+			break;
 	}
-	if (character != pl_char.x) {
+	if (character != pl_char.x && character != pl_char.exe) {
 		menu_add_edge(pl_btn.back, pl_btn.confirm, e_dir.right);
 		menu_add_edge(pl_btn.back, pl_btn.armors, e_dir.down);
 		menu_add_edge(pl_btn.armors, pl_btn.info, e_dir.right);
