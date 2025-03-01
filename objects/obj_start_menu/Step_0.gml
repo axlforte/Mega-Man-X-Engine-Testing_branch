@@ -269,7 +269,8 @@ switch (state) {
 		&& mouse_check_button_released(mb_left))
 			enter = true;
 		if (enter 
-		&& selected_item != pl_char.iris) {
+		&& selected_item != pl_char.iris
+		&& selected_item != pl_char.vent) {
 			var tran = transition_create(transition_types.blink);
 			tran.color = c_white;
 			tran.transition_limit = 16;

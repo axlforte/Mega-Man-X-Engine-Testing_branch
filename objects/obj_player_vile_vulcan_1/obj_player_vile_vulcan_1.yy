@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Weapons",
-    "path":"folders/Objects/Player/Characters/Vile/Weapons.yy",
+    "path":"folders/Objects/Players/Characters/Vile/Weapons.yy",
   },
   "parentObjectId":{
     "name":"obj_player_shot_parent",

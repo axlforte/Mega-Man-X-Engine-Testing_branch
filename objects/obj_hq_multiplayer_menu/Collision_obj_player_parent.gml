@@ -11,6 +11,11 @@ if(key_p_shoot){
 	visible = true;
 }
 
+if (clipboard_has_text() && keyboard_check(vk_control) && keyboard_check_pressed(ord("V")))
+{
+    keyboard_string += clipboard_get_text();
+}
+
 if(changing_number){
 	visible = !visible;
 }

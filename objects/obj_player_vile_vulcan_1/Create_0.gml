@@ -1,5 +1,5 @@
 event_inherited();
-audio_play(snd_player_x_shot_1);
+audio_play(snd_fingergun);
 
 // Destroy Animation
 animation_add("D",

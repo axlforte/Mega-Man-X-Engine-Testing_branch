@@ -9,7 +9,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Vile",
-    "path":"folders/Objects/Player/Characters/Vile.yy",
+    "path":"folders/Objects/Players/Characters/Vile.yy",
   },
   "parentObjectId":{
     "name":"obj_player_parent",
