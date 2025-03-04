@@ -12,6 +12,9 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	player_palette = [];
 	player_x_vel = [];
 	player_y_vel = [];
+	player_left = [];
+	player_right = [];
+	player_down = [];
 	player_grav = [];
 	enemies = [];
 	current_room = rm_headquarters;
@@ -84,6 +87,9 @@ function GameServer(_port) : TCPServer(_port) constructor{
 		player_x_vel[_socket.id] = _info[6];
 		player_y_vel[_socket.id] = _info[7];
 		player_grav[_socket.id] = _info[8];
+		player_right[_socket.id] = _info[9];
+		player_left[_socket.id] = _info[10];
+		player_down[_socket.id] = _info[11];
 		rpc.sendNotification("update_all", [
 			_socket.id,
 			player_x[_socket.id],
@@ -97,7 +103,10 @@ function GameServer(_port) : TCPServer(_port) constructor{
 			player_x_vel[_socket.id],
 			player_y_vel[_socket.id],
 			player_grav[_socket.id],
-			enemies
+			enemies,
+			player_right[_socket.id],
+			player_left[_socket.id],
+			player_down[_socket.id]
 			], roomSockets);
 		//log(_socket);
     });
@@ -121,13 +130,6 @@ function GameServer(_port) : TCPServer(_port) constructor{
     });
 	
 	rpc.registerHandler("spawn_pickup_2", function(_pos, _client) {
-		//log("put a dispenser here!")
-        //rpc.sendNotification("spawn_pickup_2", _pos, sockets);
-		//log(roomSockets);
-		//log(_client);
-		/*for(var q = 0; q < array_length(roomSockets); q++){
-			rpc.sendNotification("spawn_pickup_2", _pos, roomSockets[q]);
-		}*/
 		rpc.sendNotification("spawn_pickup_2", _pos, roomSockets);
     });
 	
@@ -157,8 +159,17 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	
 	setEvent("step", function(){
 		if(tick_timer > 60 / tick_rate){
-			// i moved all the proper checks to be seperate. no reason to keep them together, but i
-			// still need to make an update_everything call
+			if(instance_exists(obj_pvp_powerup_spawner)){
+				for(var q = 0; q < instance_number(obj_pvp_powerup_spawner);q++){
+					var _pvp = instance_find(obj_pvp_powerup_spawner,q);
+					if(_pvp.spawn){
+			rpc.sendNotification("PVP Update Spawners",
+			[q, _pvp.powerup_selection[irandom_range(0, array_length(_pvp.powerup_selection) - 1)]],
+			roomSockets);
+						_pvp.spawn_timer = 0;
+					}
+				}
+			}
 			tick_timer = 0;
 		} else {
 			tick_timer++;
@@ -166,7 +177,7 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	});
 	
 	setEvent("connected", function(_client){
-		rpc.sendNotification("update_player_id", _client.id, _client.socket);
+		rpc.sendNotification("update_player_id", [_client.id,global.pvp], _client.socket);
 		rpc.sendNotification("update_player_char", global.character_selected[0], _client.socket);
 		rpc.sendNotification("rollback_spawn_player",_client.id,roomSockets)
 	});

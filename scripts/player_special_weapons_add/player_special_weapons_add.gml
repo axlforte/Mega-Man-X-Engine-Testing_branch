@@ -72,6 +72,16 @@ function player_special_weapon_from_state(wp_state) {
 				check: player_check_teleport_dash,
 				scr: player_state_teleport_dash
 			};
+		case states.custom_screen:
+			return {
+				check: player_check_custom_screen,
+				scr: player_state_teleport_dash
+			};
+		case states.custom_chips:
+			return {
+				check: player_check_custom_chips,
+				scr: can_move_x
+			};
 		default:
 			return {};
 	}

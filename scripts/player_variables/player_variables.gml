@@ -260,6 +260,9 @@ function player_variables() {
 	biometal_index = 0; // timer
 	biometal_selected = 0; // which biometal? hu = 0, x = 1, zx = 2, hx = 3, fx = 4, lx = 5, px = 6, ox = 7, o1x = 8
 	
+	//battle network schtuff
+	can_use_chip = false;
+	
 	// Palette
 	armor_palette_index = [0, 0, 0, 0, 0, 0];
 
@@ -345,7 +348,7 @@ function player_immunity_variables() {
 	immortal = false;
 	enum immunity_types
 	{
-		dolor, normal, spike, none
+		dolor, normal, spike, invis, none
 	}
 
 	// Blink

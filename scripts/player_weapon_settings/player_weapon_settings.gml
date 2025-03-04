@@ -163,6 +163,7 @@ function player_weapon_settings() {
 
 function global_weapon_Settings(){
 	enum WEAPONS {
+		megaman_start,
 		mega_buster,copy_vision,speed_gear,power_gear,lightning_bolt,snow_drift,
 		//mm1
 		rolling_cutter,super_arm,ice_slasher,hyper_bomb,fire_storm,thunder_beam,time_slow,oil_slider,
@@ -178,6 +179,7 @@ function global_weapon_Settings(){
 		blizzard_attack,centaur_flash,flame_blast,knight_crusher,plant_barrier,silver_tomahawk,wind_storm,yamato_spear,
 		//utility - might make this universal
 		magnet_beam,item_1,item_2,item_3,wire,balloon,
+		megaman_end,
 		// Default
 		x_buster,z_buster,z_saber,a_pistol,vile_vulcan,
 		// X1
@@ -205,6 +207,10 @@ function global_weapon_Settings(){
 	for(var p = 0; p < WEAPONS.length; p++){
 		G.weapon[p] = new Weapon(); 
 		G.weapon[p].name = "weapon " + string(p);
+	}
+	
+	for(var p = WEAPONS.megaman_start; p < WEAPONS.megaman_end; p++){
+		G.weapon[p].max_level = 1;
 	}
 	
 	G.weapon_chunk[pl_char.x] = [WEAPONS.storm_tornado, WEAPONS.homing_torpedo];
@@ -267,11 +273,10 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.ice_slasher].set_shot_limit(3);
 	G.weapon[WEAPONS.crash_bomb].set_shot_limit(3);
 	G.weapon[WEAPONS.metal_blade].set_shot_limit(69);//this one was to be funny
-	G.weapon[WEAPONS.hub_buster].set_shot_limit(69);//this one was to be funny
 	G.weapon[WEAPONS.quick_boomerang].set_shot_limit(69);//this one was because im lazy
 	// Show
 	G.weapon[WEAPONS.x_buster].set_show(false);
-	G.weapon[WEAPONS.hub_buster].set_show(false);
+	//G.weapon[WEAPONS.hub_buster].set_show(false);
 	G.weapon[WEAPONS.z_buster].set_show(false);
 	G.weapon[WEAPONS.a_pistol].set_show(false);
 	G.weapon[WEAPONS.z_saber].set_show(false);
@@ -314,8 +319,9 @@ function global_weapon_Settings(){
 	// Weapon Level ID
 	G.weapon[WEAPONS.a_ray_gun].set_level_id(1);
 	// Fill Rate
-	G.weapon[WEAPONS.vile_vulcan].set_fill_rate(0.1);
-	G.weapon[WEAPONS.speed_gear].set_fill_rate((28/60) / 1);//15
+	G.weapon[WEAPONS.vile_vulcan].set_fill_rate((28/60) / 5);
+	G.weapon[WEAPONS.hub_buster].set_fill_rate(0.1);
+	G.weapon[WEAPONS.speed_gear].set_fill_rate((28/60) / 15);//15
 	G.weapon[WEAPONS.power_gear].set_fill_rate((28/60) / 15);
 	// Full Sound
 	G.weapon[WEAPONS.x2_giga_crush].set_full_sound(snd_player_full_weapon);

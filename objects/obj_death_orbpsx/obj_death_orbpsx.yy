@@ -9,8 +9,8 @@
   "name":"obj_death_orbPSX",
   "overriddenProperties":[],
   "parent":{
-    "name":"Player objects",
-    "path":"folders/Objects/Players/Player objects.yy",
+    "name":"Parents",
+    "path":"folders/Objects/Players/Parents.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -2,6 +2,7 @@ function settings_save() {
 	ini_open("Settings/savedata.ini");
 	// Settings
 	ini_write_real("SETTINGS", "Window", global.settings[0]);
+	ini_write_real("SETTINGS", "Resolution", global.settings[2]);
 	ini_write_real("SETTINGS", "Input", global.settings[1]);
 	ini_write_real("SETTINGS", global.gp_name, global.gp_movement);
 	ini_write_string("SETTINGS", "Username", global.username);

@@ -45,5 +45,5 @@ surface_dark_area = -1;
 black_sprite = noone;
 black_animation = 0;
 player_inst = noone;
-black_radius = 320;
+black_radius = global.view_width;
 black_surface = noone;

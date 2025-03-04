@@ -3,10 +3,16 @@ function player_shot_start() {
 	atk = 1;
 	destroy_if_equal_to_atk = false;
 	destroy_if_hit = false;
+	
+	// Multiplayer PVP stuff
+	hurt_players = false;// will this shot hurt players?
 
 	// Boss Damage Table
 	boss_damage = ds_map_create();
 	boss_damage[? noone] = 1;
+	
+	shoot_direction_index = 0;
+	shoot_direction = 0;
 
 	// Timer
 	timer = 0;

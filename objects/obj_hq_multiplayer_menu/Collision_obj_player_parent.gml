@@ -23,6 +23,9 @@ if(changing_number){
 if(key_p_jump){
 	server = !server;
 }
+if(key_p_dash){
+	friendly_fire = !friendly_fire;
+}
 
 if(key_p_start && !changing_number){
 	var _ip = ip_string;
@@ -48,6 +51,7 @@ if(key_p_start && !changing_number){
 		global.client = new GameClient(_ip, 1997);
 		instance_create_depth(0, 0, 0, obj_client_status);
 	}
+	global.pvp = friendly_fire;
 	room_restart();
 	instance_destroy();
 }

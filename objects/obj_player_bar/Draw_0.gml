@@ -8,6 +8,8 @@ if (owner.is_player) {
 	player_draw_weaponbar(owner);
 	if (owner.double_gear_unlocked) {
 		player_draw_double_gear(owner);	
+	} else if(owner.can_use_chip){
+		player_draw_chip_selection(owner);
 	}
 	with (obj_text) {
 		visible = true;

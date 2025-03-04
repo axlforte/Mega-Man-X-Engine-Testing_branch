@@ -16,9 +16,10 @@ switch(state) {
 			draw_string(4, 224, "NO SHADER SUPPORT");
 	break;
 	#endregion
-	#region Game Mode/Difficulty Mode
+	#region Game Mode/Difficulty Mode/PVP map select
 	case menu_states.game_mode:
 	case menu_states.difficulty_mode:
+	case menu_states.PVP_map_select:
 		draw_string_center(160, 8, titles[state], colors.gray);
 		for (var i = 0; i < items_length; i++) {
 			var item = items[i];
@@ -109,14 +110,16 @@ switch(state) {
 			var _x = 64, _y = 64 + 24*i;
 			draw_string(_x, _y, item[0], (selected_item == i ? colors.pink : colors.dark_blue));
 			if (selected_item == i) draw_string(_x - 16, _y, "▶", colors.pink);
-			if (array_length(item) > 2) {// Back
+			if (array_length(item) > 2) {// if you dont have that extra array with titles
 				var subitem = item[2];
 				var txt = "";
 				var index = global.settings[i];
+				if(i == 1) index = global.settings[2];
 				/*if (i == 0 && G.mobile) {
 					index -= 3;
 				}*/
-				if (index < array_length(subitem)) {
+				if (index < array_length(subitem) && index >= 0) {
+					//log(index);
 					txt = subitem[index];
 				}
 				draw_string_center(_x + 176, _y, txt, colors.orange);

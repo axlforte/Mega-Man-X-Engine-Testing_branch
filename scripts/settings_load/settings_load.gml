@@ -2,6 +2,7 @@ function settings_load() {
 	ini_open("Settings/savedata.ini");
 
 	global.settings[0] = ini_read_real("SETTINGS", "Window", G.mobile ? 0 : 1);
+	global.settings[2] = ini_read_real("SETTINGS", "Resolution", 2);
 	if (G.mobile && global.settings[0] > 1) {
 		global.settings[0] = 0;
 	}

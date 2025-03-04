@@ -3,60 +3,66 @@ function player_megaman_variables() {
 	state_hitbox[states.dash] = spr_megaman_crouch_mask;
 	state_hitbox[states.crouch] = spr_megaman_crouch_mask;
 	
-	player_weapon_set(0, WEAPONS.mega_buster);
+	weapon_slot_handler.add_weapon(WEAPONS.mega_buster);
 	player_weapon_select(WEAPONS.mega_buster);
 	// Weapon Test
-	player_weapon_set(1, WEAPONS.rolling_cutter);
-	player_weapon_set(2, WEAPONS.fire_storm);
-	player_weapon_set(3, WEAPONS.hyper_bomb);
-	player_weapon_set(4, WEAPONS.ice_slasher);
-	player_weapon_set(5, WEAPONS.super_arm);
-	player_weapon_set(6, WEAPONS.thunder_beam);
-	player_weapon_set(7, WEAPONS.magnet_beam);
-	player_weapon_set(8, WEAPONS.metal_blade);
-	player_weapon_set(9, WEAPONS.atomic_fire);
-	player_weapon_set(10, WEAPONS.air_shooter);
-	player_weapon_set(11, WEAPONS.crash_bomb);
-	player_weapon_set(12, WEAPONS.leaf_shield);
-	player_weapon_set(13, WEAPONS.time_stopper);
-	player_weapon_set(14, WEAPONS.bubble_lead);
-	player_weapon_set(15, WEAPONS.quick_boomerang);
-	player_weapon_set(16, WEAPONS.shadow_blade);
-	player_weapon_set(17, WEAPONS.spark_shot);
-	player_weapon_set(18, WEAPONS.needle_shot);
-	player_weapon_set(19, WEAPONS.search_snake);
-	player_weapon_set(20, WEAPONS.gemini_laser);
-	player_weapon_set(21, WEAPONS.hard_knuckle);
-	player_weapon_set(22, WEAPONS.top_spin);
-	player_weapon_set(23, WEAPONS.magnet_missile);
-	player_weapon_set(24, WEAPONS.dive_missile);
-	player_weapon_set(25, WEAPONS.ring_boomerang);
-	player_weapon_set(26, WEAPONS.pharoah_shot);
-	player_weapon_set(27, WEAPONS.dust_crusher);
-	player_weapon_set(28, WEAPONS.skull_barrier);
-	player_weapon_set(29, WEAPONS.flash_stopper);
-	player_weapon_set(30, WEAPONS.rain_flush);
-	player_weapon_set(31, WEAPONS.drill_bomb);
-	player_weapon_set(32, WEAPONS.gravity_hold);
-	player_weapon_set(33, WEAPONS.power_stone);
-	player_weapon_set(34, WEAPONS.water_wave);
-	player_weapon_set(35, WEAPONS.gyro_attack);
-	player_weapon_set(36, WEAPONS.crystal_eye);
-	player_weapon_set(37, WEAPONS.napalm_bomb);
-	player_weapon_set(38, WEAPONS.charge_kick);
-	player_weapon_set(39, WEAPONS.star_crash);
-	player_weapon_set(40, WEAPONS.yamato_spear);
-	player_weapon_set(41, WEAPONS.centaur_flash);
-	player_weapon_set(42, WEAPONS.plant_barrier);
-	player_weapon_set(43, WEAPONS.knight_crusher);
-	player_weapon_set(44, WEAPONS.wind_storm);
-	player_weapon_set(45, WEAPONS.silver_tomahawk);
-	player_weapon_set(46, WEAPONS.flame_blast);
-	player_weapon_set(47, WEAPONS.blizzard_attack);
-	player_weapon_set(48, WEAPONS.snow_drift);
+	weapon_slot_handler.add_weapon(WEAPONS.rolling_cutter);
+	weapon_slot_handler.add_weapon(WEAPONS.fire_storm);
+	weapon_slot_handler.add_weapon(WEAPONS.hyper_bomb);
+	weapon_slot_handler.add_weapon(WEAPONS.ice_slasher);
+	weapon_slot_handler.add_weapon(WEAPONS.super_arm);
+	weapon_slot_handler.add_weapon(WEAPONS.thunder_beam);
+	weapon_slot_handler.add_weapon(WEAPONS.magnet_beam);
 	
-	player_weapon_set(200, WEAPONS.speed_gear);
-	player_weapon_set(201, WEAPONS.power_gear);
+	weapon_slot_handler.add_weapon(WEAPONS.metal_blade);
+	weapon_slot_handler.add_weapon(WEAPONS.atomic_fire);
+	weapon_slot_handler.add_weapon(WEAPONS.air_shooter);
+	weapon_slot_handler.add_weapon(WEAPONS.crash_bomb);
+	weapon_slot_handler.add_weapon(WEAPONS.leaf_shield);
+	weapon_slot_handler.add_weapon(WEAPONS.time_stopper);
+	weapon_slot_handler.add_weapon(WEAPONS.bubble_lead);
+	weapon_slot_handler.add_weapon(WEAPONS.quick_boomerang);
+	
+	weapon_slot_handler.add_weapon(WEAPONS.shadow_blade);
+	weapon_slot_handler.add_weapon(WEAPONS.spark_shot);
+	weapon_slot_handler.add_weapon(WEAPONS.needle_shot);
+	weapon_slot_handler.add_weapon(WEAPONS.search_snake);
+	weapon_slot_handler.add_weapon(WEAPONS.gemini_laser);
+	weapon_slot_handler.add_weapon(WEAPONS.hard_knuckle);
+	weapon_slot_handler.add_weapon(WEAPONS.top_spin);
+	weapon_slot_handler.add_weapon(WEAPONS.magnet_missile);
+	
+	/*weapon_slot_handler.add_weapon(WEAPONS.dive_missile);
+	weapon_slot_handler.add_weapon(WEAPONS.ring_boomerang);
+	weapon_slot_handler.add_weapon(WEAPONS.pharoah_shot);
+	weapon_slot_handler.add_weapon(WEAPONS.dust_crusher);
+	weapon_slot_handler.add_weapon(WEAPONS.skull_barrier);
+	weapon_slot_handler.add_weapon(WEAPONS.flash_stopper);
+	weapon_slot_handler.add_weapon(WEAPONS.rain_flush);
+	weapon_slot_handler.add_weapon(WEAPONS.drill_bomb);
+	
+	weapon_slot_handler.add_weapon(WEAPONS.gravity_hold);
+	weapon_slot_handler.add_weapon(WEAPONS.power_stone);
+	weapon_slot_handler.add_weapon(WEAPONS.water_wave);
+	weapon_slot_handler.add_weapon(WEAPONS.gyro_attack);
+	weapon_slot_handler.add_weapon(WEAPONS.crystal_eye);
+	weapon_slot_handler.add_weapon(WEAPONS.napalm_bomb);
+	weapon_slot_handler.add_weapon(WEAPONS.charge_kick);
+	weapon_slot_handler.add_weapon(WEAPONS.star_crash);
+	
+	weapon_slot_handler.add_weapon(WEAPONS.yamato_spear);
+	weapon_slot_handler.add_weapon(WEAPONS.centaur_flash);
+	weapon_slot_handler.add_weapon(WEAPONS.plant_barrier);
+	weapon_slot_handler.add_weapon(WEAPONS.knight_crusher);
+	weapon_slot_handler.add_weapon(WEAPONS.wind_storm);
+	weapon_slot_handler.add_weapon(WEAPONS.silver_tomahawk);
+	weapon_slot_handler.add_weapon(WEAPONS.flame_blast);
+	weapon_slot_handler.add_weapon(WEAPONS.blizzard_attack);
+	
+	weapon_slot_handler.add_weapon(WEAPONS.snow_drift);*/
+	
+	weapon_slot_handler.add_weapon(WEAPONS.speed_gear);
+	weapon_slot_handler.add_weapon(WEAPONS.power_gear);
 	player_special_weapons_add(states.speed_gear);
 	player_special_weapons_add(states.power_gear);
 

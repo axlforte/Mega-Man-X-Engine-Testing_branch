@@ -9,5 +9,6 @@ num = 0;
 pressed_key = false;
 temp_num = "";
 server = false;
+friendly_fire = false;
 scr_keys_reset();
 palette_init();

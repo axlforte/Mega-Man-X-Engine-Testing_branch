@@ -48,6 +48,9 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		global.player_palettes = [];
 		global.player_x_vel = [];
 		global.player_y_vel = [];
+		global.player_key_lefts = [];
+		global.player_key_rights = [];
+		global.player_key_downs = [];
 		var _nick = global.username;
 		rpc.sendNotification("set_nickname", _nick);
 		rpc.sendNotification("update_player_id", _nick);
@@ -58,6 +61,15 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		_chat.strin = _pos;
 	});
 	
+	rpc.registerHandler("PVP Update Spawners", function(_spawner){
+		if(instance_exists(obj_pvp_powerup_spawner)){
+			for(var q = 0; q < instance_number(obj_pvp_powerup_spawner);q++){
+				var _pvp = instance_find(obj_pvp_powerup_spawner,q);
+				_pvp.spawn = true;
+			}
+		}
+	})
+	
 	rpc.registerHandler("spawn_shot", function(_pos) {
 		if(_pos[4] == global.player_server_id) return;
 		var _p = instance_create_depth(_pos[1], _pos[2], 0, _pos[0]);
@@ -66,6 +78,8 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		_p.owner = _p;
 		_p.shot_angle = _pos[4];
 		_p.dmg = 0;
+		_p.hurt_players = global.pvp;
+		_p.destroy_when_off_screen = false;
 	});
 	
 	rpc.registerHandler("spawn_enemy", function(_pos) {
@@ -116,7 +130,6 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	});
 	
 	rpc.registerHandler("update_all", function(_pos) {
-		// this didnt work last time, but it would make the data much easier to store
 		array_set(global.player_xs,        _pos[0], _pos[1]);
 		array_set(global.player_ys,        _pos[0], _pos[2]);
 		array_set(global.player_sprites,   _pos[0], _pos[3]);
@@ -129,15 +142,15 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		array_set(global.player_y_vel,     _pos[0], _pos[10]);
 		array_set(global.player_grav,      _pos[0], _pos[11]);
 		array_set(global.server_enemies,   _pos[0], _pos[12]);
-		array_set(global.server_enemies,   _pos[0], _pos[12]);
-		array_set(global.server_enemies,   _pos[0], _pos[12]);
-		//log(_pos[1])
+		array_set(global.player_key_rights,_pos[0], _pos[13]);
+		array_set(global.player_key_lefts, _pos[0], _pos[14]);
+		array_set(global.player_key_downs, _pos[0], _pos[15]);
 		array_set(global.player_x_prevs,   _pos[0], global.player_xs[_pos[0]]);
 	});
 	
 	rpc.registerHandler("update_player_id", function(_pos) {
-		//log("ID's!")
-		global.player_server_id = _pos;
+		global.player_server_id = _pos[0];
+		global.pvp = _pos[1];
 	});
 	
 	rpc.registerHandler("change_room", function(_pos) {
@@ -175,23 +188,6 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 			var _y = instance_nearest(0,0,obj_player_parent).y;
 			_x = floor(_x);
 			_y = floor(_y);
-			//delay based. kinda does rollbacking shit
-			/*var _spr = _p.pl_sprite;
-			var _frm = global.player_sprite_index;
-			var _dir = _p.image_xscale * _p.dir * (_p.state == states.wall_slide && _frm > 0 ? -1 : 1);
-			var _plt = global.player_palette_index;
-			var _mvx = 0;
-			var _st = _p.state;
-			if(variable_instance_exists(_p,"move")){
-			_mvx = (_st!=states.wall_slide && _st!=states.crouch && _st!=states.wall_jump &&
-			_st!=states.idle ? 
-			_p.move*_p.walk_speed * (2/3) : 0)
-			}
-			rpc.sendNotification("update_all", 
-			[_x,_y,_spr,_frm,_dir,_plt,
-			_mvx
-			,_p.v_speed,
-			(_p.state != states.fall && _p.state != states.jump ? _p.grav * 0.5 : 0)]);*/
 			
 			//actual rollback. sends keys and predicts they will keep pressing keys
 			if(global.rollback){
@@ -214,6 +210,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 				_p.state
 				]);
 			} else {
+				//delay based. this one actually fucking works
 				var _spr = _p.pl_sprite;
 				var _frm = global.player_sprite_index;
 				var _dir = _p.image_xscale * _p.dir * (_p.state == states.wall_slide && _frm > 0 ? -1 : 1);
@@ -230,8 +227,8 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 				_mvx
 				,_p.v_speed,
 				(_p.state != states.fall && _p.state != states.jump ? _p.grav * 0.5 : 0),
-				_p.key_left,
 				_p.key_right,
+				_p.key_left,
 				_p.key_down
 				]);
 			}
@@ -239,10 +236,6 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		} else {
 			tick_timer++;
 		}
-	});
-	
-	setEvent("draw", function() {
-		draw_sprite(spr_x_idle, 0,global.player_x, global.player_y);
 	});
 	
 	start();

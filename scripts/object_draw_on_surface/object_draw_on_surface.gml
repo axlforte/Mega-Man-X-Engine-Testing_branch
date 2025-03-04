@@ -3,7 +3,7 @@ function object_draw_on_surface() {
 		ignore_draw = false;
 		x -= other.vx;
 		y -= other.vy;
-		for (var i = 0; i < array_length_1d(trail_pos); i++) {
+		for (var i = 0; i < array_length(trail_pos); i++) {
 			var pos = trail_pos[i];
 			pos[0] -= other.vx;
 			pos[1] -= other.vy;
@@ -12,7 +12,7 @@ function object_draw_on_surface() {
 		event_perform(ev_draw, 0);
 		x += other.vx;
 		y += other.vy;
-		for (var i = 0; i < array_length_1d(trail_pos); i++) {
+		for (var i = 0; i < array_length(trail_pos); i++) {
 			var pos = trail_pos[i];
 			pos[0] += other.vx;
 			pos[1] += other.vy;

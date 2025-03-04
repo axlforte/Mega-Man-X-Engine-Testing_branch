@@ -8,4 +8,5 @@ function player_vile_variables() {
 
 	// Outro
 	teleport_outro_reset_weapon = false;
+	double_jump_unlocked = true;
 }

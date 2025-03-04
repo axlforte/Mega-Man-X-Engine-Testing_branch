@@ -2,6 +2,8 @@
 /// @param is_damage
 function player_weapon_refill() {
 	for (var i = 0; i < array_length(weapon_slot_handler.weapons); i++) {
+		//if(!variable_instance_exists(self, weapon_slot_handler)) continue;// if we dont even have weapons yet
+		//if(weapon_slot_handler.weapon[i] == 0) continue;//if there are gaps between weapons just ignore them
 		var wp = weapon_slot_handler.raw_weapon(i);
 		if (wp >= 0 && global.weapon[wp].refill_enabled) {
 			var refill_rate = argument[0] ? global.weapon[wp].damage_refill : global.weapon[wp].fill_rate;

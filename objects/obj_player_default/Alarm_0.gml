@@ -1,4 +1,5 @@
 //if (!G.checkpoint)
+
 var _x = x, _y = y - 10;
 if (global.checkpoint) {
 	_x = global.checkpoint_x;
@@ -33,4 +34,5 @@ for (var i = 0, len = array_length(global.checkpoint_phase); i < len; i++) {
 		}
 	}
 }
+camera_set_view_size(camera_get_active(),160,144);
 instance_destroy();

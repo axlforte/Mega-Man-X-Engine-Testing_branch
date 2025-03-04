@@ -35,6 +35,8 @@ function player_states() {
 		oil_slide,
 		super_arm_grab,
 		top_spin,
+		custom_screen,
+		custom_chips,
 		// Special Attacks
 		hadouken,
 		shoryuken,

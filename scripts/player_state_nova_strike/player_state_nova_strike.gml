@@ -30,6 +30,10 @@ function player_state_nova_strike() {
 	if (t == 10)
 	{
 		special_inst = instance_create_depth(x, y, depth, nova_strike_object);
+		if(global.is_online){
+			var _shot = [nova_strike_object, x, y, dir, global.player_server_id, shoot_direction_index, global.pvp];
+			global.client.pingProjectile(_shot);
+		}
 		nova_strike_move = true;
 	}
 	if (t >= 11 && t <= nova_strike_limit)

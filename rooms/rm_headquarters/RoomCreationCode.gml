@@ -1,4 +1,4 @@
-music_play("ChillPenguin");
+music_play("StageSelect");
 background_list_set(1, [
 	new BGInfo(bg_city, 1),
 	new BGInfo(bg_hangar, 0.2)
