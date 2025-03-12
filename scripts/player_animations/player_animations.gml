@@ -145,6 +145,12 @@ function player_animations() {
 		0, 3,
 		3, 4
 	], 3);
+	
+	animation_add("dash_wall_jump|wall",
+	[
+		0, 5,
+		3, 6
+	], 3);
 
 	animation_add("dash_up",
 	[

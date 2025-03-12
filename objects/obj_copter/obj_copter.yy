@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"bee_copter2",
-    "path":"sprites/bee_copter2/bee_copter2.yy",
+    "name":"spr_bee_copter",
+    "path":"sprites/spr_bee_copter/spr_bee_copter.yy",
   },
   "spriteMaskId":null,
   "visible":true,

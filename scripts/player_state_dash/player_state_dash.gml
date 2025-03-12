@@ -14,7 +14,7 @@ function player_state_dash() {
 		    if (t == 0) {
 		        // Play Audio
 		        audio_play(dash_sound);
-				if(instance_exists(obj_player_megaman))
+				if(dash_is_slide)
 					substates[3] = true;
 				else 
 					substates[3] = false;
@@ -46,7 +46,7 @@ function player_state_dash() {
 		    }
 		    // Dash Movement
 		    if (t >= 1 && t <= dash_length) {
-		        if (!move_x(dash_speed * dash_dir) || (!is_on_floor() && !dash_air))
+		        if (!move_x(dash_speed * dash_dir * (dash_speed_increase * dash_speed_increase_increment + 1)) || (!is_on_floor() && !dash_air))
 					condition = true;
         
 				// Dash Dust
@@ -182,7 +182,11 @@ function player_state_dash() {
 			animation_play("dash_up_end")
 		}
 	
-		if (t >= 7 || (key_left ^^ key_right)) {   
+		var end_lag = 0;
+		if(perfect_dash_jump)
+			end_lag = 4;
+	
+		if ((t >= 7 && animation_end) || (key_left ^^ key_right) && end_lag < t) {   
 		    dash_tapped = false;
 		    dash_tap = false;
 			y_dir = 1;

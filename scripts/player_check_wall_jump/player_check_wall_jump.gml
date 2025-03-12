@@ -23,7 +23,18 @@ function player_check_wall_jump() {
 			state_set(states.wall_jump, 1);
 			voice_play();
 			animation = "";
-			animation_play("wall_jump");
+			if(wall_jump_dash_animation && key_dash && state_unlocked[states.dash]){
+				animation_play("dash_wall_jump");
+				if(perfect_dash_jump){
+					dash_speed_increase++;
+					dash_speed_increase = clamp(dash_speed_increase,0, dash_speed_increase_max);
+					walk_speed *= dash_speed_increase * dash_speed_increase_increment + 1;
+					var wp = WEAPONS.x_buster;
+					var energy = weapon_slot_handler.locate_energy(wp), energy_max = global.weapon[wp].energy_max;
+					weapon_slot_handler.set_energy(wp, clamp(energy + 1, 0, energy_max));
+				}
+			} else
+				animation_play("wall_jump");
 	        wall_jump_dir = dir;
 			wall_jump_animation_enabled = true;
 	        v_speed = 0;

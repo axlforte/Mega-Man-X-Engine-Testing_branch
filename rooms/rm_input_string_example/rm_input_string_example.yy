@@ -18,7 +18,7 @@
   "name":"rm_input_string_example",
   "parent":{
     "name":"tests",
-    "path":"folders/tests.yy",
+    "path":"folders/Objects/tests.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

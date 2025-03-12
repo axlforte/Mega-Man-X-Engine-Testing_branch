@@ -304,7 +304,7 @@ armor_index = global.player_character_armor_index[index];
 
 #region pvp maps
 
-pvp_maps = [rm_avalanche,rm_indev];
+pvp_maps = [rm_avalanche,rm_indev,rm_q3dm17];
 page_items[menu_states.PVP_map_select] = [[_("RETURN"), [92, 88, 144, 20]]];
 for(var q = 0; q < array_length(pvp_maps); q++){
 	

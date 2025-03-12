@@ -37,6 +37,7 @@ function player_states() {
 		top_spin,
 		custom_screen,
 		custom_chips,
+		drive_slam,
 		// Special Attacks
 		hadouken,
 		shoryuken,
@@ -54,6 +55,7 @@ function player_states() {
 		// Weapons
 		db_buster,
 		x3_saber,
+		drive_saber,
 		z_saber,
 		shoot_pistol,
 		open_arms,
@@ -122,6 +124,7 @@ function player_states() {
 
 	// Special Attack States
 	state_array[states.nova_strike]		= player_state_nova_strike;
+	state_array[states.drive_slam]		= player_state_drive_slam;
 	state_array[states.hadouken]		= player_state_hadouken;
 	state_array[states.shoryuken]		= player_state_shoryuken;
 	state_array[states.tatsumaki]		= player_state_tatsumaki;
@@ -136,6 +139,7 @@ function player_states() {
 	// Weapons
 	state_array[states.db_buster]		= player_state_db_buster;
 	state_array[states.x3_saber]		= player_state_x3_saber;
+	state_array[states.drive_saber]		= player_state_drive_saber;
 	state_array[states.shoot_pistol]    = player_state_shoot_pistol;
 	state_array[states.open_arms]       = player_state_open_arms;
 	state_array[states.screen_cleaner]  = player_state_screen_cleaner;

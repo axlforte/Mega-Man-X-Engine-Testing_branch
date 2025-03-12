@@ -157,7 +157,7 @@ function WeaponSlotManager() constructor {
 	}
 }
 
-function player_weapon_settings() {
+function player_weapon_settings() { // dep
 	// this needs to have seperate stuff from the global stuff. global doesnt change, this does.
 }
 
@@ -203,6 +203,9 @@ function global_weapon_Settings(){
 	// ok its all set up to be an array, but the descriptions are gonna be ass
 	// aeughehrierhierhiegh i need to make weapon and weapon_chunk global not to mention call it
 	// its less difficult and more difficult than i expected. mostly just hiccups tho
+	// forte from like a month later: i kinda jive with this new system. i had to add
+	// something to make megaman not charge weapons but once i got everything working, all i need
+	// is a function call away!
 	
 	for(var p = 0; p < WEAPONS.length; p++){
 		G.weapon[p] = new Weapon(); 
@@ -210,16 +213,8 @@ function global_weapon_Settings(){
 	}
 	
 	for(var p = WEAPONS.megaman_start; p < WEAPONS.megaman_end; p++){
-		G.weapon[p].max_level = 1;
+		//G.weapon[p].max_level = 0;
 	}
-	
-	G.weapon_chunk[pl_char.x] = [WEAPONS.storm_tornado, WEAPONS.homing_torpedo];
-	G.weapon_chunk[pl_char.zero] = [0,0];
-	G.weapon_chunk[pl_char.axl] = [0,0];
-	G.weapon_chunk[pl_char.vile] = [0,0];
-	G.weapon_chunk[pl_char.iris] = [0,0];
-	G.weapon_chunk[pl_char.vent] = [0,0];
-	G.weapon_chunk[pl_char.megaman] = [WEAPONS.rolling_cutter, WEAPONS.yamato_spear];
 	
 	// Palettes
 	G.weapon[WEAPONS.storm_tornado].set_palette(6);

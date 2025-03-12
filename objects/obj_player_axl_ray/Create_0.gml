@@ -12,3 +12,4 @@ animation_add("D", [
 	4, 5,
 	5, 5
 ]);
+shot_direction_index = 0;

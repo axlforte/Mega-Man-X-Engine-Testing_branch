@@ -18,7 +18,9 @@ function player_x_variables() {
 	
 	weapon_slot_handler.add_weapon(WEAPONS.spark_shot);
 	weapon_slot_handler.add_weapon(WEAPONS.atomic_fire);
-
+	
+	weapon[0] = WEAPONS.x_buster;
+	player_weapon_select(WEAPONS.x_buster);
 	// Charge
 	charge_unlocked = true;
 
@@ -30,4 +32,6 @@ function player_x_variables() {
 		{alpha: 1, radius: 30 }
 	];
 	trail_color = c_blue;
+	
+	wall_jump_dash_animation = true;
 }

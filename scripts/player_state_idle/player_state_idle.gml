@@ -1,5 +1,9 @@
 function player_state_idle() {
 	var t = state_timer++;
+	
+	if(t == 0){
+		dash_speed_increase = 0;
+	}
 
 	idle_animation = (!critical ? "idle" : "critical");
 

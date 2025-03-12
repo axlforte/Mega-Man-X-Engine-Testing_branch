@@ -7,10 +7,11 @@ function player_x_armor() {
 		plt_index_default = 8;
 		dash_air_limit = 2;
 	}
-
+	ds_list_destroy(special_weapons)
 	special_weapons = ds_list_create();
 	global.weapon[WEAPONS.x_buster].code = player_x_buster_x2;
 	charge_level_max = 2;
+	G.weapon[WEAPONS.x_buster].set_show(false);
 
 	/*  If there is a body part or it's a full armor, apply default damage_reduction
 		and change dolor animation */
@@ -62,6 +63,7 @@ function player_x_armor() {
 		if (ARMS == "x2") {
 			global.weapon[WEAPONS.x_buster].code = player_x_buster_x2;
 			charge_level_max = 4;
+			wall_ledge_grab = true;
 			charge_sprites[4] = spr_player_charge_3;
 			charge_palettes = [0, 1, 1, 2, 2];
 		}
@@ -72,6 +74,7 @@ function player_x_armor() {
 			// Air Dash
 			dash_air_unlocked = true;
 			dash_up_unlocked = true;
+			dash_air_limit = 3;
 		}
 		if (BODY == "x3") {
 			defense_shield_unlocked = true;
@@ -104,7 +107,7 @@ function player_x_armor() {
 		if (armor_is_full("x3") && global.golden_armor_enabled) {
 			defense_shield_sprite = spr_player_shield_orange;
 			defense_shield_damage_reduction = 0.75;
-			player_weapon_set(32, WEAPONS.hyper_charge)
+			weapon_slot_handler.add_weapon(WEAPONS.hyper_charge)
 			auto_regen = true;
 			tatsumaki_animation = "tatsumaki2";
 			tatsumaki_sprite = spr_x_tatsumaki2_mask;
@@ -298,5 +301,40 @@ function player_x_armor() {
 			dolor_animation = "dolor";
 		}
 	#endregion
-
+	#region High ASF armor
+		if (FULL == "drive") {
+			//perfect dash
+			//fuck off buster
+			//quickstomp
+			G.weapon[WEAPONS.x_buster].set_show(true);
+			G.weapon[WEAPONS.x_buster].set_icon(0);
+			perfect_dash_jump = true;
+			wall_ledge_grab = true;
+			G.weapon[WEAPONS.x_buster].set_damage_refill(-1);
+			player_special_weapons_add(states.drive_slam);
+			player_special_weapons_add(states.drive_saber);
+			dash_air_limit = 3;
+			charge_unlocked = false;
+			G.weapon[WEAPONS.x_buster].energy_max = 15;
+			global.weapon[WEAPONS.x_buster].code = player_x_buster_drive;
+			G.weapon[WEAPONS.x_buster].set_color(7);
+		
+			animation_add("dash_end|dash",
+			[
+				0, 0,
+				2, 0,
+				4, 2, 
+				6, 3,
+				15, 2
+			]);
+		}
+	#endregion
+	#region Xtreme armor
+		if (FULL == "xtreme") {
+			//perfect dash
+			//fuck off buster
+			//quickstomp?
+			//
+		}
+	#endregion
 }

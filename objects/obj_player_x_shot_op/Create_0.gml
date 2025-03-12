@@ -1,6 +1,7 @@
 event_inherited();
 lv = 4;
 atk = 8;
+boss_damage[? noone] = 3;
 
 sound = snd_player_x_shot_ult;
 

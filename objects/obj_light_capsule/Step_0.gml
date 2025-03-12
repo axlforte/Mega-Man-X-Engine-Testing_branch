@@ -167,12 +167,14 @@ else if state == 4 {
             
            //Unlock the armors for X
             if type == 0 {
-			if (part==1){G.player_character_armor[pl_char.x][1] = armor;}
-			if (part==2){G.player_character_armor[pl_char.x][2] = armor;}
-			if (part==3){G.player_character_armor[pl_char.x][3] = armor;}
-			if (part==4){G.player_character_armor[pl_char.x][4] = armor;}
-            myPlayer.armor = global.player_character_armor[pl_char.x];
-			myPlayer.armor_check = 1;
+				if (part==1){G.player_character_armor[pl_char.x][1] = armor;}
+				if (part==2){G.player_character_armor[pl_char.x][2] = armor;}
+				if (part==3){G.player_character_armor[pl_char.x][3] = armor;}
+				if (part==4){G.player_character_armor[pl_char.x][4] = armor;}
+				if (part==5){G.player_character_armor[pl_char.x][5] = armor;}
+				else {G.player_character_armor[pl_char.x][5] = "";}
+	            myPlayer.armor = global.player_character_armor[pl_char.x];
+				myPlayer.armor_check = 1;
             }
             //Unlock the chip
             else if type == 1 {

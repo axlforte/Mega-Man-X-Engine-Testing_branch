@@ -1,0 +1,1 @@
+draw_sprite_ext(sprite_index,current_time mod 4,x,y,1,1,90,c_white,1);
