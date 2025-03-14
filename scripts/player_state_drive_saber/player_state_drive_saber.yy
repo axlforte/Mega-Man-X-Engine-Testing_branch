@@ -6,7 +6,7 @@
   "name":"player_state_drive_saber",
   "parent":{
     "name":"States",
-    "path":"folders/Scripts/Player/Base/Step/Default/Weapons/States.yy",
+    "path":"folders/Scripts/Player/Base/Special Weapons/States.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

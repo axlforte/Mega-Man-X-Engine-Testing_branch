@@ -12,7 +12,8 @@ function player_x_armor() {
 	global.weapon[WEAPONS.x_buster].code = player_x_buster_x2;
 	charge_level_max = 2;
 	G.weapon[WEAPONS.x_buster].set_show(false);
-
+	G.weapon[WEAPONS.x_buster].set_shot_limit(3);
+	
 	/*  If there is a body part or it's a full armor, apply default damage_reduction
 		and change dolor animation */
 	if (BODY != "" || FULL != "") {
@@ -309,15 +310,21 @@ function player_x_armor() {
 			G.weapon[WEAPONS.x_buster].set_show(true);
 			G.weapon[WEAPONS.x_buster].set_icon(0);
 			perfect_dash_jump = true;
+			wall_jump_dash_animation = true;
+			G.weapon[WEAPONS.x_buster].set_shot_limit(2);
 			wall_ledge_grab = true;
 			G.weapon[WEAPONS.x_buster].set_damage_refill(-1);
 			player_special_weapons_add(states.drive_slam);
 			player_special_weapons_add(states.drive_saber);
 			dash_air_limit = 3;
+			damage_reduction = 0.75;
 			charge_unlocked = false;
 			G.weapon[WEAPONS.x_buster].energy_max = 15;
 			global.weapon[WEAPONS.x_buster].code = player_x_buster_drive;
 			G.weapon[WEAPONS.x_buster].set_color(7);
+			
+			weapon_slot_handler.weapons = [];
+			weapon_slot_handler.add_weapon(WEAPONS.x_buster);
 		
 			animation_add("dash_end|dash",
 			[

@@ -1,5 +1,5 @@
 event_inherited();
-atk = 2;
+atk = 3;
 sound = snd_player_x_shot_x2_super;
 
 animations_init();

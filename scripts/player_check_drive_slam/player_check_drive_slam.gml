@@ -11,9 +11,7 @@ function player_check_drive_slam() {
 	
 	if(weapon_slot_handler.get_energy(WEAPONS.x_buster) > 14){
 		G.weapon[WEAPONS.x_buster].set_color(current_time);
-	} else if(weapon_slot_handler.get_energy(WEAPONS.x_buster) > 9){
-		G.weapon[WEAPONS.x_buster].set_color(9);
-	} else if(weapon_slot_handler.get_energy(WEAPONS.x_buster) > 3){
+	} else if(weapon_slot_handler.get_energy(WEAPONS.x_buster) > 8){
 		G.weapon[WEAPONS.x_buster].set_color(8);
 	} else {
 		G.weapon[WEAPONS.x_buster].set_color(7);

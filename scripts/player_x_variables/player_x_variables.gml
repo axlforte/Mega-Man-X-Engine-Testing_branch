@@ -33,5 +33,4 @@ function player_x_variables() {
 	];
 	trail_color = c_blue;
 	
-	wall_jump_dash_animation = true;
 }

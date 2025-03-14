@@ -10,7 +10,7 @@ function player_state_drive_saber() {
 	{
 		v_speed = -jump_strength;
 		_air = "_air";
-		if (can_jump == 2) dash_air_count++;
+		if (can_jump >= 2) dash_air_count++;
 	}
 	if (!key_jump && v_speed < 0)
 		v_speed = 0;
