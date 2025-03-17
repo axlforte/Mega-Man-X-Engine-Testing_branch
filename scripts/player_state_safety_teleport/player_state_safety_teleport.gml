@@ -12,6 +12,7 @@ function player_state_safety_teleoport() {
 		physics_ignore_frame++;
 	} else {
 		player_state_set(states.fall);
+		mask_index = state_hitbox[states.idle];
 	}
 
 }

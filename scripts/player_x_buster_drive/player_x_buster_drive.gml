@@ -6,20 +6,20 @@ function player_x_buster_drive() {
 	shoot_limit = 16;
 	shoot_type = shoot_types.normal;
 
-	var cst = 0;
+	var cst = 1;
 	
 	
 
-	if(lvl < 8 && lvl != 0){
+	if(lvl < 9 && lvl > 3){
 		player_shoot_projectile(obj_player_x_shot_2_drive);
 		cst = 2;
-	} else if(lvl > 7 && lvl < 15){
+	} else if(lvl > 8 && lvl < 15){
 		player_shoot_projectile(obj_player_x_shot_3_drive);
 		cst = 3;
 	}else if(lvl >= 15){
 		player_shoot_projectile(obj_player_x_shot_4_drive);
 		cst = 6;
-	} else {
+	} else if(lvl < 4 && lvl != 0){
 		player_shoot_projectile(obj_player_x_shot_1);
 	}
 	

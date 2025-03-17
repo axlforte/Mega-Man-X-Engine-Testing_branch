@@ -10,6 +10,7 @@ function player_state_intro() {
 				if (cam != noone)
 					y = __view_get(e__VW.YView, cam.view_id);
 				visible = true;
+				mask_index = state_hitbox[states.idle];
 				animation_play("tp");
 				audio_play(intro_sound);
 			}
@@ -45,6 +46,7 @@ function player_state_intro() {
 				weapon_can_change = true;	
 				breath_enabled = true;
 				pause_enabled = true;
+				
 			}
 		break;
 	}

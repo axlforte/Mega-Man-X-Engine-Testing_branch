@@ -338,10 +338,52 @@ function player_x_armor() {
 	#endregion
 	#region Xtreme armor
 		if (FULL == "xtreme") {
-			//perfect dash
-			//fuck off buster
-			//quickstomp?
-			//
+			
+			state_hitbox[states.dash] = spr_xtreme_mask;
+			state_hitbox[states.crouch] = spr_xtreme_mask;
+			state_hitbox[states.idle] = spr_xtreme_mask;
+			state_hitbox[states.jump] = spr_xtreme_mask;
+			state_hitbox[states.fall] = spr_xtreme_mask;
+			walk_speed = 4/3;
+			walk_speed_default = 4/3;
+			dash_speed = 3;
+			dash_length = 28;
+			jump_strength = 4.5;
+			wall_slide_vspeed = 1.25;
+			plt_index_default = 58;
+			dash_air_unlocked = true;
+			plt_index = 58;
+			dolor_animation = "dolor";
+			animation_add("walk", 
+			[
+				0, 0,
+				5, 1,
+				8, 2,
+				11, 3,
+				14, 4,
+				17, 5,
+				20, 6,
+				23, 7,
+				26, 8,
+				29, 1
+			], 5, 29);
+			animation_add("land|jump",
+			[
+				0, 5,
+				1, 0,
+				2, 0
+			]);
+			animation_add("wall_slide|wall",
+			[
+				0, 1,
+				4, 0,
+				8, 1,
+			], 8);
+
+			animation_add("wall_jump|wall",
+			[
+				0,2
+			], 1);
 		}
 	#endregion
 }

@@ -25,7 +25,13 @@ function player_state_dash() {
 		        } else {
 					dash_length = dash_normal_length;
 				}
+				
+				if(perfect_dash_jump){
+					special_inst = instance_try_destroy(special_inst);
+				}
 		    }
+			
+			
     
 		    if (t >= 0 && t <= dash_length) {
 		        // Animation
@@ -120,6 +126,15 @@ function player_state_dash() {
 		        }
         
 		    }
+			if(perfect_dash_jump && weapon_slot_handler.get_energy(WEAPONS.x_buster) >= 5){
+				if (!instance_exists(special_inst)) {
+					special_inst = instance_create_depth(x, y, depth - 1, obj_player_x_aura_drive);
+					special_inst.image_xscale = dir;
+				}
+				special_inst.image_xscale = dir;
+				special_inst.x = x + h_speed;
+				special_inst.y = y + v_speed;
+			}
 		}
 		// Dash (Vertical)
 		else {
@@ -217,6 +232,7 @@ function player_state_dash() {
 	// Changed State
 	if (state != states.dash) {
 		dash_spark_inst = player_effect_destroy(dash_spark_inst);
+		//instance_try_destroy(special_inst);
 		dash_tapped = false;
 		y_dir = 1;
 		if (key_down && crouch_unlocked)

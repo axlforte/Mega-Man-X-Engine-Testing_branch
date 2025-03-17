@@ -2,7 +2,7 @@
   "$GMSprite":"",
   "%Name":"plt_zero",
   "bboxMode":0,
-  "bbox_bottom":5,
+  "bbox_bottom":6,
   "bbox_left":0,
   "bbox_right":23,
   "bbox_top":0,

@@ -131,7 +131,7 @@ function player_animations() {
 	animation_add("dash_end|dash",
 	[
 		0, 0
-	], 0);
+	]);
 
 	animation_add("wall_slide|wall",
 	[

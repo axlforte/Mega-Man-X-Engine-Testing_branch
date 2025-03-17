@@ -46,7 +46,7 @@ function bosses_init() {
 	["CHILL PENGUIN", spr_chill_penguin_icon, spr_stage_snow_mountain, rm_chill_penguin, obj_chill_penguin_intro];
 
 	global.boss_info[e_boss.storm_eagle] = 
-	["STORM EAGLE", spr_storm_eagle_icon, spr_7th_airborne_unit, rm_test_stage_2, obj_storm_eagle_intro];
+	["STORM EAGLE", spr_storm_eagle_icon, spr_7th_airborne_unit, rm_storm_eagle, obj_storm_eagle_intro];
 
 	global.boss_info[e_boss.flame_stag] = 
 	["WAIT YOU ARE NOT FLAME STAG", spr_flame_stag_icon, spr_stage_snow_mountain, rm_test_stage, obj_chill_penguin_intro];

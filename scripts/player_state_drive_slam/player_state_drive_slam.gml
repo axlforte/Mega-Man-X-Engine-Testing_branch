@@ -26,6 +26,7 @@ function player_state_drive_slam() {
 			audio_play(nova_strike_sound);
 			audio_stop(hover_sound);
 			player_activate_immunity(immunity_types.normal);
+			instance_create_depth(x,y,depth - 1, obj_player_x_aura_drive);
 		}
 	
 		var slam_lim = 4;
@@ -56,7 +57,7 @@ function player_state_drive_slam() {
 			substates[0] = 1;
 			state_timer = 0;
 			t = state_timer;
-			if(weapon_slot_handler.get_energy(WEAPONS.x_buster) >= 15){
+			if(weapon_slot_handler.get_energy(WEAPONS.x_buster) >= 15 && key_special){
 				weapon_slot_handler.set_energy(WEAPONS.x_buster, 0);
 				instance_create_depth(x,y,depth,obj_player_x_shot_giga_drive);
 			}
