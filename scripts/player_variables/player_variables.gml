@@ -343,6 +343,7 @@ function player_dash_air_variables() {
 	// Dash Up
 	dash_up = false; // Is the player using Up Air Dash?
 	dash_up_length = 32; // Dash Air Length
+	dash_up_start_time = 19; // When does the up dash lag end?
 	dash_up_unlocked = false; // Set to true when an armor unlocks this feature
 
 	// Dash Up - Effects

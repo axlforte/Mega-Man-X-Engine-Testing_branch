@@ -157,6 +157,17 @@ if (changed_state) {
 }
 #endregion
 switch (state) {
+	#region title
+		case menu_states.title:
+			if(ts_time >= (ts_height) + 4 || enter){
+				var tran = transition_create(transition_types.fade_out_and_fade_in);
+				tran.color = c_white;
+				tran.transition_limit = 16;
+				menu_set_state(menu_states.main, 0, 2, c_white);
+			}else
+				ts_time += (1 / ts_pixels_shown) * ts_move_speed;
+		break;
+	#endregion
 	#region Main
 	case menu_states.main:
 		menu_update_item_v();
@@ -276,10 +287,10 @@ switch (state) {
 		}
 		
 		menu_update_item_h();
-		global.character_selected_index[0] = selected_item;
+		global.character_selected_index[0] = player_get_char_id(page_items[menu_states.player_select][selected_item]);
 		if (selected_item < array_length(global.player_character_armor)) {
-			armor_index = G.player_character_armor_index[selected_item];
-			armor = G.player_character_armor[selected_item];
+			armor_index = G.player_character_armor_index[player_get_char_id(page_items[menu_states.player_select][selected_item])];
+			armor = G.player_character_armor[player_get_char_id(page_items[menu_states.player_select][selected_item])];
 		}
 		switch (FULL) {
 			case "black": background_index = 2; break;
@@ -292,15 +303,16 @@ switch (state) {
 		&& mouse_check_button_released(mb_left))
 			enter = true;
 		if (enter 
-		&& selected_item != pl_char.iris
-		&& selected_item != pl_char.vent) {
+		&& player_get_char_id(page_items[menu_states.player_select][selected_item]) != pl_char.vent
+		&& player_get_char_id(page_items[menu_states.player_select][selected_item]) != pl_char.vile
+		&& player_get_char_id(page_items[menu_states.player_select][selected_item]) != pl_char.iris) {
 			var tran = transition_create(transition_types.blink);
 			tran.color = c_white;
 			tran.transition_limit = 16;
 			menu_set_state(menu_states.boss_intro, 16, 30);
 			music_stop(1000);
 			audio_play(snd_player_success);
-			global.character_selected[0] = global.character_object[selected_item];
+			global.character_selected[0] = global.character_object[player_get_char_id(page_items[menu_states.player_select][selected_item])];
 		}  else if(select){
 			menu_set_state(menu_states.stage_select);
 		}

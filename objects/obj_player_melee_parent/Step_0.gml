@@ -1,4 +1,7 @@
 PAUSE_EXCEPT;
+if(global.is_online){
+	global.client.pingProjectile(self);
+}
 if (!is_inside_view() || destroy)
 {
 //	if (instance_exists(owner)) owner.shots_count--;

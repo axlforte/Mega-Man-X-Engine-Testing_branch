@@ -29,7 +29,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_block_ladder",
+    "path":"sprites/spr_block_ladder/spr_block_ladder.yy",
+  },
   "spriteMaskId":null,
   "visible":false,
 }

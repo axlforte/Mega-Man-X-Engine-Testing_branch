@@ -60,7 +60,7 @@ function player_shoot_check() {
 		
 				if (shots_count < shots_limit && player_weapon_can_spend(current_weapon, charge_level)) {
 					weapon_script = global.weapon[current_weapon].code;
-					log(string(weapon_script) + " is the weapon script")
+					//og(string(weapon_script) + " is the weapon script")
 					//show_debug_message(string(player_x_buster_gaea))
 					if (charge_level < 0)	
 						charge_level = 0;

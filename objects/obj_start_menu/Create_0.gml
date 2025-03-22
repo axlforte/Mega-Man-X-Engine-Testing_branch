@@ -1,4 +1,4 @@
-// States Enum
+#region States Enum
 enum menu_states {
 	main,
 	game_mode,
@@ -16,7 +16,8 @@ enum menu_states {
 	volume,
 	weapon_select,//for weapons and techniques probably. 
 	online_select,//are you gonna host or join?
-	PVP_map_select//pick which pvp map you are going to
+	PVP_map_select,//pick which pvp map you are going to
+	title//when the x comes into view. im just gonna make it nice and easy, skip with enter.
 }
 camera_set_view_size(view_camera[0],global.view_width,global.view_height);
 palette_init();
@@ -24,7 +25,7 @@ palette_texture_set(plt_megaman_full);
 enum background_select { intro, middle, ending }
 
 // State
-state = menu_states.main;
+state = menu_states.title;
 state_timer = 0;
 substates = [0, 0, 0, 0];
 changed_state = false;
@@ -38,11 +39,10 @@ timer = 0;
 item_blink_t = 0;
 input_timer = 0;
 wait_t = 0;
-
+#endregion
 // Appear from the Black
 transition_create(transition_types.fade_in);
-
-// Titles
+#region Titles
 titles[menu_states.main]            = "";
 titles[menu_states.game_mode]       = _("GAME MODE");
 titles[menu_states.difficulty_mode] = _("DIFFICULTY MODE");
@@ -56,6 +56,7 @@ titles[menu_states.volume]		    = _("VOLUME CONTROL");
 titles[menu_states.weapon_select]	= _("WEAPON SELECT");
 titles[menu_states.online_select]	= _("ONLINE SELECT");
 titles[menu_states.PVP_map_select]  = _("PVP MAP SELECT");
+#endregion
 
 // Pages
 // Needs a lot of refactoring:
@@ -117,7 +118,7 @@ settings_apply();
 #region Player Select
 
 page_items[menu_states.player_select] = [
-	"X", "ZERO", "AXL", "IRIS", "VILE", "MEGAMAN", "VENT", "EXE"
+	"X", "ZERO", "AXL", "MEGAMAN", "EXE"
 ];
 global.golden_armor_enabled = false;
 
@@ -127,8 +128,8 @@ global.golden_armor_enabled = false;
 page = [
 	["", []]
 ];
-alength = array_length(global.key_text)
-for(var i = 0; i < alength; i++)
+alen = array_length(global.key_text)
+for(var i = 0; i < alen; i++)
 {
 	page[i + 1] = [_(global.key_text[i]),
 					[],
@@ -138,7 +139,7 @@ for(var i = 0; i < alength; i++)
 }
 gamepad_movement_mode_text[0] = "Directional";
 gamepad_movement_mode_text[1] = "Joystick";
-page[alength + 1] = [_("BACK"), [128, 32 + 14*(alength + 1), 128, 24]];
+page[alen + 1] = [_("BACK"), [128, 32 + 14*(alen + 1), 128, 24]];
 page_items[menu_states.key_config] = page;
 #endregion
 #region Stage Select
@@ -260,6 +261,14 @@ weapon_lerp_distance = 26;
 weapon_lerp_direction = 1;
 weapon_player_selected = pl_char.x;
 #endregion
+#region title
+title_sprite = Big_Intro;
+ts_pixels_shown = 1;
+ts_move_speed = 1/3;
+ts_height = sprite_get_height(title_sprite) / ts_pixels_shown;
+ts_time = 0;
+#endregion
+
 activate_sprites = true;
 if (global.start_menu_force_state) {
 	global.start_menu_force_state = false;
@@ -280,10 +289,7 @@ global.char_select_sprites = [
 	spr_player_x,
 	spr_player_zero,
 	spr_player_axl,
-	spr_player_iris,
-	spr_player_vile,
 	spr_player_megaman,
-	spr_player_vent,
 	spr_player_exe
 ];
 background_index = 0;
@@ -314,5 +320,5 @@ array_push(page_items[menu_states.PVP_map_select], [_(room_get_name(pvp_maps[q])
 #endregion
 menu_edge_init();
 menu_armor_load(0);
-menu_player_select_sprites_load();
+menu_player_select_sprites_load(page_items[menu_states.player_select]);
 screen_update_stretched();

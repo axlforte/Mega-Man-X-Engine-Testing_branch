@@ -14,7 +14,8 @@ function keys_init() {
 		weapon1,
 		weapon2,
 		start,
-		select
+		select,
+		chat
 	}
 	// Key Name
 	global.key_text[e_key.up]      = "UP";
@@ -31,6 +32,7 @@ function keys_init() {
 	global.key_text[e_key.weapon2] = "WEAPON2";
 	global.key_text[e_key.start]   = "MENU";
 	global.key_text[e_key.select]  = "RETURN";
+	global.key_text[e_key.chat]     = "CHAT";
 	// Keyboard
 	global.key_config[e_key.up]      = vk_up;
 	global.key_config[e_key.down]    = vk_down;
@@ -41,11 +43,12 @@ function keys_init() {
 	global.key_config[e_key.shoot]   = ord("X");
 	global.key_config[e_key.shoot2]  = ord("C");
 	global.key_config[e_key.special] = ord("Z");
-	global.key_config[e_key.special2] = ord("F");
+	global.key_config[e_key.special2]= ord("F");
 	global.key_config[e_key.weapon1] = ord("A");
 	global.key_config[e_key.weapon2] = ord("S");
 	global.key_config[e_key.start]   = vk_enter;
-	global.key_config[e_key.select]   = vk_escape;
+	global.key_config[e_key.select]  = vk_escape;
+	global.key_config[e_key.chat]    = vk_shift;//doesnt work well with letters. will debug later.
 	// Gamepad
 	global.gamepad_config[e_key.up]      = gp_padu;//dpad up
 	global.gamepad_config[e_key.down]    = gp_padd;//dpad down
@@ -56,11 +59,12 @@ function keys_init() {
 	global.gamepad_config[e_key.shoot]   = gp_face3;//x
 	global.gamepad_config[e_key.shoot2]  = gp_face4;//y
 	global.gamepad_config[e_key.special] = gp_shoulderl;//right bumper
-	global.gamepad_config[e_key.special2] = gp_shoulderr;//right trigger
+	global.gamepad_config[e_key.special2]= gp_shoulderr;//right trigger
 	global.gamepad_config[e_key.weapon1] = gp_shoulderrb;//left bumper
 	global.gamepad_config[e_key.weapon2] = gp_shoulderlb;//left trigger
 	global.gamepad_config[e_key.start]   = gp_start; //the 3 lines
-	global.gamepad_config[e_key.select]   = gp_select; // the window button
+	global.gamepad_config[e_key.select]  = gp_select; // the window button
+	global.gamepad_config[e_key.chat]    = gp_stickl; // the window button
 
 	// Initialize Variables using Apply
 	keys_apply();

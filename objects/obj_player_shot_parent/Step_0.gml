@@ -1,4 +1,8 @@
 PAUSE;
+
+if(global.is_online){
+	global.client.pingProjectile(self);
+}
 if (instance_exists(owner)) {
 	local_game_speed = owner.local_game_speed;	
 }

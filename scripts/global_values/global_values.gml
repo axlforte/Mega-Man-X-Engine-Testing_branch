@@ -20,12 +20,13 @@ function global_values() {
 	global.start_menu_state = menu_states.main;
 	global.player_max_health = 16;
 	
-	//client and server data
+	#region client and server data
 	global.player_xs = [];
 	global.player_x_prevs = [];
 	global.player_ys = [];
 	global.player_sprites = [];
 	global.player_frames = [];
+	global.player_frame_counts = [];
 	global.player_dirs = [];
 	global.player_chars = [];
 	global.player_names = [];
@@ -35,24 +36,28 @@ function global_values() {
 	global.player_grav = [];
 	global.player_key_lefts = [];
 	global.player_key_rights = [];//not the constitutional kind of rights
-	global.player_key_downs = [];//not the constitutional kind of rights
+	global.player_key_downs = [];
+	global.player_animation_frames = [];
+	global.player_animation_loops = [];
 	global.server_enemies = [];
 	global.player_sprite_index = 0;
 	global.ip = "127.0.0.1";//this is the universal 'your own computer' ip
 	global.player_server_id = 0;//which player am i?
 	global.is_online = false;//am i in a server with other people?
 	global.client = undefined;
+	global.chat = undefined;
 	
 	// server specific data
 	global.is_server = false;//are you the one doing the servering
 	global.server = undefined;
 	global.player_Server_update = false;
-	global.tick_rate = 60;
+	global.tick_rate = 120;
 	global.ping = 0;
 	global.chat_string = "";
 	global.username = "googledebunkers";
 	global.rollback = false;//rollback is a bitch. keep off unless you fix rollback
 	global.pvp = false;// (:<
+	#endregion
 
 	global.gamepad_list = ds_list_create();
 	global.gamepad_list_index = 0;
@@ -103,7 +108,7 @@ function global_player_info(){
 	global.debug_active                     = false; // Is the Debug mode on?
 	global.view_width                       = 320;//320
 	global.view_height                      = 240;//240
-	global.resolution_options = [[256,224],[256,240],[320,240]];// FORTE, MAKE THIS ONE VALUE WHEN YOU MAKE THE FINAL BUILD
+	global.resolution_options = [[160,144],[256,224],[320,240]];// FORTE, MAKE THIS ONE VALUE WHEN YOU MAKE THE FINAL BUILD
 	global.checkpoint                       = 0;
 	global.checkpoint_x                     = 0;
 	global.checkpoint_y                     = 0;

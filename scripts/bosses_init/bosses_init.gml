@@ -40,7 +40,7 @@ function bosses_init() {
 	["BLADE MAN", spr_blade_man_icon, spr_stage_hq, rm_blade_man, -1];
 
 	global.boss_info[e_boss.intro] = 
-	["", spr_blade_man_icon, -1, rm_avalanche, -1];
+	["", spr_blade_man_icon, -1, rm_forte_was_bored, -1];
 
 	global.boss_info[e_boss.chill_penguin] = 
 	["CHILL PENGUIN", spr_chill_penguin_icon, spr_stage_snow_mountain, rm_chill_penguin, obj_chill_penguin_intro];

@@ -152,7 +152,7 @@ function player_state_dash() {
 				animation = "";
 			}
 	
-			if (t == 16)
+			if (t == dash_up_start_time - 3)
 				dash_spark_inst = player_effect_create(dash_up_spark);
 	
 			if (t >= 0 && t <= dash_length) {
@@ -164,13 +164,13 @@ function player_state_dash() {
 			if (array_contains([1, 3, 7, 9, 11, 13, 15, 16], t))
 				condition_to_end |= !move_contact_block(0, -1);
 	
-			if (t == 19)
+			if (t == dash_up_start_time)
 				audio_play(dash_sound);	
 	
-			if (t >= 19 && t <= 20)
+			if (t >= dash_up_start_time && t <= dash_up_start_time + 1)
 				condition_to_end |= !move_contact_block(0, -2);
 	
-			if (t >= 21 && t <= dash_length)
+			if (t >= dash_up_start_time + 2 && t <= dash_length)
 				condition_to_end |= !move_contact_block(0, -5);
 	
 			if (condition_to_end) {

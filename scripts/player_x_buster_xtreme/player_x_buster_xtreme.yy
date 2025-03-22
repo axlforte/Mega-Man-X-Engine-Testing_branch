@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"player_x_buster_xtreme",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"player_x_buster_xtreme",
+  "parent":{
+    "name":"X1",
+    "path":"folders/Scripts/Player/Characters/X/Weapons/Shots/X1.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

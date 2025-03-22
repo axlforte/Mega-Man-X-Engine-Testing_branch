@@ -27,7 +27,7 @@ if (local_game_run_step || state == boss_states.death) {
 				bar = instance_create_depth(0, 0, layer_get_depth(layer_get_id("Camera")) - 300, obj_player_bar);
 				bar.owner = id;
 				bar.bar_icon_sprite = spr_boss_bar_icon;
-				bar.x_off = 295;
+				bar.x_off = global.view_width - 25;
 			}
 			if (t == intro_limit) {
 				// Fill health

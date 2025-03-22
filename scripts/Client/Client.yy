@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"Client",
   "parent":{
-    "name":"Netcode Example",
-    "path":"folders/Scripts/Netcode Example.yy",
+    "name":"Netcode",
+    "path":"folders/Scripts/Netcode.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

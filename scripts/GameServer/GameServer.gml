@@ -1,4 +1,101 @@
 function GameServer(_port) : TCPServer(_port) constructor{
+	server_rpc_variables();
+	server_enemy_rpc();
+	server_projectile_rpc();
+	server_player_rpc();
+	server_chat = new ServerChatRPC();
+	
+	setEvent("error", function(_err) {
+        show_debug_message(_err);
+    });
+	
+	setEvent("step", function(){
+		if(tick_timer > 60 / tick_rate){
+			if(instance_exists(obj_pvp_powerup_spawner)){
+				for(var q = 0; q < instance_number(obj_pvp_powerup_spawner);q++){
+					var _pvp = instance_find(obj_pvp_powerup_spawner,q);
+					if(_pvp.spawn){
+			rpc.sendNotification("PVP Update Spawners",
+			[q, _pvp.powerup_selection[irandom_range(0, array_length(_pvp.powerup_selection) - 1)]],
+			roomSockets);
+						_pvp.spawn_timer = 0;
+					}
+				}
+			}
+			tick_timer = 0;
+		}
+			tick_timer++;
+	});
+	
+	setEvent("connected", function(_client){
+		rpc.sendNotification("update_player_id", [_client.id,global.pvp], _client.socket);
+		rpc.sendNotification("update_player_char", global.character_selected[0], _client.socket);
+		rpc.sendNotification("rollback_spawn_player",_client.id,roomSockets)
+	});
+	
+	setEvent("disconnected", function(_client) {
+		leaveRoom(_client);
+	});
+	
+	createClient = function(_id, _socket) {
+        return new ConnectedClient(_id, _socket);
+    }
+	
+	start();
+}
+
+function ConnectedClient(_id, _socket) : BaseClient(_id, _socket) constructor {
+	self.nickname = "";
+	self.x = 0;
+	self.y = 0;
+	self.sprite = spr_x_idle;
+	self.frame = 0;
+}
+
+function server_enemy_rpc(){
+	rpc.registerHandler("spawn_enemy", function(_time, _socket) {
+		//log(_time)
+        var _e = instance_create_layer(_time[1],_time[2],_time[3],_time[0]);
+		_e.dies_when_offscreen = false;
+		_e.network_id = _time[4]
+		enemies[_time[4]] = _e;
+    });
+	
+	rpc.registerHandler("Hurt_enemy", function(_time, _socket) {
+        rpc.sendNotification("hurt_enemy", _time, roomSockets);
+    });
+	
+	update_enemy = function(_ene) {
+		enemies[_ene[4]].x = _ene[0];
+		enemies[_ene[4]].y = _ene[1];
+		enemies[_ene[4]].sprite_index = _ene[2];
+		enemies[_ene[4]].image_index = _ene[3];
+    }
+	
+	spawn_enemy_shot = function(_shot){
+		//kys
+	}
+}
+	
+function server_projectile_rpc(){
+	rpc.registerHandler("update projectile", function(_pos, _client) {
+		shots[_pos[7]][_pos[6]] = _pos;
+		rpc.sendNotification("update projectile", shots[_pos[7]][_pos[6]], roomSockets);
+	});
+	
+	rpc.registerHandler("create projectile", function(_pos, _client) {
+		//log("shot was requested")
+		array_push(shots[_pos[7]], _pos);
+		rpc.sendNotification("create projectile", _pos, roomSockets);
+	});
+	
+	rpc.registerHandler("kill projectile", function(_pos, _client) {
+		//log("somebody wants to die!")
+		rpc.sendNotification("kill projectile", _pos, roomSockets);
+	});
+}
+	
+function server_rpc_variables(){
 	roomSockets = [];
 	nicknames = [];
 	tick_rate = global.tick_rate;
@@ -16,64 +113,34 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	player_right = [];
 	player_down = [];
 	player_grav = [];
+	shots = array_create(35565,array_create(35565,0));
+	shot_x = [];
+	shot_y = [];
+	shot_x_vel = [];
+	shot_y_vel = [];
 	enemies = [];
 	current_room = rm_headquarters;
+}
+
+function server_player_rpc(){
 	
-	leaveRoom = function(_client) {
-        var _socket = _client.socket;
-        var _index = array_get_index(roomSockets, _socket);
-        if (_index != -1) {
-            array_delete(roomSockets, _index, 1);
-            array_delete(player_x, _index, 1);
-            array_delete(player_x_vel, _index, 1);
-            array_delete(player_y, _index, 1);
-            array_delete(player_y_vel, _index, 1);
-            array_delete(player_sprite, _index, 1);
-            array_delete(player_frame, _index, 1);
-            array_delete(player_dir, _index, 1);
-            array_delete(player_palette, _index, 1);
-            array_delete(nicknames, _index, 1);
-        }
-		rpc.sendNotification("haul_ass", true, roomSockets);
-    }
-	
-	change_room = function(_room) {
-		//log(_room);
-		current_room = _room;
-		rpc.sendNotification("change_room", [_room,true], roomSockets);
-    }
-	
-	update_enemy = function(_ene) {
-		enemies[_ene[4]].x = _ene[0];
-		enemies[_ene[4]].y = _ene[1];
-		enemies[_ene[4]].sprite_index = _ene[2];
-		enemies[_ene[4]].image_index = _ene[3];
-    }
-	
-	spawn_enemy_shot = function(_shot){
-		//kys
-	}
+	rpc.registerHandler("set_nickname", function(_nick, _client){
+		//log("new nickname set")
+		_client.nickname = _nick;
+		nicknames[_client.id] = _nick;
+		for(var q = 0; q < array_length(nicknames); q++){
+			rpc.sendNotification("update_names", [nicknames[q], q], roomSockets);
+		}
+		//array_push(nicknames, _nick);
+	});
 	
 	rpc.registerHandler("ping", function(_time, _socket) {
-		//log("i was pinged i work i swear")
         return _time;
     });
 	
-	rpc.registerHandler("chat", function(_time, _socket) {
+	rpc.registerHandler("chat message", function(_time, _socket) {
 		//log(_time)
         rpc.sendNotification("chat", _time, roomSockets);
-    });
-	
-	rpc.registerHandler("spawn_enemy", function(_time, _socket) {
-		//log(_time)
-        var _e = instance_create_layer(_time[1],_time[2],_time[3],_time[0]);
-		_e.dies_when_offscreen = false;
-		_e.network_id = _time[4]
-		enemies[_time[4]] = _e;
-    });
-	
-	rpc.registerHandler("Hurt_enemy", function(_time, _socket) {
-        rpc.sendNotification("hurt_enemy", _time, roomSockets);
     });
 	
 	rpc.registerHandler("update_all", function(_info, _socket) {
@@ -128,75 +195,34 @@ function GameServer(_port) : TCPServer(_port) constructor{
 		}
 		//log(_socket);
     });
-	
-	rpc.registerHandler("spawn_pickup_2", function(_pos, _client) {
-		rpc.sendNotification("spawn_pickup_2", _pos, roomSockets);
-    });
-	
-	rpc.registerHandler("spawn_shot", function(_pos, _client) {
-		rpc.sendNotification("spawn_shot", _pos, roomSockets);
-    });
+	#region connect and disconnect
+	leaveRoom = function(_client) {
+        var _socket = _client.socket;
+        var _index = array_get_index(roomSockets, _socket);
+        if (_index != -1) {
+            array_delete(roomSockets, _index, 1);
+            array_delete(player_x, _index, 1);
+            array_delete(player_x_vel, _index, 1);
+            array_delete(player_y, _index, 1);
+            array_delete(player_y_vel, _index, 1);
+            array_delete(player_sprite, _index, 1);
+            array_delete(player_frame, _index, 1);
+            array_delete(player_dir, _index, 1);
+            array_delete(player_palette, _index, 1);
+            array_delete(nicknames, _index, 1);
+        }
+		rpc.sendNotification("haul_ass", true, roomSockets);
+    }
 	
 	rpc.registerHandler("room_join", function(_param, _client){
 		//log("joined room")
 		array_push(roomSockets, _client.socket)
 		rpc.sendNotification("change_room", [current_room], _client.socket);
 	});
-	
-	rpc.registerHandler("set_nickname", function(_nick, _client){
-		//log("new nickname set")
-		_client.nickname = _nick;
-		nicknames[_client.id] = _nick;
-		for(var q = 0; q < array_length(nicknames); q++){
-			rpc.sendNotification("update_names", [nicknames[q], q], roomSockets);
-		}
-		//array_push(nicknames, _nick);
-	});
-	
-	setEvent("error", function(_err) {
-        show_debug_message(_err);
-    });
-	
-	setEvent("step", function(){
-		if(tick_timer > 60 / tick_rate){
-			if(instance_exists(obj_pvp_powerup_spawner)){
-				for(var q = 0; q < instance_number(obj_pvp_powerup_spawner);q++){
-					var _pvp = instance_find(obj_pvp_powerup_spawner,q);
-					if(_pvp.spawn){
-			rpc.sendNotification("PVP Update Spawners",
-			[q, _pvp.powerup_selection[irandom_range(0, array_length(_pvp.powerup_selection) - 1)]],
-			roomSockets);
-						_pvp.spawn_timer = 0;
-					}
-				}
-			}
-			tick_timer = 0;
-		} else {
-			tick_timer++;
-		}
-	});
-	
-	setEvent("connected", function(_client){
-		rpc.sendNotification("update_player_id", [_client.id,global.pvp], _client.socket);
-		rpc.sendNotification("update_player_char", global.character_selected[0], _client.socket);
-		rpc.sendNotification("rollback_spawn_player",_client.id,roomSockets)
-	});
-	
-	setEvent("disconnected", function(_client) {
-		leaveRoom(_client);
-	});
-	
-	createClient = function(_id, _socket) {
-        return new ConnectedClient(_id, _socket);
+	#endregion
+	change_room = function(_room) {
+		//log(_room);
+		current_room = _room;
+		rpc.sendNotification("change_room", [_room,true], roomSockets);
     }
-	
-	start();
-}
-
-function ConnectedClient(_id, _socket) : BaseClient(_id, _socket) constructor {
-	self.nickname = "";
-	self.x = 0;
-	self.y = 0;
-	self.sprite = spr_x_idle;
-	self.frame = 0;
 }

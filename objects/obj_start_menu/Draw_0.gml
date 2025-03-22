@@ -1,6 +1,13 @@
 draw_set_offset(0, 0);
 
 switch(state) {
+	case menu_states.title:
+		draw_sprite_ext(title_sprite,0,x,y - (floor(ts_time) * ts_height) * ts_pixels_shown,1,ts_height,0,c_white,1);
+		draw_sprite_ext(spr_square_16,0,x,ts_time * 2, 32,32,0,c_black,1);
+		if(ts_time > ts_height)
+			draw_sprite_ext(big_x,0,208,62,1,(4 - (ts_time - ts_height)) * 16, 0,c_white,1);
+	break;
+	
 	#region Main
 	case menu_states.main:
 		//draw_sprite(spr_start_menu, 0, 0, 0);

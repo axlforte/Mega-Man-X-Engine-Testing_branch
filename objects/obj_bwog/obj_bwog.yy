@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sleeping_bwog",
-    "path":"sprites/sleeping_bwog/sleeping_bwog.yy",
+    "name":"spr_sleeping_bwog",
+    "path":"sprites/spr_sleeping_bwog/spr_sleeping_bwog.yy",
   },
   "spriteMaskId":null,
   "visible":true,

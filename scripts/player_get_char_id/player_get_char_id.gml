@@ -4,7 +4,7 @@ function player_get_char_id() {
 		length
 	}
 
-	switch (argument[0]) {
+	switch (string_lower(argument[0])) {
 		case "x": return pl_char.x; break;	
 		case "zero": return pl_char.zero; break;	
 		case "axl": return pl_char.axl; break;	

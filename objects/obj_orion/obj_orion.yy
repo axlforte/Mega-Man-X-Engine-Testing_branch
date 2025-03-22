@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Orion",
-    "path":"sprites/Orion/Orion.yy",
+    "name":"spr_orion_oldasf",
+    "path":"sprites/spr_orion_oldasf/spr_orion_oldasf.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -147,4 +147,10 @@ function player_shot_start() {
 	// Local Game Speed
 	local_game_speed_init();
 	using_world_speed = false;
+	
+	server_shot_id = -1;
+	client_shot_id = global.player_server_id;
+	if(global.is_online){
+		server_shot_id = global.client.createProjectile(self);
+	}
 }

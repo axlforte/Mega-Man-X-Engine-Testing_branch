@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"scr_chat",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_chat",
+  "parent":{
+    "name":"Netcode",
+    "path":"folders/Scripts/Netcode.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

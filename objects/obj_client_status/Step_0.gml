@@ -1,11 +1,5 @@
+global.chat.step();
 if(keyboard_check_pressed(ord("t"))){
-	chatting = !chatting;
-	keyboard_string = "";
-	
-	global.chat_string = chat_string;
-	chat_string = "";
-}
-
-if(chatting){
-	chat_string = keyboard_string;
+	var _chat = get_string("Chat Message", "");
+	global.chat_string = _chat;
 }

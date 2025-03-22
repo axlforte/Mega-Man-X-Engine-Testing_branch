@@ -28,8 +28,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"broken_port_to_devroom",
-    "path":"sprites/broken_port_to_devroom/broken_port_to_devroom.yy",
+    "name":"spr_broken_port_to_devroom",
+    "path":"sprites/spr_broken_port_to_devroom/spr_broken_port_to_devroom.yy",
   },
   "spriteMaskId":null,
   "visible":true,

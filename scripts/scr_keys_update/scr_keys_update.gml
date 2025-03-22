@@ -42,8 +42,11 @@ function scr_keys_update() {
 			key_p_start = (!key_start && keyboard_check(global.key_start));
 			key_start = keyboard_check(global.key_start);
 			
-			key_p_select = (!key_start && keyboard_check(global.key_select));
+			key_p_select = (!key_select && keyboard_check(global.key_select));
 			key_select = keyboard_check(global.key_select);
+			
+			key_p_chat = (!key_chat && keyboard_check(global.key_chat));
+			key_chat = keyboard_check(global.key_chat);
 		}
 	} else {
 		if (instance_exists(obj_mobile_btn_dpad)) {
@@ -83,6 +86,12 @@ function scr_keys_update() {
 	
 		key_p_wp2 = (!key_p_wp2 && keyboard_check_pressed(global.key_weapon2));
 		key_wp2 = keyboard_check(global.key_weapon2);
+		
+		key_p_select = (!key_select && keyboard_check_pressed(global.key_select));
+		key_select = keyboard_check(global.key_select);
+			
+		key_p_chat = (!key_chat && keyboard_check_pressed(global.key_chat));
+		key_chat = keyboard_check(global.key_chat);
 	}
 
 	if (global.settings[1] == input_types.gamepad) {

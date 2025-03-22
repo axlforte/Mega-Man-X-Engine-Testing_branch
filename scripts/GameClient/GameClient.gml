@@ -2,9 +2,132 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	ping = 0;
 	nickname = "";
 	players = [];
-	enemies = [];
+	shots = array_create(32,[]);
+	client_chat = new ClientChatRPC();
 	tick_rate = global.tick_rate;
 	tick_timer = 0;
+	is_connected = false;
+	last_created_shot = noone;
+	
+	ClientFunctions();
+	
+	CSD = new ClientShotData();
+	CPD = new ClientPlayerData();
+	CVD = new ClientVariousData();
+	
+	setEvent("connected", function() {
+		ClientConnect();
+	});
+	
+	setEvent("step", function() {
+		ClientStep();
+	});
+	
+	start();
+}
+
+function ClientConnect(){
+	is_connected = true;
+	global.is_online = true;
+	global.client = self;
+	var _chr = pl_char.x;
+	if(instance_exists(obj_player_zero))
+		_chr = pl_char.zero
+	if(instance_exists(obj_player_axl))
+		_chr = pl_char.axl
+	if(instance_exists(obj_player_megaman))
+		_chr = pl_char.megaman
+	settings_load();
+	settings_apply();
+	log(global.username + " is the current username.")
+	var _nick = get_string("Username", global.username);
+	global.username = _nick;
+		log(global.username + " is the new current username.")
+	nickname = _nick;
+	settings_save();
+	sendPing();
+	rpc.sendNotification("room_join");
+	rpc.sendNotification("set_nickname", _nick);
+	rpc.sendNotification("update_player_char", _chr);
+}
+
+function ClientStep(){
+	if(!is_connected || !instance_exists(obj_player_parent)) return;
+	if(tick_timer > 60 / tick_rate && instance_exists(obj_player_parent)){
+		var _p =  instance_nearest(0,0,obj_player_parent);
+		var _x = instance_nearest(0,0,obj_player_parent).x;
+		var _y = instance_nearest(0,0,obj_player_parent).y;
+		_x = floor(_x);
+		_y = floor(_y);
+			
+		//actual rollback. sends keys and predicts they will keep pressing keys
+		if(global.rollback){
+			rpc.sendNotification("rollback_keys", [
+			global.player_server_id,
+			_x,
+			_y,
+			_p.key_left,
+			_p.key_right,
+			_p.key_up,
+			_p.key_down,
+			_p.key_dash,
+			_p.key_jump,
+			_p.key_shoot,
+			_p.key_shoot2,
+			_p.key_special,
+			_p.key_special2,
+			_p.key_wp1,
+			_p.key_wp2,
+			_p.state
+			]);
+		} else {
+			//delay based. this one actually fucking works
+			var _spr = _p.pl_sprite;
+			var _frm = global.player_sprite_index;
+			var _dir = _p.image_xscale * _p.dir * (_p.state == states.wall_slide && _frm > 0 ? -1 : 1);
+			var _plt = global.player_palette_index;
+			var _mvx = 0;
+			var _st = _p.state;
+			if(variable_instance_exists(_p,"move")){
+				_mvx = _p.move*_p.walk_speed * (2/3);
+					
+				var _mv_except = [
+					states.idle,
+					states.crouch,
+					states.intro,
+					states.complete,
+					states.wall_slide,
+					states.dolor,
+					states.death,
+					states.dead
+				]
+					
+				for(var e = 0; e < alength(_mv_except); e++){
+					if(_st == _mv_except[e])
+						_mvx = 0;
+				}
+			}
+			rpc.sendNotification("update_all", 
+			[_x,_y,_spr,_frm,_dir,_plt,
+			_mvx
+			,_p.v_speed,
+			(_p.state != states.fall && _p.state != states.jump ? _p.grav / 3 : 0),
+			_p.key_right,
+			_p.key_left,
+			_p.key_down,
+			_p.animation_frames,
+			_p.animation_loop,
+			_p.animation_i
+			]);
+		}
+		tick_timer = 0;
+	}
+		tick_timer++;
+}
+	
+// dark, if you see this and think 'this is terrible code'
+// i wouldnt blame you. there's gotta be something im missing.
+function ClientFunctions(){
 	sendPing = function() {
         // Wait 1 second to send ping
         call_later(1, time_source_units_seconds, function() {
@@ -21,76 +144,66 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
         });
     }
 	
+	createProjectile = function(_shot) {
+		
+		if(object_get_name(_shot.object_index) == "obj_pvp_projectile") return;
+		
+		var _server_shot_id = array_length(shots[global.player_server_id]);
+		
+		array_push(shots[global.player_server_id],_shot);// this gets the shot into the right spot we want it at
+		//log(string(_shot) + "\nshot info");
+		rpc.sendNotification("create projectile", 
+		[_shot.sprite_index,_shot.image_index,_shot.x,_shot.y,
+		_shot.v_speed,_shot.h_speed, _server_shot_id,global.player_server_id]);
+		return _server_shot_id;
+    }
+	
 	pingProjectile = function(_shot) {
-        rpc.sendNotification("spawn_shot", _shot);
+		if(object_get_name(_shot.object_index) == "obj_pvp_projectile") return;
+		//log("update dammit")
+		rpc.sendNotification("update projectile", 
+		[_shot.sprite_index,_shot.image_index,_shot.x,_shot.y,
+		_shot.v_speed,_shot.h_speed, _shot.server_shot_id,global.player_server_id]);
     }
 	
-	pingChat = function(_string) {
-        rpc.sendNotification("chat", _string);
-    }
-	
-	spawn_enemy = function(_params) {
-		 rpc.sendNotification("spawn_enemy", _params);
+	KillProjectile = function(_shot){
+		if(object_get_name(_shot.object_index) == "obj_pvp_projectile") return;
+		log(string(_shot.server_shot_id) + " is the shot id. it wants to die!")
+		rpc.sendNotification("kill projectile", _shot);
 	}
+}
+
+function ClientPlayerData() constructor{
+	client = other;
 	
-	hurt_enemy = function(_params) {
-		 rpc.sendNotification("Hurt_enemy", _params);
-	}
-	
-	rpc.registerHandler("haul_ass", function(_pos) {
-		global.player_xs = [];
-		global.player_ys = [];
-		global.player_sprites = [];
-		global.player_frames = [];
-		global.player_dirs = [];
-		global.player_chars = [];
-		global.player_names = [];
-		global.player_palettes = [];
-		global.player_x_vel = [];
-		global.player_y_vel = [];
-		global.player_key_lefts = [];
-		global.player_key_rights = [];
-		global.player_key_downs = [];
-		var _nick = global.username;
-		rpc.sendNotification("set_nickname", _nick);
-		rpc.sendNotification("update_player_id", _nick);
+	client.rpc.registerHandler("update_all", function(_pos) {
+		array_set(global.player_xs,               _pos[0], _pos[1]);
+		array_set(global.player_ys,               _pos[0], _pos[2]);
+		array_set(global.player_sprites,          _pos[0], _pos[3]);
+		array_set(global.player_frames,           _pos[0], _pos[4]);
+		array_set(global.player_dirs,             _pos[0], _pos[5]);
+		array_set(global.player_chars,            _pos[0], _pos[6]);
+		array_set(global.player_names,            _pos[0], _pos[7]);
+		array_set(global.player_palettes,         _pos[0], _pos[8]);
+		array_set(global.player_x_vel,            _pos[0], _pos[9]);
+		array_set(global.player_y_vel,            _pos[0], _pos[10]);
+		array_set(global.player_grav,             _pos[0], _pos[11]);
+		array_set(global.server_enemies,          _pos[0], _pos[12]);
+		array_set(global.player_key_rights,       _pos[0], _pos[13]);
+		array_set(global.player_key_lefts,        _pos[0], _pos[14]);
+		array_set(global.player_key_downs,        _pos[0], _pos[15]);
+		array_set(global.player_animation_frames, _pos[0], _pos[16]);
+		array_set(global.player_animation_loops,  _pos[0], _pos[17]);
+		array_set(global.player_frame_counts,     _pos[0], _pos[18]);
+		array_set(global.player_x_prevs,          _pos[0], global.player_xs[_pos[0]]);
 	});
 	
-	rpc.registerHandler("chat", function(_pos) {
-		var _chat = instance_create_depth(0, 0, 0, obj_chat);
-		_chat.strin = _pos;
+	client.rpc.registerHandler("update_player_id", function(_pos) {
+		global.player_server_id = _pos[0];
+		global.pvp = _pos[1];
 	});
 	
-	rpc.registerHandler("PVP Update Spawners", function(_spawner){
-		if(instance_exists(obj_pvp_powerup_spawner)){
-			for(var q = 0; q < instance_number(obj_pvp_powerup_spawner);q++){
-				var _pvp = instance_find(obj_pvp_powerup_spawner,q);
-				_pvp.spawn = true;
-			}
-		}
-	})
-	
-	rpc.registerHandler("spawn_shot", function(_pos) {
-		if(_pos[4] == global.player_server_id) return;
-		var _p = instance_create_depth(_pos[1], _pos[2], 0, _pos[0]);
-		_p.dir = _pos[3];
-		_p.image_xscale = _p.dir;
-		_p.owner = _p;
-		_p.shot_angle = _pos[4];
-		_p.dmg = 0;
-		_p.hurt_players = global.pvp;
-		_p.destroy_when_off_screen = false;
-	});
-	
-	rpc.registerHandler("spawn_enemy", function(_pos) {
-		if(instance_position(_pos[1],_pos[2],_pos[0])) { return; }
-		var _e = instance_create_layer(_pos[1],_pos[2],_pos[3],_pos[0]);
-		_e.dies_when_offscreen = false;
-		_e.network_id = _pos[4]
-		global.server_enemies[_pos[4]] = _e;
-	});
-	
-	rpc.registerHandler("rollback_spawn_player", function(_pos) {
+	client.rpc.registerHandler("rollback_spawn_player", function(_pos) {
 		global.player_Server_update = false;
 		var _p = instance_create_depth(global.player_x, global.player_y, 0, obj_player_online);
 		with(obj_player_online){
@@ -99,7 +212,7 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		players[_pos] = _p;
 	});
 	
-	rpc.registerHandler("rollback_keys", function(_info){
+	client.rpc.registerHandler("rollback_keys", function(_info){
 		players[_info[0]].x =            _info[1];
 		players[_info[0]].y =            _info[2];
 		players[_info[0]].key_left =     _info[3];
@@ -117,126 +230,91 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 		players[_info[0]].state =        _info[15];
 	});
 	
-	rpc.registerHandler("hurt_enemy", function(_pos) {
-		//if(_pos[2] == global.player_server_id){ return;}
-		log(string(array_length(global.server_enemies)) + " length of enemies")
-		for(var q = 0; q < array_length(global.server_enemies); q++){
-			log(string(global.server_enemies[q].network_id) + " id")
-			log(string(_pos[0]) + " pos")
-			if(global.server_enemies[q].network_id == _pos[0]){
-				scr_weapon_apply_damage(global.server_enemies[q], _pos[1]);
+	client.rpc.registerHandler("haul_ass", function(_pos) {
+		global.player_xs = [];
+		global.player_ys = [];
+		global.player_sprites = [];
+		global.player_frames = [];
+		global.player_dirs = [];
+		global.player_chars = [];
+		global.player_names = [];
+		global.player_palettes = [];
+		global.player_x_vel = [];
+		global.player_y_vel = [];
+		global.player_key_lefts = [];
+		global.player_key_rights = [];
+		global.player_key_downs = [];
+		var _nick = global.username;
+		client.rpc.sendNotification("set_nickname", _nick);
+		client.rpc.sendNotification("update_player_id", _nick);
+	});
+}
+
+function ClientShotData() constructor{
+	client = other;
+	
+	client.rpc.registerHandler("create projectile", function(_pos) {
+		//log("google " + string(_pos[7]));
+		var _proj = instance_create_depth(_pos[2],_pos[3],0,obj_pvp_projectile);
+		_proj.sprite_index = _pos[0];
+		_proj.image_index = _pos[1];
+		_proj.x = _pos[2];
+		_proj.y = _pos[3];
+		_proj.v_speed = _pos[4];
+		_proj.h_speed = _pos[5];
+		_proj.server_shot_id = _pos[6];
+		_proj.client_shot_id = _pos[7];
+		array_push(shots[_pos[7]], _proj);
+		
+		if(_pos[7] == global.player_server_id)global.client.shots[_pos[7]][_pos[6]] = -1;
+	});
+	
+	client.rpc.registerHandler("update projectile", function(_proj){
+		for(var q = 0; q < instance_number(obj_player_shot_parent); q++){
+			//[sprite_index,image_index,x,y,v_speed,h_speed,server_shot_id]
+			
+			if(instance_find(obj_player_shot_parent,q).server_shot_id == _proj[6]){
+				if(object_get_name(instance_find(obj_player_shot_parent,q).object_index) == "obj_pvp_projectile"){
+					var _shot = instance_find(obj_player_shot_parent,q);
+					
+					if(global.client.shots[_proj[7]][_proj[6]] == -1){
+						//log(_shot);
+						instance_destroy(_shot);
+					}
+					_shot.sprite_index = _proj[0];
+					_shot.image_index = _proj[1];
+					_shot.x = _proj[2];
+					_shot.y = _proj[3];
+					_shot.v_speed = _proj[4];
+					_shot.h_speed = _proj[5];
+					//log("updates")
+					return;
+				}
 			}
 		}
 	});
 	
-	rpc.registerHandler("update_all", function(_pos) {
-		array_set(global.player_xs,        _pos[0], _pos[1]);
-		array_set(global.player_ys,        _pos[0], _pos[2]);
-		array_set(global.player_sprites,   _pos[0], _pos[3]);
-		array_set(global.player_frames,    _pos[0], _pos[4]);
-		array_set(global.player_dirs,      _pos[0], _pos[5]);
-		array_set(global.player_chars,     _pos[0], _pos[6]);
-		array_set(global.player_names,     _pos[0], _pos[7]);
-		array_set(global.player_palettes,  _pos[0], _pos[8]);
-		array_set(global.player_x_vel,     _pos[0], _pos[9]);
-		array_set(global.player_y_vel,     _pos[0], _pos[10]);
-		array_set(global.player_grav,      _pos[0], _pos[11]);
-		array_set(global.server_enemies,   _pos[0], _pos[12]);
-		array_set(global.player_key_rights,_pos[0], _pos[13]);
-		array_set(global.player_key_lefts, _pos[0], _pos[14]);
-		array_set(global.player_key_downs, _pos[0], _pos[15]);
-		array_set(global.player_x_prevs,   _pos[0], global.player_xs[_pos[0]]);
+	client.rpc.registerHandler("kill projectile", function(_proj){
+		//log("literally anything");
+		global.client.shots[_proj[7]][_proj[6]] = -1;
+		//log("didnt find it");
+	});
+}
+
+function ClientVariousData() constructor{
+	client = other;
+	
+	client.rpc.registerHandler("PVP Update Spawners", function(_spawner){
+		if(instance_exists(obj_pvp_powerup_spawner)){
+			for(var q = 0; q < instance_number(obj_pvp_powerup_spawner);q++){
+				var _pvp = instance_find(obj_pvp_powerup_spawner,q);
+				_pvp.spawn = true;
+			}
+		}
 	});
 	
-	rpc.registerHandler("update_player_id", function(_pos) {
-		global.player_server_id = _pos[0];
-		global.pvp = _pos[1];
-	});
-	
-	rpc.registerHandler("change_room", function(_pos) {
+	client.rpc.registerHandler("change_room", function(_pos) {
 		if(room != _pos[0])
 			room_goto(_pos[0]);
 	});
-	
-	is_connected = false;
-	
-	setEvent("connected", function() {
-		is_connected = true;
-		global.is_online = true;
-		global.client = self;
-		var _chr = pl_char.x;
-		if(instance_exists(obj_player_zero))
-			_chr = pl_char.zero
-		if(instance_exists(obj_player_axl))
-			_chr = pl_char.axl
-		if(instance_exists(obj_player_megaman))
-			_chr = pl_char.megaman
-		var _nick = get_string("Username", global.username);
-		global.username = _nick;
-		settings_save();
-		sendPing();
-		rpc.sendNotification("room_join");
-		rpc.sendNotification("set_nickname", _nick);
-		rpc.sendNotification("update_player_char", _chr);
-	});
-	
-	setEvent("step", function() {
-		if(!is_connected || !instance_exists(obj_player_parent)) return;
-		if(tick_timer > 60 / tick_rate && instance_exists(obj_player_parent)){
-			var _p =  instance_nearest(0,0,obj_player_parent);
-			var _x = instance_nearest(0,0,obj_player_parent).x;
-			var _y = instance_nearest(0,0,obj_player_parent).y;
-			_x = floor(_x);
-			_y = floor(_y);
-			
-			//actual rollback. sends keys and predicts they will keep pressing keys
-			if(global.rollback){
-				rpc.sendNotification("rollback_keys", [
-				global.player_server_id,
-				_x,
-				_y,
-				_p.key_left,
-				_p.key_right,
-				_p.key_up,
-				_p.key_down,
-				_p.key_dash,
-				_p.key_jump,
-				_p.key_shoot,
-				_p.key_shoot2,
-				_p.key_special,
-				_p.key_special2,
-				_p.key_wp1,
-				_p.key_wp2,
-				_p.state
-				]);
-			} else {
-				//delay based. this one actually fucking works
-				var _spr = _p.pl_sprite;
-				var _frm = global.player_sprite_index;
-				var _dir = _p.image_xscale * _p.dir * (_p.state == states.wall_slide && _frm > 0 ? -1 : 1);
-				var _plt = global.player_palette_index;
-				var _mvx = _p.walk_speed;
-				var _st = _p.state;
-				if(variable_instance_exists(_p,"move")){
-				_mvx = (_st!=states.wall_slide && _st!=states.crouch && _st!=states.wall_jump &&
-				_st!=states.idle ? 
-				_p.move*_p.walk_speed * (2/3) : 0)
-				}
-				rpc.sendNotification("update_all", 
-				[_x,_y,_spr,_frm,_dir,_plt,
-				_mvx
-				,_p.v_speed,
-				(_p.state != states.fall && _p.state != states.jump ? _p.grav * 0.5 : 0),
-				_p.key_right,
-				_p.key_left,
-				_p.key_down
-				]);
-			}
-			tick_timer = 0;
-		} else {
-			tick_timer++;
-		}
-	});
-	
-	start();
 }

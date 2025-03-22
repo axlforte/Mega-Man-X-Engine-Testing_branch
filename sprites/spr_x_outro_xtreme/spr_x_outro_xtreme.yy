@@ -31,8 +31,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Xtreme",
-    "path":"folders/Sprites/Player/Characters/X/Armors/Xtreme.yy",
+    "name":"Full",
+    "path":"folders/Sprites/Player/Characters/X/Armors/Xtreme/Full.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

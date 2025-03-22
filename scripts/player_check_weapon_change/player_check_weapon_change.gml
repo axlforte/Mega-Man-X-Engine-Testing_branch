@@ -10,9 +10,9 @@ function player_check_weapon_change() {
 	if (change_dir != 0) {
 		do {
 			weapon_id = (weapon_id + change_dir + WEAPONS.length) mod WEAPONS.length;
-			log(weapon_id)
-			log(weapon_slot_handler.get_enabled(weapon_id))
-			log(weapon_list[weapon_id])
+			//log(weapon_id)
+			//log(weapon_slot_handler.get_enabled(weapon_id))
+			//log(weapon_list[weapon_id])
 		}
 		until (weapon_slot_handler.get_weapon(weapon_id) != noone && weapon_slot_handler.get_enabled(weapon_id));
 	}

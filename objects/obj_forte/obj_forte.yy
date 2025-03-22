@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"forte_sit",
-    "path":"sprites/forte_sit/forte_sit.yy",
+    "name":"spr_forte_sit",
+    "path":"sprites/spr_forte_sit/spr_forte_sit.yy",
   },
   "spriteMaskId":null,
   "visible":true,
