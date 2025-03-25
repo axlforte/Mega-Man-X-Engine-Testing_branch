@@ -19,7 +19,7 @@ function player_x_buster_shadow(lvl = -1, t = 0) {
 			if (state != states.ceil_cling)
 			{
 				player_shoot_projectile(obj_player_x_shot_shadow_1);
-				shot_current_angle_index = (shot_current_angle_index + 1) mod array_length_1d(angles);
+				shot_current_angle_index = (shot_current_angle_index + 1) mod array_length(angles);
 				shot_angle = angles[shot_current_angle_index];
 			}
 			else

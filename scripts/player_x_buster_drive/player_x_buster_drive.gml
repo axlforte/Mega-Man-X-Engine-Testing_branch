@@ -10,17 +10,20 @@ function player_x_buster_drive() {
 	
 	
 
-	if(lvl < 9 && lvl > 3){
+	if(lvl < 10 && lvl > 3){
 		player_shoot_projectile(obj_player_x_shot_2_drive);
 		cst = 2;
-	} else if(lvl > 8 && lvl < 15){
+	} else if(lvl > 9 && lvl < 17){
 		player_shoot_projectile(obj_player_x_shot_3_drive);
-		cst = 3;
-	}else if(lvl >= 15){
+		cst = 2;
+	}else if(lvl >= 17){
 		player_shoot_projectile(obj_player_x_shot_4_drive);
-		cst = 6;
+		cst = 5;
 	} else if(lvl < 4 && lvl != 0){
 		player_shoot_projectile(obj_player_x_shot_1);
+	} else {
+		player_shoot_projectile(obj_player_dash_dust);
+		shots_count--;
 	}
 	
 	var wp = WEAPONS.x_buster;

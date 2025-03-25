@@ -23,6 +23,17 @@ function GameServer(_port) : TCPServer(_port) constructor{
 				}
 			}
 			tick_timer = 0;
+			
+			for(var e = 0; e > alength(shots); e++){
+				for(var f = 0; f > alength(shots[e]); f++){
+					shots[e][f][8]++;
+					if(shots[e][f][8] > projectile_existance_limit){
+						shots[e][f] = -1;
+					}
+				}
+			}
+			clearShotsArray();
+			rpc.sendNotification("update projectile", shots ,roomSockets);
 		}
 			tick_timer++;
 	});
@@ -79,20 +90,41 @@ function server_enemy_rpc(){
 	
 function server_projectile_rpc(){
 	rpc.registerHandler("update projectile", function(_pos, _client) {
+		//log(_pos)
+		if(alength(shots[_pos[7]][_pos[6]]) > 6)
+			_pos[8] = shots[_pos[7]][_pos[6]][8];
 		shots[_pos[7]][_pos[6]] = _pos;
-		rpc.sendNotification("update projectile", shots[_pos[7]][_pos[6]], roomSockets);
 	});
 	
 	rpc.registerHandler("create projectile", function(_pos, _client) {
-		//log("shot was requested")
 		array_push(shots[_pos[7]], _pos);
 		rpc.sendNotification("create projectile", _pos, roomSockets);
 	});
 	
 	rpc.registerHandler("kill projectile", function(_pos, _client) {
-		//log("somebody wants to die!")
-		rpc.sendNotification("kill projectile", _pos, roomSockets);
+		//log(string(_pos) + "wants to die! may as well")
+		shots[_pos.client_shot_id][_pos.server_shot_id] = -1;
+		//log(shots);
+		rpc.sendNotification("kill projectile", shots, roomSockets);
 	});
+	
+	clearShotsArray = function(){
+		var _new_array = [];
+		for(var e = 0; e < alength(shots); e++){
+			_new_array = [];
+			for(var f = 0; f < alength(shots[e]); f++){
+				if(shots[e][f] != 0 && shots[e][f] != -1){
+					if(alength(shots[e][f]) > 6){
+						shots[e][f][8]++;
+						if(shots[e][f][8] < projectile_existance_limit)
+							array_push(_new_array,shots[e][f]);
+					} else
+						array_push(_new_array,shots[e][f]);
+				}
+			}
+			shots[e] = _new_array;
+		}
+	}
 }
 	
 function server_rpc_variables(){
@@ -113,12 +145,14 @@ function server_rpc_variables(){
 	player_right = [];
 	player_down = [];
 	player_grav = [];
-	shots = array_create(35565,array_create(35565,0));
+	shots = [];
+	shots[0] = [];
 	shot_x = [];
 	shot_y = [];
 	shot_x_vel = [];
 	shot_y_vel = [];
 	enemies = [];
+	projectile_existance_limit = 120;
 	current_room = rm_headquarters;
 }
 

@@ -33,7 +33,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_x_shot_shadow_1",
+    "path":"sprites/spr_x_shot_shadow_1/spr_x_shot_shadow_1.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

@@ -4,6 +4,7 @@
   "eventList":[
     {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":2,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_chill_penguin_shot_1",
@@ -34,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_chill_penguin_shot_1",
-    "path":"sprites/spr_chill_penguin_shot_1/spr_chill_penguin_shot_1.yy",
+    "name":"spr_chill_penguin_shot_2",
+    "path":"sprites/spr_chill_penguin_shot_2/spr_chill_penguin_shot_2.yy",
   },
   "spriteMaskId":null,
   "visible":true,

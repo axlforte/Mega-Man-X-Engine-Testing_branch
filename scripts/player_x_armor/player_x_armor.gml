@@ -319,7 +319,7 @@ function player_x_armor() {
 			damage_reduction = 0.25;
 			dash_length = 24;
 			charge_unlocked = false;
-			G.weapon[WEAPONS.x_buster].energy_max = 15;
+			G.weapon[WEAPONS.x_buster].energy_max = 20;
 			global.weapon[WEAPONS.x_buster].code = player_x_buster_drive;
 			G.weapon[WEAPONS.x_buster].set_color(7);
 			

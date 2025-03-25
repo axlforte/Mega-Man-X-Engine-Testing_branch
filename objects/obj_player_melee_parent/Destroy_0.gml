@@ -8,5 +8,5 @@
 
 room_speed = 60;
 if(global.is_online){
-	global.client.shots[client_shot_id][server_shot_id] = -1;
+	global.client.KillProjectile(self);
 }

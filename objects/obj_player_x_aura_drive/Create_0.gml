@@ -2,7 +2,7 @@ event_inherited();
 lv = 4;
 atk = 2;
 ang = 0;
-boss_damage[? noone] = 2;
+boss_damage[? noone] = 0.25;
 shot_level = 2;
 hit_if_shot_level_is_equal = true;
 anti_destroy = true;

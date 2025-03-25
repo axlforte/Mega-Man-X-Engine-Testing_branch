@@ -159,7 +159,8 @@ function player_step() {
 }
 function player_weapon_demo() {
 	var t = floor(weapon_demo_t++);
-	key_p_shoot = (t == 60 || t == 180)
+	key_p_shoot = (t == 60 || t == 180);
+	key_shoot = (t == 60 || t == 180);
 	if (t > weapon_demo_limit) {
 		weapon_demo_finished = true;
 	}

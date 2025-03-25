@@ -9,5 +9,5 @@ if (instance_exists(owner) && owner.is_player) {
 }
 room_speed = 60;
 if(global.is_online && object_get_name(object_index) != "obj_pvp_projectile"){
-	global.client.shots[client_shot_id][server_shot_id] = -1;
+	global.client.KillProjectile(self);
 }

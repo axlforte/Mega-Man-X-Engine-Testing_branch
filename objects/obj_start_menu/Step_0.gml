@@ -638,6 +638,11 @@ switch (state) {
 	#endregion
 	#region Stage Select
 	case menu_states.stage_select:
+		if(state_timer == 0){
+			with(obj_player_shot_parent){
+				instance_destroy();
+			}
+		}
 		if (selected_item < 10) {
 			if (vinput_p != 0) {
 				if (selected_item < 5) selected_item += 5;
@@ -679,7 +684,7 @@ switch (state) {
 							tran.color = c_white;
 							tran.transition_limit = 16;
 							menu_set_state(menu_states.player_select, 16, 20);
-							selected_item = 5;
+							global.boss_selected = selected_item;
 							audio_play(snd_player_success);
 						}
 					}
@@ -795,10 +800,10 @@ switch (state) {
 				player_load_armor(true);
 				player_weapon_set(other.weapon_get_props.player.wp_slot, other.weapon_get_props.player.new_weapon);
 				weapon[0] = other.weapon_get_props.player.new_weapon;
-				plt_index = weapon_palettes[weapon[0]];
+				plt_index = global.weapon[weapon[0]].palette;
 				other.weapon_get_props.player.palette_swap = true;
 				if (!weapon_allow_pallete) {
-					if (plt_index == weapon_palettes[weapon[0]])
+					if (plt_index == global.weapon[weapon[0]].palette)
 						plt_index = plt_index_default;
 					other.weapon_get_props.player.palette_swap = false;
 				}
@@ -809,7 +814,7 @@ switch (state) {
 			if (weapon_get_props.player.palette_swap == false) {
 				weapon_get_props.player.palette_sprite = noone;	
 			}
-			show_debug_message(weapon_get_props.player.palette_array);
+			//show_debug_message(weapon_get_props.player.palette_array);
 		}
 		else if (t == weapon_get_props.dark_limit) {
 			
@@ -840,7 +845,12 @@ switch (state) {
 			}
 		} else {
 			if (instance_exists(obj_player_parent)) {
-				if (obj_player_parent.weapon_demo_finished) {			
+				if (obj_player_parent.weapon_demo_finished) {
+					if(wait_t == 1){
+						with(obj_player_shot_parent){
+							instance_destroy();
+						}
+					}
 					menu_set_state(menu_states.stage_select, 16, 60);
 					wait_t = 60;
 				}

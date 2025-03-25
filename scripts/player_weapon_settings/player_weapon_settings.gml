@@ -216,6 +216,9 @@ function global_weapon_Settings(){
 		//G.weapon[p].max_level = 0;
 	}
 	
+	G.weapon[WEAPONS.snow_drift].name = "SNOW DRIFT";
+	G.weapon[WEAPONS.pharoah_shot].name = "PHAROAH SHOT";
+	
 	// Palettes
 	G.weapon[WEAPONS.storm_tornado].set_palette(6);
 	G.weapon[WEAPONS.homing_torpedo].set_palette(9);

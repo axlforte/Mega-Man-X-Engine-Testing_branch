@@ -1,5 +1,6 @@
 event_inherited();
 sound = snd_player_x_shot_1;
+destroy_if_hit = true;
 
 atk = 2;
 //abs_hspeed = 4;
@@ -17,3 +18,7 @@ animation_add("loop",
 ], 0, 11);
 
 animation_play("loop");
+execute_step_in_first_frame = true;
+physics_ignore_frame = 1;
+blocked_reflect = true;
+destroy_reset_speed = false;

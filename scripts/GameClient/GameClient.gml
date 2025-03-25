@@ -1,6 +1,7 @@
 function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	ping = 0;
 	nickname = "";
+	shot_index = 0;
 	players = [];
 	shots = array_create(32,[]);
 	client_chat = new ClientChatRPC();
@@ -25,7 +26,6 @@ function GameClient(_ip, _port) : TCPSocket(_ip, _port) constructor {
 	
 	start();
 }
-
 function ClientConnect(){
 	is_connected = true;
 	global.is_online = true;
@@ -50,7 +50,6 @@ function ClientConnect(){
 	rpc.sendNotification("set_nickname", _nick);
 	rpc.sendNotification("update_player_char", _chr);
 }
-
 function ClientStep(){
 	if(!is_connected || !instance_exists(obj_player_parent)) return;
 	if(tick_timer > 60 / tick_rate && instance_exists(obj_player_parent)){
@@ -124,9 +123,6 @@ function ClientStep(){
 	}
 		tick_timer++;
 }
-	
-// dark, if you see this and think 'this is terrible code'
-// i wouldnt blame you. there's gotta be something im missing.
 function ClientFunctions(){
 	sendPing = function() {
         // Wait 1 second to send ping
@@ -137,6 +133,14 @@ function ClientFunctions(){
 					global.ping = _ping;
                 })
                 .onError(function(_error) { 
+					global.server = false;
+					audio_stop_all();
+					audio_group_set_gain(audiogroup_default, 1, 0);
+					global.player_lives = max(global.player_lives, 2);
+					room_goto(rm_start_menu);
+					global.start_menu_force_state = true;
+					global.start_menu_state = menu_states.main;
+					global.checkpoint = false;
                 })
                 .onFinally(function() {
                     sendPing();
@@ -148,22 +152,48 @@ function ClientFunctions(){
 		
 		if(object_get_name(_shot.object_index) == "obj_pvp_projectile") return;
 		
-		var _server_shot_id = array_length(shots[global.player_server_id]);
+		//var _my_tags = asset_get_tags(object_get_name(_shot.object_index));
+		//if(array_contains(_my_tags, "nopvp")) return;
 		
-		array_push(shots[global.player_server_id],_shot);// this gets the shot into the right spot we want it at
-		//log(string(_shot) + "\nshot info");
+		var _server_shot_id = 0;
+		var _fail = false;
+		if(array_length(shots) > global.player_server_id){
+			if(array_length(shots[global.player_server_id]) > 0){
+				_server_shot_id = shot_index++;
+				array_push(shots[global.player_server_id],_shot);
+			} else 
+				_fail = true;
+		} else 
+			_fail = true;
+			
+		if(_fail){
+			shots[global.player_server_id] = _shot;
+		}
+		
+		var _dir = 1;
+		if(variable_instance_exists(_shot,"dir"))
+			_dir = _shot.dir;
+		var _atk = _shot.atk;
+		if(object_get_name(_shot.object_index) == "obj_player_effect_parent"){_atk = -1;}
+		
 		rpc.sendNotification("create projectile", 
 		[_shot.sprite_index,_shot.image_index,_shot.x,_shot.y,
-		_shot.v_speed,_shot.h_speed, _server_shot_id,global.player_server_id]);
+		_shot.v_speed,_shot.h_speed, _server_shot_id,global.player_server_id, 0, _dir, _atk]);
 		return _server_shot_id;
     }
 	
 	pingProjectile = function(_shot) {
-		if(object_get_name(_shot.object_index) == "obj_pvp_projectile") return;
+		if(object_get_name(_shot.object_index) == "obj_pvp_projectile"){return;}
+		var _atk = _shot.atk;
+		if(object_get_name(_shot.object_index) == "obj_player_effect_parent"){_atk = -1;}
 		//log("update dammit")
+		
+		var _dir = 1;
+		if(variable_instance_exists(_shot,"dir"))
+			_dir = _shot.dir;
 		rpc.sendNotification("update projectile", 
 		[_shot.sprite_index,_shot.image_index,_shot.x,_shot.y,
-		_shot.v_speed,_shot.h_speed, _shot.server_shot_id,global.player_server_id]);
+		_shot.v_speed,_shot.h_speed, _shot.server_shot_id,global.player_server_id, 0, _dir,_atk]);
     }
 	
 	KillProjectile = function(_shot){
@@ -172,7 +202,6 @@ function ClientFunctions(){
 		rpc.sendNotification("kill projectile", _shot);
 	}
 }
-
 function ClientPlayerData() constructor{
 	client = other;
 	
@@ -249,12 +278,15 @@ function ClientPlayerData() constructor{
 		client.rpc.sendNotification("update_player_id", _nick);
 	});
 }
-
 function ClientShotData() constructor{
 	client = other;
 	
 	client.rpc.registerHandler("create projectile", function(_pos) {
 		//log("google " + string(_pos[7]));
+		if(_pos[7] == global.player_server_id){return;}
+		
+		
+		
 		var _proj = instance_create_depth(_pos[2],_pos[3],0,obj_pvp_projectile);
 		_proj.sprite_index = _pos[0];
 		_proj.image_index = _pos[1];
@@ -264,43 +296,25 @@ function ClientShotData() constructor{
 		_proj.h_speed = _pos[5];
 		_proj.server_shot_id = _pos[6];
 		_proj.client_shot_id = _pos[7];
+		if(variable_instance_exists(_proj,"dir")){
+			_proj.dir = _pos[9];
+		}
 		array_push(shots[_pos[7]], _proj);
 		
 		if(_pos[7] == global.player_server_id)global.client.shots[_pos[7]][_pos[6]] = -1;
 	});
 	
-	client.rpc.registerHandler("update projectile", function(_proj){
-		for(var q = 0; q < instance_number(obj_player_shot_parent); q++){
-			//[sprite_index,image_index,x,y,v_speed,h_speed,server_shot_id]
-			
-			if(instance_find(obj_player_shot_parent,q).server_shot_id == _proj[6]){
-				if(object_get_name(instance_find(obj_player_shot_parent,q).object_index) == "obj_pvp_projectile"){
-					var _shot = instance_find(obj_player_shot_parent,q);
-					
-					if(global.client.shots[_proj[7]][_proj[6]] == -1){
-						//log(_shot);
-						instance_destroy(_shot);
-					}
-					_shot.sprite_index = _proj[0];
-					_shot.image_index = _proj[1];
-					_shot.x = _proj[2];
-					_shot.y = _proj[3];
-					_shot.v_speed = _proj[4];
-					_shot.h_speed = _proj[5];
-					//log("updates")
-					return;
-				}
-			}
-		}
+	client.rpc.registerHandler("update projectile", function(_shots){
+		global.client.shots = _shots;
 	});
 	
 	client.rpc.registerHandler("kill projectile", function(_proj){
 		//log("literally anything");
 		global.client.shots[_proj[7]][_proj[6]] = -1;
+		log(global.client.shots)
 		//log("didnt find it");
 	});
 }
-
 function ClientVariousData() constructor{
 	client = other;
 	

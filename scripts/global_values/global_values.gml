@@ -92,6 +92,8 @@ function global_values() {
 	global.magma_dragoon_defeat = 0;
 	global.unarmored_x_defeat = 0;
 	global.unarmored_axl_defeat = 0;
+	global.boss_selected = -1;
+	global.new_special_weapon = WEAPONS.homing_torpedo;
 	global.show_fps = false;
 	// Replay
 	global.recording_replay = false;

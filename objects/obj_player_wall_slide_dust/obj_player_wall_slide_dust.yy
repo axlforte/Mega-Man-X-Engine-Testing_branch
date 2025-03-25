@@ -39,5 +39,8 @@
     "path":"sprites/spr_player_dash_dust/spr_player_dash_dust.yy",
   },
   "spriteMaskId":null,
+  "tags":[
+    "nopvp",
+  ],
   "visible":true,
 }

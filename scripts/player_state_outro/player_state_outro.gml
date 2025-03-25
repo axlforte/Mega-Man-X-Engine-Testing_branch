@@ -41,7 +41,11 @@ function player_state_outro() {
 				global.player_lives = max(global.player_lives, 2);
 				room_goto(rm_start_menu);
 				global.start_menu_force_state = true;
-				global.start_menu_state = menu_states.stage_select;
+				if(global.boss_info[global.boss_slot[global.boss_selected]][5] != -1){
+					global.start_menu_state = menu_states.weapon_get;
+					G.new_special_weapon = G.boss_info[G.boss_slot[G.boss_selected]][5];
+				}else
+					global.start_menu_state = menu_states.stage_select;
 				global.checkpoint = false;
 			}
 		break;

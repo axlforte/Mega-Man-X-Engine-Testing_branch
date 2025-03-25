@@ -39,6 +39,9 @@
     "name":"spr_x_shot_storm_tornado_mask",
     "path":"sprites/spr_x_shot_storm_tornado_mask/spr_x_shot_storm_tornado_mask.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"spr_x_shot_storm_tornado_mask",
+    "path":"sprites/spr_x_shot_storm_tornado_mask/spr_x_shot_storm_tornado_mask.yy",
+  },
   "visible":true,
 }

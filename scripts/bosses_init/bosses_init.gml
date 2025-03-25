@@ -26,39 +26,39 @@ function bosses_init() {
 #endregion
 #region Bosses Info
 	// Needs refactoring: use struct
-	// [name, boss_icon, stage_icon, room, object]
+	// [name, boss_icon, stage_icon, room, object, weapon]
 	global.boss_info[e_boss.hq] = 
-	["", spr_hq_icon, -1, rm_headquarters, -1];
+	["", spr_hq_icon, -1, rm_headquarters, -1, -1];
 	
 	global.boss_info[e_boss.pvp_map] = 
-	["", spr_engine_icon, -1, rm_headquarters, -1];
+	["", spr_engine_icon, -1, rm_headquarters, -1, -1];
 
 	global.boss_info[e_boss.engine] = 
-	["", spr_engine_icon, spr_stage_hq, rm_full_testing_stage, -1];
+	["", spr_engine_icon, spr_stage_hq, rm_full_testing_stage, -1, -1];
 	
 	global.boss_info[e_boss.blade_man] = 
-	["BLADE MAN", spr_blade_man_icon, spr_stage_hq, rm_blade_man, -1];
+	["BLADE MAN", spr_blade_man_icon, spr_stage_hq, rm_blade_man, -1, -1];
 
 	global.boss_info[e_boss.intro] = 
-	["", spr_blade_man_icon, -1, rm_forte_was_bored, -1];
+	["", spr_blade_man_icon, -1, rm_forte_was_bored, -1, -1];
 
 	global.boss_info[e_boss.chill_penguin] = 
-	["CHILL PENGUIN", spr_chill_penguin_icon, spr_stage_snow_mountain, rm_chill_penguin, obj_chill_penguin_intro];
+	["CHILL PENGUIN", spr_chill_penguin_icon, spr_stage_snow_mountain, rm_chill_penguin, obj_chill_penguin_intro, WEAPONS.snow_drift];
 
 	global.boss_info[e_boss.storm_eagle] = 
-	["STORM EAGLE", spr_storm_eagle_icon, spr_7th_airborne_unit, rm_storm_eagle, obj_storm_eagle_intro];
+	["STORM EAGLE", spr_storm_eagle_icon, spr_7th_airborne_unit, rm_storm_eagle, obj_storm_eagle_intro, -1];
 
 	global.boss_info[e_boss.flame_stag] = 
-	["WAIT YOU ARE NOT FLAME STAG", spr_flame_stag_icon, spr_stage_snow_mountain, rm_test_stage, obj_chill_penguin_intro];
+	["WAIT YOU ARE NOT FLAME STAG", spr_flame_stag_icon, spr_stage_snow_mountain, rm_test_stage, obj_chill_penguin_intro, -1];
 
 	global.boss_info[e_boss.neon_tiger] = 
-	["NEON TIGER", spr_neon_tiger_icon, -1, rm_test_slopes, obj_magma_dragoon];
+	["NEON TIGER", spr_neon_tiger_icon, -1, rm_test_slopes, obj_magma_dragoon, WEAPONS.power_stone];
 	
 	global.boss_info[e_boss.magma_dragoon] = 
-	["MAGMA DRAGOON", spr_magma_dragoon_icon, -1, rm_magma_dragoon, obj_magma_dragoon_intro];
+	["MAGMA DRAGOON", spr_magma_dragoon_icon, -1, rm_magma_dragoon, obj_magma_dragoon_intro, -1];
 	
 	global.boss_info[e_boss.launch_octopus] = 
-	["LAUNCH OCTOPUS", spr_launch_octopus_icon, spr_launch_octopus_map, rm_launch_octopus, obj_launch_octopus_intro];
+	["LAUNCH OCTOPUS", spr_launch_octopus_icon, spr_launch_octopus_map, rm_launch_octopus, obj_launch_octopus_intro, -1];
 #endregion
 #region Stage Select Bosses
 	global.boss_slot[0] = e_boss.chill_penguin;

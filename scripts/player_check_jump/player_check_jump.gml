@@ -9,7 +9,7 @@ function player_check_jump() {
 					dash_speed_increase = clamp(dash_speed_increase,0, dash_speed_increase_max);
 					walk_speed *= dash_speed_increase * dash_speed_increase_increment + 1;
 					
-					var wp_change = 1;
+					var wp_change = 2;
 					
 					if(dash_end)
 						wp_change = 3;

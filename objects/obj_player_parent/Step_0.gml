@@ -9,7 +9,7 @@ if (!global.paused) {
 
 if(armor_check)
 {
- player_check_armor();
+ player_check_armor(true);
  armor_check = 0;
 }
 

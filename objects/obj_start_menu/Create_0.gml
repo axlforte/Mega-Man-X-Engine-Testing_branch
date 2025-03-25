@@ -193,7 +193,7 @@ weapon_get_props = {
 			y: 0,
 			interval: [0, 60]
 		},
-		new_weapon: WEAPONS.homing_torpedo,
+		new_weapon: global.new_special_weapon,
 		wp_slot: 2,
 		visible: false,
 		palette_array: [0, 0, 0, 0, 0, 0],
