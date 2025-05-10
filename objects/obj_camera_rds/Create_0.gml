@@ -48,3 +48,4 @@ if (!instance_exists(_target) || instance_exists(obj_player_ready)) {
 	y = mid_y;
 }
 shake_t = 0;
+camera_set_view_size(view_camera[0],global.view_width,global.view_height);

@@ -212,6 +212,18 @@ function player_x_animation() {
 		2, 3
 	]);
 
-
-
+	animation_add("slam",[
+		0,0,
+		2,1
+	],3);
+	
+	animation_add("slam_end|slam",[
+		0,2,
+		1,3,
+		2,5,
+		3,6,
+		23,7,
+		25,8,
+		27,8
+	]);
 }

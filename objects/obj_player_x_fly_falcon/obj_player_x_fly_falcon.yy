@@ -37,5 +37,5 @@
     "path":"sprites/spr_x_fly_effect_top_falcon/spr_x_fly_effect_top_falcon.yy",
   },
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }

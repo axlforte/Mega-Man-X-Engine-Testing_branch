@@ -7,3 +7,6 @@
 }*/
 
 room_speed = 60;
+if(global.is_online){
+	global.client.KillProjectile(self);
+}

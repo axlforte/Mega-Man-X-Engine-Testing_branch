@@ -13,25 +13,31 @@ var t = timer++;
 // Start
 if (t == 0 && pickup_type == pickup_types.wp) {
 	// Find weapon to fill
-	/*with (target) {
+	with (target) {
 		// If this weapon is full, find other weapon to fill
-		if (weapon[0] == noone || 
-		weapon_slot_handler.get_energy(weapon[0]) >= global.weapon[weapon[0]].energy_max || 
-		global.weapon[weapon[0]].damage_refill != 0) {
-			for (var i = 1; i < array_length( weapon_slot_handler.weapons); i++) {
-				var wp = weapon_slot_handler.raw_weapon(i);
-				if (wp >= 0 && weapon_slot_handler.get_energy(wp) < global.weapon[wp].energy_max && 
-				global.weapon[wp].damage_refill == 0) {
-					other.weapon_id = weapon_slot_handler.raw_weapon(i);
-					other.weapon_fill_other = true;
-					other.instant_fill = true;
+		//if(variable_instance_exists(self, weapon_slot_handler)){
+			//if(weapon_slot_handler.weapon[weapon[0]] != 0){
+				if (weapon[0] == noone || 
+				weapon_slot_handler.get_energy(weapon[0]) >= global.weapon[weapon[0]].energy_max || 
+				global.weapon[weapon[0]].damage_refill != 0) {
+					for (var i = 1; i < array_length( weapon_slot_handler.weapons); i++) {
+						//if(!variable_instance_exists(self, weapon_slot_handler)) continue;
+						//if(weapon_slot_handler.weapon[weapon[0]] == 0) continue;
+						var wp = weapon_slot_handler.raw_weapon(i);
+						if (wp >= 0 && weapon_slot_handler.get_energy(wp) < global.weapon[wp].energy_max && 
+						global.weapon[wp].damage_refill == 0) {
+							other.weapon_id = weapon_slot_handler.raw_weapon(i);
+							other.weapon_fill_other = true;
+							other.instant_fill = true;
+						}
+					}
+				} else {
+					//log(weapon[0])
+					other.weapon_id = weapon[0];
 				}
-			}
-		} else {
-			log(weapon[0])
-			other.weapon_id = weapon[0];
-		}
-	}*/
+			//}
+		//}
+	}
 }
 
 // If the target is dead, ignore this

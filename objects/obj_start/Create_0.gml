@@ -1,6 +1,4 @@
 global_values();
-global.view_width = 320;
-global.view_height = 240;
 alarm[0] = 1;
 keys_init();
 gamepad_init();

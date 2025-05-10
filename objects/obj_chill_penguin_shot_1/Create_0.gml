@@ -8,3 +8,4 @@ shot_type = 0;
 phy_type = phy_types.NEW;
 through_walls = false;
 audio_play(snd_ice_shot);
+alarm[0] = 1;

@@ -5,7 +5,7 @@ function text_init() {
 		big,
 		custom
 	}
-	global.text_font_array[text_fonts.normal] = [spr_text_font_normal, 33, 8];
+	global.text_font_array[text_fonts.normal] = [spr_text_font_normal, 33, 7];
 	global.text_font_array[text_fonts.big] = [spr_text_font_big, 65, 8];
 
 	var arr = global.text_font_array[text_fonts.normal];

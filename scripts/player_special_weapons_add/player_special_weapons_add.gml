@@ -9,6 +9,9 @@ function player_special_weapons_add(wp_state) {
 	wp_info.index = wp_state;
 	ds_list_add(special_weapons, wp_info);
 }
+function player_special_weapons_remove(wp_state){
+	ds_list_delete(special_weapons, wp_state);
+}
 function player_special_weapon_from_state(wp_state) {
 	switch(wp_state)
 	{
@@ -71,6 +74,26 @@ function player_special_weapon_from_state(wp_state) {
 			return {
 				check: player_check_teleport_dash,
 				scr: player_state_teleport_dash
+			};
+		case states.custom_screen:
+			return {
+				check: player_check_custom_screen,
+				scr: player_state_teleport_dash
+			};
+		case states.custom_chips:
+			return {
+				check: player_check_custom_chips,
+				scr: can_move_x
+			};
+		case states.drive_slam:
+			return {
+				check: player_check_drive_slam,
+				scr: player_state_drive_slam
+			};
+		case states.drive_saber:
+			return {
+				check: player_check_drive_saber,
+				scr: noone
 			};
 		default:
 			return {};

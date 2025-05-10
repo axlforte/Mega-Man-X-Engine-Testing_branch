@@ -3,10 +3,16 @@ function player_shot_start() {
 	atk = 1;
 	destroy_if_equal_to_atk = false;
 	destroy_if_hit = false;
+	
+	// Multiplayer PVP stuff
+	hurt_players = false;// will this shot hurt players?
 
 	// Boss Damage Table
 	boss_damage = ds_map_create();
 	boss_damage[? noone] = 1;
+	
+	shoot_direction_index = 0;
+	shoot_direction = 0;
 
 	// Timer
 	timer = 0;
@@ -141,4 +147,10 @@ function player_shot_start() {
 	// Local Game Speed
 	local_game_speed_init();
 	using_world_speed = false;
+	
+	server_shot_id = -1;
+	client_shot_id = global.player_server_id;
+	if(global.is_online){
+		server_shot_id = global.client.createProjectile(self);
+	}
 }

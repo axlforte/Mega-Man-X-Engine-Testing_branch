@@ -14,7 +14,7 @@ function player_state_dash() {
 		    if (t == 0) {
 		        // Play Audio
 		        audio_play(dash_sound);
-				if(instance_exists(obj_player_megaman))
+				if(dash_is_slide)
 					substates[3] = true;
 				else 
 					substates[3] = false;
@@ -25,7 +25,13 @@ function player_state_dash() {
 		        } else {
 					dash_length = dash_normal_length;
 				}
+				
+				if(perfect_dash_jump){
+					special_inst = instance_try_destroy(special_inst);
+				}
 		    }
+			
+			
     
 		    if (t >= 0 && t <= dash_length) {
 		        // Animation
@@ -46,7 +52,7 @@ function player_state_dash() {
 		    }
 		    // Dash Movement
 		    if (t >= 1 && t <= dash_length) {
-		        if (!move_x(dash_speed * dash_dir) || (!is_on_floor() && !dash_air))
+		        if (!move_x(dash_speed * dash_dir * (dash_speed_increase * dash_speed_increase_increment + 1)) || (!is_on_floor() && !dash_air))
 					condition = true;
         
 				// Dash Dust
@@ -120,6 +126,15 @@ function player_state_dash() {
 		        }
         
 		    }
+			if(perfect_dash_jump && weapon_slot_handler.get_energy(WEAPONS.x_buster) >= 5){
+				if (!instance_exists(special_inst)) {
+					special_inst = instance_create_depth(x, y, depth - 1, obj_player_x_aura_drive);
+					special_inst.image_xscale = dir;
+				}
+				special_inst.image_xscale = dir;
+				special_inst.x = x + h_speed;
+				special_inst.y = y + v_speed;
+			}
 		}
 		// Dash (Vertical)
 		else {
@@ -137,7 +152,7 @@ function player_state_dash() {
 				animation = "";
 			}
 	
-			if (t == 16)
+			if (t == dash_up_start_time - 3)
 				dash_spark_inst = player_effect_create(dash_up_spark);
 	
 			if (t >= 0 && t <= dash_length) {
@@ -149,13 +164,13 @@ function player_state_dash() {
 			if (array_contains([1, 3, 7, 9, 11, 13, 15, 16], t))
 				condition_to_end |= !move_contact_block(0, -1);
 	
-			if (t == 19)
+			if (t == dash_up_start_time)
 				audio_play(dash_sound);	
 	
-			if (t >= 19 && t <= 20)
+			if (t >= dash_up_start_time && t <= dash_up_start_time + 1)
 				condition_to_end |= !move_contact_block(0, -2);
 	
-			if (t >= 21 && t <= dash_length)
+			if (t >= dash_up_start_time + 2 && t <= dash_length)
 				condition_to_end |= !move_contact_block(0, -5);
 	
 			if (condition_to_end) {
@@ -182,7 +197,11 @@ function player_state_dash() {
 			animation_play("dash_up_end")
 		}
 	
-		if (t >= 7 || (key_left ^^ key_right)) {   
+		var end_lag = 0;
+		if(perfect_dash_jump)
+			end_lag = 4;
+	
+		if ((t >= 7 && animation_end) || (key_left ^^ key_right) && end_lag < t) {   
 		    dash_tapped = false;
 		    dash_tap = false;
 			y_dir = 1;
@@ -213,6 +232,7 @@ function player_state_dash() {
 	// Changed State
 	if (state != states.dash) {
 		dash_spark_inst = player_effect_destroy(dash_spark_inst);
+		//instance_try_destroy(special_inst);
 		dash_tapped = false;
 		y_dir = 1;
 		if (key_down && crouch_unlocked)

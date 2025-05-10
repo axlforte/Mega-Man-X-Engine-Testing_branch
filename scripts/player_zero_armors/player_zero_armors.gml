@@ -1,6 +1,6 @@
 function player_zero_armors() {
 	// Default
-	plt_index_default = 0;
+	plt_index_default = 6;
 
 	if (FULL == "black") {
 		plt_index_default = 1;

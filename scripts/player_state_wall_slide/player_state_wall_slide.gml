@@ -22,14 +22,25 @@ function player_state_wall_slide() {
 	else
 		substates[0] = 1;
 
-	if (t >= 5) {
+	
+	
+	var ledgegrabbing = false;
+	var _x_ledge_offset = -16 * dir;
+	var _y_ledge_offset = 34;
+	if(wall_ledge_grab && 
+	instance_place(x + _x_ledge_offset,y - _y_ledge_offset,obj_block_parent) && 
+	!instance_place(x + _x_ledge_offset,y - _y_ledge_offset - 2,obj_block_parent))
+		ledgegrabbing = true;
+		
+	if (t >= 5 && !ledgegrabbing) {
 		dir = -wall_slide_dir;
 		xscale = wall_slide_dir;
 		
 		if (instance_exists(wall_slide_dust))
 			script_try(wall_slide_dust.script);
 	}
-	if (t >= 7)
+	
+	if (t >= 7 && !ledgegrabbing)
 		v_speed = wall_slide_vspeed;
 	else
 		v_speed = 0;

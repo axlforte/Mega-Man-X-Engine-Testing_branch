@@ -11,6 +11,9 @@ function scr_weapon_collision() {
 #endregion
 #region Collision with Enemy
 	var parents = [par_destructibleobject, par_enemy];
+	//for pvp. should i deal damage to other players?
+	if(hurt_players)
+		parents = [par_destructibleobject, par_enemy, obj_player_parent];
 	// Remember to destroy or block this weapon after all collisions are processed
 	var to_destroy = false, to_block = false;
 	// Play hit sound
@@ -32,73 +35,111 @@ function scr_weapon_collision() {
 				var enemy = enemies_list[| i];
 				var enemy_block = false;
 				// Ignore this enemy if it's dead or undamageable
-				if (enemy.dead || !enemy.damageable) continue;
+				if(k != 2)
+					if (enemy.dead || !enemy.damageable) continue;
 				set_melee_counter = 2;
 				// If the enemy can block this weapon
-				if (enemy.blocking) {
-					to_destroy = true;
-					to_block = true;
-					enemy_block = true;
-				} else {
-					var enemy_hp = enemy.hp;
-					var can_hit_boss = (enemy.is_boss && (enemy.boss_buffer <= 0 || shot_level > enemy.boss_buffer_level - hit_if_shot_level_is_equal))
-					if (!enemy.is_boss || can_hit_boss) {
-						var dmg = atk;
-						if (enemy.is_boss) {
-							dmg = boss_damage[? noone];
-							if (ds_map_exists(boss_damage, enemy.object_index))
-								dmg = boss_damage[? enemy.object_index];
-						}
-						scr_weapon_apply_damage(enemy, dmg);
-						if (enemy.hp > 0 || hit_sound_on_destroy || (enemy.is_boss && enemy.state != boss_states.death))
-							play_hit = true;
-					}
-					// It's a boss and can't hit
-					else if (weapon_type == weapon_types.saber) {
-						enemy_block = true;
-						to_block = true;
-					} else {
-						to_destroy = true;	
-						play_hit = true;
-						enemy.light++;
-					}
-					switch (parent) {
-						case par_destructibleobject:
-							// Do something
-							break;
-						case par_enemy:
-							if (can_hit_boss) {
-								enemy.boss_buffer = boss_buffer_limit;
-								enemy.boss_buffer_level = shot_level;
-								_hit_sound = snd_boss_hit;
-							}
-							break;
-						case par_enemy_projectile:
-							// Destroy projectile?
-							break;
-					}
-					if (((atk == enemy_hp && destroy_if_equal_to_atk) || (destroy_if_hit && !enemy.is_boss)) || enemy.hp > 0)
+				if(k != 2){
+					if (enemy.blocking) {
 						to_destroy = true;
-					if (enemy.is_boss && enemy.hp <= 0 && enemy.state != boss_states.death) {	
-						with (enemy) {
-							state_set(boss_states.death);
-							light = 0;
-							boss_buffer = 0;
-							if (other.weapon_death_type == weapon_death_types.saber)
-								death_animation = "death_chop";
-						}
-						with (obj_player_shot_parent) {
-							can_hit = false;
-							if (timer < other.timer) {
-								event_perform(ev_step, ev_step_normal);
+						to_block = true;
+						enemy_block = true;
+					} else {
+						var enemy_hp = enemy.hp;
+						var can_hit_boss = (enemy.is_boss && (enemy.boss_buffer <= 0 || shot_level > enemy.boss_buffer_level - hit_if_shot_level_is_equal))
+						if (!enemy.is_boss || can_hit_boss) {
+							var dmg = atk;
+							if (enemy.is_boss) {
+								dmg = boss_damage[? noone];
+								if (ds_map_exists(boss_damage, enemy.object_index))
+									dmg = boss_damage[? enemy.object_index];
 							}
+							scr_weapon_apply_damage(enemy, dmg);
+							if (enemy.hp > 0 || hit_sound_on_destroy || (enemy.is_boss && enemy.state != boss_states.death))
+								play_hit = true;
 						}
-						pause_set(true, pause_types.boss_death);
-						with (obj_player_parent) {
-							immortal = true;	
+						// It's a boss and can't hit
+						else if (weapon_type == weapon_types.saber) {
+							enemy_block = true;
+							to_block = true;
+						} else {
+							to_destroy = true;	
+							play_hit = true;
+							enemy.light++;
 						}
-						music_stop();
-						audio_pause_all();
+						switch (parent) {
+							case par_destructibleobject:
+								// Do something
+								break;
+							case par_enemy:
+								if (can_hit_boss) {
+									enemy.boss_buffer = boss_buffer_limit;
+									enemy.boss_buffer_level = shot_level;
+									_hit_sound = snd_boss_hit;
+								}
+								break;
+							case par_enemy_projectile:
+								// Destroy projectile?
+								break;
+						}
+						if (((atk == enemy_hp && destroy_if_equal_to_atk) || (destroy_if_hit && !enemy.is_boss)) || enemy.hp > 0)
+							to_destroy = true;
+						if (enemy.is_boss && enemy.hp <= 0 && enemy.state != boss_states.death) {	
+							with (enemy) {
+								state_set(boss_states.death);
+								light = 0;
+								boss_buffer = 0;
+								if (other.weapon_death_type == weapon_death_types.saber)
+									death_animation = "death_chop";
+							}
+							with (obj_player_shot_parent) {
+								can_hit = false;
+								if (timer < other.timer) {
+									event_perform(ev_step, ev_step_normal);
+								}
+							}
+							pause_set(true, pause_types.boss_death);
+							with (obj_player_parent) {
+								immortal = true;// WHY IS THIS IN WEAPON COLLISION?
+							}
+							music_stop();
+							audio_pause_all();
+						}
+					}
+				} else {
+					var _damage_reduction = 0;
+					var cond = true;
+					with(enemy){
+						if (instance_exists(defense_shield_inst)) {
+							other._damage_reduction = defense_shield_damage_reduction;
+							defense_shield_inst = player_effect_destroy(defense_shield_inst);
+							defense_shield_enabled = false;
+						}
+						
+						if(state == states.dead || state == states.death || state == states.dolor || state == states.intro || state == states.ready || immortal || immunity){
+							other.cond = false;
+						}
+					}
+					
+					if(enemy.state == states.dead || enemy.state == states.death || 
+					enemy.state == states.dolor || enemy.state == states.intro || 
+					enemy.state == states.ready || enemy.immortal || enemy.immunity){
+						cond = false;
+					}
+					
+					if(ds_list_size(enemy.immunity_list) > 0) cond = false;
+					if(cond) {
+						//var dolor_damage = max(1, floor(atk * (1 - _damage_reduction)));
+						var dolor_damage = atk;
+						log(atk);
+						var new_health = enemy.hp - dolor_damage;
+						with(enemy){
+							self.dolor_damage = dolor_damage;
+							player_activate_immunity(immunity_types.dolor);
+							player_state_set(states.dolor, 0, [new_health > 0 && state == states.wall_slide, 0, 0, 0, 0]);
+							player_weapon_refill(true);
+							log(self.dolor_damage);
+						}
 					}
 				}
 				// Create Saber Hitspark effect for this enemy

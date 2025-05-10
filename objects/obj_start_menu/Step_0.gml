@@ -157,6 +157,17 @@ if (changed_state) {
 }
 #endregion
 switch (state) {
+	#region title
+		case menu_states.title:
+			if(ts_time >= (ts_height) + 4 || enter){
+				var tran = transition_create(transition_types.fade_out_and_fade_in);
+				tran.color = c_white;
+				tran.transition_limit = 16;
+				menu_set_state(menu_states.main, 0, 2, c_white);
+			}else
+				ts_time += (1 / ts_pixels_shown) * ts_move_speed;
+		break;
+	#endregion
 	#region Main
 	case menu_states.main:
 		menu_update_item_v();
@@ -189,7 +200,30 @@ switch (state) {
 		}
 		break;
 	#endregion
-	#region Select if you are server or client
+	#region PVP map select
+	case menu_states.PVP_map_select:
+		menu_update_item_v();
+		menu_update_item_click();
+		if (enter && selected_item > 0) {
+			var info = global.boss_info[e_boss.pvp_map];
+			boss_room = pvp_maps[selected_item - 1];
+			boss_object = info[4];
+			boss_name = info[0];
+			boss_defeated = true;
+			if (room_exists(boss_room)) {
+				var tran = transition_create(transition_types.blink);
+				tran.color = c_white;
+				tran.transition_limit = 16;
+				menu_set_state(menu_states.player_select, 16, 20);
+				selected_item = 5;
+				audio_play(snd_player_success);
+			}
+		} else if(select || enter && selected_item <= 0){
+			menu_set_state(menu_states.stage_select);
+		}
+		break;
+	#endregion
+	#region Online Select
 	case menu_states.online_select:
 		menu_update_item_v();
 		menu_update_item_click();
@@ -219,7 +253,7 @@ switch (state) {
 			var tran = transition_create(transition_types.blink);
 			tran.color = c_white;
 			tran.transition_limit = 16;
-			menu_set_state(menu_states.stage_select, 16, 30);
+			menu_set_state(menu_states.stage_select, 16, 15);
 			audio_play(snd_player_success);
 			global.difficulty = selected_item;
 			break;
@@ -253,10 +287,10 @@ switch (state) {
 		}
 		
 		menu_update_item_h();
-		global.character_selected_index[0] = selected_item;
+		global.character_selected_index[0] = player_get_char_id(page_items[menu_states.player_select][selected_item]);
 		if (selected_item < array_length(global.player_character_armor)) {
-			armor_index = G.player_character_armor_index[selected_item];
-			armor = G.player_character_armor[selected_item];
+			armor_index = G.player_character_armor_index[player_get_char_id(page_items[menu_states.player_select][selected_item])];
+			armor = G.player_character_armor[player_get_char_id(page_items[menu_states.player_select][selected_item])];
 		}
 		switch (FULL) {
 			case "black": background_index = 2; break;
@@ -269,15 +303,16 @@ switch (state) {
 		&& mouse_check_button_released(mb_left))
 			enter = true;
 		if (enter 
-		&& selected_item != pl_char.iris
-		&& selected_item != pl_char.vile) {
+		&& player_get_char_id(page_items[menu_states.player_select][selected_item]) != pl_char.vent
+		&& player_get_char_id(page_items[menu_states.player_select][selected_item]) != pl_char.vile
+		&& player_get_char_id(page_items[menu_states.player_select][selected_item]) != pl_char.iris) {
 			var tran = transition_create(transition_types.blink);
 			tran.color = c_white;
 			tran.transition_limit = 16;
 			menu_set_state(menu_states.boss_intro, 16, 30);
 			music_stop(1000);
 			audio_play(snd_player_success);
-			global.character_selected[0] = global.character_object[selected_item];
+			global.character_selected[0] = global.character_object[player_get_char_id(page_items[menu_states.player_select][selected_item])];
 		}  else if(select){
 			menu_set_state(menu_states.stage_select);
 		}
@@ -447,18 +482,32 @@ switch (state) {
 				}
 				// Android
 				break;
-			// Key Config
+			// resolution
 			case 1:
+				var new_value = clamp(global.settings[settings_types.resolution] + hinput_p, 0, array_length(subitem) - 1);
+				if (global.settings[settings_types.resolution] != new_value && new_value >= 0) {
+					sound = true;
+					global.settings[settings_types.resolution] = new_value;
+					global.center_screen = true;
+					global.view_width = global.resolution_options[new_value][0];
+					global.view_height = global.resolution_options[new_value][1];
+					page_items[menu_states.option][0][2] = Get_screen_size_possibilities();
+					custom_window_size(global.settings[0] + 1);
+					camera_set_view_size(view_camera[0],global.view_width,global.view_height);
+				}
+				break;
+			// Key Config
+			case 2:
 				if (enter)
 					menu_set_state(menu_states.key_config);
 				break;
 			// Audio Settings
-			case 2:
+			case 3:
 				if (enter)
 					menu_set_state(menu_states.audio_settings);
 				break;
 			// Damage Numbers (shows how much an attack damages an enemy)
-			case 3:
+			case 4:
 				if (enter)
 					global.hit_effects = !global.hit_effects;
 					if(global.hit_effects)
@@ -469,7 +518,7 @@ switch (state) {
 							[_("DAMAGE NUMBERS    FALSE"), [64, 136, 144, 20]];
 				break;
 			// Back
-			case 4:
+			case 5:
 				if (enter) {
 					menu_set_state(menu_states.main);
 					settings_save();
@@ -589,6 +638,11 @@ switch (state) {
 	#endregion
 	#region Stage Select
 	case menu_states.stage_select:
+		if(state_timer == 0){
+			with(obj_player_shot_parent){
+				instance_destroy();
+			}
+		}
 		if (selected_item < 10) {
 			if (vinput_p != 0) {
 				if (selected_item < 5) selected_item += 5;
@@ -615,20 +669,24 @@ switch (state) {
 				enter |= (mouse_check_button_pressed(mb_left) &&
 				point_in_rectangle(mouse_x, mouse_y, pos[0], pos[1], pos[0] + w, pos[1] + h))
 			if (enter) {
-				var _boss = global.boss_slot[selected_item];
-				if (_boss != noone) {
-					var info = global.boss_info[_boss];
-					boss_room = info[3];
-					boss_object = info[4];
-					boss_name = info[0];
-					boss_defeated = global.boss_defeated[_boss];
-					if (room_exists(boss_room)) {
-						var tran = transition_create(transition_types.blink);
-						tran.color = c_white;
-						tran.transition_limit = 16;
-						menu_set_state(menu_states.player_select, 16, 60);
-						selected_item = 5;
-						audio_play(snd_player_success);
+				if(selected_item == 2){
+					menu_set_state(menu_states.PVP_map_select);
+				} else {
+					var _boss = global.boss_slot[selected_item];
+					if (_boss != noone) {
+						var info = global.boss_info[_boss];
+						boss_room = info[3];
+						boss_object = info[4];
+						boss_name = info[0];
+						boss_defeated = global.boss_defeated[_boss];
+						if (room_exists(boss_room)) {
+							var tran = transition_create(transition_types.blink);
+							tran.color = c_white;
+							tran.transition_limit = 16;
+							menu_set_state(menu_states.player_select, 16, 20);
+							global.boss_selected = selected_item;
+							audio_play(snd_player_success);
+						}
 					}
 				}
 			} else if(select){
@@ -742,10 +800,10 @@ switch (state) {
 				player_load_armor(true);
 				player_weapon_set(other.weapon_get_props.player.wp_slot, other.weapon_get_props.player.new_weapon);
 				weapon[0] = other.weapon_get_props.player.new_weapon;
-				plt_index = weapon_palettes[weapon[0]];
+				plt_index = global.weapon[weapon[0]].palette;
 				other.weapon_get_props.player.palette_swap = true;
 				if (!weapon_allow_pallete) {
-					if (plt_index == weapon_palettes[weapon[0]])
+					if (plt_index == global.weapon[weapon[0]].palette)
 						plt_index = plt_index_default;
 					other.weapon_get_props.player.palette_swap = false;
 				}
@@ -756,7 +814,7 @@ switch (state) {
 			if (weapon_get_props.player.palette_swap == false) {
 				weapon_get_props.player.palette_sprite = noone;	
 			}
-			show_debug_message(weapon_get_props.player.palette_array);
+			//show_debug_message(weapon_get_props.player.palette_array);
 		}
 		else if (t == weapon_get_props.dark_limit) {
 			
@@ -787,7 +845,12 @@ switch (state) {
 			}
 		} else {
 			if (instance_exists(obj_player_parent)) {
-				if (obj_player_parent.weapon_demo_finished) {			
+				if (obj_player_parent.weapon_demo_finished) {
+					if(wait_t == 1){
+						with(obj_player_shot_parent){
+							instance_destroy();
+						}
+					}
 					menu_set_state(menu_states.stage_select, 16, 60);
 					wait_t = 60;
 				}

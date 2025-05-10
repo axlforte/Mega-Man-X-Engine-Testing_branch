@@ -1,150 +1,9 @@
 function GameServer(_port) : TCPServer(_port) constructor{
-	roomSockets = [];
-	nicknames = [];
-	tick_rate = global.tick_rate;
-	tick_timer = 0;
-	player_x = [];
-	player_y = [];
-	player_sprite = [];
-	player_frame = [];
-	player_dir = [];
-	player_char = [];
-	player_palette = [];
-	player_y_vel = [];
-	player_x_vel = [];
-	current_room = rm_headquarters;
-	
-	leaveRoom = function(_client) {
-        var _socket = _client.socket;
-        var _index = array_get_index(roomSockets, _socket);
-        if (_index != -1) {
-            array_delete(roomSockets, _index, 1);
-            array_delete(player_x, _index, 1);
-            array_delete(player_y, _index, 1);
-            array_delete(player_sprite, _index, 1);
-            array_delete(player_frame, _index, 1);
-            array_delete(player_dir, _index, 1);
-            array_delete(player_palette, _index, 1);
-            array_delete(nicknames, _index, 1);
-        }
-		//log($"{_client.nickname} left the room");
-    }
-	
-	change_room = function(_room) {
-		//log(_room);
-		current_room = _room;
-		rpc.sendNotification("change_room", [_room,true], roomSockets);
-    }
-	
-	rpc.registerHandler("ping", function(_time, _socket) {
-		//log("i was pinged i work i swear")
-        return _time;
-    });
-	
-	rpc.registerHandler("chat", function(_time, _socket) {
-		//log(_time)
-        rpc.sendNotification("chat", _time, roomSockets);
-    });
-	
-	rpc.registerHandler("update_position", function(_info, _socket) {
-		//log("i was pinged i work i swear")
-		//log(_info);
-		_socket.x = _info.x;
-		_socket.y = _info.y;
-		_socket.sprite = _info.sprite;
-		_socket.frame = _info.frame;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_x_pos", function(_info, _socket) {
-		//log(_info);
-		player_x[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	
-	rpc.registerHandler("update_y_pos", function(_info, _socket) {
-		//log(_info);
-		player_y[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_sprite", function(_info, _socket) {
-		//log(_info);
-		player_sprite[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_frame", function(_info, _socket) {
-		//log(_info);
-		player_frame[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_dir", function(_info, _socket) {
-		//log(_info);
-		player_dir[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_palette", function(_info, _socket) {
-		//log(_info);
-		player_palette[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_x_vel", function(_info, _socket) {
-		//log(_info);
-		player_x_vel[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_y_vel", function(_info, _socket) {
-		//log(_info);
-		player_y_vel[_socket.id] = _info;
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("update_player_char", function(_info, _socket) {
-		//log(_info);
-		//log("char updated")
-		player_char[_socket.id] = _info;
-		for(var q = 0; q < array_length(player_char); q++){
-			rpc.sendNotification("update_player_char", [player_char[q], q], roomSockets);
-		}
-		//log(_socket);
-    });
-	
-	rpc.registerHandler("spawn_pickup_2", function(_pos, _client) {
-		//log("put a dispenser here!")
-        //rpc.sendNotification("spawn_pickup_2", _pos, sockets);
-		//log(roomSockets);
-		//log(_client);
-		/*for(var q = 0; q < array_length(roomSockets); q++){
-			rpc.sendNotification("spawn_pickup_2", _pos, roomSockets[q]);
-		}*/
-		rpc.sendNotification("spawn_pickup_2", _pos, roomSockets);
-    });
-	
-	rpc.registerHandler("spawn_shot", function(_pos, _client) {
-		rpc.sendNotification("spawn_shot", _pos, roomSockets);
-    });
-	
-	rpc.registerHandler("room_join", function(_param, _client){
-		//log("joined room")
-		array_push(roomSockets, _client.socket)
-		rpc.sendNotification("change_room", [current_room], _client.socket);
-	});
-	
-	rpc.registerHandler("set_nickname", function(_nick, _client){
-		//log("new nickname set")
-		_client.nickname = _nick;
-		nicknames[_client.id] = _nick;
-		for(var q = 0; q < array_length(nicknames); q++){
-			rpc.sendNotification("update_names", [nicknames[q], q], roomSockets);
-		}
-		//array_push(nicknames, _nick);
-	});
+	server_rpc_variables();
+	server_enemy_rpc();
+	server_projectile_rpc();
+	server_player_rpc();
+	server_chat = new ServerChatRPC();
 	
 	setEvent("error", function(_err) {
         show_debug_message(_err);
@@ -152,34 +11,37 @@ function GameServer(_port) : TCPServer(_port) constructor{
 	
 	setEvent("step", function(){
 		if(tick_timer > 60 / tick_rate){
-			//log(roomSockets)
-			//log(player_x);
-			//log(player_y);
-			for(var q = 0; q < array_length(player_x); q++){
-				if(q < array_length(player_x))
-					rpc.sendNotification("update_x_pos", [player_x[q], q], roomSockets);
-				if(q < array_length(player_y))
-					rpc.sendNotification("update_y_pos", [player_y[q], q], roomSockets);
-				if(q < array_length(player_sprite))
-					rpc.sendNotification("update_sprite", [player_sprite[q], q], roomSockets);
-				if(q < array_length(player_frame))
-					rpc.sendNotification("update_frame", [player_frame[q], q], roomSockets);
-				if(q < array_length(player_dir))
-					rpc.sendNotification("update_dir", [player_dir[q], q], roomSockets);
-				if(q < array_length(nicknames))
-					rpc.sendNotification("update_names", [nicknames[q], q], roomSockets);
-				if(q < array_length(player_palette))
-					rpc.sendNotification("update_palette", [player_palette[q], q], roomSockets);
+			if(instance_exists(obj_pvp_powerup_spawner)){
+				for(var q = 0; q < instance_number(obj_pvp_powerup_spawner);q++){
+					var _pvp = instance_find(obj_pvp_powerup_spawner,q);
+					if(_pvp.spawn){
+			rpc.sendNotification("PVP Update Spawners",
+			[q, _pvp.powerup_selection[irandom_range(0, array_length(_pvp.powerup_selection) - 1)]],
+			roomSockets);
+						_pvp.spawn_timer = 0;
+					}
+				}
 			}
 			tick_timer = 0;
-		} else {
-			tick_timer++;
+			
+			for(var e = 0; e > alength(shots); e++){
+				for(var f = 0; f > alength(shots[e]); f++){
+					shots[e][f][8]++;
+					if(shots[e][f][8] > projectile_existance_limit){
+						shots[e][f] = -1;
+					}
+				}
+			}
+			clearShotsArray();
+			rpc.sendNotification("update projectile", shots ,roomSockets);
 		}
+			tick_timer++;
 	});
 	
 	setEvent("connected", function(_client){
-		rpc.sendNotification("update_player_id", _client.id, _client.socket);
+		rpc.sendNotification("update_player_id", [_client.id,global.pvp], _client.socket);
 		rpc.sendNotification("update_player_char", global.character_selected[0], _client.socket);
+		rpc.sendNotification("rollback_spawn_player",_client.id,roomSockets)
 	});
 	
 	setEvent("disconnected", function(_client) {
@@ -199,4 +61,202 @@ function ConnectedClient(_id, _socket) : BaseClient(_id, _socket) constructor {
 	self.y = 0;
 	self.sprite = spr_x_idle;
 	self.frame = 0;
+}
+
+function server_enemy_rpc(){
+	rpc.registerHandler("spawn_enemy", function(_time, _socket) {
+		//log(_time)
+        var _e = instance_create_layer(_time[1],_time[2],_time[3],_time[0]);
+		_e.dies_when_offscreen = false;
+		_e.network_id = _time[4]
+		enemies[_time[4]] = _e;
+    });
+	
+	rpc.registerHandler("Hurt_enemy", function(_time, _socket) {
+        rpc.sendNotification("hurt_enemy", _time, roomSockets);
+    });
+	
+	update_enemy = function(_ene) {
+		enemies[_ene[4]].x = _ene[0];
+		enemies[_ene[4]].y = _ene[1];
+		enemies[_ene[4]].sprite_index = _ene[2];
+		enemies[_ene[4]].image_index = _ene[3];
+    }
+	
+	spawn_enemy_shot = function(_shot){
+		//kys
+	}
+}
+	
+function server_projectile_rpc(){
+	rpc.registerHandler("update projectile", function(_pos, _client) {
+		//log(_pos)
+		if(alength(shots[_pos[7]][_pos[6]]) > 6)
+			_pos[8] = shots[_pos[7]][_pos[6]][8];
+		shots[_pos[7]][_pos[6]] = _pos;
+	});
+	
+	rpc.registerHandler("create projectile", function(_pos, _client) {
+		array_push(shots[_pos[7]], _pos);
+		rpc.sendNotification("create projectile", _pos, roomSockets);
+	});
+	
+	rpc.registerHandler("kill projectile", function(_pos, _client) {
+		//log(string(_pos) + "wants to die! may as well")
+		shots[_pos.client_shot_id][_pos.server_shot_id] = -1;
+		//log(shots);
+		rpc.sendNotification("kill projectile", shots, roomSockets);
+	});
+	
+	clearShotsArray = function(){
+		var _new_array = [];
+		for(var e = 0; e < alength(shots); e++){
+			_new_array = [];
+			for(var f = 0; f < alength(shots[e]); f++){
+				if(shots[e][f] != 0 && shots[e][f] != -1){
+					if(alength(shots[e][f]) > 6){
+						shots[e][f][8]++;
+						if(shots[e][f][8] < projectile_existance_limit)
+							array_push(_new_array,shots[e][f]);
+					} else
+						array_push(_new_array,shots[e][f]);
+				}
+			}
+			shots[e] = _new_array;
+		}
+	}
+}
+	
+function server_rpc_variables(){
+	roomSockets = [];
+	nicknames = [];
+	tick_rate = global.tick_rate;
+	tick_timer = 0;
+	player_x = [];
+	player_y = [];
+	player_sprite = [];
+	player_frame = [];
+	player_dir = [];
+	player_char = [];
+	player_palette = [];
+	player_x_vel = [];
+	player_y_vel = [];
+	player_left = [];
+	player_right = [];
+	player_down = [];
+	player_grav = [];
+	shots = [];
+	shots[0] = [];
+	shot_x = [];
+	shot_y = [];
+	shot_x_vel = [];
+	shot_y_vel = [];
+	enemies = [];
+	projectile_existance_limit = 120;
+	current_room = rm_headquarters;
+}
+
+function server_player_rpc(){
+	
+	rpc.registerHandler("set_nickname", function(_nick, _client){
+		//log("new nickname set")
+		_client.nickname = _nick;
+		nicknames[_client.id] = _nick;
+		for(var q = 0; q < array_length(nicknames); q++){
+			rpc.sendNotification("update_names", [nicknames[q], q], roomSockets);
+		}
+		//array_push(nicknames, _nick);
+	});
+	
+	rpc.registerHandler("ping", function(_time, _socket) {
+        return _time;
+    });
+	
+	rpc.registerHandler("chat message", function(_time, _socket) {
+		//log(_time)
+        rpc.sendNotification("chat", _time, roomSockets);
+    });
+	
+	rpc.registerHandler("update_all", function(_info, _socket) {
+		//log(_info);
+		player_x[_socket.id] = _info[0];
+		player_y[_socket.id] = _info[1];
+		player_sprite[_socket.id] = _info[2];
+		player_frame[_socket.id] = _info[3];
+		player_dir[_socket.id] = _info[4];
+		player_palette[_socket.id] = _info[5];
+		player_x_vel[_socket.id] = _info[6];
+		player_y_vel[_socket.id] = _info[7];
+		player_grav[_socket.id] = _info[8];
+		player_right[_socket.id] = _info[9];
+		player_left[_socket.id] = _info[10];
+		player_down[_socket.id] = _info[11];
+		rpc.sendNotification("update_all", [
+			_socket.id,
+			player_x[_socket.id],
+			player_y[_socket.id],
+			player_sprite[_socket.id],
+			player_frame[_socket.id],
+			player_dir[_socket.id],
+			player_char[_socket.id],
+			nicknames[_socket.id],
+			player_palette[_socket.id],
+			player_x_vel[_socket.id],
+			player_y_vel[_socket.id],
+			player_grav[_socket.id],
+			enemies,
+			player_right[_socket.id],
+			player_left[_socket.id],
+			player_down[_socket.id]
+			], roomSockets);
+		//log(_socket);
+    });
+	
+	rpc.registerHandler("rollback_keys", function(_info, _socket) {
+		rpc.sendNotification("rollback_keys", _socket.id, _socket.socket);
+	});
+	
+	rpc.registerHandler("update_player_id", function(_info, _socket) {
+		rpc.sendNotification("update_player_id", _socket.id, _socket.socket);
+	});
+	
+	rpc.registerHandler("update_player_char", function(_info, _socket) {
+		//log(_info);
+		//log("char updated")
+		player_char[_socket.id] = _info;
+		for(var q = 0; q < array_length(player_char); q++){
+			rpc.sendNotification("update_player_char", [player_char[q], q], roomSockets);
+		}
+		//log(_socket);
+    });
+	#region connect and disconnect
+	leaveRoom = function(_client) {
+        var _socket = _client.socket;
+        var _index = array_get_index(roomSockets, _socket);
+        if (_index != -1) {
+            array_delete(roomSockets, _index, 1);
+            array_delete(player_x, _index, 1);
+            array_delete(player_x_vel, _index, 1);
+            array_delete(player_y, _index, 1);
+            array_delete(player_y_vel, _index, 1);
+            array_delete(player_sprite, _index, 1);
+            array_delete(player_frame, _index, 1);
+            array_delete(player_dir, _index, 1);
+            array_delete(player_palette, _index, 1);
+            array_delete(nicknames, _index, 1);
+        }
+		rpc.sendNotification("haul_ass", true, roomSockets);
+    }
+	
+	rpc.registerHandler("room_join", function(_param, _client){
+		//log("joined room")
+		array_push(roomSockets, _client.socket)
+		rpc.sendNotification("change_room", [current_room], _client.socket);
+	});
+	#endregion
+	change_room = function(_room) {
+		//log(_room);
+		current_room = _room;
+		rpc.sendNotification("change_room", [_room,true], roomSockets);
+    }
 }

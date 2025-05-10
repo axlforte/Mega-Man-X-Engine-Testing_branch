@@ -6,7 +6,21 @@ function player_x_variables() {
 	// Weapon Test
 	weapon_slot_handler.add_weapon(WEAPONS.storm_tornado);
 	weapon_slot_handler.add_weapon(WEAPONS.homing_torpedo);
-
+	
+	weapon_slot_handler.add_weapon(WEAPONS.thunder_beam);
+	weapon_slot_handler.add_weapon(WEAPONS.fire_storm);
+	
+	weapon_slot_handler.add_weapon(WEAPONS.air_shooter);
+	weapon_slot_handler.add_weapon(WEAPONS.bubble_lead);
+	
+	weapon_slot_handler.add_weapon(WEAPONS.hard_knuckle);
+	weapon_slot_handler.add_weapon(WEAPONS.gemini_laser);
+	
+	weapon_slot_handler.add_weapon(WEAPONS.spark_shot);
+	weapon_slot_handler.add_weapon(WEAPONS.atomic_fire);
+	
+	weapon[0] = WEAPONS.x_buster;
+	player_weapon_select(WEAPONS.x_buster);
 	// Charge
 	charge_unlocked = true;
 
@@ -18,4 +32,5 @@ function player_x_variables() {
 		{alpha: 1, radius: 30 }
 	];
 	trail_color = c_blue;
+	
 }

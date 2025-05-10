@@ -40,5 +40,7 @@ function scr_keys_reset() {
 	
 	key_p_select = false;
 	key_select = false;
-	
+
+	key_p_chat = false;
+	key_chat = false;	
 }

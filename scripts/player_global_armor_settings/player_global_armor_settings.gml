@@ -9,7 +9,8 @@ function player_global_armor_settings() {
 	enum x_armor {
 		none, x1, x2, x3, x3_s, x4, x4_1,
 		ultimate, falcon, gaea, blade, shadow,
-		x7, x8_ultimate, x8_neutral, x8_hermes, x8_icarus, cm,
+		x7, x8_ultimate, x8_neutral, x8_hermes, x8_icarus, cm, 
+		drive,xtreme,
 		length
 	}
 	enum zero_armor {
@@ -33,6 +34,24 @@ function player_global_armor_settings() {
 		none,
 		length
 	}
+	
+	enum exe_armor {
+		none,
+		wood,
+		fire,
+		elec,
+		aqua,
+		//
+		guts,
+		team,
+		custom,
+		shield,
+		ground,
+		shadow,
+		//
+		length
+	}
+	
 	enum vent_armor {
 		none,
 		x,
@@ -62,13 +81,15 @@ function player_global_armor_settings() {
 		"",
 		"x1", "x2", "x3", "x3_s", "x4", "x4_1",
 		"ult", "falcon", "gaea", "blade", "shadow",
-		"x7", "x8_ult", "neutral", "hermes", "icarus", "cm"
+		"x7", "x8_ult", "neutral", "hermes", "icarus", "cm", 
+		"drive", "xtreme"
 	];
 	global.character_armor_name[pl_char.x] = [
 		"default",
 		"light", "giga", "max", "max z-saber", "force", "plasma buster",
 		"ultimate", "falcon", "gaea", "blade", "shadow",
-		"glide", "ultimate x8", "neutral", "hermes", "icarus", "cm"
+		"glide", "ultimate x8", "neutral", "hermes", "icarus", "cm", 
+		"drive", "XTREME"
 	];
 	player_global_armor_set_mixable(pl_char.x, x_armor.length, [
 		x_armor.none,
@@ -130,6 +151,37 @@ function player_global_armor_settings() {
 		"Model_OX",
 		"Model_O1X"
 	];
+	
+	global.character_armor[pl_char.exe] = [
+		"",
+		"wood",
+		"fire",
+		"elec",
+		"aqua",
+		"guts",
+		"team",
+		"custom",
+		"shield",
+		"ground",
+		"shadow"
+	];
+	
+	global.character_armor_name[pl_char.exe] = [
+		"default",
+		"wood",
+		"fire",
+		"elec",
+		"aqua",
+		"guts",
+		"team",
+		"custom",
+		"shield",
+		"ground",
+		"shadow"
+	];
+	
+	player_global_armor_set_mixable(pl_char.exe, exe_armor.length);
+	
 	player_global_armor_set_mixable(pl_char.vent, vent_armor.length);
 	
 	// Axl Armors
@@ -168,10 +220,14 @@ function player_global_armor_settings() {
 	global.character_armor_unlocked[pl_char.x][x_armor.x1] = [false, true, true, true, true, false];
 	global.character_armor_unlocked[pl_char.x][x_armor.x2] = [false, true, true, true, true, false];
 	global.character_armor_unlocked[pl_char.x][x_armor.x3] = [false, true, true, true, true, false];
+	global.character_armor_unlocked[pl_char.x][x_armor.x7] = [false, true, true, true, true, false];
 	global.character_armor_unlocked[pl_char.x][x_armor.falcon] = [false, true, true, true, true, false];
 	
 	global.character_armor_unlocked[pl_char.x][x_armor.ultimate] =  [false, false, false, false, false, true];	
-	global.character_armor_unlocked[pl_char.x][x_armor.x8_ultimate] = [false, false, false, false, false, true];	
+	global.character_armor_unlocked[pl_char.x][x_armor.x8_ultimate] =  [false, false, false, false, false, true];	
+	global.character_armor_unlocked[pl_char.x][x_armor.shadow] = [false, false, false, false, false, true];	
+	global.character_armor_unlocked[pl_char.x][x_armor.drive] = [false, false, false, false, false, true];	
+	global.character_armor_unlocked[pl_char.x][x_armor.xtreme] = [false, false, false, false, false, true];	
 	
 	// Only Stock Buster
 	//global.character_armor_unlocked[pl_char.x][x_armor.x4_1] = [false, false, false, true, false, false];
@@ -190,6 +246,22 @@ function player_global_armor_settings() {
 		global.character_armor_unlocked[pl_char.iris][i] = [false, false, false, false, false, true];
 	}
 	global.character_armor_unlocked[pl_char.iris][iris_armor.swimsuit] = [false, false, false, false, false, false];
+	
+	for (var i = 0; i < exe_armor.length; i++) {
+		global.character_armor_unlocked[pl_char.exe][i] = [false, false, false, false, false, false];
+	}
+	global.character_armor_unlocked[pl_char.exe][0] = [false, true, true, true, true, true];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.wood] = [false, true, false, false, true, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.elec] = [false, true, false, false, true, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.fire] = [false, true, false, false, true, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.aqua] = [false, true, false, false, true, false];
+	
+	global.character_armor_unlocked[pl_char.exe][exe_armor.guts] = [false, false, true, true, false, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.team] = [false, false, true, true, false, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.custom] = [false, false, true, true, false, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.ground] = [false, false, true, true, false, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.shield] = [false, false, true, true, false, false];
+	global.character_armor_unlocked[pl_char.exe][exe_armor.shadow] = [false, false, true, true, false, false];
 
 }
 // Set player armors that are mixable

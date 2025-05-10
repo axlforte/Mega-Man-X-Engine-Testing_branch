@@ -4,7 +4,7 @@ abs_hspeed = 0;
 boss_damage[? noone] = 8;
 shot_level = 10;
 lv = 4;
-atk = 32;
+atk = 64;
 animation_add("S", [0, 0]);
 animation_play("S");
 animation_end_destroy = true;

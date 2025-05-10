@@ -78,6 +78,7 @@ function player_variables() {
 	wall_slide_sound = snd_player_wall_slide; // Wall Slide Sound
 	wall_slide_animation_enabled = true; // Is the animation enabled?
 	wall_slide_vspeed = 2; // Vertical Speed
+	wall_ledge_grab = false;// does the player grab the ledge when sliding down?
 	// Wall Slide - Effects
 	/// Dust
 	wall_slide_dust = player_effect_new(obj_player_wall_slide_dust, -16, 16, layer_up, 4, player_wall_slide_dust);
@@ -88,6 +89,7 @@ function player_variables() {
 	wall_jump_strength = 5; // Initial Vertical Speed
 	wall_jump_reset_gravity = false; // Set to true when the player is on the ceiling to ignore gravity
 	wall_jump_animation_enabled = true; // Is the animation enabled?
+	wall_jump_dash_animation = false;
 
 	// Wall Jump - Effect
 	wall_jump_spark = player_effect_new(obj_player_wall_jump_spark, 16, 20, layer_up);
@@ -260,6 +262,16 @@ function player_variables() {
 	biometal_index = 0; // timer
 	biometal_selected = 0; // which biometal? hu = 0, x = 1, zx = 2, hx = 3, fx = 4, lx = 5, px = 6, ox = 7, o1x = 8
 	
+	//battle network schtuff
+	can_use_chip = false;
+	
+	//drive armor yeet functions
+	dash_speed_increase = 0;
+	dash_speed_increase_max = 9;
+	dash_speed_increase_increment = 0.05;
+	perfect_dash_jump = false;//should be false, because then everyone can do a perfect dash jump
+	drive_double_jump_cost = 2;
+	
 	// Palette
 	armor_palette_index = [0, 0, 0, 0, 0, 0];
 
@@ -298,6 +310,7 @@ function player_dash_variables() {
 	dash_sound = snd_player_dash; // Dash Sound
 	dash_immunity = false; // Does the player Immunity have immunity when using dash? 
 	dash_blink = false; // Does the player blink?
+	dash_is_slide = false; // Is your dash actually meant to be a slide?
 	
 	// Dash - Double Tap
 	dash_tap = false; // Check for double tap when key (left, right) is pressed
@@ -330,6 +343,7 @@ function player_dash_air_variables() {
 	// Dash Up
 	dash_up = false; // Is the player using Up Air Dash?
 	dash_up_length = 32; // Dash Air Length
+	dash_up_start_time = 19; // When does the up dash lag end?
 	dash_up_unlocked = false; // Set to true when an armor unlocks this feature
 
 	// Dash Up - Effects
@@ -345,7 +359,7 @@ function player_immunity_variables() {
 	immortal = false;
 	enum immunity_types
 	{
-		dolor, normal, spike, none
+		dolor, normal, spike, invis, none
 	}
 
 	// Blink

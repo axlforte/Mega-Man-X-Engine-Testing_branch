@@ -13,6 +13,9 @@ else if (t == 23) y -= 2;
 // Destroy
 if (t == 24)
 {
+	if(global.is_online){
+		global.client.KillProjectile(self);
+	}
     instance_destroy();
     exit;
 }

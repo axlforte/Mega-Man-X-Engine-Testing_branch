@@ -1,10 +1,12 @@
 function menu_player_select_sprites_load() {
 	//G.player_select_sprite[pl_char.x, x_armor.none]
 	// For each character
-	for (var c = 0; c < pl_char.length; c++) {
+	//for (var c = 0; c < pl_char.length; c++) {
+	for (var c = 0; c < array_length(argument[0]); c++) {
 		var character_name = G.character_name[c];
-		show_debug_message(character_name);
-		show_debug_message(G.character_armor);
+		character_name = string_lower(argument[0][c]);
+		//show_debug_message(character_name);
+		//show_debug_message(G.character_armor);
 		if (c < array_length(G.character_armor)) {
 			var armors = G.character_armor[c];
 			var armors_length = array_length(armors);
@@ -22,6 +24,7 @@ function menu_player_select_sprites_load() {
 				if (asset_index == -1)
 					asset_index = noone;
 				G.player_select_sprite[c, i] = asset_index;
+				//G.player_select_sprite[c, i] = argument[0][clamp(c,0,array_length(argument[0]) - 1)];
 			}
 		}
 	}

@@ -31,6 +31,8 @@ if(flame_interval < flame_t){
 
 if(!global.is_online){
 	if(owner.weapon_slot_handler.get_energy(owner.weapon[0]) <= 0 || owner.state == states.dolor){
-		other.instance_destroy();
+		with(other){
+			instance_destroy();
+		}
 	}
 }

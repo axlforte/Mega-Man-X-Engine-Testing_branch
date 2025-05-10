@@ -1,0 +1,18 @@
+/// @description - Draw String on Screen
+/// @param x
+/// @param y
+/// @param string
+/// @param _color
+function draw_string_center_here() {
+
+	// Arguments
+	var _x = argument[0];
+	var _y = argument[1];
+	var _text = argument[2];
+	var _color = (argument_count > 3 ? argument[3] : colors.blue);
+	var _plt = (argument_count > 4 ? argument[4] : true);
+	_x = floor(_x - (get_string_width(_text) / 2));
+	draw_string_here(_x, _y, _text, _color, _plt);
+
+
+}

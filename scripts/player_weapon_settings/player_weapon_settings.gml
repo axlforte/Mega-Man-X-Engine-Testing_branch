@@ -102,19 +102,12 @@ function WeaponSlotManager() constructor {
 	
 	get_energy = function(_wep){
 		for(var e = 0; e < array_length(weapons); e++){
-			//(string(weapons[e]) + ", " + string(e))
 			if(weapons[e] != 0){
 				if(_wep == weapons[e].weapon){
-					//(string(e) + ", " + string(_wep) + ", i am the succ of energy")
-					//im still mad i cant use ds lists ):<
-					//but i can settle with arrays. they
-					//work almost as well
-					//(weapons[e].find_energy())
 					return weapons[e].find_energy();
 				}
 			}
 		}
-		//log("end of loop i guess")
 		return 0;
 	}
 	
@@ -131,11 +124,9 @@ function WeaponSlotManager() constructor {
 	
 	locate_energy = function(_wep){
 		for(var e = 0; e < array_length(weapons); e++){
-			//log(string(_wep) + ", " + string(weapons[e].weapon) + ", " + string(_wep == weapons[e].weapon))
 			if(weapons[e].weapon == _wep)
 				return weapons[e].find_energy();
 		}
-		//fuck you, kill yourself. 
 		return undefined;
 	}
 	
@@ -166,12 +157,13 @@ function WeaponSlotManager() constructor {
 	}
 }
 
-function player_weapon_settings() {
+function player_weapon_settings() { // dep
 	// this needs to have seperate stuff from the global stuff. global doesnt change, this does.
 }
 
 function global_weapon_Settings(){
 	enum WEAPONS {
+		megaman_start,
 		mega_buster,copy_vision,speed_gear,power_gear,lightning_bolt,snow_drift,
 		//mm1
 		rolling_cutter,super_arm,ice_slasher,hyper_bomb,fire_storm,thunder_beam,time_slow,oil_slider,
@@ -187,6 +179,7 @@ function global_weapon_Settings(){
 		blizzard_attack,centaur_flash,flame_blast,knight_crusher,plant_barrier,silver_tomahawk,wind_storm,yamato_spear,
 		//utility - might make this universal
 		magnet_beam,item_1,item_2,item_3,wire,balloon,
+		megaman_end,
 		// Default
 		x_buster,z_buster,z_saber,a_pistol,vile_vulcan,
 		// X1
@@ -197,6 +190,8 @@ function global_weapon_Settings(){
 		messenko,z_buster_x5,nightmare_saber,
 		// Axl
 		a_ray_gun,
+		// EXE
+		hub_buster,bn_chip,bn_cust_menu,
 		length
 	}
 	// dark: Must be changed to struct array
@@ -208,19 +203,21 @@ function global_weapon_Settings(){
 	// ok its all set up to be an array, but the descriptions are gonna be ass
 	// aeughehrierhierhiegh i need to make weapon and weapon_chunk global not to mention call it
 	// its less difficult and more difficult than i expected. mostly just hiccups tho
+	// forte from like a month later: i kinda jive with this new system. i had to add
+	// something to make megaman not charge weapons but once i got everything working, all i need
+	// is a function call away!
 	
 	for(var p = 0; p < WEAPONS.length; p++){
 		G.weapon[p] = new Weapon(); 
 		G.weapon[p].name = "weapon " + string(p);
 	}
 	
-	G.weapon_chunk[pl_char.x] = [WEAPONS.storm_tornado, WEAPONS.homing_torpedo];
-	G.weapon_chunk[pl_char.zero] = [0,0];
-	G.weapon_chunk[pl_char.axl] = [0,0];
-	G.weapon_chunk[pl_char.vile] = [0,0];
-	G.weapon_chunk[pl_char.iris] = [0,0];
-	G.weapon_chunk[pl_char.vent] = [0,0];
-	G.weapon_chunk[pl_char.megaman] = [WEAPONS.rolling_cutter, WEAPONS.yamato_spear];
+	for(var p = WEAPONS.megaman_start; p < WEAPONS.megaman_end; p++){
+		//G.weapon[p].max_level = 0;
+	}
+	
+	G.weapon[WEAPONS.snow_drift].name = "SNOW DRIFT";
+	G.weapon[WEAPONS.pharoah_shot].name = "PHAROAH SHOT";
 	
 	// Palettes
 	G.weapon[WEAPONS.storm_tornado].set_palette(6);
@@ -277,6 +274,7 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.quick_boomerang].set_shot_limit(69);//this one was because im lazy
 	// Show
 	G.weapon[WEAPONS.x_buster].set_show(false);
+	//G.weapon[WEAPONS.hub_buster].set_show(false);
 	G.weapon[WEAPONS.z_buster].set_show(false);
 	G.weapon[WEAPONS.a_pistol].set_show(false);
 	G.weapon[WEAPONS.z_saber].set_show(false);
@@ -284,6 +282,7 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.falcon_giga].set_show(false);
 	// Cost
 	G.weapon[WEAPONS.x_buster].set_costs([0]);
+	G.weapon[WEAPONS.hub_buster].set_costs([0]);
 	G.weapon[WEAPONS.z_buster].set_costs([0]);
 	G.weapon[WEAPONS.z_buster_x5].set_costs([0]);
 	G.weapon[WEAPONS.nightmare_saber].set_costs([0]);
@@ -318,8 +317,9 @@ function global_weapon_Settings(){
 	// Weapon Level ID
 	G.weapon[WEAPONS.a_ray_gun].set_level_id(1);
 	// Fill Rate
-	G.weapon[WEAPONS.vile_vulcan].set_fill_rate(0.1);
-	G.weapon[WEAPONS.speed_gear].set_fill_rate((28/60) / 1);//15
+	G.weapon[WEAPONS.vile_vulcan].set_fill_rate((28/60) / 5);
+	G.weapon[WEAPONS.hub_buster].set_fill_rate(0.1);
+	G.weapon[WEAPONS.speed_gear].set_fill_rate((28/60) / 15);//15
 	G.weapon[WEAPONS.power_gear].set_fill_rate((28/60) / 15);
 	// Full Sound
 	G.weapon[WEAPONS.x2_giga_crush].set_full_sound(snd_player_full_weapon);
@@ -334,6 +334,7 @@ function global_weapon_Settings(){
 	G.weapon[WEAPONS.power_gear].set_selectable(false);
 	// Scripts
 	G.weapon[WEAPONS.x_buster].set_code(player_x_buster_x2);
+	G.weapon[WEAPONS.hub_buster].set_code(player_exe_buster);
 	G.weapon[WEAPONS.z_buster].set_code(player_zero_buster_x1);
 	G.weapon[WEAPONS.storm_tornado].set_code(player_x_storm_tornado);
 	G.weapon[WEAPONS.homing_torpedo].set_code(player_x_homing_torpedo);

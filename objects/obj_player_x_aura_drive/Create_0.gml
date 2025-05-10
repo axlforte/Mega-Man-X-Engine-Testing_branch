@@ -1,0 +1,12 @@
+event_inherited();
+lv = 4;
+atk = 2;
+ang = 0;
+boss_damage[? noone] = 0.25;
+shot_level = 2;
+hit_if_shot_level_is_equal = true;
+anti_destroy = true;
+anti_destroy_limit = 6;
+shot_counted = false;
+//audio_play(snd_player_x_shot_ult);
+abs_hspeed = 0;

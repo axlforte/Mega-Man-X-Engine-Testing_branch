@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"random_shorter_functions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"random_shorter_functions",
+  "parent":{
+    "name":"Utils",
+    "path":"folders/Scripts/Utils.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

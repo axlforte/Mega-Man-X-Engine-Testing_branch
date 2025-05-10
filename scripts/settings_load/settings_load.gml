@@ -2,13 +2,14 @@ function settings_load() {
 	ini_open("Settings/savedata.ini");
 
 	global.settings[0] = ini_read_real("SETTINGS", "Window", G.mobile ? 0 : 1);
+	global.settings[2] = ini_read_real("SETTINGS", "Resolution", 2);
 	if (G.mobile && global.settings[0] > 1) {
 		global.settings[0] = 0;
 	}
 	//if (G.mobile && G.settings[0] != 3 && G.settings[0] != 4) G.settings[0] = 3;
 
 	global.settings[1] = ini_read_real("SETTINGS", "Input", input_types.keyboard);
-	global.username = ini_read_string("SETTINGS", "Input", environment_get_variable("USERNAME"));
+	global.username = ini_read_string("SETTINGS", "Username", environment_get_variable("USERNAME"));
 
 	G.voice_language = ini_read_string("AUDIO", "Voice Language", "SNES");
 	global.sfx_volume = ini_read_real("AUDIO", "Sound Volume", 1);

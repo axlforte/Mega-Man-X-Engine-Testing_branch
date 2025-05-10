@@ -1,11 +1,116 @@
 function global_values() {
+	global_player_info();
+	
+	enum diff_modes {
+		easy,
+		normal,
+		hard
+	}
+	enum pause_types {
+		none,
+		normal,
+		door,
+		pickup,
+		boss_death,
+		special_attack,
+		custom_screen
+	};
+	global.background_list = ds_list_create();
+	global.start_menu_force_state = false;
+	global.start_menu_state = menu_states.main;
+	global.player_max_health = 16;
+	
+	#region client and server data
+	global.player_xs = [];
+	global.player_x_prevs = [];
+	global.player_ys = [];
+	global.player_sprites = [];
+	global.player_frames = [];
+	global.player_frame_counts = [];
+	global.player_dirs = [];
+	global.player_chars = [];
+	global.player_names = [];
+	global.player_palettes = [];
+	global.player_x_vel = [];
+	global.player_y_vel = [];
+	global.player_grav = [];
+	global.player_key_lefts = [];
+	global.player_key_rights = [];//not the constitutional kind of rights
+	global.player_key_downs = [];
+	global.player_animation_frames = [];
+	global.player_animation_loops = [];
+	global.server_enemies = [];
+	global.player_sprite_index = 0;
+	global.ip = "127.0.0.1";//this is the universal 'your own computer' ip
+	global.player_server_id = 0;//which player am i?
+	global.is_online = false;//am i in a server with other people?
+	global.client = undefined;
+	global.chat = undefined;
+	
+	// server specific data
+	global.is_server = false;//are you the one doing the servering
+	global.server = undefined;
+	global.player_Server_update = false;
+	global.tick_rate = 120;
+	global.ping = 0;
+	global.chat_string = "";
+	global.username = "googledebunkers";
+	global.rollback = false;//rollback is a bitch. keep off unless you fix rollback
+	global.pvp = false;// (:<
+	#endregion
+
+	global.gamepad_list = ds_list_create();
+	global.gamepad_list_index = 0;
+	global.gp_movement = 0; // Directional
+	global.gp_name = "";
+	for (var i = 0; i < 80; i ++) {
+		global.heart_used[i] = 0;
+		global.checkpointid[i] = 0;
+	}
+
+	shaders_init();
+	global.dictionary = ds_map_create();
+	global.mobile = (os_type == os_android);
+	characters_init();
+	text_init();
+	display_reset(0, false);
+	global.character_selected_index[0] = 0;
+	global.character_selected[0] = obj_player_x;
+	global.pickup_lifeup_sprite = spr_vent_pickup_lifeup;
+	global.transition_object_list = ds_list_create();
+	for (var i = 0; i < pl_char.length; i++) {
+		global.player_character_armor[i] = ["", "", "", "", "", ""];
+		global.player_character_armor_index[i] = [0, 0, 0, 0, 0, 0];
+	}
+	draw_set_circle_precision(64);
+	//global.run_from_ide = !global.mobile && parameter_count() == 3 && string_count("GMS2TEMP", parameter_string(2));
+	global.run_from_ide = true;
+	instance_create_depth(0, 0, 0, obj_window_center);
+	global.game_world_speed = 1;
+	global.chill_penguin_defeat = 0;
+	global.launch_octopus_defeat = 0;
+	global.magma_dragoon_defeat = 0;
+	global.unarmored_x_defeat = 0;
+	global.unarmored_axl_defeat = 0;
+	global.boss_selected = -1;
+	global.new_special_weapon = WEAPONS.homing_torpedo;
+	global.show_fps = false;
+	// Replay
+	global.recording_replay = false;
+	global.running_replay = false;
+	global.replay_fname = "";
+	replay_init();
+}
+
+function global_player_info(){
 	global.reload                           = false; // Is the game reloading after a death?
 	global.player_x                         = 0;     // Player X coordinate used for the camera and misc other actions
 	global.player_y                         = 0;     // Player Y coordinate
 	global.player_spawned                   = false; // Has the player spawned yet?
 	global.debug_active                     = false; // Is the Debug mode on?
-	global.view_width                       = 256;//320
-	global.view_height                      = 224;//240
+	global.view_width                       = 320;//320
+	global.view_height                      = 240;//240
+	global.resolution_options = [[160,144],[256,224],[320,240]];// FORTE, MAKE THIS ONE VALUE WHEN YOU MAKE THE FINAL BUILD
 	global.checkpoint                       = 0;
 	global.checkpoint_x                     = 0;
 	global.checkpoint_y                     = 0;
@@ -41,83 +146,4 @@ function global_values() {
 	global.player_palette_index = 0;
 	global_weapon_Settings();
 	player_global_armor_settings();
-	
-	enum diff_modes {
-		easy,
-		normal,
-		hard
-	}
-	enum pause_types {
-		none,
-		normal,
-		door,
-		pickup,
-		boss_death,
-		special_attack
-	};
-	global.background_list = ds_list_create();
-	global.start_menu_force_state = false;
-	global.start_menu_state = menu_states.main;
-	global.player_max_health = 16;
-	
-	//server shit
-	global.ip = "127.0.0.1";//this is the universal 'your own computer' ip
-	global.is_server = false;//are you the one doing the servering
-	global.player_server_id = 0;//which player am i?
-	global.is_online = false;//am i in a server with other people?
-	global.client = undefined;
-	global.server = undefined;
-	global.player_xs = [];
-	global.player_ys = [];
-	global.player_sprites = [];
-	global.player_frames = [];
-	global.player_dirs = [];
-	global.player_chars = [];
-	global.player_names = [];
-	global.player_palettes = [];
-	global.player_x_vel = [];
-	global.player_y_vel = [];
-	global.tick_rate = 60;
-	global.chat_string = "";
-	global.username = "googledebunkers";
-
-	global.gamepad_list = ds_list_create();
-	global.gamepad_list_index = 0;
-	global.gp_movement = 0; // Directional
-	global.gp_name = "";
-	for (var i = 0; i < 80; i ++) {
-		global.heart_used[i] = 0;
-		global.checkpointid[i] = 0;
-	}
-
-	shaders_init();
-	global.dictionary = ds_map_create();
-	global.mobile = (os_type == os_android);
-	characters_init();
-	text_init();
-	display_reset(0, false);
-	global.character_selected_index[0] = 0;
-	global.character_selected[0] = obj_player_x;
-	global.pickup_lifeup_sprite = spr_vent_pickup_lifeup;
-	global.transition_object_list = ds_list_create();
-	for (var i = 0; i < pl_char.length; i++) {
-		global.player_character_armor[i] = ["", "", "", "", "", ""];
-		global.player_character_armor_index[i] = [0, 0, 0, 0, 0, 0];
-	}
-	draw_set_circle_precision(64);
-	//global.run_from_ide = !global.mobile && parameter_count() == 3 && string_count("GMS2TEMP", parameter_string(2));
-	global.run_from_ide = true;
-	instance_create_depth(0, 0, 0, obj_window_center);
-	global.game_world_speed = 1;
-	global.chill_penguin_defeat = 0;
-	global.launch_octopus_defeat = 0;
-	global.magma_dragoon_defeat = 0;
-	global.unarmored_x_defeat = 0;
-	global.unarmored_axl_defeat = 0;
-	global.show_fps = false;
-	// Replay
-	global.recording_replay = false;
-	global.running_replay = false;
-	global.replay_fname = "";
-	replay_init();
 }

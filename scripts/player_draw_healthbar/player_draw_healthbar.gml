@@ -1,6 +1,6 @@
 function player_draw_healthbar(p) {
-	var xx = x_off + __view_get(e__VW.XView, 0);;
-	var yy = y_off + __view_get(e__VW.YView, 0);;
+	var xx = x_off + __view_get(e__VW.XView, 0);
+	var yy = y_off + __view_get(e__VW.YView, 0);
 	scr_draw_vertical_bar(
 		xx,
 		yy,
@@ -54,4 +54,12 @@ function player_draw_double_gear(p) {
 	- p.weapon_slot_handler.get_energy(wp)) 
 	/ global.weapon[wp].energy_max);
 	draw_sprite_ext(spr_double_gear_unit, 2, xx + 4, yy + 20, xs, 1, 0, c_white, 1);
+}
+
+function player_draw_chip_selection(p){
+	var xx = x_off + __view_get(e__VW.XView, 0);
+	var yy = y_off + __view_get(e__VW.YView, 0) + 20;
+	for(var g = array_length(p.chip_selection); g > 0; g--){
+		draw_sprite(Cheeps,p.chip_selection[g - 1].image,xx + g * 2, yy + g * 2);
+	}
 }

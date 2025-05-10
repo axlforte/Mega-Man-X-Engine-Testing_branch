@@ -32,7 +32,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_vile_idle",
+    "path":"sprites/spr_vile_idle/spr_vile_idle.yy",
+  },
   "spriteMaskId":{
     "name":"spr_vile_mask",
     "path":"sprites/spr_vile_mask/spr_vile_mask.yy",

@@ -8,3 +8,6 @@ if (instance_exists(owner) && owner.is_player) {
 	}
 }
 room_speed = 60;
+if(global.is_online && object_get_name(object_index) != "obj_pvp_projectile"){
+	global.client.KillProjectile(self);
+}

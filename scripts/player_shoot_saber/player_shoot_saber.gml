@@ -6,3 +6,12 @@ function player_shoot_saber() {
 	shoot_next_wait = true;	
 	shoot_limit = 52;
 }
+
+function player_shoot_saber_drive() {
+	if (state == states.dolor) exit;
+	player_state_set(states.drive_saber, 0);
+	shoot_next_projectile = argument[0];
+	player_add_projectile();
+	shoot_next_wait = true;	
+	shoot_limit = 16;
+}

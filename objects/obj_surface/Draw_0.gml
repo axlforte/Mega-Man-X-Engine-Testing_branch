@@ -7,7 +7,7 @@ vy = v[1];
 #region Draw Layers on Surfaces
 if (drawing_layers_on_surfaces) {
 	if (!surface_exists(black_surface))
-		black_surface = surface_create(320, 240);
+		black_surface = surface_create(global.view_width, global.view_height);
 	if (surface_exists(black_surface)) {
 		surface_set_target(black_surface);
 		draw_set_color(c_black);
@@ -47,7 +47,7 @@ if (drawing_layers_on_surfaces) {
 	}
 	for (var k = 0; k < 2; k++) {
 		if (!surface_exists(surfaces[k])) {
-			surfaces[k] = surface_create(320, 240);
+			surfaces[k] = surface_create(global.view_width, global.view_height);
 		}
 		if (surface_exists(surfaces[k])) {
 			surface_set_target(surfaces[k]);
@@ -114,7 +114,7 @@ drawing_layers_on_surfaces_previous = drawing_layers_on_surfaces;
 #endregion
 #region Draw Dark Area Surface
 if (!surface_exists(surface_dark_area))
-	surface_dark_area = surface_create(320, 240);
+	surface_dark_area = surface_create(global.view_width, global.view_height);
 if (surface_exists(surface_dark_area) && black_animation <= 2) {
 	if (black_animation > 0)
 		draw_clear_alpha(c_black, 0);

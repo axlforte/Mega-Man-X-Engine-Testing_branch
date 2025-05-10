@@ -1,0 +1,1 @@
+draw_sprite(spr_x_idle,0,0,0);

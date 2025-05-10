@@ -2,8 +2,11 @@
 function player_check_armor() {
 	var _refresh = false;
 	if (argument_count > 0) _refresh = argument[0];
-	if (_refresh) player_variables();
+	if (_refresh) {
+		player_variables();
+	}
 	player_armor_order();
+	
 
 	script_try(variables_script);
 	script_try(animation_script);

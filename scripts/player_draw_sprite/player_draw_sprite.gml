@@ -24,8 +24,8 @@ function player_draw_sprite(_x = x, _y = y, xs = xscale, ys = y_dir, index = flo
 	}
 	
 	if (!weapon_allow_pallete && charge_palette_enabled) {
-		if (plt_index == global.weapon[weapon[0]].palette)
-			plt_index = plt_index_default;
+		//if (plt_index == global.weapon[weapon[0]].palette)
+			//plt_index = plt_index_default;
 	}
 	//do the drawing. you dont need the draw effect to be drawn more than once.
 	for (var j = 0; j < array_length(armor_current_order) - 1; j++) {
@@ -42,6 +42,7 @@ function player_draw_sprite(_x = x, _y = y, xs = xscale, ys = y_dir, index = flo
 			} else {
 				scr_shader_set(shader_palette_light);	
 			}
+			global.player_sprite_index = index;
 			global.player_palette_index = plt_index;
 			draw_sprite_ext(pl_sprite[i], index, floor(_x), floor(_y), xs, ys, rotation, c_white, 1);
 			if(instance_exists(obj_player_megaman)){

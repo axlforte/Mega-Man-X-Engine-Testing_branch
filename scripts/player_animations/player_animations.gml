@@ -131,7 +131,7 @@ function player_animations() {
 	animation_add("dash_end|dash",
 	[
 		0, 0
-	], 0);
+	]);
 
 	animation_add("wall_slide|wall",
 	[
@@ -144,6 +144,12 @@ function player_animations() {
 	[
 		0, 3,
 		3, 4
+	], 3);
+	
+	animation_add("dash_wall_jump|wall",
+	[
+		0, 5,
+		3, 6
 	], 3);
 
 	animation_add("dash_up",

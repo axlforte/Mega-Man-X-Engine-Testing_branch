@@ -1,4 +1,8 @@
 PAUSE;
+
+if(global.is_online && object_get_name(object_index) != "obj_pvp_projectile"){
+	global.client.pingProjectile(self);
+}
 if (instance_exists(owner)) {
 	local_game_speed = owner.local_game_speed;	
 }

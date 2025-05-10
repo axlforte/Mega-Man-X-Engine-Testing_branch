@@ -9,7 +9,7 @@
 /// @param unit_sprite
 /// @param area_sprite
 /// @param limit_sprite
-function scr_draw_vertical_bar(_x, _y, icon, index, amount, max_amount, max_bar, unit, area, limit, unit_color = -1) {
+function scr_draw_vertical_bar(_x, _y, icon, index, amount, max_amount, max_bar, unit, area, limit, unit_color = -1, unit_rainbow = false) {
 
 	var hh = sprite_get_height(area);
 
@@ -34,7 +34,10 @@ function scr_draw_vertical_bar(_x, _y, icon, index, amount, max_amount, max_bar,
 			yy = _y - hh;
 			unit_color++;
 		}
-		draw_sprite(unit, unit_color, _x, yy);
+		if(unit_rainbow)
+			draw_sprite(unit, current_time, _x, yy);
+		else
+			draw_sprite(unit, unit_color, _x, yy);
 		yy -= 2;
 	
 	}

@@ -7,5 +7,3 @@ if (!destroy)
 
 animation_update();
 image_index = animation_i;
-
-scr_physics_update();

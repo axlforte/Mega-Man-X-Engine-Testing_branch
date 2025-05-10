@@ -1,4 +1,4 @@
-// States Enum
+#region States Enum
 enum menu_states {
 	main,
 	game_mode,
@@ -15,14 +15,17 @@ enum menu_states {
 	weapon_get,
 	volume,
 	weapon_select,//for weapons and techniques probably. 
-	online_select//are you gonna host or join?
+	online_select,//are you gonna host or join?
+	PVP_map_select,//pick which pvp map you are going to
+	title//when the x comes into view. im just gonna make it nice and easy, skip with enter.
 }
+camera_set_view_size(view_camera[0],global.view_width,global.view_height);
 palette_init();
 palette_texture_set(plt_megaman_full);
 enum background_select { intro, middle, ending }
 
 // State
-state = menu_states.main;
+state = menu_states.title;
 state_timer = 0;
 substates = [0, 0, 0, 0];
 changed_state = false;
@@ -36,11 +39,10 @@ timer = 0;
 item_blink_t = 0;
 input_timer = 0;
 wait_t = 0;
-
+#endregion
 // Appear from the Black
 transition_create(transition_types.fade_in);
-
-// Titles
+#region Titles
 titles[menu_states.main]            = "";
 titles[menu_states.game_mode]       = _("GAME MODE");
 titles[menu_states.difficulty_mode] = _("DIFFICULTY MODE");
@@ -51,6 +53,10 @@ titles[menu_states.audio_settings]  = _("AUDIO SETTINGS");
 titles[menu_states.voice_language]  = _("VOICE LANGUAGE");
 titles[menu_states.weapon_get]		= "";
 titles[menu_states.volume]		    = _("VOLUME CONTROL");
+titles[menu_states.weapon_select]	= _("WEAPON SELECT");
+titles[menu_states.online_select]	= _("ONLINE SELECT");
+titles[menu_states.PVP_map_select]  = _("PVP MAP SELECT");
+#endregion
 
 // Pages
 // Needs a lot of refactoring:
@@ -70,7 +76,7 @@ page_items[menu_states.game_mode] = [
 	[_("MULTIPLAYER"),   [92, 128, 144, 20]]
 ];
 #endregion
-#region Game Mode
+#region Online Selection (Dep)
 page_items[menu_states.online_select] = [
 	[_("HOST"), [92, 88, 144, 20]],
 	[_("JOIN"),   [92, 128, 144, 20]]
@@ -95,37 +101,24 @@ enum e_settings {
 	window_size
 }
 // PC
-var wsize_options = [];
-var k = 0;
-while((k+1)*global.view_height + 40 <= global.screen_height) {
-	wsize_options[k] = "x" + string(k+1);
-	k++;
-}
-wsize_options[k] = "FULLSCREEN";
-wsize_options[k + 1] = "STRETCHED";
-global.fullscreen_index = k + 1;
-// Mobile
-if (G.mobile) {
-	wsize_options = ["NORMAL", "STRETCHED"];
-	global.fullscreen_index = 1;
-}
-
+var wsize_options = Get_screen_size_possibilities();
+var _res_options = ["SNES", "NES", "DEFAULT"];
 page_items[menu_states.option] = [
 	[_("WINDOW SIZE"), [64, 64, 200, 20], wsize_options],
+	[_("RESOLUTION"), [64, 64, 200, 20], _res_options],
 	[_("KEY CONFIG"), [64, 88, 144, 20]],
 	[_("AUDIO SETTINGS"), [64, 112, 144, 20]],
 	[_("DAMAGE NUMBERS"), [64, 136, 144, 20]],
 	[_("BACK"), [64, 160, 144, 20]]
 ];
-
-#endregion
-// Settings
 settings_load();
 settings_apply();
+
+#endregion
 #region Player Select
 
 page_items[menu_states.player_select] = [
-	"X", "ZERO", "AXL", "IRIS", "VILE", "MEGAMAN"
+	"X", "ZERO", "AXL", "MEGAMAN", "EXE"
 ];
 global.golden_armor_enabled = false;
 
@@ -135,8 +128,8 @@ global.golden_armor_enabled = false;
 page = [
 	["", []]
 ];
-alength = array_length(global.key_text)
-for(var i = 0; i < alength; i++)
+alen = array_length(global.key_text)
+for(var i = 0; i < alen; i++)
 {
 	page[i + 1] = [_(global.key_text[i]),
 					[],
@@ -146,7 +139,7 @@ for(var i = 0; i < alength; i++)
 }
 gamepad_movement_mode_text[0] = "Directional";
 gamepad_movement_mode_text[1] = "Joystick";
-page[alength + 1] = [_("BACK"), [128, 32 + 14*(alength + 1), 128, 24]];
+page[alen + 1] = [_("BACK"), [128, 32 + 14*(alen + 1), 128, 24]];
 page_items[menu_states.key_config] = page;
 #endregion
 #region Stage Select
@@ -186,7 +179,6 @@ page_items[menu_states.volume] = [
 	[_("BACK"),            [64, 112, 144, 20]]
 ];
 #endregion
-
 #region Weapon Get
 weapon_get_props = {
 	player: {
@@ -201,7 +193,7 @@ weapon_get_props = {
 			y: 0,
 			interval: [0, 60]
 		},
-		new_weapon: WEAPONS.homing_torpedo,
+		new_weapon: global.new_special_weapon,
 		wp_slot: 2,
 		visible: false,
 		palette_array: [0, 0, 0, 0, 0, 0],
@@ -214,7 +206,7 @@ weapon_get_props = {
 	instances: []
 };
 #endregion
-
+#region boss intro
 // Boss Intro Scripts
 enum boss_intros {
 	eclipse	
@@ -227,7 +219,8 @@ selected_item = 0;
 selected_item_next = 0;
 item_y = 0;
 sound = false;
-
+#endregion
+#region input
 // Input
 inputting = true;
 hinput = false;
@@ -241,15 +234,16 @@ scr_keys_reset();
 // Buttons
 buttons = ds_list_create();
 btn_length = 0;
-
-// Palette
+#endregion
+#region palette
 palette_init();
-
+#endregion
+#region background
 // Layer Background
 layer_id = layer_get_id("BG");
 layer_bg = layer_background_get_id(layer_id);
-
-// Boss Intro
+#endregion
+#region boss intro
 boss_intro_sprite = noone;
 boss_intro_index = 0;
 boss_inst = noone;
@@ -259,13 +253,21 @@ boss_name = "";
 boss_name_show = false;
 boss_defeated = false;
 loading_text = "";
-
-//weapon selection
+#endregion
+#region weapon selection
 weapon_lerp = 0;
 weapon_lerp_time = 6;
 weapon_lerp_distance = 26;
 weapon_lerp_direction = 1;
 weapon_player_selected = pl_char.x;
+#endregion
+#region title
+title_sprite = Big_Intro;
+ts_pixels_shown = 1;
+ts_move_speed = 1/3;
+ts_height = sprite_get_height(title_sprite) / ts_pixels_shown;
+ts_time = 0;
+#endregion
 
 activate_sprites = true;
 if (global.start_menu_force_state) {
@@ -287,13 +289,11 @@ global.char_select_sprites = [
 	spr_player_x,
 	spr_player_zero,
 	spr_player_axl,
-	spr_player_iris,
-	spr_player_vile,
 	spr_player_megaman,
-	spr_player_vent
+	spr_player_exe
 ];
 background_index = 0;
-// Animation
+#region animation
 animation2_init();
 can_activate_sprites = true;
 for (var i = 0; i <= P_EXT4; i++) {
@@ -306,7 +306,19 @@ for (var i = 0; i <= P_EXT4; i++) {
 var index = global.character_selected_index[0];
 armor = global.player_character_armor[index];
 armor_index = global.player_character_armor_index[index];
+#endregion
 
+#region pvp maps
+
+pvp_maps = [rm_avalanche,rm_indev,rm_q3dm17];
+page_items[menu_states.PVP_map_select] = [[_("RETURN"), [92, 88, 144, 20]]];
+for(var q = 0; q < array_length(pvp_maps); q++){
+	
+array_push(page_items[menu_states.PVP_map_select], [_(room_get_name(pvp_maps[q])),[92, 112 + q * 24, 144, 20]])
+}
+
+#endregion
 menu_edge_init();
 menu_armor_load(0);
-menu_player_select_sprites_load();
+menu_player_select_sprites_load(page_items[menu_states.player_select]);
+screen_update_stretched();

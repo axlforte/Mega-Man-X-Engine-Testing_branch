@@ -11,6 +11,7 @@ function draw_string_here() {
 	var _text = argument[2];
 	var _color = (argument_count > 3 ? argument[3] : colors.blue);
 	var _use_plt = (argument_count > 4 ? argument[4] : true);
+	var _letter_length = (argument_count > 5 ? argument[5] : global.text_font_width);
 
 	if(_use_plt){
 		plt_index = _color;
@@ -26,7 +27,7 @@ function draw_string_here() {
 	    if (_char != " ") {
 			draw_sprite(global.text_font_sprite, char_index(_char), xx, _y - 1);
 	    }
-		xx += global.text_font_width;
+		xx += _letter_length;
 	}
 	if(_use_plt){
 		palette_reset();

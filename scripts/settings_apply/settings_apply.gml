@@ -2,7 +2,8 @@ function settings_apply() {
 	enum settings_types
 	{
 		window_size,
-		input
+		input,
+		resolution
 	}
 	G.voice_enabled = (G.voice_language != "NONE");
 	custom_window_size(global.settings[settings_types.window_size] + 1);
