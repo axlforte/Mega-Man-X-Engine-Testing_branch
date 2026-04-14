@@ -12,7 +12,7 @@ https://mmxe.nicepage.io/
 ## Social Media
 - YouTube: https://www.youtube.com/@MMXEngine
 - Twitter: https://twitter.com/MMXEngine
-- Discord: https://discord.gg/dXygbY9
+- Discord: https://discord.gg/h5unXT3j3W
 
 ## Playable Characters  
 - X
